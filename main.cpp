@@ -2,8 +2,17 @@
 #include <iostream>
 #include <windows.h>
 #include <conio.h>
+#include <fstream>
+#include <string.h>
+#include <queue>
 
-#include "modules/clickcatcher.h"
+// подключение всех необходимых стандартных библиотек для проекта
+
+#include "modules/clickcatcher.h" // подключение модуля clickcatcher - самописная библиотека по обработке нажатых клавиш
+#include "modules/client_class.h" // подключение модуля client_class - модуль данных об клиенте
+#include "modules/formation_order.h" // подключение модуля formation_order - модуль формирование заказа
+
+// подключение всех необходимых самописных библиотек и модулей для проекта
 
 void Configure_Console_Window (void) {
 
@@ -138,14 +147,15 @@ int main (void) {
 
                         if ((ClickCatch ("Arrow_Left", ButtonNumber)) || (ClickCatch ("Arrow_Right", ButtonNumber))) {
 
-                            switch (MenuItem) {
+                                switch (MenuItem) {
 
-                                case 1: MenuItem = 2; break;
-                                case 2: MenuItem = 1; break;
-                                case 3: MenuItem = 4; break;
-                                case 4: MenuItem = 3; break;
+                                    case 1: MenuItem = 2; break;
+                                    case 2: MenuItem = 1; break;
+                                    case 3: MenuItem = 4; break;
+                                    case 4: MenuItem = 3; break;
+                                    default: exit (-100);
 
-                            }
+                                }
 
                             break;
 
@@ -153,14 +163,15 @@ int main (void) {
 
                         if ((ClickCatch ("Arrow_Up", ButtonNumber)) || (ClickCatch ("Arrow_Down", ButtonNumber))) {
 
-                            switch (MenuItem) {
+                                switch (MenuItem) {
 
-                                case 1: MenuItem = 3; break;
-                                case 2: MenuItem = 4; break;
-                                case 3: MenuItem = 1; break;
-                                case 4: MenuItem = 2; break;
+                                    case 1: MenuItem = 3; break;
+                                    case 2: MenuItem = 4; break;
+                                    case 3: MenuItem = 1; break;
+                                    case 4: MenuItem = 2; break;
+                                    default: exit (-100);
 
-                            }
+                                }
 
                             break;
 
@@ -170,14 +181,15 @@ int main (void) {
 
                             cls ();
 
-                            switch (MenuItem) {
+                                switch (MenuItem) {
 
-                                case 1: CenterText ("Создание нового заказа\n"); break;
-                                case 2: CenterText ("Поиск работы среди имеющихся в базе\n"); break;
-                                case 3: CenterText ("Настройки программы\n"); break;
-                                case 4: CenterText ("Статистика заказов\n"); break;
+                                    case 1: CenterText ("Создание нового заказа\n");    Formation_Order();  break;
+                                    case 2: CenterText ("Поиск работы среди имеющихся в базе\n");           break;
+                                    case 3: CenterText ("Настройки программы\n");                           break;
+                                    case 4: CenterText ("Статистика заказов\n");                            break;
+                                    default: exit (-100); // эксепшион при работе с getch
 
-                            }
+                                }
 
                             break;
 

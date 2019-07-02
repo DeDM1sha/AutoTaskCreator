@@ -1,9 +1,21 @@
 # depslib dependency file v1.0
-1548799797 source:e:\cplusplus_projects\autotaskcreator\main.cpp
+1562095893 source:e:\cplusplus_projects\autotaskcreator\main.cpp
+	<stdio.h>
 	<iostream>
 	<windows.h>
 	<conio.h>
+	<fstream>
+	<string.h>
+	<queue>
 	"modules/clickcatcher.h"
+	"modules/client_class.h"
+	"modules/formation_order.h"
 
-1548795000 e:\cplusplus_projects\autotaskcreator\modules\clickcatcher.h
+1562095617 e:\cplusplus_projects\autotaskcreator\modules\clickcatcher.h
+
+1562095878 e:\cplusplus_projects\autotaskcreator\modules\formation_order.h
+
+1562094870 e:\cplusplus_projects\autotaskcreator\modules\client_class.h
+	<fstream>
+	<time.h>
 

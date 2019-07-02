@@ -1,6 +1,21 @@
-// Данная библиотека позволяет упростить работу с функцией getch, путем отправки в данную функцию названия желаемой нажатой пользователм кнопки, и номером этой конпки.
-// Первый параметр функции отвечает за название нужной нам клавиши на клавиатуре, и имеет тип string. Предусмотрено написание названия клавиши в разных регистрах, но только на кириллице.
-// Второй параметр функции отвечает за ASCII номер клавиши, и имеет тип int. Предусмотрены все возможные варианты нумерации каждой клавиши из всех возможных (включая и оба регистра, и оба языка для каждой клавиши). Сюда следует отправлять значение, полученное функцией getch в основной программе.
+/*  Данная библиотека позволяет упростить работу с функцией getch, путем отправки в данную функцию названия желаемой
+    нажатой пользователем кнопки, и номером этой конпки.
+
+//  Первый параметр функции отвечает за название нужной нам клавиши на клавиатуре, и имеет тип string.
+    Предусмотрено написание названия клавиши в разных регистрах, но только на латинице.
+
+//  Второй параметр функции отвечает за ASCII номер клавиши, и имеет тип unsigned short int.
+    Предусмотрены все возможные варианты нумерации каждой клавиши из всех возможных,
+    включая и оба регистра, и оба языка для каждой клавиши - то бишь, взяв например отдельно взятую клавишу G -
+    будет успешно обработано все 4 варианта кода этой клавиши, а именно:
+    * "п" - маленькая буква на кириллице
+    * "П" - большая буква на кириллице
+    * "g" - маленькая буква на латинице
+    * "G" - большая буква на латинице.
+
+    Сюда следует отправлять значение, полученное функцией getch в основной программе.
+
+*/
 
 #pragma once
 
@@ -16,45 +31,45 @@ class ClassClick {
 
 	public:
 
-		ClassClick (std::string Str, unsigned short int Num) {
+		ClassClick (const std::string& Str, const unsigned short int& Value) {
 
 			this->Name = Str;
-			this->Number = Num;
+			this->Number = Value;
 
 		}
 
 		~ClassClick (void) {}
 
-		void setName (std::string Str) {
+		void setName (const std::string& Str) {
 
 			this->Name = Str;
 
-		}
+		} // сеттер на Name
 
 		std::string getName (void) const {
 
 			return this->Name;
 
-		}
+		} // геттер на Name
 
-		void setNumber (unsigned short int Num) {
+		void setNumber (const unsigned short int& Value) {
 
-			this->Number = Num;
+			this->Number = Value;
 
-		}
+		} // сеттер на Number
 
 		unsigned short int getNumber (void) const {
 
 			return this->Number;
 
-		}
+		} // геттер на Number
 
-};
+}; // класс нажатой клавиши
 
 
-bool ClickCatch (std::string Str, unsigned short int Num) {
+bool ClickCatch (const std::string& Str, const unsigned short int& Value) {
 
-	ClassClick Button (Str, Num);
+	ClassClick Button (Str, Value);
 
     /* Esc -> F12 */
 
@@ -304,6 +319,6 @@ bool ClickCatch (std::string Str, unsigned short int Num) {
 
     return false;
 
-}
+} // функция обработки нажатой и требуемой кнопки
 
 #endif // _click_catcher_H_
