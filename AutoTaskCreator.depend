@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1548799797 source:e:\cplusplus_projects\autotaskcreator\main.cpp
+	<iostream>
+	<windows.h>
+	<conio.h>
+	"modules/clickcatcher.h"
+
+1548795000 e:\cplusplus_projects\autotaskcreator\modules\clickcatcher.h
+

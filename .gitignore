@@ -1,0 +1,6 @@
+/bin/*
+/obj/*
+/AutoGitPusher.exe
+/gitpush.bat
+/gitignore
+/LICENSE
