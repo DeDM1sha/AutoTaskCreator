@@ -10,7 +10,7 @@ void Configure_Console_Window (void) {
     void *handle = GetStdHandle (STD_OUTPUT_HANDLE);
     CONSOLE_CURSOR_INFO structCursorInfo;
     GetConsoleCursorInfo (handle, &structCursorInfo);
-    structCursorInfo.bVisible = false;
+    structCursorInfo.bVisible = FALSE;
     SetConsoleCursorInfo (handle, &structCursorInfo); // Отключение каретки
     SetConsoleCP (1251);
     SetConsoleOutputCP (1251); // Установка кириллицы
