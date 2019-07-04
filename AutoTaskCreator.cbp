@@ -34,6 +34,8 @@
 		</Compiler>
 		<Unit filename="main.cpp" />
 		<Unit filename="modules/clickcatcher.h" />
+		<Unit filename="modules/client_class.h" />
+		<Unit filename="modules/formation_order.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

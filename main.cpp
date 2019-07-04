@@ -5,6 +5,7 @@
 #include <fstream>
 #include <string.h>
 #include <queue>
+#include <time.h>
 
 // подключение всех необходимых стандартных библиотек для проекта
 
@@ -20,10 +21,13 @@ void Configure_Console_Window (void) {
     CONSOLE_CURSOR_INFO structCursorInfo;
     GetConsoleCursorInfo (handle, &structCursorInfo);
     structCursorInfo.bVisible = FALSE;
-    SetConsoleCursorInfo (handle, &structCursorInfo); // Отключение каретки
+    SetConsoleCursorInfo (handle, &structCursorInfo); // отключение каретки
     SetConsoleCP (1251);
-    SetConsoleOutputCP (1251); // Установка кириллицы
-    system ("color A && mode con cols=125 lines=30 && title AutoTaskCreator"); // Установка цвета текста, отключение бокового меню, заголовок программы
+    SetConsoleOutputCP (1251); // установка кириллицы
+    system ("color A"); // установка цвета текста
+    system ("mode con cols=125 lines=30"); // установка разрешения консоли, отключения бокового скрола
+    system ("title AutoTaskCreator"); // установка заголовка консоли
+    system ("@echo off"); // переключение режима отображения команд на экране
 
 } // Функция настроек консольного окна
 
@@ -130,6 +134,12 @@ int main (void) {
 
     unsigned short int MenuItem = 1;
     unsigned short int ButtonNumber = 0;
+
+    Clients Client;
+
+    std::cout << Client.getUserNamePath();
+
+    system ("pause");
 
     Configure_Console_Window ();
 

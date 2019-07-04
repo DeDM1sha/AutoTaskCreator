@@ -3,12 +3,9 @@
 #ifndef _client_class_H_
 #define _client_class_H_
 
-#include <fstream>
-#include <time.h>
-
 void Delay (unsigned short int Time) {
 
-	clock_t end_time = clock () + Time * CLOCKS_PER_SEC / 1000;
+	const clock_t end_time = clock () + Time * CLOCKS_PER_SEC / 1000;
 
 		while (clock () < end_time) {};
 
@@ -39,25 +36,11 @@ class Clients {
 			MenuFunctional = false;
 			TasksCount = 0;
 			FinishedWorksCount = 0;
-			UserNamePath = Get_UserName ();
+			UserNamePath = "" + system ("@echo %UserName%"); // переписать
 
 		}
 
 		~Clients (void) {}
-
-		std::string Get_UserName (void) {
-
-			std::string Stroke = "\0";
-
-			system ("echo %UserName% > log.txt");
-			std::ifstream Read ("log.txt");
-			Read >> Stroke;
-			Read.close ();
-			remove ("log.txt");
-
-			return Stroke;
-
-		} // метод получения имени пк-пользователя
 
 		void setName (std::string Str) {
 
