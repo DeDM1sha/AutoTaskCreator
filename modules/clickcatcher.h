@@ -40,25 +40,25 @@ class ClassClick {
 
 		~ClassClick (void) {}
 
-		void setName (const std::string& Str) {
+		const void setName (const std::string& Str) {
 
 			this->Name = Str;
 
 		} // сеттер на Name
 
-		std::string getName (void) const {
+		const std::string getName (void) const {
 
 			return this->Name;
 
 		} // геттер на Name
 
-		void setNumber (const unsigned short int& Value) {
+		const void setNumber (const unsigned short int& Value) {
 
 			this->Number = Value;
 
 		} // сеттер на Number
 
-		unsigned short int getNumber (void) const {
+		const unsigned short int getNumber (void) const {
 
 			return this->Number;
 
@@ -66,8 +66,7 @@ class ClassClick {
 
 }; // класс нажатой клавиши
 
-
-bool ClickCatch (const std::string& Str, const unsigned short int& Value) {
+const bool ClickCatch (const std::string& Str, const unsigned short int& Value) {
 
 	ClassClick Button (Str, Value);
 

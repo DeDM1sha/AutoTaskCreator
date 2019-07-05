@@ -10,12 +10,12 @@
 // подключение всех необходимых стандартных библиотек для проекта
 
 #include "modules/clickcatcher.h" // подключение модуля clickcatcher - самописная библиотека по обработке нажатых клавиш
-#include "modules/client_class.h" // подключение модуля client_class - модуль данных об клиенте
+#include "modules/client_class.h" // подключение модуля client_class - класс данных об клиенте
 #include "modules/formation_order.h" // подключение модуля formation_order - модуль формирование заказа
 
 // подключение всех необходимых самописных библиотек и модулей для проекта
 
-void Configure_Console_Window (void) {
+const void Configure_Console_Window (void) {
 
     void *handle = GetStdHandle (STD_OUTPUT_HANDLE);
     CONSOLE_CURSOR_INFO structCursorInfo;
@@ -31,7 +31,7 @@ void Configure_Console_Window (void) {
 
 } // Функция настроек консольного окна
 
-void CenterText (std::string Text) {
+const void CenterText (const std::string Text) {
 
     CONSOLE_SCREEN_BUFFER_INFO consoleInfo;
     GetConsoleScreenBufferInfo ((GetStdHandle (STD_OUTPUT_HANDLE)), &consoleInfo);
@@ -43,13 +43,24 @@ void CenterText (std::string Text) {
 
 } // функция центирования текста на экране
 
-void cls (void) {
+const void cls (void) {
 
     system ("cls");
 
 } // функция очистки экрана
 
-void Draw_Menu (unsigned short int MenuItem) {
+const void Exception (const std::string TextError) {
+
+    SetConsoleTextAttribute (GetStdHandle (STD_OUTPUT_HANDLE), (WORD) ((0 << 4) | 12));
+
+    printf ("\n\n%s!!!\n\n", TextError.c_str());
+    system ("pause");
+
+	SetConsoleTextAttribute (GetStdHandle (STD_OUTPUT_HANDLE), (WORD) ((0 << 4) | 10));
+
+} // функция Exception - для отображения случившихся ошибок
+
+const void Draw_Menu (const unsigned short int MenuItem) {
 
     printf ("\n\n\n\n\n");
 
@@ -135,12 +146,6 @@ int main (void) {
     unsigned short int MenuItem = 1;
     unsigned short int ButtonNumber = 0;
 
-    /*Clients Client;
-
-    std::cout << Client.getUserNamePath();
-
-    system ("pause");*/
-
     Configure_Console_Window ();
 
         while (true) {
@@ -153,7 +158,7 @@ int main (void) {
                     ButtonNumber = getch ();
 
                         if (ClickCatch ("Esc", ButtonNumber))
-                            exit(0); // выход из программы
+                            return 0; // выход из программы
 
                         if ((ClickCatch ("Arrow_Left", ButtonNumber)) || (ClickCatch ("Arrow_Right", ButtonNumber))) {
 
@@ -163,7 +168,7 @@ int main (void) {
                                     case 2: MenuItem = 1; break;
                                     case 3: MenuItem = 4; break;
                                     case 4: MenuItem = 3; break;
-                                    default: exit (-100);
+                                    default: Exception ("Error selected getch in life cycle");
 
                                 }
 
@@ -179,7 +184,7 @@ int main (void) {
                                     case 2: MenuItem = 4; break;
                                     case 3: MenuItem = 1; break;
                                     case 4: MenuItem = 2; break;
-                                    default: exit (-100);
+                                    default: Exception ("Error selected getch in life cycle");
 
                                 }
 
@@ -197,7 +202,7 @@ int main (void) {
                                     case 2: CenterText ("Поиск работы среди имеющихся в базе\n");           break;
                                     case 3: CenterText ("Настройки программы\n");                           break;
                                     case 4: CenterText ("Статистика заказов\n");                            break;
-                                    default: exit (-100); // эксепшион при работе с getch
+                                    default: Exception ("Error selected getch in life cycle"); // эксепшион при работе с getch
 
                                 }
 

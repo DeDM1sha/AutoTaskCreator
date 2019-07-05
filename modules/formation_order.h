@@ -14,7 +14,15 @@ static std::string Linux = "Linux";
 static std::string MacOS = "MacOS";
 static std::string Windows = "Windows";
 
-void Show_Text_Choise (std::string Text) {
+/*static void Delay (unsigned short int Time) {
+
+	const clock_t end_time = clock () + Time * CLOCKS_PER_SEC / 1000;
+
+		while (clock () < end_time) {};
+
+} // функция задержки*/
+
+static void Show_Text_Choise (const std::string Text) {
 
 	SetConsoleTextAttribute (GetStdHandle (STD_OUTPUT_HANDLE), (WORD) ((0 << 4) | 11));
 
@@ -24,7 +32,7 @@ void Show_Text_Choise (std::string Text) {
 
 } // функция для отображения выбранного решения другим цветом
 
-void Fill_InputData (Clients& Client) {
+const void Fill_InputData (Clients& Client) {
 
 	std::string Temp = "\0";
 	short int ButtonNumber = 0;
@@ -177,7 +185,7 @@ void Fill_InputData (Clients& Client) {
 
 }
 
-void Create_Source_Code (Clients& Client) {
+static void Create_Source_Code (const Clients& Client) {
 
 	std::queue <std::string> Code;
 
@@ -337,7 +345,7 @@ void Create_Source_Code (Clients& Client) {
 
 	Code.push ("}");
 
-	std::string FilePath = "C:\\Users\\" + Client.getUserNamePath () + "\\AppData\\Local\\Temp\\task.c";
+	std::string FilePath = "C:\\Users\\" + Client.getPK_Name () + "\\AppData\\Local\\Temp\\task.c";
 
 		if (Client.getTechnology_Name () == CPlusPlus)
 			FilePath += "pp";
@@ -355,7 +363,7 @@ void Create_Source_Code (Clients& Client) {
 
 } // функция создания исходного кода
 
-void Formation_Order (void) {
+const void Formation_Order (void) {
 
     Clients Client;
 

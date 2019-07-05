@@ -3,14 +3,6 @@
 #ifndef _client_class_H_
 #define _client_class_H_
 
-void Delay (unsigned short int Time) {
-
-	const clock_t end_time = clock () + Time * CLOCKS_PER_SEC / 1000;
-
-		while (clock () < end_time) {};
-
-} // функция задержки
-
 class Clients {
 
 	private:
@@ -22,8 +14,8 @@ class Clients {
 		bool MenuFunctional; // базовый функционал для управления меню
 		unsigned short int TasksCount; // количество заданных заданий
 		unsigned short int FinishedWorksCount; // количество уже имеющихся в базе заданий для этого клиента
-		std::string UserNamePath; // имя профиля на пк исполнителя
-		// добавить string для пути сохранения лаб
+		std::string PK_Name; // имя профиля на пк исполнителя
+		std::string Labs_Path; // место сохранения лаб
 
 	public:
 
@@ -36,7 +28,8 @@ class Clients {
 			MenuFunctional = false;
 			TasksCount = 0;
 			FinishedWorksCount = 0;
-			UserNamePath = Get_PK_UserName ();  // переписать
+			PK_Name = Get_PK_UserName ();
+			Labs_Path = "\0";
 
 		}
 
@@ -46,34 +39,13 @@ class Clients {
 
 		}
 
-		std::string Get_PK_UserName (void) const {
-
-            std::string Str = "\0";
-
-            system ("@echo %UserName% > PK_UserName.txt");
-
-            std::ifstream Read ("PK_UserName.txt");
-
-                if (Read.is_open ())
-                    Read >> Str;
-
-                //else
-                    // написать реализацию своего экспешина
-
-
-            Read.close ();
-
-            return Str;
-
-		}
-
-		void setName (const std::string Str) {
+		const void setName (const std::string Str) {
 
 			this->Name = Str;
 
 		} // сеттер для Name
 
-		std::string getName (void) const {
+		 const std::string getName (void) const {
 
 			return this->Name;
 
@@ -81,13 +53,13 @@ class Clients {
 
 	//////////////////////////////////////////////
 
-		void setTechnology_Name (const std::string Str) {
+		const void setTechnology_Name (const std::string Str) {
 
 			this->Technology_Name = Str;
 
 		} // сеттер для Technology_Name
 
-		std::string getTechnology_Name (void) const {
+		const std::string getTechnology_Name (void) const {
 
 			return this->Technology_Name;
 
@@ -95,13 +67,13 @@ class Clients {
 
 	//////////////////////////////////////////////
 
-		void setIDE_Name (const std::string Str) {
+		const void setIDE_Name (const std::string Str) {
 
 			this->IDE_Name = Str;
 
 		} // сеттер для setIDE_Name
 
-		std::string getIDE_Name (void) const {
+		const std::string getIDE_Name (void) const {
 
 			return this->IDE_Name;
 
@@ -109,13 +81,13 @@ class Clients {
 
 	//////////////////////////////////////////////
 
-		void setOS_Name (const std::string Str) {
+		const void setOS_Name (const std::string Str) {
 
 			this->OS_Name = Str;
 
 		} // сеттер для OS_Name
 
-		std::string getOS_Name (void) const {
+		const std::string getOS_Name (void) const {
 
 			return this->OS_Name;
 
@@ -123,13 +95,13 @@ class Clients {
 
 	//////////////////////////////////////////////
 
-		void setMenuFunctional (const bool Flag) {
+		const void setMenuFunctional (const bool Flag) {
 
 			this->MenuFunctional = Flag;
 
 		} // сеттер для MenuFunctional
 
-		bool getMenuFunctional (void) const {
+		const bool getMenuFunctional (void) const {
 
 			return this->MenuFunctional;
 
@@ -137,13 +109,13 @@ class Clients {
 
 	//////////////////////////////////////////////
 
-		void setTasksCount (const unsigned short int Number) {
+		const void setTasksCount (const unsigned short int Number) {
 
 			this->TasksCount = Number;
 
 		} // сеттер для TasksCount
 
-		unsigned short int getTasksCount (void) const {
+		const unsigned short int getTasksCount (void) const {
 
 			return this->TasksCount;
 
@@ -151,13 +123,13 @@ class Clients {
 
 	//////////////////////////////////////////////
 
-		void setFinishedWorksCount (const unsigned short int Number) {
+		const void setFinishedWorksCount (const unsigned short int Number) {
 
 			this->FinishedWorksCount = Number;
 
 		} // сеттер для FinishedWorksCount
 
-		unsigned short int getFinishedWorksCount (void) const {
+		const unsigned short int getFinishedWorksCount (void) const {
 
 			return this->FinishedWorksCount;
 
@@ -165,21 +137,48 @@ class Clients {
 
 	//////////////////////////////////////////////
 
-		void setUserNamePath (const std::string Str) {
+		const void setPK_Name (const std::string Str) {
 
-			this->UserNamePath = Str;
+			this->PK_Name = Str;
 
-		} // сеттер для UserNamePath
+		} // сеттер для PK_Name
 
-		std::string getUserNamePath (void) const {
+		const std::string getPK_Name (void) const {
 
-			return this->UserNamePath;
+			return this->PK_Name;
 
-		} // геттер для UserNamePath;
+		} // геттер для PK_Name;
 
 	//////////////////////////////////////////////
 
+	const std::string Get_PK_UserName (void) const;
+	const std::string Get_Labs_Path (void) const;
 
 };
+
+const std::string Clients::Get_PK_UserName (void) const {
+
+    std::string Str = "\0";
+
+    system ("@echo %UserName% > PK_UserName.txt");
+
+    std::ifstream Read ("PK_UserName.txt");
+
+        if (Read.is_open ())
+            Read >> Str;
+
+  //      else
+//            Exception ("File PK_UserName.txt didnt open"); // переписать
+
+    Read.close ();
+
+    return Str;
+
+} // метод получения названия имени пользователя-пк
+
+/*const std::string Clients::Get_Labs_Path (void) const {
+
+
+}*/
 
 #endif // _client_class_H_
