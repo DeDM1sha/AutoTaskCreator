@@ -16,9 +16,9 @@ class Clients {
 	private:
 
 		std::string Name; // имя клиента
-		std::string TechnologyName; // название технологии
-		std::string IDEName; // название IDE
-		std::string OSName; // название операционной системы
+		std::string Technology_Name; // название технологии
+		std::string IDE_Name; // название IDE
+		std::string OS_Name; // название операционной системы
 		bool MenuFunctional; // базовый функционал для управления меню
 		unsigned short int TasksCount; // количество заданных заданий
 		unsigned short int FinishedWorksCount; // количество уже имеющихся в базе заданий для этого клиента
@@ -30,130 +30,154 @@ class Clients {
 		Clients (void) {
 
 			Name = "\0";
-			TechnologyName = "\0";
-			IDEName = "\0";
-			OSName = "\0";
+			Technology_Name = "\0";
+			IDE_Name = "\0";
+			OS_Name = "\0";
 			MenuFunctional = false;
 			TasksCount = 0;
 			FinishedWorksCount = 0;
-			UserNamePath = "" + system ("@echo %UserName%"); // переписать
+			UserNamePath = Get_PK_UserName ();  // переписать
 
 		}
 
-		~Clients (void) {}
+		~Clients (void) {
 
-		void setName (std::string Str) {
+            remove ("PK_UserName.txt");
+
+		}
+
+		std::string Get_PK_UserName (void) const {
+
+            std::string Str = "\0";
+
+            system ("@echo %UserName% > PK_UserName.txt");
+
+            std::ifstream Read ("PK_UserName.txt");
+
+                if (Read.is_open ())
+                    Read >> Str;
+
+                //else
+                    // написать реализацию своего экспешина
+
+
+            Read.close ();
+
+            return Str;
+
+		}
+
+		void setName (const std::string Str) {
 
 			this->Name = Str;
 
-		}
+		} // сеттер для Name
 
 		std::string getName (void) const {
 
 			return this->Name;
 
-		} // set и get для Name
+		} // геттер для Name
 
 	//////////////////////////////////////////////
 
-		void setTechnologyName (std::string Str) {
+		void setTechnology_Name (const std::string Str) {
 
-			this->TechnologyName = Str;
+			this->Technology_Name = Str;
 
-		}
+		} // сеттер для Technology_Name
 
-		std::string getTechnologyName (void) const {
+		std::string getTechnology_Name (void) const {
 
-			return this->TechnologyName;
+			return this->Technology_Name;
 
-		} // set и get для TechnologyName
-
-	//////////////////////////////////////////////
-
-		void setIDEName (std::string Str) {
-
-			this->IDEName = Str;
-
-		}
-
-		std::string getIDEName (void) const {
-
-			return this->IDEName;
-
-		} // set и get для IDEName
+		} // геттер для Technology_Name
 
 	//////////////////////////////////////////////
 
-		void setOSName (std::string Str) {
+		void setIDE_Name (const std::string Str) {
 
-			this->OSName = Str;
+			this->IDE_Name = Str;
 
-		}
+		} // сеттер для setIDE_Name
 
-		std::string getOSName (void) const {
+		std::string getIDE_Name (void) const {
 
-			return this->OSName;
+			return this->IDE_Name;
 
-		} // set и get для OSName
+		} // геттер для IDE_Name
 
 	//////////////////////////////////////////////
 
-		void setMenuFunctional (bool Flag) {
+		void setOS_Name (const std::string Str) {
+
+			this->OS_Name = Str;
+
+		} // сеттер для OS_Name
+
+		std::string getOS_Name (void) const {
+
+			return this->OS_Name;
+
+		} // геттер для OS_Name
+
+	//////////////////////////////////////////////
+
+		void setMenuFunctional (const bool Flag) {
 
 			this->MenuFunctional = Flag;
 
-		}
+		} // сеттер для MenuFunctional
 
 		bool getMenuFunctional (void) const {
 
 			return this->MenuFunctional;
 
-		} // set и get для MenuFunctional
+		} // геттер для MenuFunctional
 
 	//////////////////////////////////////////////
 
-		void setTasksCount (unsigned short int Number) {
+		void setTasksCount (const unsigned short int Number) {
 
 			this->TasksCount = Number;
 
-		}
+		} // сеттер для TasksCount
 
 		unsigned short int getTasksCount (void) const {
 
 			return this->TasksCount;
 
-		} // set и get для TasksCount
+		} // геттер для TasksCount
 
 	//////////////////////////////////////////////
 
-		void setFinishedWorksCount (unsigned short int Number) {
+		void setFinishedWorksCount (const unsigned short int Number) {
 
 			this->FinishedWorksCount = Number;
 
-		}
+		} // сеттер для FinishedWorksCount
 
 		unsigned short int getFinishedWorksCount (void) const {
 
 			return this->FinishedWorksCount;
 
-		} // set и get для FinishedWorksCount
+		} // геттер для FinishedWorksCount
 
 	//////////////////////////////////////////////
 
-		void setUserNamePath (std::string Str) {
+		void setUserNamePath (const std::string Str) {
 
 			this->UserNamePath = Str;
 
-		}
+		} // сеттер для UserNamePath
 
 		std::string getUserNamePath (void) const {
 
 			return this->UserNamePath;
 
-		} // set и get для UserNamePath;
+		} // геттер для UserNamePath;
 
 	//////////////////////////////////////////////
-
 
 
 };

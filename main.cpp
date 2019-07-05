@@ -135,11 +135,11 @@ int main (void) {
     unsigned short int MenuItem = 1;
     unsigned short int ButtonNumber = 0;
 
-    Clients Client;
+    /*Clients Client;
 
     std::cout << Client.getUserNamePath();
 
-    system ("pause");
+    system ("pause");*/
 
     Configure_Console_Window ();
 

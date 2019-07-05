@@ -5,14 +5,14 @@
 #ifndef _formation_order_h_
 #define _formation_order_h_
 
-#define C "c"
-#define CPlusPlus "cpp"
-#define VisualStudio "VisualStudio"
-#define Geany "Geany"
-#define CodeBlocks "Code::Blocks"
-#define Linux "Linux"
-#define MacOS "MacOS"
-#define Windows "Windows"
+static std::string C = "c";
+static std::string CPlusPlus = "cpp";
+static std::string VisualStudio = "VisualStudio";
+static std::string Geany = "Geany";
+static std::string CodeBlocks = "Code::Blocks";
+static std::string Linux = "Linux";
+static std::string MacOS = "MacOS";
+static std::string Windows = "Windows";
 
 void Show_Text_Choise (std::string Text) {
 
@@ -24,9 +24,7 @@ void Show_Text_Choise (std::string Text) {
 
 } // функция для отображения выбранного решения другим цветом
 
-static Clients Client;
-
-void Fill_InputData (void) {
+void Fill_InputData (Clients& Client) {
 
 	std::string Temp = "\0";
 	short int ButtonNumber = 0;
@@ -38,9 +36,6 @@ void Fill_InputData (void) {
 	SetConsoleTextAttribute (GetStdHandle (STD_OUTPUT_HANDLE), (WORD) ((0 << 4) | 10));
 	Client.setName (Temp);
 
-	std::cout << "lol: " << Client.getName() << "\n";
-	system ("pause");
-
 	std::cout << "\n\nВыбор технологии: C / C++ (C / +) ?:   ";
 
 		while (true) {
@@ -49,7 +44,7 @@ void Fill_InputData (void) {
 
 				if (ClickCatch ("C", ButtonNumber)) {
 
-					Client.setTechnologyName (C);
+					Client.setTechnology_Name (C);
 					Show_Text_Choise ("C");
 					break;
 
@@ -57,7 +52,7 @@ void Fill_InputData (void) {
 
 				else if (ClickCatch ("+", ButtonNumber)) {
 
-					Client.setTechnologyName (CPlusPlus);
+					Client.setTechnology_Name (CPlusPlus);
 					Show_Text_Choise ("C++");
 					break;
 
@@ -73,7 +68,7 @@ void Fill_InputData (void) {
 
 				if (ClickCatch ("V", ButtonNumber)) {
 
-					Client.setIDEName (VisualStudio);
+					Client.setIDE_Name (VisualStudio);
 					Show_Text_Choise (VisualStudio);
 					break;
 
@@ -81,7 +76,7 @@ void Fill_InputData (void) {
 
 				else if (ClickCatch ("G", ButtonNumber)) {
 
-					Client.setIDEName (Geany);
+					Client.setIDE_Name (Geany);
 					Show_Text_Choise (Geany);
 					break;
 
@@ -89,7 +84,7 @@ void Fill_InputData (void) {
 
 				else if (ClickCatch ("C", ButtonNumber)) {
 
-					Client.setIDEName (CodeBlocks);
+					Client.setIDE_Name (CodeBlocks);
 					Show_Text_Choise (CodeBlocks);
 					break;
 
@@ -105,7 +100,7 @@ void Fill_InputData (void) {
 
 				if (ClickCatch ("L", ButtonNumber)) {
 
-					Client.setOSName (Linux);
+					Client.setOS_Name (Linux);
 					Show_Text_Choise (Linux);
 					break;
 
@@ -113,7 +108,7 @@ void Fill_InputData (void) {
 
 				else if (ClickCatch ("M", ButtonNumber)) {
 
-					Client.setOSName (MacOS);
+					Client.setOS_Name (MacOS);
 					Show_Text_Choise (MacOS);
 					break;
 
@@ -121,7 +116,7 @@ void Fill_InputData (void) {
 
 				else if (ClickCatch ("W", ButtonNumber)) {
 
-					Client.setOSName (Windows);
+					Client.setOS_Name (Windows);
 					Show_Text_Choise (Windows);
 					break;
 
@@ -158,7 +153,6 @@ void Fill_InputData (void) {
 		while (true) {
 
 			std::cout << "\n\nКоличество заданий:   ";
-			SetConsoleTextAttribute (GetStdHandle (STD_OUTPUT_HANDLE), (WORD) ((0 << 4) | 11));
 
 				while (!(std::cin >> Count) || (std::cin.peek() != '\n')) {
 
@@ -179,18 +173,18 @@ void Fill_InputData (void) {
 	SetConsoleTextAttribute (GetStdHandle (STD_OUTPUT_HANDLE), (WORD) ((0 << 4) | 10));
 
 	/*std::cout << "\n---------------------------\n";
-	std::cout << "Name: " << Client.getName () << "\nTech: " << Client.getTechnologyName() << "\nIDE: " << Client.getIDEName() << "\nOS: " << Client.getOSName() << "\nFunc: " << Client.getMenuFunctional() << "\nCount: " << Client.getTasksCount();*/
+	std::cout << "Name: " << Client.getName () << "\nTech: " << Client.getTechnology_Name() << "\nIDE: " << Client.getIDE_Name() << "\nOS: " << Client.getOS_Name() << "\nFunc: " << Client.getMenuFunctional() << "\nCount: " << Client.getTasksCount();*/
 
 }
 
-void Create_Source_Code (void) {
+void Create_Source_Code (Clients& Client) {
 
 	std::queue <std::string> Code;
 
-		if (Client.getIDEName () == VisualStudio)
+		if (Client.getIDE_Name () == VisualStudio)
 			Code.push ("//#include \"stdafx.h\"\n");
 
-		if (Client.getOSName () == Windows)
+		if (Client.getOS_Name () == Windows)
 			Code.push ("#include <windows.h>\n");
 
 		else {
@@ -204,12 +198,12 @@ void Create_Source_Code (void) {
 
 			Code.push ("#include <conio.h>\n");
 
-				if (Client.getTechnologyName () == C)
+				if (Client.getTechnology_Name () == C)
 					Code.push ("#include <stdbool.h>\n");
 
 		}
 
-		if (Client.getTechnologyName () == C)
+		if (Client.getTechnology_Name () == C)
 			Code.push ("#include <stdio.h>\n\n");
 
 		else {
@@ -224,13 +218,13 @@ void Create_Source_Code (void) {
 			Code.push ("void cls (void) {\n\n");
 			Code.push ("	system (\"cls\");\n\n");
 
-				if (Client.getOSName () != Windows)
+				if (Client.getOS_Name () != Windows)
 					Code.push ("	//system (\"clear\");\n\n");
 
 			Code.push ("} // функция очистки экрана\n\n");
 			Code.push ("void DrawLine (void) {\n\n");
 
-				if (Client.getTechnologyName () == C)
+				if (Client.getTechnology_Name () == C)
 					Code.push ("	printf (\"\\n--------------------------------------\\n\");\n\n");
 
 				else
@@ -239,13 +233,13 @@ void Create_Source_Code (void) {
 			Code.push ("} // функция отрисовки пунктирной линии\n\n");
 			Code.push ("void Continue (void) {\n\n");
 
-				if (Client.getTechnologyName () == C)
+				if (Client.getTechnology_Name () == C)
 					Code.push ("	printf (\"\\nДля продолжения нажмите любую клавишу... \\n\");\n");
 
 				else
 					Code.push ("	cout << \"\\nДля продолжения нажмите любую клавишу... \\n\";\n");
 
-				if (Client.getIDEName () == VisualStudio)
+				if (Client.getIDE_Name () == VisualStudio)
 					Code.push ("	_getch ();\n\n");
 
 				else
@@ -257,9 +251,9 @@ void Create_Source_Code (void) {
 
 	Code.push ("int main (void) {\n\n");
 
-		if (Client.getOSName () == Windows) {
+		if (Client.getOS_Name () == Windows) {
 
-			if (Client.getIDEName () == Geany) {
+			if (Client.getIDE_Name () == Geany) {
 
 			Code.push ("	//SetConsoleCP(1251);\n");
 			Code.push ("	//SetConsoleOutputCP(1251); // кириллица в консоли\n");
@@ -289,7 +283,7 @@ void Create_Source_Code (void) {
 			Code.push ("			ButtonNumber = 0;\n");
 			Code.push ("			cls ();\n\n");
 
-				if (Client.getTechnologyName () == C) {
+				if (Client.getTechnology_Name () == C) {
 
 					Code.push ("			printf (\"		Меню программы\\n\\n\");\n");
 					Code.push ("			printf (\"1. \\n\");\n");
@@ -309,7 +303,7 @@ void Create_Source_Code (void) {
 
 			Code.push ("				while (true) { // защита от дурака по нажатию\n\n");
 
-				if (Client.getIDEName () == VisualStudio)
+				if (Client.getIDE_Name () == VisualStudio)
 					Code.push ("					ButtonNumber = _getch ();\n\n");
 
 				else
@@ -334,7 +328,7 @@ void Create_Source_Code (void) {
 
 		else {
 
-				if (Client.getIDEName () == VisualStudio)
+				if (Client.getIDE_Name () == VisualStudio)
 					Code.push ("	//system (\"pause\");\n\n");
 
 			Code.push ("	return 0; // завершение программы\n\n");
@@ -345,7 +339,7 @@ void Create_Source_Code (void) {
 
 	std::string FilePath = "C:\\Users\\" + Client.getUserNamePath () + "\\AppData\\Local\\Temp\\task.c";
 
-		if (Client.getTechnologyName () == CPlusPlus)
+		if (Client.getTechnology_Name () == CPlusPlus)
 			FilePath += "pp";
 
 	std::ofstream Write (FilePath.c_str());
@@ -363,9 +357,11 @@ void Create_Source_Code (void) {
 
 void Formation_Order (void) {
 
+    Clients Client;
 
-	Fill_InputData (); // заполнение данных по заказу
-	Create_Source_Code (); // создание исходников
+	Fill_InputData (Client); // заполнение данных по заказу
+	Create_Source_Code (Client); // создание исходников
+
 
 } // функция формирования заказа
 
