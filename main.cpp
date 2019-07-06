@@ -9,9 +9,15 @@
 
 // подключение всех необходимых стандартных библиотек для проекта
 
-#include "modules/clickcatcher.h" // подключение модуля clickcatcher - самописная библиотека по обработке нажатых клавиш
-#include "modules/client_class.h" // подключение модуля client_class - класс данных об клиенте
-#include "modules/formation_order.h" // подключение модуля formation_order - модуль формирование заказа
+#include "modules/classes/client_class.h" // подключение модуля client_class - класс данных об клиенте
+#include "modules/classes/db_clients_class.h" // подключение модуля db_clients_class - класс базы данных всех заказов и клиентов
+#include "modules/libs/clickcatcher.h" // подключение модуля clickcatcher - самописная библиотека по обработке нажатых клавиш
+#include "modules/libs/additional_functions.h" // подключение модуля additional_functions - библиотека дополнительних общий функций
+
+#include "modules/Menu_Formation_order.h" // подключение модуля Formation_order - модуль формирование заказа
+#include "modules/Menu_Search_tasks.h" // подключение модуля Search_tasks - модуль поиска заказа по ключевым словам
+#include "modules/Menu_Settings.h" // подключение модуля Menu_Settings - модуль настроек приложения
+#include "modules/Menu_Statistics.h" // одключение модуля Menu_Statistics - модуль статистики по базе данных
 
 // подключение всех необходимых самописных библиотек и модулей для проекта
 
@@ -30,35 +36,6 @@ const void Configure_Console_Window (void) {
     system ("@echo off"); // переключение режима отображения команд на экране
 
 } // Функция настроек консольного окна
-
-const void CenterText (const std::string Text) {
-
-    CONSOLE_SCREEN_BUFFER_INFO consoleInfo;
-    GetConsoleScreenBufferInfo ((GetStdHandle (STD_OUTPUT_HANDLE)), &consoleInfo);
-
-        for (unsigned short int i = 0; i < ((consoleInfo.srWindow.Right - consoleInfo.srWindow.Left + 1) / 2 - strlen (Text.c_str ()) / 2); i++)
-            printf (" ");
-
-    printf ("%s\n", Text.c_str());
-
-} // функция центирования текста на экране
-
-const void cls (void) {
-
-    system ("cls");
-
-} // функция очистки экрана
-
-const void Exception (const std::string TextError) {
-
-    SetConsoleTextAttribute (GetStdHandle (STD_OUTPUT_HANDLE), (WORD) ((0 << 4) | 12));
-
-    printf ("\n\n%s!!!\n\n", TextError.c_str());
-    system ("pause");
-
-	SetConsoleTextAttribute (GetStdHandle (STD_OUTPUT_HANDLE), (WORD) ((0 << 4) | 10));
-
-} // функция Exception - для отображения случившихся ошибок
 
 const void Draw_Menu (const unsigned short int MenuItem) {
 
@@ -141,10 +118,11 @@ const void Draw_Menu (const unsigned short int MenuItem) {
 
 } // функция отрисовки меню
 
+volatile unsigned int ButtonNumber = 0;
+
 int main (void) {
 
     unsigned short int MenuItem = 1;
-    unsigned short int ButtonNumber = 0;
 
     Configure_Console_Window ();
 
@@ -198,10 +176,10 @@ int main (void) {
 
                                 switch (MenuItem) {
 
-                                    case 1: CenterText ("Создание нового заказа\n");    Formation_Order();  break;
-                                    case 2: CenterText ("Поиск работы среди имеющихся в базе\n");           break;
-                                    case 3: CenterText ("Настройки программы\n");                           break;
-                                    case 4: CenterText ("Статистика заказов\n");                            break;
+                                    case 1: CenterText ("Создание нового заказа\n");                Menu_Formation_Order(); break;
+                                    case 2: CenterText ("Поиск работы среди имеющихся в базе\n");   Menu_Search_Tasks ();   break;
+                                    case 3: CenterText ("Настройки программы\n");                   Menu_Settings ();       break;
+                                    case 4: CenterText ("Статистика заказов\n");                    Menu_Statistics ();     break;
                                     default: Exception ("Error selected getch in life cycle"); // эксепшион при работе с getch
 
                                 }

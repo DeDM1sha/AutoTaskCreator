@@ -1,7 +1,11 @@
+// Класс клиента
+
 #pragma once
 
-#ifndef _client_class_H_
-#define _client_class_H_
+#ifndef _client_class_h_
+#define _client_class_h_
+
+#include "../libs/additional_functions.h"
 
 class Clients {
 
@@ -13,9 +17,9 @@ class Clients {
 		std::string OS_Name; // название операционной системы
 		bool MenuFunctional; // базовый функционал для управления меню
 		unsigned short int TasksCount; // количество заданных заданий
-		unsigned short int FinishedWorksCount; // количество уже имеющихся в базе заданий для этого клиента
-		std::string PK_Name; // имя профиля на пк исполнителя
+		unsigned short int Available_TasksCount; // количество уже имеющихся в базе заданий для этого клиента
 		std::string Labs_Path; // место сохранения лаб
+		std::string PK_Name; // имя профиля на пк исполнителя
 
 	public:
 
@@ -27,9 +31,9 @@ class Clients {
 			OS_Name = "\0";
 			MenuFunctional = false;
 			TasksCount = 0;
-			FinishedWorksCount = 0;
-			PK_Name = Get_PK_UserName ();
+			Available_TasksCount = 0;
 			Labs_Path = "\0";
+			PK_Name = Load_PK_UserName ();
 
 		}
 
@@ -123,21 +127,21 @@ class Clients {
 
 	//////////////////////////////////////////////
 
-		const void setFinishedWorksCount (const unsigned short int Number) {
+        const void setAvailable_TasksCount (const unsigned short int Number) {
 
-			this->FinishedWorksCount = Number;
+			this->Available_TasksCount = Number;
 
-		} // сеттер для FinishedWorksCount
+		} // сеттер для Available_TasksCount
 
-		const unsigned short int getFinishedWorksCount (void) const {
+		const unsigned short int getAvailable_TasksCount (void) const {
 
-			return this->FinishedWorksCount;
+			return this->Available_TasksCount;
 
-		} // геттер для FinishedWorksCount
+		} // геттер для Available_TasksCount
 
 	//////////////////////////////////////////////
 
-		const void setPK_Name (const std::string Str) {
+        const void setPK_Name (const std::string Str) {
 
 			this->PK_Name = Str;
 
@@ -151,12 +155,12 @@ class Clients {
 
 	//////////////////////////////////////////////
 
-	const std::string Get_PK_UserName (void) const;
-	const std::string Get_Labs_Path (void) const;
+	const std::string Load_Labs_Path (void) const;
+	const std::string Load_PK_UserName (void) const;
 
-};
+}; // класс данных о вводимом клиенте
 
-const std::string Clients::Get_PK_UserName (void) const {
+const std::string Clients::Load_PK_UserName (void) const {
 
     std::string Str = "\0";
 
@@ -167,8 +171,8 @@ const std::string Clients::Get_PK_UserName (void) const {
         if (Read.is_open ())
             Read >> Str;
 
-  //      else
-//            Exception ("File PK_UserName.txt didnt open"); // переписать
+        else
+            Exception ("File PK_UserName.txt didnt open"); // переписать
 
     Read.close ();
 
@@ -176,9 +180,9 @@ const std::string Clients::Get_PK_UserName (void) const {
 
 } // метод получения названия имени пользователя-пк
 
-/*const std::string Clients::Get_Labs_Path (void) const {
+/*const std::string Clients::Load_Labs_Path (void) const {
 
 
 }*/
 
-#endif // _client_class_H_
+#endif // _client_class_h_

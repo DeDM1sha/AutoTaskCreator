@@ -1,9 +1,9 @@
-// Это модуль для формирования заказа. Именно здесь описан весь функционал кнопки "Создать заказ".
+// Модуль для формирования заказа. Именно здесь описан весь функционал кнопки "Создать заказ".
 
 #pragma once
 
-#ifndef _formation_order_h_
-#define _formation_order_h_
+#ifndef _Menu_formation_order_h_
+#define _Menu_formation_order_h_
 
 static std::string C = "c";
 static std::string CPlusPlus = "cpp";
@@ -13,14 +13,6 @@ static std::string CodeBlocks = "Code::Blocks";
 static std::string Linux = "Linux";
 static std::string MacOS = "MacOS";
 static std::string Windows = "Windows";
-
-/*static void Delay (unsigned short int Time) {
-
-	const clock_t end_time = clock () + Time * CLOCKS_PER_SEC / 1000;
-
-		while (clock () < end_time) {};
-
-} // функция задержки*/
 
 static void Show_Text_Choise (const std::string Text) {
 
@@ -35,13 +27,17 @@ static void Show_Text_Choise (const std::string Text) {
 const void Fill_InputData (Clients& Client) {
 
 	std::string Temp = "\0";
-	short int ButtonNumber = 0;
+	unsigned short int ButtonNumber = 0;
 	unsigned short int Count = 0;
 
 	std::cout << "\n\nИмя клиента:   ";
 	SetConsoleTextAttribute (GetStdHandle (STD_OUTPUT_HANDLE), (WORD) ((0 << 4) | 11));
 	getline (std::cin, Temp);
 	SetConsoleTextAttribute (GetStdHandle (STD_OUTPUT_HANDLE), (WORD) ((0 << 4) | 10));
+
+        if (Temp == "EXIT" || Temp == "Exit" || Temp == "exit" || Temp == "ESC" || Temp == "Esc" || Temp == "esc" || Temp == "!q")
+            return; // если было введено одно из службных слов для выхода - возврат в главное меню программы
+
 	Client.setName (Temp);
 
 	std::cout << "\n\nВыбор технологии: C / C++ (C / +) ?:   ";
@@ -363,7 +359,9 @@ static void Create_Source_Code (const Clients& Client) {
 
 } // функция создания исходного кода
 
-const void Formation_Order (void) {
+const void Menu_Formation_Order (void) {
+
+    printf ("                                                                                               Input Exit / Esc / !q for quit\n");
 
     Clients Client;
 
@@ -373,4 +371,4 @@ const void Formation_Order (void) {
 
 } // функция формирования заказа
 
-#endif // _formation_order_h_
+#endif // _Menu_formation_order_h_

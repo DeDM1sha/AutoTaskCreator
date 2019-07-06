@@ -19,8 +19,8 @@
 
 #pragma once
 
-#ifndef _clickcatcher_H_
-#define _clickcatcher_H_
+#ifndef _clickcatcher_h_
+#define _clickcatcher_h_
 
 class ClassClick {
 
@@ -320,4 +320,4 @@ const bool ClickCatch (const std::string& Str, const unsigned short int& Value) 
 
 } // функция обработки нажатой и требуемой кнопки
 
-#endif // _click_catcher_H_
+#endif // _click_catcher_h_

@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1562350664 source:e:\cplusplus_projects\autotaskcreator\main.cpp
+1562409731 source:e:\cplusplus_projects\autotaskcreator\main.cpp
 	<stdio.h>
 	<iostream>
 	<windows.h>
@@ -8,13 +8,40 @@
 	<string.h>
 	<queue>
 	<time.h>
-	"modules/clickcatcher.h"
-	"modules/client_class.h"
-	"modules/formation_order.h"
+	"modules/classes/client_class.h"
+	"modules/classes/db_clients_class.h"
+	"modules/libs/clickcatcher.h"
+	"modules/libs/additional_functions.h"
+	"modules/Menu_Formation_order.h"
+	"modules/Menu_Search_tasks.h"
+	"modules/Menu_Settings.h"
+	"modules/Menu_Statistics.h"
 
-1562343880 e:\cplusplus_projects\autotaskcreator\modules\clickcatcher.h
+1562399688 e:\cplusplus_projects\autotaskcreator\modules\clickcatcher.h
 
-1562348321 e:\cplusplus_projects\autotaskcreator\modules\formation_order.h
+1562402542 e:\cplusplus_projects\autotaskcreator\modules\formation_order.h
 
-1562350683 e:\cplusplus_projects\autotaskcreator\modules\client_class.h
+1562403052 e:\cplusplus_projects\autotaskcreator\modules\client_class.h
+	"additional_functions.h"
+
+1562402542 e:\cplusplus_projects\autotaskcreator\modules\additional_functions.h
+
+1562403048 e:\cplusplus_projects\autotaskcreator\modules\db_clients_class.h
+
+1562409731 e:\cplusplus_projects\autotaskcreator\modules\menu_formation_order.h
+
+1562406915 e:\cplusplus_projects\autotaskcreator\modules\classes\client_class.h
+	"../libs/additional_functions.h"
+
+1562407609 e:\cplusplus_projects\autotaskcreator\modules\libs\additional_functions.h
+
+1562403048 e:\cplusplus_projects\autotaskcreator\modules\classes\db_clients_class.h
+
+1562399688 e:\cplusplus_projects\autotaskcreator\modules\libs\clickcatcher.h
+
+1562409922 e:\cplusplus_projects\autotaskcreator\modules\menu_search_tasks.h
+
+1562409922 e:\cplusplus_projects\autotaskcreator\modules\menu_settings.h
+
+1562409922 e:\cplusplus_projects\autotaskcreator\modules\menu_statistics.h
 
