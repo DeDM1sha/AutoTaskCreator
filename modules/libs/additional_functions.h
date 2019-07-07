@@ -5,6 +5,16 @@
 #ifndef _additional_functions_h_
 #define _additional_functions_h_
 
+//////////////////////////////////////////////////////////////////////////////
+
+/* Глобальные общие переменные */
+
+volatile unsigned int ButtonNumber = 0; // переменная для обработки нажатий в меню
+
+//////////////////////////////////////////////////////////////////////////////
+
+/* Глобальные общие функции */
+
 /*const void Delay (unsigned short int Time) {
 
 	const clock_t end_time = clock () + Time * CLOCKS_PER_SEC / 1000;
@@ -21,7 +31,7 @@ const void CenterText (const std::string Text) {
         for (unsigned short int i = 0; i < ((consoleInfo.srWindow.Right - consoleInfo.srWindow.Left + 1) / 2 - strlen (Text.c_str ()) / 2); i++)
             printf (" ");
 
-    printf ("%s\n", Text.c_str());
+    printf ("%s", Text.c_str());
 
 } // функция центирования текста на экране
 
@@ -41,5 +51,7 @@ const void Exception (const std::string TextError) {
 	SetConsoleTextAttribute (GetStdHandle (STD_OUTPUT_HANDLE), (WORD) ((0 << 4) | 10));
 
 } // функция Exception - для отображения случившихся ошибок
+
+//////////////////////////////////////////////////////////////////////////////
 
 #endif // _additional_functions_h_

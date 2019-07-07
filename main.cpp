@@ -10,7 +10,9 @@
 // подключение всех необходимых стандартных библиотек для проекта
 
 #include "modules/classes/client_class.h" // подключение модуля client_class - класс данных об клиенте
-#include "modules/classes/db_clients_class.h" // подключение модуля db_clients_class - класс базы данных всех заказов и клиентов
+#include "modules/classes/statistics_class.h" // подключение модуля statistics_class - класс базы данных всех заказов и клиентов
+#include "modules/classes/settings_class.h" // подключения модуля settings_class - класс настроек приложения
+
 #include "modules/libs/clickcatcher.h" // подключение модуля clickcatcher - самописная библиотека по обработке нажатых клавиш
 #include "modules/libs/additional_functions.h" // подключение модуля additional_functions - библиотека дополнительних общий функций
 
@@ -118,9 +120,10 @@ const void Draw_Menu (const unsigned short int MenuItem) {
 
 } // функция отрисовки меню
 
-volatile unsigned int ButtonNumber = 0;
-
 int main (void) {
+
+    Class_Clients Client; // инициализация объекта Client
+    Class_Settings Settings (Client); // инициализация объекта Settings
 
     unsigned short int MenuItem = 1;
 
@@ -176,9 +179,9 @@ int main (void) {
 
                                 switch (MenuItem) {
 
-                                    case 1: CenterText ("Создание нового заказа\n");                Menu_Formation_Order(); break;
+                                    case 1: CenterText ("Создание нового заказа\n");                Menu_Formation_Order (Client); break;
                                     case 2: CenterText ("Поиск работы среди имеющихся в базе\n");   Menu_Search_Tasks ();   break;
-                                    case 3: CenterText ("Настройки программы\n");                   Menu_Settings ();       break;
+                                    case 3: CenterText ("Настройки программы\n");                   Menu_Settings (Settings);       break;
                                     case 4: CenterText ("Статистика заказов\n");                    Menu_Statistics ();     break;
                                     default: Exception ("Error selected getch in life cycle"); // эксепшион при работе с getch
 

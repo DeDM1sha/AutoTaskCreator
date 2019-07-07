@@ -7,7 +7,68 @@
 
 #include "../libs/additional_functions.h"
 
-class Clients {
+class AbstractClass_Clients {
+
+    private:
+
+        std::string PK_Name; // имя профиля на пк исполнителя
+
+    public:
+
+        AbstractClass_Clients (void) {
+
+            PK_Name = Load_PK_UserName ();
+
+        }
+
+        ~AbstractClass_Clients (void) {
+
+            remove ("PK_UserName.txt");
+
+        }
+
+    //////////////////////////////////////////////
+
+        const void setPK_Name (const std::string Str) {
+
+			this->PK_Name = Str;
+
+		} // сеттер для PK_Name
+
+		const std::string getPK_Name (void) const {
+
+			return this->PK_Name;
+
+		} // геттер для PK_Name
+
+	//////////////////////////////////////////////
+
+        const std::string Load_PK_UserName (void) const;
+
+
+}; // абстрактный класс - родитель для хранения общей информации по клиентам
+
+const std::string AbstractClass_Clients::Load_PK_UserName (void) const {
+
+    std::string PK_Name = "\0";
+
+    system ("@echo %UserName% > PK_UserName.txt");
+
+    std::ifstream Read ("PK_UserName.txt");
+
+        if (Read.is_open ())
+            Read >> PK_Name;
+
+        else
+            Exception ("File PK_UserName.txt didnt open"); // переписать
+
+    Read.close ();
+
+    return PK_Name;
+
+} // метод получения названия имени пользователя-пк
+
+class Class_Clients : public AbstractClass_Clients {
 
 	private:
 
@@ -18,12 +79,10 @@ class Clients {
 		bool MenuFunctional; // базовый функционал для управления меню
 		unsigned short int TasksCount; // количество заданных заданий
 		unsigned short int Available_TasksCount; // количество уже имеющихся в базе заданий для этого клиента
-		std::string Labs_Path; // место сохранения лаб
-		std::string PK_Name; // имя профиля на пк исполнителя
 
 	public:
 
-		Clients (void) {
+		Class_Clients (void) {
 
 			Name = "\0";
 			Technology_Name = "\0";
@@ -32,14 +91,12 @@ class Clients {
 			MenuFunctional = false;
 			TasksCount = 0;
 			Available_TasksCount = 0;
-			Labs_Path = "\0";
-			PK_Name = Load_PK_UserName ();
 
 		}
 
-		~Clients (void) {
+		~Class_Clients (void) {
 
-            remove ("PK_UserName.txt");
+
 
 		}
 
@@ -79,7 +136,7 @@ class Clients {
 
 		const std::string getIDE_Name (void) const {
 
-			return this->IDE_Name;
+            return this->IDE_Name;
 
 		} // геттер для IDE_Name
 
@@ -139,50 +196,7 @@ class Clients {
 
 		} // геттер для Available_TasksCount
 
-	//////////////////////////////////////////////
-
-        const void setPK_Name (const std::string Str) {
-
-			this->PK_Name = Str;
-
-		} // сеттер для PK_Name
-
-		const std::string getPK_Name (void) const {
-
-			return this->PK_Name;
-
-		} // геттер для PK_Name;
-
-	//////////////////////////////////////////////
-
-	const std::string Load_Labs_Path (void) const;
-	const std::string Load_PK_UserName (void) const;
 
 }; // класс данных о вводимом клиенте
-
-const std::string Clients::Load_PK_UserName (void) const {
-
-    std::string Str = "\0";
-
-    system ("@echo %UserName% > PK_UserName.txt");
-
-    std::ifstream Read ("PK_UserName.txt");
-
-        if (Read.is_open ())
-            Read >> Str;
-
-        else
-            Exception ("File PK_UserName.txt didnt open"); // переписать
-
-    Read.close ();
-
-    return Str;
-
-} // метод получения названия имени пользователя-пк
-
-/*const std::string Clients::Load_Labs_Path (void) const {
-
-
-}*/
 
 #endif // _client_class_h_

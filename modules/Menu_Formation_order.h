@@ -24,7 +24,7 @@ static void Show_Text_Choise (const std::string Text) {
 
 } // функция для отображения выбранного решения другим цветом
 
-const void Fill_InputData (Clients& Client) {
+const void Fill_InputData (Class_Clients& Client) {
 
 	std::string Temp = "\0";
 	unsigned short int ButtonNumber = 0;
@@ -181,7 +181,7 @@ const void Fill_InputData (Clients& Client) {
 
 }
 
-static void Create_Source_Code (const Clients& Client) {
+static void Create_Source_Code (const Class_Clients& Client) {
 
 	std::queue <std::string> Code;
 
@@ -341,12 +341,12 @@ static void Create_Source_Code (const Clients& Client) {
 
 	Code.push ("}");
 
-	std::string FilePath = "C:\\Users\\" + Client.getPK_Name () + "\\AppData\\Local\\Temp\\task.c";
+	//std::string FilePath = "C:\\Users\\" + Client.getPK_Name () + "\\AppData\\Local\\Temp\\task.c";
 
-		if (Client.getTechnology_Name () == CPlusPlus)
-			FilePath += "pp";
+		//if (Client.getTechnology_Name () == CPlusPlus)
+			//FilePath += "pp";
 
-	std::ofstream Write (FilePath.c_str());
+	/*std::ofstream Write (FilePath.c_str());
 
 		while (!Code.empty ()) {
 
@@ -355,15 +355,13 @@ static void Create_Source_Code (const Clients& Client) {
 
 		}
 
-	Write.close ();
+	Write.close ();*/
 
 } // функция создания исходного кода
 
-const void Menu_Formation_Order (void) {
+const void Menu_Formation_Order (Class_Clients& Client) {
 
     printf ("                                                                                               Input Exit / Esc / !q for quit\n");
-
-    Clients Client;
 
 	Fill_InputData (Client); // заполнение данных по заказу
 	Create_Source_Code (Client); // создание исходников

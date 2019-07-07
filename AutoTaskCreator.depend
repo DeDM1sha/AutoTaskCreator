@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1562409731 source:e:\cplusplus_projects\autotaskcreator\main.cpp
+1562517561 source:e:\cplusplus_projects\autotaskcreator\main.cpp
 	<stdio.h>
 	<iostream>
 	<windows.h>
@@ -9,7 +9,8 @@
 	<queue>
 	<time.h>
 	"modules/classes/client_class.h"
-	"modules/classes/db_clients_class.h"
+	"modules/classes/statistics_class.h"
+	"modules/classes/settings_class.h"
 	"modules/libs/clickcatcher.h"
 	"modules/libs/additional_functions.h"
 	"modules/Menu_Formation_order.h"
@@ -28,20 +29,24 @@
 
 1562403048 e:\cplusplus_projects\autotaskcreator\modules\db_clients_class.h
 
-1562409731 e:\cplusplus_projects\autotaskcreator\modules\menu_formation_order.h
+1562515589 e:\cplusplus_projects\autotaskcreator\modules\menu_formation_order.h
 
-1562406915 e:\cplusplus_projects\autotaskcreator\modules\classes\client_class.h
+1562517192 e:\cplusplus_projects\autotaskcreator\modules\classes\client_class.h
 	"../libs/additional_functions.h"
 
-1562407609 e:\cplusplus_projects\autotaskcreator\modules\libs\additional_functions.h
+1562517561 e:\cplusplus_projects\autotaskcreator\modules\libs\additional_functions.h
 
-1562403048 e:\cplusplus_projects\autotaskcreator\modules\classes\db_clients_class.h
+1562515563 e:\cplusplus_projects\autotaskcreator\modules\classes\db_clients_class.h
 
-1562399688 e:\cplusplus_projects\autotaskcreator\modules\libs\clickcatcher.h
+1562412502 e:\cplusplus_projects\autotaskcreator\modules\libs\clickcatcher.h
 
-1562409922 e:\cplusplus_projects\autotaskcreator\modules\menu_search_tasks.h
+1562412394 e:\cplusplus_projects\autotaskcreator\modules\menu_search_tasks.h
 
-1562409922 e:\cplusplus_projects\autotaskcreator\modules\menu_settings.h
+1562518910 e:\cplusplus_projects\autotaskcreator\modules\menu_settings.h
 
-1562409922 e:\cplusplus_projects\autotaskcreator\modules\menu_statistics.h
+1562412394 e:\cplusplus_projects\autotaskcreator\modules\menu_statistics.h
+
+1562515735 e:\cplusplus_projects\autotaskcreator\modules\classes\statistics_class.h
+
+1562521981 e:\cplusplus_projects\autotaskcreator\modules\classes\settings_class.h
 

@@ -2,10 +2,10 @@
 
 #pragma once
 
-#ifndef _db_clients_class_h_
-#define _db_clients_class_h_
+#ifndef _statistics_class_h
+#define _statistics_class_h
 
-class Clients_DataBase {
+class Class_Statistics : public AbstractClass_Clients {
 
     private:
 
@@ -14,14 +14,14 @@ class Clients_DataBase {
 
     public:
 
-        Clients_DataBase () {
+        Class_Statistics () {
 
             TotalNumber_ClientsInBD_Count = 0;
 			TotalNumber_CompletedTasks_Count = 0;
 
         }
 
-        ~Clients_DataBase (void) {
+        ~Class_Statistics (void) {
 
 
 
@@ -61,17 +61,17 @@ class Clients_DataBase {
 
 }; // класс базы данных всех заказов
 
-const unsigned short int Clients_DataBase::Load_TotalNumber_ClientsInBD_Count (void) const {
+const unsigned short int Class_Statistics::Load_TotalNumber_ClientsInBD_Count (void) const {
 
 
     return 0;
 
 } // метод подсчета кол-ва клиентов в базе
 
-const unsigned short int Clients_DataBase::Load_TotalNumber_CompletedTasks_Count (void) const {
+const unsigned short int Class_Statistics::Load_TotalNumber_CompletedTasks_Count (void) const {
 
     return 0;
 
 } // метод подсчета кол-ва выполненных заданий в базе
 
-#endif // _db_clients_class_h_
+#endif // _statistics_class_h
