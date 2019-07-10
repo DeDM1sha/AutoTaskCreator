@@ -15,13 +15,38 @@ volatile unsigned int ButtonNumber = 0; // переменная для обра�
 
 /* Глобальные общие функции */
 
-/*const void Delay (unsigned short int Time) {
+const void Delay (unsigned short int Time) {
 
 	const clock_t end_time = clock () + Time * CLOCKS_PER_SEC / 1000;
 
 		while (clock () < end_time) {};
 
-} // функция задержки*/
+} // функция задержки
+
+const void Show_Text_Choise (const std::string Text) {
+
+	SetConsoleTextAttribute (GetStdHandle (STD_OUTPUT_HANDLE), (WORD) ((0 << 4) | 11));
+
+	std::cout << Text;
+
+	SetConsoleTextAttribute (GetStdHandle (STD_OUTPUT_HANDLE), (WORD) ((0 << 4) | 10));
+
+} // функция для отображения выбранного решения другим цветом
+
+const std::string Show_Text_Input (void) {
+
+    std::string Str = "\0";
+
+    SetConsoleTextAttribute (GetStdHandle (STD_OUTPUT_HANDLE), (WORD) ((0 << 4) | 11));
+
+    //std::cin.get ();
+    getline (std::cin, Str);
+
+    SetConsoleTextAttribute (GetStdHandle (STD_OUTPUT_HANDLE), (WORD) ((0 << 4) | 10));
+
+    return Str;
+
+} // функция для отображения вводимых данных другим цветом
 
 const void CenterText (const std::string Text) {
 

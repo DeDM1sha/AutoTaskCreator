@@ -122,12 +122,15 @@ const void Draw_Menu (const unsigned short int MenuItem) {
 
 int main (void) {
 
+    Configure_Console_Window ();
+
     Class_Clients Client; // инициализация объекта Client
     Class_Settings Settings (Client); // инициализация объекта Settings
 
-    unsigned short int MenuItem = 1;
+        if (Settings.getAutomatic_Order_Start () == true)
+            Menu_Formation_Order (Client, Settings);
 
-    Configure_Console_Window ();
+    unsigned short int MenuItem = 1;
 
         while (true) {
 
@@ -179,7 +182,7 @@ int main (void) {
 
                                 switch (MenuItem) {
 
-                                    case 1: CenterText ("Создание нового заказа\n");                Menu_Formation_Order (Client); break;
+                                    case 1: CenterText ("Создание нового заказа\n");                Menu_Formation_Order (Client, Settings); break;
                                     case 2: CenterText ("Поиск работы среди имеющихся в базе\n");   Menu_Search_Tasks ();   break;
                                     case 3: CenterText ("Настройки программы\n");                   Menu_Settings (Settings);       break;
                                     case 4: CenterText ("Статистика заказов\n");                    Menu_Statistics ();     break;

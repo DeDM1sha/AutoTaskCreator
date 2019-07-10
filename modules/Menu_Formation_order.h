@@ -14,26 +14,17 @@ static std::string Linux = "Linux";
 static std::string MacOS = "MacOS";
 static std::string Windows = "Windows";
 
-static void Show_Text_Choise (const std::string Text) {
-
-	SetConsoleTextAttribute (GetStdHandle (STD_OUTPUT_HANDLE), (WORD) ((0 << 4) | 11));
-
-	std::cout << Text;
-
-	SetConsoleTextAttribute (GetStdHandle (STD_OUTPUT_HANDLE), (WORD) ((0 << 4) | 10));
-
-} // функция для отображения выбранного решения другим цветом
-
 const void Fill_InputData (Class_Clients& Client) {
 
-	std::string Temp = "\0";
 	unsigned short int ButtonNumber = 0;
 	unsigned short int Count = 0;
 
 	std::cout << "\n\nИмя клиента:   ";
-	SetConsoleTextAttribute (GetStdHandle (STD_OUTPUT_HANDLE), (WORD) ((0 << 4) | 11));
-	getline (std::cin, Temp);
-	SetConsoleTextAttribute (GetStdHandle (STD_OUTPUT_HANDLE), (WORD) ((0 << 4) | 10));
+
+	const std::string Temp = Show_Text_Input ();
+
+	std::cout << "Name: " << Temp << "\n";
+	system ("pause");
 
         if (Temp == "EXIT" || Temp == "Exit" || Temp == "exit" || Temp == "ESC" || Temp == "Esc" || Temp == "esc" || Temp == "!q")
             return; // если было введено одно из службных слов для выхода - возврат в главное меню программы
@@ -181,7 +172,7 @@ const void Fill_InputData (Class_Clients& Client) {
 
 }
 
-static void Create_Source_Code (const Class_Clients& Client) {
+static void Create_Source_Code (const Class_Clients& Client, const Class_Settings& Settings) {
 
 	std::queue <std::string> Code;
 
@@ -346,7 +337,13 @@ static void Create_Source_Code (const Class_Clients& Client) {
 		//if (Client.getTechnology_Name () == CPlusPlus)
 			//FilePath += "pp";
 
-	/*std::ofstream Write (FilePath.c_str());
+    /*std::string FilePath = Settings.getLabs_Path () + "\\task.c";
+
+    std::cout << "Path: " << Settings.getLabs_Path ();
+
+    system ("pause");
+
+	std::ofstream Write (FilePath.c_str());
 
 		while (!Code.empty ()) {
 
@@ -359,12 +356,12 @@ static void Create_Source_Code (const Class_Clients& Client) {
 
 } // функция создания исходного кода
 
-const void Menu_Formation_Order (Class_Clients& Client) {
+const void Menu_Formation_Order (Class_Clients& Client, Class_Settings& Settings) {
 
     printf ("                                                                                               Input Exit / Esc / !q for quit\n");
 
 	Fill_InputData (Client); // заполнение данных по заказу
-	Create_Source_Code (Client); // создание исходников
+	Create_Source_Code (Client, Settings); // создание исходников
 
 
 } // функция формирования заказа

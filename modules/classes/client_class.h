@@ -94,11 +94,7 @@ class Class_Clients : public AbstractClass_Clients {
 
 		}
 
-		~Class_Clients (void) {
-
-
-
-		}
+		~Class_Clients (void) {}
 
 		const void setName (const std::string Str) {
 
