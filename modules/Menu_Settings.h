@@ -22,12 +22,13 @@ const void Menu_Settings (Class_Settings& Settings) {
                 String_AutomaticOrderStart = "False";
 
         printf ("%s%s\n", "                                     2. Автоматический запуск нового заказа: ", String_AutomaticOrderStart.c_str ());
+        printf ("                                     3. Восстановить настройки по умолчанию\n");
 
             while (true) {
 
                 ButtonNumber = getch ();
 
-                    if (ClickCatch ("Esc", ButtonNumber) || ClickCatch ("1", ButtonNumber) || ClickCatch ("2", ButtonNumber))
+                    if (ClickCatch ("Esc", ButtonNumber) || ClickCatch ("1", ButtonNumber) || ClickCatch ("2", ButtonNumber) || (ClickCatch ("3", ButtonNumber)))
                         break;
 
             }
@@ -40,9 +41,13 @@ const void Menu_Settings (Class_Settings& Settings) {
                 if (ClickCatch ("1", ButtonNumber)) {
 
                     CenterText ("Введите новый путь к хранению заказов\n");
+                    CenterText ("Input Exit / Esc / !q for quit\n\n");
                     CenterText ("Путь: ");
 
                     const std::string Str = Show_Text_Input ();
+
+                        if (Check_Input_ForExit (Str))
+                            continue;
 
                     Settings.setLabs_Path (Str);
 
@@ -59,31 +64,41 @@ const void Menu_Settings (Class_Settings& Settings) {
 
                             ButtonNumber = getch ();
 
-                                if (ClickCatch ("Y", ButtonNumber) || ClickCatch ("N", ButtonNumber))
+                                if (ClickCatch ("Y", ButtonNumber) || ClickCatch ("N", ButtonNumber) || ClickCatch ("Esc", ButtonNumber))
                                         break;
 
                         }
 
-                         if (ClickCatch ("Y", ButtonNumber)) {
+                        if (ClickCatch ("Y", ButtonNumber) || ClickCatch ("N", ButtonNumber)) {
 
-                            Show_Text_Choise ("Yes");
-                            Settings.setAutomatic_Order_Start (true);
+                                if (ClickCatch ("Y", ButtonNumber)) {
 
-                        }
+                                    Show_Text_Choise ("Yes");
+                                    Settings.setAutomatic_Order_Start (true);
 
-                        else if (ClickCatch ("N", ButtonNumber)) {
+                                }
 
-                            Show_Text_Choise ("No");
-                            Settings.setAutomatic_Order_Start (false);
+                                else {
+
+                                    Show_Text_Choise ("No");
+                                    Settings.setAutomatic_Order_Start (false);
+
+                                }
 
                         }
 
                         else
-                            Exception ("Error selected getch in settings, order start choice");
+                            continue;
 
                 }
 
-        Settings.SaveSettings ();
+                else if (ClickCatch ("3", ButtonNumber)) {
+
+                    CenterText ("");
+
+                }
+
+            Settings.SaveSettings ();
 
     }
 

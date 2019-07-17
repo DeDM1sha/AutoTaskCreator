@@ -19,7 +19,7 @@ const void Delay (unsigned short int Time) {
 
 	const clock_t end_time = clock () + Time * CLOCKS_PER_SEC / 1000;
 
-		while (clock () < end_time) {};
+		while (clock () < end_time);
 
 } // функция задержки
 
@@ -35,14 +35,22 @@ const void Show_Text_Choise (const std::string Text) {
 
 const std::string Show_Text_Input (void) {
 
-    std::string Str = "\0";
+    const unsigned short int StrokeSize = 128;
+    char Stroke [StrokeSize];
+
+		for (unsigned short int i = 0; i < StrokeSize; i++)
+            Stroke[i] = '\0'; // очистка строки от мусора
 
     SetConsoleTextAttribute (GetStdHandle (STD_OUTPUT_HANDLE), (WORD) ((0 << 4) | 11));
 
-    //std::cin.get ();
-    getline (std::cin, Str);
+    fflush (stdin); // очистка потока ввода
+    fgets (Stroke, StrokeSize, stdin); // считываем всю строку с пробелами
 
     SetConsoleTextAttribute (GetStdHandle (STD_OUTPUT_HANDLE), (WORD) ((0 << 4) | 10));
+
+    std::string Str = std::string (Stroke); // инициализируем строку типа string, в нее закидываем всю строку Stroke
+
+    Str.erase (Str.length () - 1, Str.length ()); // стираем всю оставшуюся ненужную часть строки (все табы, лишние пробелы)
 
     return Str;
 
@@ -78,5 +86,14 @@ const void Exception (const std::string TextError) {
 } // функция Exception - для отображения случившихся ошибок
 
 //////////////////////////////////////////////////////////////////////////////
+
+const bool Check_Input_ForExit (const std::string& Str) {
+
+        if (Str == "EXIT" || Str == "Exit" || Str == "exit" || Str == "ESC" || Str == "Esc" || Str == "esc" || Str == "!q")
+            return true;
+
+    return false;
+
+} // функция для проверки ввода на строку выхода
 
 #endif // _additional_functions_h_

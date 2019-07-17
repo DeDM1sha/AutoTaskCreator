@@ -221,7 +221,14 @@ const void Class_Settings::SaveSettings (void) const {
 
     ConfigFile_Close ();
 
-    Delay (3000);
+    printf ("\n\n\nСохранение изменений");
+
+        for (unsigned short int i = 0; i < 3; i++) {
+
+            printf (".");
+            Delay (1000);
+
+        }
 
 }
 

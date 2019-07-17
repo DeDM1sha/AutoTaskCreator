@@ -30,8 +30,10 @@ const void Configure_Console_Window (void) {
     GetConsoleCursorInfo (handle, &structCursorInfo);
     structCursorInfo.bVisible = FALSE;
     SetConsoleCursorInfo (handle, &structCursorInfo); // отключение каретки
+
     SetConsoleCP (1251);
     SetConsoleOutputCP (1251); // установка кириллицы
+
     system ("color A"); // установка цвета текста
     system ("mode con cols=125 lines=30"); // установка разрешения консоли, отключения бокового скрола
     system ("title AutoTaskCreator"); // установка заголовка консоли
@@ -168,7 +170,6 @@ int main (void) {
                                     case 2: MenuItem = 4; break;
                                     case 3: MenuItem = 1; break;
                                     case 4: MenuItem = 2; break;
-                                    default: Exception ("Error selected getch in life cycle");
 
                                 }
 
@@ -186,7 +187,6 @@ int main (void) {
                                     case 2: CenterText ("Поиск работы среди имеющихся в базе\n");   Menu_Search_Tasks ();   break;
                                     case 3: CenterText ("Настройки программы\n");                   Menu_Settings (Settings);       break;
                                     case 4: CenterText ("Статистика заказов\n");                    Menu_Statistics ();     break;
-                                    default: Exception ("Error selected getch in life cycle"); // эксепшион при работе с getch
 
                                 }
 
@@ -199,3 +199,5 @@ int main (void) {
         } // жизненный цикл прораммы
 
 }
+
+

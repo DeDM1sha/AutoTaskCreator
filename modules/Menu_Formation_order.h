@@ -23,10 +23,7 @@ const void Fill_InputData (Class_Clients& Client) {
 
 	const std::string Temp = Show_Text_Input ();
 
-	std::cout << "Name: " << Temp << "\n";
-	system ("pause");
-
-        if (Temp == "EXIT" || Temp == "Exit" || Temp == "exit" || Temp == "ESC" || Temp == "Esc" || Temp == "esc" || Temp == "!q")
+        if (Check_Input_ForExit (Temp))
             return; // если было введено одно из службных слов для выхода - возврат в главное меню программы
 
 	Client.setName (Temp);
