@@ -5,7 +5,18 @@
 
 const void Menu_Search_Tasks (void) {
 
-    system ("pause");
+    Show_Text_ForExit ();
+
+        while (true) {
+
+            ButtonNumber = getch ();
+
+                if (ClickCatch ("Esc", ButtonNumber))
+                    return;
+
+        }
+
+
 
 } // функция поиска заказа / задания
 

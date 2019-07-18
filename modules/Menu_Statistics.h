@@ -5,7 +5,16 @@
 
 const void Menu_Statistics (void) {
 
-    system ("pause");
+    Show_Text_ForExit ();
+
+        while (true) {
+
+            ButtonNumber = getch ();
+
+                if (ClickCatch ("Esc", ButtonNumber))
+                    return;
+
+        }
 
 } // функция статистики базы заказов и клиентов
 

@@ -7,6 +7,8 @@
 
 #include "../libs/additional_functions.h"
 
+static std::string PathPK_UserName = "C:\\Windows\\Temp\\PK_UserName.txt";
+
 class AbstractClass_Clients {
 
     private:
@@ -23,7 +25,7 @@ class AbstractClass_Clients {
 
         ~AbstractClass_Clients (void) {
 
-            remove ("PK_UserName.txt");
+            remove (PathPK_UserName.c_str ());
 
         }
 
@@ -50,11 +52,12 @@ class AbstractClass_Clients {
 
 const std::string AbstractClass_Clients::Load_PK_UserName (void) const {
 
+    std::string Command = "@echo %UserName% > " + PathPK_UserName;
     std::string PK_Name = "\0";
 
-    system ("@echo %UserName% > PK_UserName.txt");
+    system (Command.c_str ());
 
-    std::ifstream Read ("PK_UserName.txt");
+    std::ifstream Read (PathPK_UserName.c_str ());
 
         if (Read.is_open ())
             Read >> PK_Name;

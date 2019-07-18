@@ -7,6 +7,7 @@
 
 static std::string SaveTag_Path_to_Labs = "Path_to_Labs";
 static std::string SaveTag_Order_Start = "Order_Start";
+static std::string SaveTag_Close_Application = "Close_Application";
 
 class Class_Settings {
 
@@ -15,6 +16,7 @@ class Class_Settings {
         std::string Config_Path; // место хранения файла с настройками
         std::string Labs_Path; // место сохранения лаб
         bool Automatic_Order_Start; // автоматический запуск создания заказа
+        bool Automatic_Close_Application; // автоматическое завершение приложения после заполнения заказа
 
     public:
 
@@ -22,8 +24,14 @@ class Class_Settings {
 
             Config_Path = "C:\\Users\\" + Client.getPK_Name () + "\\AppData\\Local\\Temp\\AutoTaskCreator_Settings.cfg";
             Check_ConfigFile ();
+
+            ConfigFile_Open ();
+
             Labs_Path = Load_Labs_Path ();
             Automatic_Order_Start = Load_Order_Start ();
+            Automatic_Close_Application = Load_Close_Application ();
+
+            ConfigFile_Close ();
 
         }
 
@@ -73,11 +81,26 @@ class Class_Settings {
 
     //////////////////////////////////////////////
 
+        const void setAutomatic_Close_Application (const bool Flag) {
+
+            this->Automatic_Close_Application = Flag;
+
+        } // сеттер для Automatic_Close_Application
+
+        const bool getAutomatic_Close_Application (void) const {
+
+            return this->Automatic_Close_Application;
+
+        } // геттер для Automatic_Close_Applcation
+
+    //////////////////////////////////////////////
+
         const void Check_ConfigFile (void) const;
         const void ConfigFile_Open (void) const;
         const void ConfigFile_Close (void) const;
         const std::string Load_Labs_Path (void) const;
         const bool Load_Order_Start (void) const;
+        const bool Load_Close_Application (void) const;
         const void SaveSettings (void) const;
 
 
@@ -93,8 +116,9 @@ const void Class_Settings::Check_ConfigFile (void) const {
 
             std::ofstream Write (Config_Path.c_str ());
 
-            Write   << SaveTag_Path_to_Labs << " = " << "E:\\C++Tasks" << "\n" // дефолтный путь к лабам
-                    << SaveTag_Order_Start << " = " << 0 << "\n"; // дефолтное значение автозапуска нового заказа - отключено
+            Write   << SaveTag_Path_to_Labs << " = " << Labs_Path << "\n" // дефолтный путь к лабам
+                    << SaveTag_Order_Start << " = " << Automatic_Order_Start << "\n" // дефолтное значение автозапуска нового заказа - отключено
+                    << SaveTag_Close_Application << " = " << Automatic_Close_Application << "\n"; // дефолтное значение автозавершения работы приложения после создания заказа
 
             Write.close ();
 
@@ -110,7 +134,6 @@ const void Class_Settings::Check_ConfigFile (void) const {
     Read.close ();
 
     ConfigFile_Close ();
-
 
 } // метод проверки существования файла с конфигом
 
@@ -134,8 +157,6 @@ const std::string Class_Settings::Load_Labs_Path (void) const {
 
     std::string Str = "\0";
     std::string LabsPath = "\0";
-
-    ConfigFile_Open ();
 
     std::ifstream Read (Config_Path.c_str ());
 
@@ -162,8 +183,6 @@ const std::string Class_Settings::Load_Labs_Path (void) const {
 
     Read.close ();
 
-    ConfigFile_Close ();
-
     return LabsPath;
 
 } // метод получения пути хранения заказов
@@ -173,8 +192,6 @@ const bool Class_Settings::Load_Order_Start (void) const {
     std::string Str = "\0";
     bool Found = false;
     bool Flag = false;
-
-    ConfigFile_Open ();
 
     std::ifstream Read (Config_Path.c_str ());
 
@@ -202,11 +219,43 @@ const bool Class_Settings::Load_Order_Start (void) const {
 
     Read.close ();
 
-    ConfigFile_Close ();
-
     return Flag;
 
 } // метод получения значения для автоматического запуска создания лаб
+
+const bool Class_Settings::Load_Close_Application (void) const {
+
+    std::string Str = "\0";
+    bool Found = false;
+    bool Flag = false;
+
+    std::ifstream Read (Config_Path.c_str ());
+
+        if (Read.is_open ()) {
+
+            while (Read >> Str) {
+
+                if (Str == SaveTag_Close_Application) {
+
+                    Read >> Str;
+                    Read >> Flag;
+                    Found = true;
+
+                }
+
+            }
+
+        }
+
+        else
+            Exception ("File Settings didnt open");
+
+        if (Found == false)
+            Exception ("Not found Automatic_Close_Application in settings file");
+
+    return Flag;
+
+} // метод получения значения для автоматического закрытия приложения
 
 const void Class_Settings::SaveSettings (void) const {
 
@@ -215,7 +264,8 @@ const void Class_Settings::SaveSettings (void) const {
     std::ofstream Write (Config_Path.c_str ());
 
     Write   << SaveTag_Path_to_Labs << " = " << getLabs_Path () << "\n"
-            << SaveTag_Order_Start << " = " << getAutomatic_Order_Start () << "\n";
+            << SaveTag_Order_Start << " = " << getAutomatic_Order_Start () << "\n"
+            << SaveTag_Close_Application << " = " << getAutomatic_Close_Application () << "\n";
 
     Write.close ();
 

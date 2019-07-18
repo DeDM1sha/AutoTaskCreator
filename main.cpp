@@ -23,7 +23,7 @@
 
 // подключение всех необходимых самописных библиотек и модулей для проекта
 
-const void Configure_Console_Window (void) {
+const void Configure_Console_Window (const std::string Symbol) {
 
     void *handle = GetStdHandle (STD_OUTPUT_HANDLE);
     CONSOLE_CURSOR_INFO structCursorInfo;
@@ -34,7 +34,9 @@ const void Configure_Console_Window (void) {
     SetConsoleCP (1251);
     SetConsoleOutputCP (1251); // установка кириллицы
 
-    system ("color A"); // установка цвета текста
+    const std::string ColorCommand = "color " + Symbol;
+
+    system (ColorCommand.c_str ()); // установка цвета текста
     system ("mode con cols=125 lines=30"); // установка разрешения консоли, отключения бокового скрола
     system ("title AutoTaskCreator"); // установка заголовка консоли
     system ("@echo off"); // переключение режима отображения команд на экране
@@ -124,7 +126,7 @@ const void Draw_Menu (const unsigned short int MenuItem) {
 
 int main (void) {
 
-    Configure_Console_Window ();
+    Configure_Console_Window ("A");
 
     Class_Clients Client; // инициализация объекта Client
     Class_Settings Settings (Client); // инициализация объекта Settings
@@ -141,6 +143,10 @@ int main (void) {
                     cls ();
                     CenterText ("Выберите пункт меню, используя клавиши стрелочек на клавиатуре");
                     Draw_Menu (MenuItem);
+
+                        if (Settings.getAutomatic_Close_Application () == true && FirstOrderCreated == true)
+                            return 0;
+
                     ButtonNumber = getch ();
 
                         if (ClickCatch ("Esc", ButtonNumber))
@@ -154,7 +160,6 @@ int main (void) {
                                     case 2: MenuItem = 1; break;
                                     case 3: MenuItem = 4; break;
                                     case 4: MenuItem = 3; break;
-                                    default: Exception ("Error selected getch in life cycle");
 
                                 }
 
@@ -199,5 +204,3 @@ int main (void) {
         } // жизненный цикл прораммы
 
 }
-
-

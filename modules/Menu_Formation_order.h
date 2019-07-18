@@ -167,7 +167,10 @@ const void Fill_InputData (Class_Clients& Client) {
 	/*std::cout << "\n---------------------------\n";
 	std::cout << "Name: " << Client.getName () << "\nTech: " << Client.getTechnology_Name() << "\nIDE: " << Client.getIDE_Name() << "\nOS: " << Client.getOS_Name() << "\nFunc: " << Client.getMenuFunctional() << "\nCount: " << Client.getTasksCount();*/
 
-}
+    if (FirstOrderCreated == false)
+            FirstOrderCreated = true;
+
+} // функция заполнения данных по клиенту
 
 static void Create_Source_Code (const Class_Clients& Client, const Class_Settings& Settings) {
 
@@ -270,7 +273,7 @@ static void Create_Source_Code (const Class_Clients& Client, const Class_Setting
 
 		if (Client.getMenuFunctional () == true) {
 
-			Code.push ("	short ButtonNumber = 0; // переменная для работа с функцией getch\n\n\n\n");
+			Code.push ("	int ButtonNumber = 0; // переменная для работа с функцией getch\n\n\n\n");
 			Code.push ("		while (true) { // начало жизненного цикла программы\n\n");
 			Code.push ("			ButtonNumber = 0;\n");
 			Code.push ("			cls ();\n\n");
@@ -329,18 +332,12 @@ static void Create_Source_Code (const Class_Clients& Client, const Class_Setting
 
 	Code.push ("}");
 
-	//std::string FilePath = "C:\\Users\\" + Client.getPK_Name () + "\\AppData\\Local\\Temp\\task.c";
+	/*std::string FilePath = "C:\\Users\\" + Client.getPK_Name () + "\\AppData\\Local\\Temp\\task.c";
 
-		//if (Client.getTechnology_Name () == CPlusPlus)
-			//FilePath += "pp";
+		if (Client.getTechnology_Name () == CPlusPlus)
+			FilePath += "pp";
 
-    /*std::string FilePath = Settings.getLabs_Path () + "\\task.c";
-
-    std::cout << "Path: " << Settings.getLabs_Path ();
-
-    system ("pause");
-
-	std::ofstream Write (FilePath.c_str());
+    std::ofstream Write (FilePath.c_str());
 
 		while (!Code.empty ()) {
 
@@ -349,17 +346,31 @@ static void Create_Source_Code (const Class_Clients& Client, const Class_Setting
 
 		}
 
-	Write.close ();*/
+	Write.close ();
+
+	std::ifstream Read (FilePath.c_str());
+
+        if (!Read.is_open ())
+            Exception ("Source code didnt created");
+
+	Read.close ();*/
+
+    /*std::string FilePath = Settings.getLabs_Path () + "\\task.c";
+
+    std::cout << "Path: " << Settings.getLabs_Path ();
+
+    system ("pause");*/
+
+
 
 } // функция создания исходного кода
 
 const void Menu_Formation_Order (Class_Clients& Client, Class_Settings& Settings) {
 
-    printf ("                                                                                               Input Exit / Esc / !q for quit\n");
+    Show_Text_ForExit ();
 
 	Fill_InputData (Client); // заполнение данных по заказу
 	Create_Source_Code (Client, Settings); // создание исходников
-
 
 } // функция формирования заказа
 

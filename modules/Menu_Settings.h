@@ -6,12 +6,15 @@
 const void Menu_Settings (Class_Settings& Settings) {
 
     std::string String_AutomaticOrderStart = "\0";
+    std::string String_AutomaticCloseApplication = "\0";
 
     while (true) {
 
         cls ();
 
-        printf ("\n\n\n\n\n\n\n\n");
+        Show_Text_ForExit ();
+
+        printf ("\n\n\n\n\n\n\n");
         CenterText ("Выберите пункт меню для изменения выбранных настроек\n\n\n");
         printf ("%s%s\n", "                                     1. Путь к месту хранения заказов: ", Settings.getLabs_Path ().c_str ());
 
@@ -22,13 +25,21 @@ const void Menu_Settings (Class_Settings& Settings) {
                 String_AutomaticOrderStart = "False";
 
         printf ("%s%s\n", "                                     2. Автоматический запуск нового заказа: ", String_AutomaticOrderStart.c_str ());
-        printf ("                                     3. Восстановить настройки по умолчанию\n");
+
+            if (Settings.getAutomatic_Close_Application () == true)
+                String_AutomaticCloseApplication = "True";
+
+            else
+                String_AutomaticCloseApplication = "False";
+
+        printf ("%s%s\n", "                                     3. Автоматическое закрытие после заполнения заказа: ", String_AutomaticCloseApplication.c_str ());
+        printf ("                                     4. Восстановить настройки по умолчанию\n");
 
             while (true) {
 
                 ButtonNumber = getch ();
 
-                    if (ClickCatch ("Esc", ButtonNumber) || ClickCatch ("1", ButtonNumber) || ClickCatch ("2", ButtonNumber) || (ClickCatch ("3", ButtonNumber)))
+                    if (ClickCatch ("Esc", ButtonNumber) || ClickCatch ("1", ButtonNumber) || ClickCatch ("2", ButtonNumber) || (ClickCatch ("3", ButtonNumber)) || (ClickCatch ("4", ButtonNumber)))
                         break;
 
             }
@@ -41,7 +52,6 @@ const void Menu_Settings (Class_Settings& Settings) {
                 if (ClickCatch ("1", ButtonNumber)) {
 
                     CenterText ("Введите новый путь к хранению заказов\n");
-                    CenterText ("Input Exit / Esc / !q for quit\n\n");
                     CenterText ("Путь: ");
 
                     const std::string Str = Show_Text_Input ();
@@ -90,13 +100,79 @@ const void Menu_Settings (Class_Settings& Settings) {
                         else
                             continue;
 
-                }
+                } // изменение автоматического запуска меню заказа
 
                 else if (ClickCatch ("3", ButtonNumber)) {
 
-                    CenterText ("");
+                    CenterText ("Задайте булевое значение для автоматического закрытия приложения после меню заказа\n");
+                    CenterText ("Для этого нажмите Y (Yes) - для включения\n");
+                    CenterText ("Или N (No) - для отключения\n\n");
+                    CenterText ("Ваш выбор: ");
 
-                }
+                        while (true) {
+
+                            ButtonNumber = getch ();
+
+                                if (ClickCatch ("Y", ButtonNumber) || ClickCatch ("N", ButtonNumber) || ClickCatch ("Esc", ButtonNumber))
+                                        break;
+
+                        }
+
+                        if (ClickCatch ("Y", ButtonNumber) || ClickCatch ("N", ButtonNumber)) {
+
+                                if (ClickCatch ("Y", ButtonNumber)) {
+
+                                    Show_Text_Choise ("Yes");
+                                    Settings.setAutomatic_Close_Application (true);
+
+                                }
+
+                                else {
+
+                                    Show_Text_Choise ("No");
+                                    Settings.setAutomatic_Close_Application (false);
+
+                                }
+
+                        }
+
+                        else
+                            continue;
+
+                } // изменение автоматического закрытия приложения после меню заказа
+
+                else if (ClickCatch ("4", ButtonNumber)) {
+
+                    CenterText ("Вы действительно хотите восстановить настройки по умолчанию?\n");
+                    CenterText ("Для этого нажмите Y (Yes) - для восстановления\n");
+                    CenterText ("Или N (No) - для отмены восстановления\n\n");
+                    CenterText ("Ваш выбор: ");
+
+                        while (true) {
+
+                            ButtonNumber = getch ();
+
+                                if (ClickCatch ("Y", ButtonNumber) || ClickCatch ("N", ButtonNumber) || ClickCatch ("Esc", ButtonNumber))
+                                        break;
+
+                        }
+
+                        if (ClickCatch ("Y", ButtonNumber)) {
+
+                            Show_Text_Choise ("Yes");
+
+                            Settings.setLabs_Path ("E:\\C++Tasks");
+                            Settings.setAutomatic_Order_Start (false);
+                            Settings.setAutomatic_Close_Application (false);
+
+                            Settings.Check_ConfigFile ();
+
+                        }
+
+                        else if (ClickCatch ("N", ButtonNumber) || ClickCatch ("Esc", ButtonNumber))
+                            continue;
+
+                } // вернуть настройки по умолчанию
 
             Settings.SaveSettings ();
 

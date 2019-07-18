@@ -10,6 +10,7 @@
 /* Глобальные общие переменные */
 
 volatile unsigned int ButtonNumber = 0; // переменная для обработки нажатий в меню
+bool FirstOrderCreated = false; // переменная для отметки о том что первый заказ был создан
 
 //////////////////////////////////////////////////////////////////////////////
 
@@ -95,5 +96,11 @@ const bool Check_Input_ForExit (const std::string& Str) {
     return false;
 
 } // функция для проверки ввода на строку выхода
+
+const void Show_Text_ForExit (void) {
+
+    printf ("                                                                                               Input Exit / Esc / !q for quit\n");
+
+} // функция для отображения подсказки для выхода из меню
 
 #endif // _additional_functions_h_
