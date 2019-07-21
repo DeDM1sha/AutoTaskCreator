@@ -165,8 +165,6 @@ const void Menu_Settings (Class_Settings& Settings) {
                             Settings.setAutomatic_Order_Start (false);
                             Settings.setAutomatic_Close_Application (false);
 
-                            Settings.Check_ConfigFile ();
-
                         }
 
                         else if (ClickCatch ("N", ButtonNumber) || ClickCatch ("Esc", ButtonNumber))
@@ -176,7 +174,7 @@ const void Menu_Settings (Class_Settings& Settings) {
 
             Settings.SaveSettings ();
 
-    }
+    } // конец жизненного цикла меню настроек
 
 } // функция настроек приложения
 

@@ -16,7 +16,7 @@ bool FirstOrderCreated = false; // переменная для отметки о
 
 /* Глобальные общие функции */
 
-const void Delay (unsigned short int Time) {
+const void Delay (const unsigned short int Time) {
 
 	const clock_t end_time = clock () + Time * CLOCKS_PER_SEC / 1000;
 

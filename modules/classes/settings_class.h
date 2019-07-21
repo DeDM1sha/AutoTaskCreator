@@ -20,7 +20,7 @@ class Class_Settings {
 
     public:
 
-        Class_Settings (Class_Clients& Client) {
+        Class_Settings (const Class_Clients& Client) {
 
             Config_Path = "C:\\Users\\" + Client.getPK_Name () + "\\AppData\\Local\\Temp\\AutoTaskCreator_Settings.cfg";
             Check_ConfigFile ();
@@ -102,7 +102,6 @@ class Class_Settings {
         const bool Load_Order_Start (void) const;
         const bool Load_Close_Application (void) const;
         const void SaveSettings (void) const;
-
 
 };
 

@@ -6,12 +6,13 @@
 #include <string.h>
 #include <queue>
 #include <time.h>
+#include <vector>
 
 // подключение всех необходимых стандартных библиотек для проекта
 
 #include "modules/classes/client_class.h" // подключение модуля client_class - класс данных об клиенте
-#include "modules/classes/statistics_class.h" // подключение модуля statistics_class - класс базы данных всех заказов и клиентов
 #include "modules/classes/settings_class.h" // подключения модуля settings_class - класс настроек приложения
+#include "modules/classes/statistics_class.h" // подключение модуля statistics_class - класс базы данных всех заказов и клиентов
 
 #include "modules/libs/clickcatcher.h" // подключение модуля clickcatcher - самописная библиотека по обработке нажатых клавиш
 #include "modules/libs/additional_functions.h" // подключение модуля additional_functions - библиотека дополнительних общий функций
@@ -23,7 +24,7 @@
 
 // подключение всех необходимых самописных библиотек и модулей для проекта
 
-const void Configure_Console_Window (const std::string Symbol) {
+const void Configure_Console_Window (void) {
 
     void *handle = GetStdHandle (STD_OUTPUT_HANDLE);
     CONSOLE_CURSOR_INFO structCursorInfo;
@@ -34,9 +35,7 @@ const void Configure_Console_Window (const std::string Symbol) {
     SetConsoleCP (1251);
     SetConsoleOutputCP (1251); // установка кириллицы
 
-    const std::string ColorCommand = "color " + Symbol;
-
-    system (ColorCommand.c_str ()); // установка цвета текста
+    system ("color A");
     system ("mode con cols=125 lines=30"); // установка разрешения консоли, отключения бокового скрола
     system ("title AutoTaskCreator"); // установка заголовка консоли
     system ("@echo off"); // переключение режима отображения команд на экране
@@ -126,10 +125,10 @@ const void Draw_Menu (const unsigned short int MenuItem) {
 
 int main (void) {
 
-    Configure_Console_Window ("A");
-
     Class_Clients Client; // инициализация объекта Client
     Class_Settings Settings (Client); // инициализация объекта Settings
+
+    Configure_Console_Window ();
 
         if (Settings.getAutomatic_Order_Start () == true)
             Menu_Formation_Order (Client, Settings);
@@ -191,7 +190,7 @@ int main (void) {
                                     case 1: CenterText ("Создание нового заказа\n");                Menu_Formation_Order (Client, Settings); break;
                                     case 2: CenterText ("Поиск работы среди имеющихся в базе\n");   Menu_Search_Tasks ();   break;
                                     case 3: CenterText ("Настройки программы\n");                   Menu_Settings (Settings);       break;
-                                    case 4: CenterText ("Статистика заказов\n");                    Menu_Statistics ();     break;
+                                    case 4: CenterText ("Статистика заказов\n");                    Menu_Statistics (Settings);     break;
 
                                 }
 
