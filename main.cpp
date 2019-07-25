@@ -125,10 +125,10 @@ const void Draw_Menu (const unsigned short int MenuItem) {
 
 int main (void) {
 
+    Configure_Console_Window ();
+
     Class_Clients Client; // инициализация объекта Client
     Class_Settings Settings (Client); // инициализация объекта Settings
-
-    Configure_Console_Window ();
 
         if (Settings.getAutomatic_Order_Start () == true)
             Menu_Formation_Order (Client, Settings);

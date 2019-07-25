@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1563702749 source:e:\cplusplus_projects\autotaskcreator\main.cpp
+1564076455 source:e:\cplusplus_projects\autotaskcreator\main.cpp
 	<stdio.h>
 	<iostream>
 	<windows.h>
@@ -32,7 +32,7 @@
 
 1563642660 e:\cplusplus_projects\autotaskcreator\modules\menu_formation_order.h
 
-1563698021 e:\cplusplus_projects\autotaskcreator\modules\classes\client_class.h
+1563734634 e:\cplusplus_projects\autotaskcreator\modules\classes\client_class.h
 	"../libs/additional_functions.h"
 
 1563702030 e:\cplusplus_projects\autotaskcreator\modules\libs\additional_functions.h
@@ -43,11 +43,11 @@
 
 1563642660 e:\cplusplus_projects\autotaskcreator\modules\menu_search_tasks.h
 
-1563733733 e:\cplusplus_projects\autotaskcreator\modules\menu_settings.h
+1564080405 e:\cplusplus_projects\autotaskcreator\modules\menu_settings.h
 
-1563733783 e:\cplusplus_projects\autotaskcreator\modules\menu_statistics.h
+1564076685 e:\cplusplus_projects\autotaskcreator\modules\menu_statistics.h
 
-1563733783 e:\cplusplus_projects\autotaskcreator\modules\classes\statistics_class.h
+1564077484 e:\cplusplus_projects\autotaskcreator\modules\classes\statistics_class.h
 
-1563701237 e:\cplusplus_projects\autotaskcreator\modules\classes\settings_class.h
+1564082873 e:\cplusplus_projects\autotaskcreator\modules\classes\settings_class.h
 

@@ -51,14 +51,37 @@ const void Menu_Settings (Class_Settings& Settings) {
 
                 if (ClickCatch ("1", ButtonNumber)) {
 
-                    CenterText ("Введите новый путь к хранению заказов\n");
-                    CenterText ("Путь: ");
+                    std::string Str = "\0";
+                    std::string TestFilePath = "\0";
+                    CenterText ("Введите новый путь к хранению заказов");
 
-                    const std::string Str = Show_Text_Input ();
+                        while (true) {
+
+                            printf ("\n");
+                            CenterText ("Путь: ");
+
+                            Str = Show_Text_Input ();
+
+                                if (Check_Input_ForExit (Str))
+                                    break;
+
+                            TestFilePath = Str + "\\ValidTest.txt";
+                            std::ofstream Write (TestFilePath.c_str ());
+
+                                if (!Write.is_open() || Str.length () < 2)
+                                    CenterText ("Error! Not valid path\n\n");
+
+                                else
+                                    break;
+
+                            Write.close ();
+
+                        } // валидность на ввод пути
 
                         if (Check_Input_ForExit (Str))
                             continue;
 
+                    remove (TestFilePath.c_str ());
                     Settings.setLabs_Path (Str);
 
                 } // изменение пути места хранения заказов
@@ -161,9 +184,9 @@ const void Menu_Settings (Class_Settings& Settings) {
 
                             Show_Text_Choise ("Yes");
 
-                            Settings.setLabs_Path ("E:\\C++Tasks");
-                            Settings.setAutomatic_Order_Start (false);
-                            Settings.setAutomatic_Close_Application (false);
+                            remove (Settings.getConfig_Path().c_str());
+
+                            Settings.SetDefault_Parameters ();
 
                         }
 
@@ -172,7 +195,7 @@ const void Menu_Settings (Class_Settings& Settings) {
 
                 } // вернуть настройки по умолчанию
 
-            Settings.SaveSettings ();
+            Settings.SaveSettings (true);
 
     } // конец жизненного цикла меню настроек
 

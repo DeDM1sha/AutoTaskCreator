@@ -11,26 +11,19 @@ class Class_Statistics {
 
         unsigned short int TotalNumber_ClientsInDB_Count; // общее кол-во клиентов в базе
         unsigned short int TotalNumber_CompletedTasks_Count; // общее кол-во выполненных заданий со всех клиентов
-        std::string* ClientsName;
+        std::vector <std::string> ClientsName; // имена всех клиентов
 
     public:
 
         Class_Statistics (const Class_Settings& Settings) {
 
             TotalNumber_ClientsInDB_Count = Load_TotalNumber_ClientsInDB_Count (Settings);
-
-            ClientsName = new std::string [TotalNumber_ClientsInDB_Count];
-            Load_ClientsName (Settings);
-
+            ClientsName.reserve(TotalNumber_ClientsInDB_Count);
 			TotalNumber_CompletedTasks_Count = Load_TotalNumber_CompletedTasks_Count (Settings);
 
         }
 
-        ~Class_Statistics (void) {
-
-            delete [] ClientsName;
-
-        }
+        ~Class_Statistics (void) {}
 
         const void setTotalNumber_CompletedTasks_Count (const unsigned short int Number) {
 
@@ -72,13 +65,13 @@ class Class_Statistics {
 
         } // геттер для ClientsName
 
-        const unsigned short int Load_TotalNumber_ClientsInDB_Count (const Class_Settings&) const;
-        const void Load_ClientsName (const Class_Settings&) const;
+        const unsigned short int Load_TotalNumber_ClientsInDB_Count (const Class_Settings&);
+        const void Load_ClientsName (const Class_Settings&);
         const unsigned short int Load_TotalNumber_CompletedTasks_Count (const Class_Settings&) const;
 
 }; // класс базы данных всех заказов
 
-const unsigned short int Class_Statistics::Load_TotalNumber_ClientsInDB_Count (const Class_Settings& Settings) const {
+const unsigned short int Class_Statistics::Load_TotalNumber_ClientsInDB_Count (const Class_Settings& Settings) {
 
     unsigned short int TotalCount = 0;
 
@@ -91,37 +84,12 @@ const unsigned short int Class_Statistics::Load_TotalNumber_ClientsInDB_Count (c
 
         if (Read.is_open ()) {
 
-            while (getline (Read, Str))
-
-                if (Str != "CountClients.txt")
-                    TotalCount++;
-
-        }
-
-        else
-            Exception ("File CountClients.txt didnt open (For upload count clients)");
-
-    Read.close ();
-
-    return TotalCount;
-
-} // метод подсчета кол-ва клиентов в базе
-
-const void Class_Statistics::Load_ClientsName (const Class_Settings& Settings) const {
-
-    std::string Str = "\0";
-    unsigned short int Counter = 0;
-    std::string LogPath = Settings.getLabs_Path () + "//CountClients.txt";
-    std::ifstream Read (LogPath.c_str ());
-
-        if (Read.is_open ()) {
-
             while (getline (Read, Str)) {
 
                 if (Str != "CountClients.txt") {
 
-                    ClientsName[Counter] = Str;
-                    Counter++;
+                    ClientsName.push_back (Str);
+                    TotalCount++;
 
                 }
 
@@ -130,13 +98,15 @@ const void Class_Statistics::Load_ClientsName (const Class_Settings& Settings) c
         }
 
         else
-            Exception ("File CountClients.txt didnt open (For upload clients names)");
+            Exception ("File CountClients.txt didnt open (For upload count clients)");
 
     Read.close ();
 
     remove (LogPath.c_str ());
 
-} // метод по подгрузке всех имен клиентов в базе
+    return TotalCount;
+
+} // метод подсчета кол-ва клиентов и их имен в базе
 
 const unsigned short int Class_Statistics::Load_TotalNumber_CompletedTasks_Count (const Class_Settings& Settings) const {
 

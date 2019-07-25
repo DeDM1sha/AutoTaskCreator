@@ -17,6 +17,8 @@ class Class_Settings {
         std::string Labs_Path; // место сохранения лаб
         bool Automatic_Order_Start; // автоматический запуск создания заказа
         bool Automatic_Close_Application; // автоматическое завершение приложения после заполнения заказа
+        std::string Url_BanList_Clients; // ссылка на банлист клиентов
+        std::string Url_BanList_Workers; // ссылка на банлист исполнителей
 
     public:
 
@@ -24,14 +26,7 @@ class Class_Settings {
 
             Config_Path = "C:\\Users\\" + Client.getPK_Name () + "\\AppData\\Local\\Temp\\AutoTaskCreator_Settings.cfg";
             Check_ConfigFile ();
-
-            ConfigFile_Open ();
-
-            Labs_Path = Load_Labs_Path ();
-            Automatic_Order_Start = Load_Order_Start ();
-            Automatic_Close_Application = Load_Close_Application ();
-
-            ConfigFile_Close ();
+            Load_Parameters ();
 
         }
 
@@ -95,17 +90,50 @@ class Class_Settings {
 
     //////////////////////////////////////////////
 
-        const void Check_ConfigFile (void) const;
+        const void setUrl_BanList_Clients (const std::string Str) {
+
+            this->Url_BanList_Clients = Str;
+
+        } // сеттер для Url_BanList_Clients
+
+        const std::string getUrl_BanList_Clients (void) const {
+
+            return this->Url_BanList_Clients;
+
+        } // геттер для Url_BanList_Clients
+
+    //////////////////////////////////////////////
+
+        const void setUrl_BanList_Workers (const std::string Str) {
+
+            this->Url_BanList_Workers = Str;
+
+        } // сеттер для Url_BanList_Workers
+
+        const std::string getUrl_BanList_Workers (void) const {
+
+            return this->Url_BanList_Workers;
+
+        } // геттер для Url_BanList_Workers
+
+    //////////////////////////////////////////////
+
+         const void SetDefault_Parameters (void) {
+
+            this->Labs_Path = "E:\\C++Tasks";
+            this->Automatic_Order_Start = false;
+            this->Automatic_Close_Application = false;
+
+        } // метод установки настроек по умолчанию
+
+        const void Check_ConfigFile (void);
         const void ConfigFile_Open (void) const;
         const void ConfigFile_Close (void) const;
-        const std::string Load_Labs_Path (void) const;
-        const bool Load_Order_Start (void) const;
-        const bool Load_Close_Application (void) const;
-        const void SaveSettings (void) const;
-
+        const void Load_Parameters (void);
+        const void SaveSettings (const bool) const;
 };
 
-const void Class_Settings::Check_ConfigFile (void) const {
+const void Class_Settings::Check_ConfigFile (void) {
 
     ConfigFile_Open ();
 
@@ -113,13 +141,8 @@ const void Class_Settings::Check_ConfigFile (void) const {
 
         if (!Read.is_open ()) {
 
-            std::ofstream Write (Config_Path.c_str ());
-
-            Write   << SaveTag_Path_to_Labs << " = " << Labs_Path << "\n" // дефолтный путь к лабам
-                    << SaveTag_Order_Start << " = " << Automatic_Order_Start << "\n" // дефолтное значение автозапуска нового заказа - отключено
-                    << SaveTag_Close_Application << " = " << Automatic_Close_Application << "\n"; // дефолтное значение автозавершения работы приложения после создания заказа
-
-            Write.close ();
+            SetDefault_Parameters ();
+            SaveSettings (false);
 
             std::ifstream Check (Config_Path.c_str ());
 
@@ -152,10 +175,14 @@ const void Class_Settings::ConfigFile_Close (void) const {
 
 } // метод сохранения файла конфига
 
-const std::string Class_Settings::Load_Labs_Path (void) const {
+const void Class_Settings::Load_Parameters (void) {
+
+    ConfigFile_Open ();
 
     std::string Str = "\0";
-    std::string LabsPath = "\0";
+    bool LabsPath_Founded = false;
+    bool OrderStart_Founded = false;
+    bool CloseApp_Founded = false;
 
     std::ifstream Read (Config_Path.c_str ());
 
@@ -163,10 +190,27 @@ const std::string Class_Settings::Load_Labs_Path (void) const {
 
             while (Read >> Str) {
 
-                if (Str == SaveTag_Path_to_Labs) {
+                if (Str == SaveTag_Path_to_Labs && LabsPath_Founded == false) {
 
                     Read >> Str;
-                    Read >> LabsPath;
+                    Read >> Labs_Path;
+                    LabsPath_Founded = true;
+
+                }
+
+                if (Str == SaveTag_Order_Start && OrderStart_Founded == false) {
+
+                    Read >> Str;
+                    Read >> Automatic_Order_Start;
+                    OrderStart_Founded = true;
+
+                }
+
+                if (Str == SaveTag_Close_Application && CloseApp_Founded == false) {
+
+                    Read >> Str;
+                    Read >> Automatic_Close_Application;
+                    CloseApp_Founded = true;
 
                 }
 
@@ -177,16 +221,29 @@ const std::string Class_Settings::Load_Labs_Path (void) const {
         else
             Exception ("File Settings didnt open");
 
-        if (LabsPath.length () == 0)
-            Exception ("Not found Path_to_Labs in settings file");
-
     Read.close ();
 
-    return LabsPath;
+        if (LabsPath_Founded == false)
+            Exception ("Not found Path_to_Labs in settings file");
 
-} // метод получения пути хранения заказов
+        if (OrderStart_Founded == false)
+            Exception ("Not found Automatic_Order_Start in settings file");
 
-const bool Class_Settings::Load_Order_Start (void) const {
+        if (CloseApp_Founded == false)
+            Exception ("Not found Automatic_Close_Application in settings file");
+
+        if (!(((LabsPath_Founded == OrderStart_Founded) == CloseApp_Founded) == true)) {
+
+            remove (Config_Path.c_str ());
+            Check_ConfigFile ();
+
+        }
+
+    ConfigFile_Close ();
+
+}
+
+/*const bool Load_Order_Start (void) const {
 
     std::string Str = "\0";
     bool Found = false;
@@ -222,7 +279,7 @@ const bool Class_Settings::Load_Order_Start (void) const {
 
 } // метод получения значения для автоматического запуска создания лаб
 
-const bool Class_Settings::Load_Close_Application (void) const {
+const bool Load_Close_Application (void) const {
 
     std::string Str = "\0";
     bool Found = false;
@@ -254,9 +311,9 @@ const bool Class_Settings::Load_Close_Application (void) const {
 
     return Flag;
 
-} // метод получения значения для автоматического закрытия приложения
+} // метод получения значения для автоматического закрытия приложения*/
 
-const void Class_Settings::SaveSettings (void) const {
+const void Class_Settings::SaveSettings (const bool UsingDelay) const {
 
     ConfigFile_Open ();
 
@@ -270,15 +327,19 @@ const void Class_Settings::SaveSettings (void) const {
 
     ConfigFile_Close ();
 
-    printf ("\n\n\nСохранение изменений");
+        if (UsingDelay == true) {
 
-        for (unsigned short int i = 0; i < 3; i++) {
+            printf ("\n\n\nСохранение изменений");
 
-            printf (".");
-            Delay (1000);
+                for (unsigned short int i = 0; i < 3; i++) {
+
+                    printf (".");
+                    Delay (1000);
+
+                }
 
         }
 
-}
+} // метод сохранения настроек
 
 #endif // _settings_class_h_
