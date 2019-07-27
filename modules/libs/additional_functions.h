@@ -1,4 +1,4 @@
-// Модуль - хранилище всех дополнительных общих библиотек для проекта
+// Модуль - хранилище всех дополнительных общих глобальных переменных и функций для проекта
 
 #pragma once
 
@@ -102,5 +102,14 @@ const void Show_Text_ForExit (void) {
     printf ("                                                                                               Input Exit / Esc / !q for quit\n");
 
 } // функция для отображения подсказки для выхода из меню
+
+const std::string Convert_Int_toString (unsigned short int Number) {
+
+    std::ostringstream ConverInt_ToString;
+    ConverInt_ToString << Number;
+
+    return std::string(ConverInt_ToString.str());
+
+} // функция конвертирования из int в string
 
 #endif // _additional_functions_h_

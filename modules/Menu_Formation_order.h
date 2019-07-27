@@ -5,8 +5,8 @@
 #ifndef _Menu_formation_order_h_
 #define _Menu_formation_order_h_
 
-static std::string C = "c";
-static std::string CPlusPlus = "cpp";
+static std::string C = "C";
+static std::string CPlusPlus = "C++";
 static std::string VisualStudio = "VisualStudio";
 static std::string Geany = "Geany";
 static std::string CodeBlocks = "Code::Blocks";
@@ -14,7 +14,7 @@ static std::string Linux = "Linux";
 static std::string MacOS = "MacOS";
 static std::string Windows = "Windows";
 
-const void Fill_InputData (Class_Clients& Client) {
+static bool Fill_InputData (Class_Clients& Client) {
 
 	unsigned short int ButtonNumber = 0;
 	unsigned short int Count = 0;
@@ -24,7 +24,7 @@ const void Fill_InputData (Class_Clients& Client) {
 	const std::string Temp = Show_Text_Input ();
 
         if (Check_Input_ForExit (Temp))
-            return; // если было введено одно из службных слов для выхода - возврат в главное меню программы
+            return false; // если было введено одно из службных слов для выхода - возврат в главное меню программы
 
 	Client.setName (Temp);
 
@@ -37,7 +37,7 @@ const void Fill_InputData (Class_Clients& Client) {
 				if (ClickCatch ("C", ButtonNumber)) {
 
 					Client.setTechnology_Name (C);
-					Show_Text_Choise ("C");
+					Show_Text_Choise (C);
 					break;
 
 				}
@@ -45,7 +45,7 @@ const void Fill_InputData (Class_Clients& Client) {
 				else if (ClickCatch ("+", ButtonNumber)) {
 
 					Client.setTechnology_Name (CPlusPlus);
-					Show_Text_Choise ("C++");
+					Show_Text_Choise (CPlusPlus);
 					break;
 
 				}
@@ -167,12 +167,14 @@ const void Fill_InputData (Class_Clients& Client) {
 	/*std::cout << "\n---------------------------\n";
 	std::cout << "Name: " << Client.getName () << "\nTech: " << Client.getTechnology_Name() << "\nIDE: " << Client.getIDE_Name() << "\nOS: " << Client.getOS_Name() << "\nFunc: " << Client.getMenuFunctional() << "\nCount: " << Client.getTasksCount();*/
 
-    if (FirstOrderCreated == false)
-            FirstOrderCreated = true;
+        if (FirstOrderCreated == false)
+                FirstOrderCreated = true;
+
+    return true;
 
 } // функция заполнения данных по клиенту
 
-static void Create_Source_Code (const Class_Clients& Client, const Class_Settings& Settings) {
+static std::string Create_Source_Code (const Class_Clients& Client, const Class_Settings& Settings) {
 
 	std::queue <std::string> Code;
 
@@ -332,12 +334,12 @@ static void Create_Source_Code (const Class_Clients& Client, const Class_Setting
 
 	Code.push ("}");
 
-	/*std::string FilePath = "C:\\Users\\" + Client.getPK_Name () + "\\AppData\\Local\\Temp\\task.c";
+    std::string CodePath = "C:\\Users\\" + Client.getPK_Name () + "\\AppData\\Local\\Temp\\task.c";
 
 		if (Client.getTechnology_Name () == CPlusPlus)
-			FilePath += "pp";
+			CodePath += "pp";
 
-    std::ofstream Write (FilePath.c_str());
+    std::ofstream Write (CodePath.c_str());
 
 		while (!Code.empty ()) {
 
@@ -348,29 +350,95 @@ static void Create_Source_Code (const Class_Clients& Client, const Class_Setting
 
 	Write.close ();
 
-	std::ifstream Read (FilePath.c_str());
+	std::ifstream Read (CodePath.c_str());
 
         if (!Read.is_open ())
             Exception ("Source code didnt created");
 
-	Read.close ();*/
+	Read.close ();
 
-    /*std::string FilePath = Settings.getLabs_Path () + "\\task.c";
-
-    std::cout << "Path: " << Settings.getLabs_Path ();
-
-    system ("pause");*/
-
-
+	return CodePath;
 
 } // функция создания исходного кода
 
-const void Menu_Formation_Order (Class_Clients& Client, Class_Settings& Settings) {
+static void Create_Client_Folder (const Class_Clients& Client, const Class_Settings& Settings) {
+
+    std::string Path = Settings.getLabs_Path () + "\\" + Client.getName () + "\\CheckFolder.txt";
+    bool Founded = false;
+
+    std::ofstream Write (Path.c_str ());
+
+        if (!Write.is_open ()) { // если такого клиента в базе еще не существует, то создать папку
+
+            system (std::string("mkdir " + Settings.getLabs_Path () + "\\\"" + Client.getName () + "\"").c_str());
+            Founded = true;
+
+        }
+
+    Write.close ();
+
+        if (!Founded) // если уже существует, то удалить проверочный файл
+            remove (Path.c_str ());
+
+} // функция создания папок для нового клиента
+
+static void SendFiles_To_ClientFolders (const Class_Clients& Client, const Class_Settings& Settings, const std::string& CodePath) {
+
+    unsigned short int TasksCount = 0;
+    std::string Path = Settings.getLabs_Path () + "\\" + Client.getName () + "\\TasksCount.txt";
+    std::string Str = "\0";
+    system (std::string("cd " + Settings.getLabs_Path () + "\\" + Client.getName () + " && dir /B > TasksCount.txt").c_str());
+
+    std::ifstream Read (Path.c_str ());
+
+        if (Read.is_open ()) {
+
+            while (getline (Read, Str))
+                if (Str != "TasksCount.txt")
+                    TasksCount++;
+
+        }
+
+        else
+            Exception ("File TasksCount in Formation order didnt open");
+
+    Read.close ();
+    remove (Path.c_str ());
+
+        for (unsigned short int i = TasksCount + 1; i < Client.getTasksCount () + TasksCount + 1; i++) {
+
+            std::string TaskFolder_Path = Settings.getLabs_Path () + "\\" + Client.getName () + "\\Task_" + Convert_Int_toString (i);
+            system (std::string("mkdir " + TaskFolder_Path).c_str ());
+            system (std::string("copy " + CodePath + " \"" + TaskFolder_Path + "\"" + " /-Y >nul").c_str ());
+
+            std::ofstream Write ((TaskFolder_Path + "\\tz.txt").c_str ());
+
+                if (Write.is_open ())
+                    Write << "Technology = " << Client.getTechnology_Name () << "\n";
+
+                else
+                    Exception ("tz.txt didnt created in new task folder");
+
+            Write.close ();
+
+        }
+
+    remove (CodePath.c_str ());
+
+} // функция отправки исходников по папкам проекта
+
+const void Menu_Formation_Order (Class_Clients& Client, const Class_Settings& Settings) {
 
     Show_Text_ForExit ();
 
-	Fill_InputData (Client); // заполнение данных по заказу
-	Create_Source_Code (Client, Settings); // создание исходников
+        if (!Fill_InputData (Client)) // заполнение данных по заказу
+            return;
+
+	const std::string CodePath = Create_Source_Code (Client, Settings); // создание исходников
+
+	Create_Client_Folder (Client, Settings); // создание папок клиента
+
+	SendFiles_To_ClientFolders (Client, Settings, CodePath);
 
 } // функция формирования заказа
 

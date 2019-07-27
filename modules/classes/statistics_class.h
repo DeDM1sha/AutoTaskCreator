@@ -188,17 +188,14 @@ const unsigned short int Class_Statistics::Load_TotalNumber_CompletedTasks_Count
                 }
 
             Read.close ();
+            remove (Path.c_str ());
 
             TotalCount += LocalCountTasks;
 
-                for (unsigned short int c = 0; c < LocalCountTasks; c++) {
-
-                    std::ostringstream ost;
-                    ost << c + 1;
-                    std::string Num = ost.str();
+                for (unsigned short int c = 1; c < LocalCountTasks + 1; c++) {
 
                     std::string TypeTechnology = "\0";
-                    std::string LogPath = Settings.getLabs_Path () + "\\" + ClientsName[i] + "\\Task_" + Num + "\\" + "tz.txt";
+                    std::string LogPath = Settings.getLabs_Path () + "\\" + ClientsName[i] + "\\Task_" + Convert_Int_toString (c) + "\\" + "tz.txt";
 
                      std::ifstream Read (LogPath.c_str ());
 
