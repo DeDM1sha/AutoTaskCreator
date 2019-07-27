@@ -11,10 +11,21 @@ const void Menu_Statistics (const Class_Settings& Settings) {
 
             Show_Text_ForExit ();
             printf ("\n\n\n\n\n\n\n");
-
-            printf ("%s%u\n", "                     Количество клиентов в базе: ", Statistics.getTotalNumber_ClientsInDB_Count ());
-            printf ("%s%u\n", "                  Количество выполненных заданий в базе: ", Statistics.getTotalNumber_CompletedTasks_Count ());
-
+            printf ("                                      ------------------------------------------------\n");
+            std::cout << "                                      | Количество клиентов в базе: " << std::setw (16) << Statistics.getTotalNumber_ClientsInDB_Count () << " |\n";
+            printf ("                                      |----------------------------------------------|\n");
+            std::cout << "                                      | Количество выполненных заданий в базе: " << std::setw (5) << Statistics.getTotalNumber_CompletedTasks_Count () << " |\n";
+            printf ("                                      |----------------------------------------------|\n");
+            std::cout << "                                      | Количество задач на C: " << std::setw (21) << Statistics.getTotalNumber_Technology_C () << " |\n";
+            printf ("                                      |----------------------------------------------|\n");
+            std::cout << "                                      | Количество задач на C++: " << std::setw (19) << Statistics.getTotalNumber_Technology_CPlusPlus () << " |\n";
+            printf ("                                      |----------------------------------------------|\n");
+            std::cout << "                                      | Количество прочих задач: " << std::setw (19) << Statistics.getTotalNumber_Technology_Another () << " |\n";
+            printf ("                                      |----------------------------------------------|\n");
+            /*
+            printf ("%s%u%s\n", "                                            | Количество клиентов в базе: ", Statistics.getTotalNumber_ClientsInDB_Count (), "             |");
+            printf ("%s%u%s\n", "                                            | Количество выполненных заданий в базе: ", Statistics.getTotalNumber_CompletedTasks_Count (), " |");
+*/
                 while (true) {
 
                 ButtonNumber = getch ();
@@ -25,11 +36,6 @@ const void Menu_Statistics (const Class_Settings& Settings) {
                 }
 
         } // конец жизненного цикла меню статистики
-
-
-    std::cout << "Clients in BD: " << Statistics.getTotalNumber_ClientsInDB_Count ();
-
-
 
 } // функция статистики базы заказов и клиентов
 

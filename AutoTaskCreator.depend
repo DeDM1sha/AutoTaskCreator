@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1564076455 source:e:\cplusplus_projects\autotaskcreator\main.cpp
+1564220608 source:e:\cplusplus_projects\autotaskcreator\main.cpp
 	<stdio.h>
 	<iostream>
 	<windows.h>
@@ -9,6 +9,8 @@
 	<queue>
 	<time.h>
 	<vector>
+	<iomanip>
+	<sstream>
 	"modules/classes/client_class.h"
 	"modules/classes/settings_class.h"
 	"modules/classes/statistics_class.h"
@@ -43,11 +45,11 @@
 
 1563642660 e:\cplusplus_projects\autotaskcreator\modules\menu_search_tasks.h
 
-1564080405 e:\cplusplus_projects\autotaskcreator\modules\menu_settings.h
+1564217840 e:\cplusplus_projects\autotaskcreator\modules\menu_settings.h
 
-1564076685 e:\cplusplus_projects\autotaskcreator\modules\menu_statistics.h
+1564224448 e:\cplusplus_projects\autotaskcreator\modules\menu_statistics.h
 
-1564077484 e:\cplusplus_projects\autotaskcreator\modules\classes\statistics_class.h
+1564223890 e:\cplusplus_projects\autotaskcreator\modules\classes\statistics_class.h
 
-1564082873 e:\cplusplus_projects\autotaskcreator\modules\classes\settings_class.h
+1564220154 e:\cplusplus_projects\autotaskcreator\modules\classes\settings_class.h
 

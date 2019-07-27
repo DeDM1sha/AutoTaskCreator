@@ -7,6 +7,8 @@
 #include <queue>
 #include <time.h>
 #include <vector>
+#include <iomanip>
+#include <sstream>
 
 // подключение всех необходимых стандартных библиотек для проекта
 
