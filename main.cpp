@@ -190,7 +190,7 @@ int main (void) {
                                 switch (MenuItem) {
 
                                     case 1: CenterText ("Создание нового заказа\n");                Menu_Formation_Order (Client, Settings);    break;
-                                    case 2: CenterText ("Поиск работы среди имеющихся в базе\n");   Menu_Search_Tasks ();                       break;
+                                    case 2: CenterText ("Поиск работы среди имеющихся в базе\n");   Menu_Search_Tasks (Settings);                       break;
                                     case 3: CenterText ("Настройки программы\n");                   Menu_Settings (Settings);                   break;
                                     case 4: CenterText ("Статистика заказов\n");                    Menu_Statistics (Settings);                 break;
 

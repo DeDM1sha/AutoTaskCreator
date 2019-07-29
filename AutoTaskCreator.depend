@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1564343820 source:e:\cplusplus_projects\autotaskcreator\main.cpp
+1564421520 source:e:\cplusplus_projects\autotaskcreator\main.cpp
 	<stdio.h>
 	<iostream>
 	<windows.h>
@@ -43,7 +43,7 @@
 
 1563702030 e:\cplusplus_projects\autotaskcreator\modules\libs\clickcatcher.h
 
-1564343758 e:\cplusplus_projects\autotaskcreator\modules\menu_search_tasks.h
+1564424000 e:\cplusplus_projects\autotaskcreator\modules\menu_search_tasks.h
 
 1564343758 e:\cplusplus_projects\autotaskcreator\modules\menu_settings.h
 
