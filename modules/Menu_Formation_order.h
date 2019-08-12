@@ -38,7 +38,7 @@ static bool Fill_InputData (Class_Clients& Client) {
 				if (ClickCatch ("C", ButtonNumber)) {
 
 					Client.setTechnology_Name (C);
-					Show_Text_Choise (C);
+					Show_Text_Output (C);
 					break;
 
 				}
@@ -46,7 +46,7 @@ static bool Fill_InputData (Class_Clients& Client) {
 				else if (ClickCatch ("+", ButtonNumber)) {
 
 					Client.setTechnology_Name (CPlusPlus);
-					Show_Text_Choise (CPlusPlus);
+					Show_Text_Output (CPlusPlus);
 					break;
 
 				}
@@ -54,7 +54,7 @@ static bool Fill_InputData (Class_Clients& Client) {
 				else if (ClickCatch ("A", ButtonNumber)) {
 
                     Client.setTechnology_Name (Another);
-                    Show_Text_Choise (Another);
+                    Show_Text_Output (Another);
                     break;
 
 				}
@@ -73,7 +73,7 @@ static bool Fill_InputData (Class_Clients& Client) {
                         if (ClickCatch ("V", ButtonNumber)) {
 
                             Client.setIDE_Name (VisualStudio);
-                            Show_Text_Choise (VisualStudio);
+                            Show_Text_Output (VisualStudio);
                             break;
 
                         }
@@ -81,7 +81,7 @@ static bool Fill_InputData (Class_Clients& Client) {
                         else if (ClickCatch ("G", ButtonNumber)) {
 
                             Client.setIDE_Name (Geany);
-                            Show_Text_Choise (Geany);
+                            Show_Text_Output (Geany);
                             break;
 
                         }
@@ -89,7 +89,7 @@ static bool Fill_InputData (Class_Clients& Client) {
                         else if (ClickCatch ("C", ButtonNumber)) {
 
                             Client.setIDE_Name (CodeBlocks);
-                            Show_Text_Choise (CodeBlocks);
+                            Show_Text_Output (CodeBlocks);
                             break;
 
                         }
@@ -105,7 +105,7 @@ static bool Fill_InputData (Class_Clients& Client) {
                         if (ClickCatch ("L", ButtonNumber)) {
 
                             Client.setOS_Name (Linux);
-                            Show_Text_Choise (Linux);
+                            Show_Text_Output (Linux);
                             break;
 
                         }
@@ -113,7 +113,7 @@ static bool Fill_InputData (Class_Clients& Client) {
                         else if (ClickCatch ("M", ButtonNumber)) {
 
                             Client.setOS_Name (MacOS);
-                            Show_Text_Choise (MacOS);
+                            Show_Text_Output (MacOS);
                             break;
 
                         }
@@ -121,7 +121,7 @@ static bool Fill_InputData (Class_Clients& Client) {
                         else if (ClickCatch ("W", ButtonNumber)) {
 
                             Client.setOS_Name (Windows);
-                            Show_Text_Choise (Windows);
+                            Show_Text_Output (Windows);
                             break;
 
                         }
@@ -137,7 +137,7 @@ static bool Fill_InputData (Class_Clients& Client) {
                         if (ClickCatch ("Y", ButtonNumber)) {
 
                             Client.setMenuFunctional (true);
-                            Show_Text_Choise ("Yes");
+                            Show_Text_Output ("Yes");
                             break;
 
                         }
@@ -145,7 +145,7 @@ static bool Fill_InputData (Class_Clients& Client) {
                         else if (ClickCatch ("N", ButtonNumber)) {
 
                             Client.setMenuFunctional (false);
-                            Show_Text_Choise ("No");
+                            Show_Text_Output ("No");
                             break;
 
                         }

@@ -74,7 +74,7 @@ const void Menu_Search_Tasks (const Class_Settings& Settings) {
 
                             if (!Founded) {
 
-                                Show_Text_Choise (std::string ("Клиент " + Name + " не найден в базе\n"));
+                                Show_Text_Output (std::string ("Клиент " + Name + " не найден в базе\n"));
                                 Continue ();
 
                             }

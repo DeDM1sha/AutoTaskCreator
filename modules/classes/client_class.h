@@ -23,11 +23,7 @@ class AbstractClass_Clients {
 
         }
 
-        ~AbstractClass_Clients (void) {
-
-            remove (PathPK_UserName.c_str ());
-
-        }
+        ~AbstractClass_Clients (void) {}
 
     //////////////////////////////////////////////
 
@@ -66,6 +62,8 @@ const std::string AbstractClass_Clients::Load_PK_UserName (void) const {
             Exception ("File PK_UserName.txt didnt open"); // переписать
 
     Read.close ();
+
+    remove (PathPK_UserName.c_str ());
 
     return PK_Name;
 

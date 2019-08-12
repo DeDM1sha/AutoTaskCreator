@@ -24,7 +24,7 @@ const void Delay (const unsigned short int Time) {
 
 } // функция задержки
 
-const void Show_Text_Choise (const std::string Text) {
+const void Show_Text_Output (const std::string Text) {
 
 	SetConsoleTextAttribute (GetStdHandle (STD_OUTPUT_HANDLE), (WORD) ((0 << 4) | 11));
 

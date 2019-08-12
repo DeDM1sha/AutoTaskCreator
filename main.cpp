@@ -44,7 +44,7 @@ const void Configure_Console_Window (void) {
 
 } // Функция настроек консольного окна
 
-const void Draw_Menu (const unsigned short int MenuItem) {
+const void Draw_Menu (const unsigned short int& MenuItem) {
 
     printf ("\n\n\n\n\n");
 
@@ -139,14 +139,14 @@ int main (void) {
 
         while (true) {
 
+                if (Settings.getAutomatic_Close_Application () == true && FirstOrderCreated == true)
+                    return 0;
+
+            cls ();
+            CenterText ("Выберите пункт меню, используя клавиши стрелочек на клавиатуре");
+            Draw_Menu (MenuItem);
+
                 while (true) {
-
-                    cls ();
-                    CenterText ("Выберите пункт меню, используя клавиши стрелочек на клавиатуре");
-                    Draw_Menu (MenuItem);
-
-                        if (Settings.getAutomatic_Close_Application () == true && FirstOrderCreated == true)
-                            return 0;
 
                     ButtonNumber = getch ();
 

@@ -2,8 +2,8 @@
 
 #pragma once
 
-#ifndef _settings_class_h_
-#define _settings_class_h_
+#ifndef _banlist_class_h_
+#define _banlist_class_h_
 
 static std::string SaveTag_Path_to_Labs = "Path_to_Labs";
 static std::string SaveTag_Order_Start = "Order_Start";
@@ -17,8 +17,8 @@ class Class_Settings {
         std::string Labs_Path; // место сохранения лаб
         bool Automatic_Order_Start; // автоматический запуск создания заказа
         bool Automatic_Close_Application; // автоматическое завершение приложения после заполнения заказа
-      /*  std::string Url_BanList_Clients; // ссылка на банлист клиентов
-        std::string Url_BanList_Workers; // ссылка на банлист исполнителей*/
+        std::string Url_BanList_Clients; // ссылка на банлист клиентов
+        std::string Url_BanList_Workers; // ссылка на банлист исполнителей
 
     public:
 
@@ -89,7 +89,7 @@ class Class_Settings {
         } // геттер для Automatic_Close_Applcation
 
     //////////////////////////////////////////////
-/*
+
         const void setUrl_BanList_Clients (const std::string Str) {
 
             this->Url_BanList_Clients = Str;
@@ -116,7 +116,7 @@ class Class_Settings {
 
         } // геттер для Url_BanList_Workers
 
-    //////////////////////////////////////////////*/
+    //////////////////////////////////////////////
 
          const void SetDefault_Parameters (void) {
 
@@ -273,4 +273,4 @@ const void Class_Settings::SaveSettings (const bool UsingDelay) const {
 
 } // метод сохранения настроек
 
-#endif // _settings_class_h_
+#endif // _banlist_class_h_

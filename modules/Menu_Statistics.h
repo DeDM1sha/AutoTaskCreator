@@ -26,11 +26,14 @@ const void Menu_Statistics (const Class_Settings& Settings) {
         std::cout << "                                      | Количество прочих задач: " << std::setw (19) << Statistics.getTotalNumber_Technology_Another () << " |\n";
         printf ("                                      |----------------------------------------------|\n");
 
+            if (Statistics.getTotalNumber_CompletedTasks_Count () != (Statistics.getTotalNumber_Technology_C () + Statistics.getTotalNumber_Technology_CPlusPlus () + Statistics.getTotalNumber_Technology_Another ()))
+                Show_Text_Output ("\n                         Общее кол-во выполненных задач не совпадает в сумме по отдельности!");
+
             while (true) {
 
                 ButtonNumber = getch ();
 
-                    if (ClickCatch ("Esc", ButtonNumber) || ClickCatch ("F5", ButtonNumber));
+                    if (ClickCatch ("Esc", ButtonNumber) || ClickCatch ("F5", ButtonNumber))
                         break;
 
             }

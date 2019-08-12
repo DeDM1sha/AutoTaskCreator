@@ -108,14 +108,14 @@ const void Menu_Settings (Class_Settings& Settings) {
 
                                 if (ClickCatch ("Y", ButtonNumber)) {
 
-                                    Show_Text_Choise ("Yes");
+                                    Show_Text_Output ("Yes");
                                     Settings.setAutomatic_Order_Start (true);
 
                                 }
 
                                 else {
 
-                                    Show_Text_Choise ("No");
+                                    Show_Text_Output ("No");
                                     Settings.setAutomatic_Order_Start (false);
 
                                 }
@@ -147,14 +147,14 @@ const void Menu_Settings (Class_Settings& Settings) {
 
                                 if (ClickCatch ("Y", ButtonNumber)) {
 
-                                    Show_Text_Choise ("Yes");
+                                    Show_Text_Output ("Yes");
                                     Settings.setAutomatic_Close_Application (true);
 
                                 }
 
                                 else {
 
-                                    Show_Text_Choise ("No");
+                                    Show_Text_Output ("No");
                                     Settings.setAutomatic_Close_Application (false);
 
                                 }
@@ -184,7 +184,7 @@ const void Menu_Settings (Class_Settings& Settings) {
 
                         if (ClickCatch ("Y", ButtonNumber)) {
 
-                            Show_Text_Choise ("Yes");
+                            Show_Text_Output ("Yes");
 
                             remove (Settings.getConfig_Path().c_str());
 
