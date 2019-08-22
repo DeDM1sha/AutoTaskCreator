@@ -34,8 +34,8 @@ const void Configure_Console_Window (void) {
     structCursorInfo.bVisible = FALSE;
     SetConsoleCursorInfo (handle, &structCursorInfo); // отключение каретки
 
-    SetConsoleCP (1251);
-    SetConsoleOutputCP (1251); // установка кириллицы
+    SetConsoleCP(1251);
+    SetConsoleOutputCP(1251); // установка кириллицы
 
     system ("color A");
     system ("mode con cols=125 lines=30"); // установка разрешения консоли, отключения бокового скрола

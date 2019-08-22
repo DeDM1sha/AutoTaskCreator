@@ -15,6 +15,8 @@ static std::string Linux = "Linux";
 static std::string MacOS = "MacOS";
 static std::string Windows = "Windows";
 
+static std::string CodePath = "\0";
+
 static bool Fill_InputData (Class_Clients& Client) {
 
 	unsigned short int ButtonNumber = 0;
@@ -188,10 +190,10 @@ static bool Fill_InputData (Class_Clients& Client) {
 
 } // функция заполнения данных по клиенту
 
-static std::string Create_Source_Code (const Class_Clients& Client, const Class_Settings& Settings) {
+static void Create_Source_Code (const Class_Clients& Client, const Class_Settings& Settings) {
 
         if (Client.getTechnology_Name () == Another)
-            return "\0";
+            return;
 
 	std::queue <std::string> Code;
 
@@ -257,19 +259,8 @@ static std::string Create_Source_Code (const Class_Clients& Client, const Class_
 
 	Code.push ("int main (void) {\n\n");
 
-        if (Client.getIDE_Name () != Geany) {
-
             Code.push ("	SetConsoleCP(1251);\n");
             Code.push ("	SetConsoleOutputCP(1251); // кириллица в консоли\n");
-
-        }
-
-        else {
-
-            Code.push ("	//SetConsoleCP(1251);\n");
-            Code.push ("	//SetConsoleOutputCP(1251); // кириллица в консоли\n");
-
-        }
 
         if (Client.getOS_Name () == Windows) {
 
@@ -342,7 +333,7 @@ static std::string Create_Source_Code (const Class_Clients& Client, const Class_
 
 	Code.push ("}");
 
-    std::string CodePath = "C:\\Users\\" + Client.getPK_Name () + "\\AppData\\Local\\Temp\\task.c";
+    CodePath = "C:\\Users\\" + Client.getPK_Name () + "\\AppData\\Local\\Temp\\task.c";
 
 		if (Client.getTechnology_Name () == CPlusPlus)
 			CodePath += "pp";
@@ -364,8 +355,6 @@ static std::string Create_Source_Code (const Class_Clients& Client, const Class_
             Exception ("Source code didnt created");
 
 	Read.close ();
-
-	return CodePath;
 
 } // функция создания исходного кода
 
@@ -460,7 +449,7 @@ const void Menu_Formation_Order (Class_Clients& Client, const Class_Settings& Se
             return;
 
     Create_Client_Folder (Client, Settings); // создание папки клиента
-    const std::string CodePath = Create_Source_Code (Client, Settings); // создание исходников
+    Create_Source_Code (Client, Settings); // создание исходников
     SendFiles_To_ClientFolders (Client, Settings, CodePath); // отправка исходников по новым папкам с заданиями
 
 } // функция формирования заказа
