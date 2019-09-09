@@ -14,84 +14,86 @@ static void Continue (void) {
 
 const void Menu_Search_Tasks (const Class_Settings& Settings) {
 
-    while (true) {
+    unsigned short int ButtonNumber = 0; // переменная для обработки нажатий в меню
 
-        cls ();
+        while (true) {
 
-        Show_Text_ForExit ();
+            cls ();
 
-        printf ("1. Найти клиента по имени\n");
+            Show_Text_ForExit ();
 
-            while (true) {
+            printf ("1. Найти клиента по имени\n");
 
-                ButtonNumber = getch ();
+                while (true) {
 
-                    if (ClickCatch ("Esc", ButtonNumber) || ClickCatch ("1", ButtonNumber))
-                        break;
+                    ButtonNumber = getch ();
 
-            }
+                        if (ClickCatch ("Esc", ButtonNumber) || ClickCatch ("1", ButtonNumber))
+                            break;
 
-            if (ClickCatch ("Esc", ButtonNumber))
-                return;
+                }
 
-            else if (ClickCatch ("1", ButtonNumber)) {
+                if (ClickCatch ("Esc", ButtonNumber))
+                    return;
 
-                bool Founded = false;
-                CenterText ("Введите имя: ");
-                std::string Name = Show_Text_Input ();
+                else if (ClickCatch ("1", ButtonNumber)) {
 
-                std::ofstream Write (std::string(Settings.getLabs_Path () + "\\" + Name + "\\CheckClient.txt").c_str ());
+                    bool Founded = false;
+                    CenterText ("Введите имя: ");
+                    std::string Name = Show_Text_Input ();
 
-                    if (Write.is_open ())
-                        Founded = true;
+                    std::ofstream Write (std::string(Settings.getLabs_Path () + "\\" + Name + "\\CheckClient.txt").c_str ());
 
-                Write.close ();
+                        if (Write.is_open ())
+                            Founded = true;
 
-                    if (!Founded) {
+                    Write.close ();
 
-                        std::ofstream Fopen ("Reverse_Name.txt");
-                        Fopen << Name;
-                        Fopen.close ();
+                        if (!Founded) {
 
-                        std::string FirstName = "\0";
-                        std::string SecondName = "\0";
+                            std::ofstream Fopen ("Reverse_Name.txt");
+                            Fopen << Name;
+                            Fopen.close ();
 
-                        std::ifstream Read ("Reverse_Name.txt");
-                        Read >> SecondName;
-                        Read >> FirstName;
-                        Read.close ();
+                            std::string FirstName = "\0";
+                            std::string SecondName = "\0";
 
-                        remove ("Reverse_Name.txt");
+                            std::ifstream Read ("Reverse_Name.txt");
+                            Read >> SecondName;
+                            Read >> FirstName;
+                            Read.close ();
 
-                        Name = FirstName + " " + SecondName;
+                            remove ("Reverse_Name.txt");
 
-                        std::ofstream Write (std::string(Settings.getLabs_Path () + "\\" + Name + "\\CheckClient.txt").c_str ());
+                            Name = FirstName + " " + SecondName;
 
-                            if (Write.is_open ())
-                                Founded = true;
+                            std::ofstream Write (std::string(Settings.getLabs_Path () + "\\" + Name + "\\CheckClient.txt").c_str ());
 
-                        Write.close ();
+                                if (Write.is_open ())
+                                    Founded = true;
 
-                            if (!Founded) {
+                            Write.close ();
 
-                                Show_Text_Output (std::string ("Клиент " + Name + " не найден в базе\n"));
-                                Continue ();
+                                if (!Founded) {
 
-                            }
+                                    Show_Text_Output (std::string ("Клиент " + Name + " не найден в базе\n"));
+                                    Continue ();
 
-                    }
+                                }
 
-                    if (Founded) {
+                        }
 
-                        remove (std::string(Settings.getLabs_Path () + "\\" + Name + "\\CheckClient.txt").c_str ());
-                        system (std::string("explorer \"" + Settings.getLabs_Path () + "\\" + Name + "\"").c_str ());
+                        if (Founded) {
+
+                            remove (std::string(Settings.getLabs_Path () + "\\" + Name + "\\CheckClient.txt").c_str ());
+                            system (std::string("explorer \"" + Settings.getLabs_Path () + "\\" + Name + "\"").c_str ());
 
 
-                    }
+                        }
 
-            } // поиск клиента по имени
+                } // поиск клиента по имени
 
-    }
+        }
 
 } // функция поиска заказа / задания / клиента
 

@@ -260,12 +260,12 @@ const void Class_Settings::SaveSettings (const bool UsingDelay) const {
 
         if (UsingDelay == true) {
 
-            printf ("\n\n\nСохранение изменений");
+            printf ("\n\n\nСохранение изменений ");
 
-                for (unsigned short int i = 0; i < 3; i++) {
+                for (unsigned short int i = 0; i < 4; i++) {
 
-                    printf (".");
                     Delay (1000);
+                    printf (".");
 
                 }
 

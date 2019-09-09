@@ -29,7 +29,7 @@
 #ifndef _clickcatcher_h_
 #define _clickcatcher_h_
 
-const bool ClickCatch (const std::string& Button_Name, const unsigned short int& Button_Number) {
+const bool ClickCatch (const std::string Button_Name, const unsigned short int& Button_Number) {
 
     /* Esc -> F12 */
 
@@ -280,5 +280,11 @@ const bool ClickCatch (const std::string& Button_Name, const unsigned short int&
     return false;
 
 } // функция обработки нажатой и требуемой кнопки
+
+const bool ClickCatch (const unsigned short int& Button_Number, const std::string Button_Name) {
+
+    return ClickCatch (Button_Name, Button_Number);
+
+} // функция на случай если введут иной порядок аргументов
 
 #endif // _click_catcher_h_

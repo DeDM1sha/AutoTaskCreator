@@ -1,4 +1,4 @@
-// Модуль для настроек приложения. Именно здесь описан весь функционал кнопки "Настройки".
+// РњРѕРґСѓР»СЊ РґР»СЏ РЅР°СЃС‚СЂРѕРµРє РїСЂРёР»РѕР¶РµРЅРёСЏ. РРјРµРЅРЅРѕ Р·РґРµСЃСЊ РѕРїРёСЃР°РЅ РІРµСЃСЊ С„СѓРЅРєС†РёРѕРЅР°Р» РєРЅРѕРїРєРё "РќР°СЃС‚СЂРѕР№РєРё".
 
 #pragma once
 
@@ -9,6 +9,7 @@ const void Menu_Settings (Class_Settings& Settings) {
 
     std::string String_AutomaticOrderStart = "\0";
     std::string String_AutomaticCloseApplication = "\0";
+    unsigned short int ButtonNumber = 0; // РїРµСЂРµРјРµРЅРЅР°СЏ РґР»СЏ РѕР±СЂР°Р±РѕС‚РєРё РЅР°Р¶Р°С‚РёР№ РІ РјРµРЅСЋ
 
     while (true) {
 
@@ -17,8 +18,8 @@ const void Menu_Settings (Class_Settings& Settings) {
         Show_Text_ForExit ();
 
         printf ("\n\n\n\n\n\n\n");
-        CenterText ("Выберите пункт меню для изменения выбранных настроек\n\n\n");
-        printf ("%s%s\n", "                                     1. Путь к месту хранения заказов: ", Settings.getLabs_Path ().c_str ());
+        CenterText ("Р’С‹Р±РµСЂРёС‚Рµ РїСѓРЅРєС‚ РјРµРЅСЋ РґР»СЏ РёР·РјРµРЅРµРЅРёСЏ РІС‹Р±СЂР°РЅРЅС‹С… РЅР°СЃС‚СЂРѕРµРє\n\n\n");
+        printf ("%s%s\n", "                                     1. РџСѓС‚СЊ Рє РјРµСЃС‚Сѓ С…СЂР°РЅРµРЅРёСЏ Р·Р°РєР°Р·РѕРІ: ", Settings.getLabs_Path ().c_str ());
 
             if (Settings.getAutomatic_Order_Start () == true)
                 String_AutomaticOrderStart = "True";
@@ -26,7 +27,7 @@ const void Menu_Settings (Class_Settings& Settings) {
             else
                 String_AutomaticOrderStart = "False";
 
-        printf ("%s%s\n", "                                     2. Автоматический запуск нового заказа: ", String_AutomaticOrderStart.c_str ());
+        printf ("%s%s\n", "                                     2. РђРІС‚РѕРјР°С‚РёС‡РµСЃРєРёР№ Р·Р°РїСѓСЃРє РЅРѕРІРѕРіРѕ Р·Р°РєР°Р·Р°: ", String_AutomaticOrderStart.c_str ());
 
             if (Settings.getAutomatic_Close_Application () == true)
                 String_AutomaticCloseApplication = "True";
@@ -34,8 +35,8 @@ const void Menu_Settings (Class_Settings& Settings) {
             else
                 String_AutomaticCloseApplication = "False";
 
-        printf ("%s%s\n", "                                     3. Автоматическое закрытие после заполнения заказа: ", String_AutomaticCloseApplication.c_str ());
-        printf ("                                     4. Восстановить настройки по умолчанию\n");
+        printf ("%s%s\n", "                                     3. РђРІС‚РѕРјР°С‚РёС‡РµСЃРєРѕРµ Р·Р°РєСЂС‹С‚РёРµ РїРѕСЃР»Рµ Р·Р°РїРѕР»РЅРµРЅРёСЏ Р·Р°РєР°Р·Р°: ", String_AutomaticCloseApplication.c_str ());
+        printf ("                                     4. Р’РѕСЃСЃС‚Р°РЅРѕРІРёС‚СЊ РЅР°СЃС‚СЂРѕР№РєРё РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ\n");
 
             while (true) {
 
@@ -55,12 +56,12 @@ const void Menu_Settings (Class_Settings& Settings) {
 
                     std::string Str = "\0";
                     std::string TestFilePath = "\0";
-                    CenterText ("Введите новый путь к хранению заказов");
+                    CenterText ("Р’РІРµРґРёС‚Рµ РЅРѕРІС‹Р№ РїСѓС‚СЊ Рє С…СЂР°РЅРµРЅРёСЋ Р·Р°РєР°Р·РѕРІ");
 
                         while (true) {
 
                             printf ("\n");
-                            CenterText ("Путь: ");
+                            CenterText ("РџСѓС‚СЊ: ");
 
                             Str = Show_Text_Input ();
 
@@ -78,7 +79,7 @@ const void Menu_Settings (Class_Settings& Settings) {
 
                             Write.close ();
 
-                        } // валидность на ввод пути
+                        } // РІР°Р»РёРґРЅРѕСЃС‚СЊ РЅР° РІРІРѕРґ РїСѓС‚Рё
 
                         if (Check_Input_ForExit (Str))
                             continue;
@@ -86,14 +87,14 @@ const void Menu_Settings (Class_Settings& Settings) {
                     remove (TestFilePath.c_str ());
                     Settings.setLabs_Path (Str);
 
-                } // изменение пути места хранения заказов
+                } // РёР·РјРµРЅРµРЅРёРµ РїСѓС‚Рё РјРµСЃС‚Р° С…СЂР°РЅРµРЅРёСЏ Р·Р°РєР°Р·РѕРІ
 
                 else if (ClickCatch ("2", ButtonNumber)) {
 
-                    CenterText ("Задайте булевое значение для автоматического запуска меню заказа\n");
-                    CenterText ("Для этого нажмите Y (Yes) - для включения\n");
-                    CenterText ("Или N (No) - для отключения\n\n");
-                    CenterText ("Ваш выбор: ");
+                    CenterText ("Р—Р°РґР°Р№С‚Рµ Р±СѓР»РµРІРѕРµ Р·РЅР°С‡РµРЅРёРµ РґР»СЏ Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРѕРіРѕ Р·Р°РїСѓСЃРєР° РјРµРЅСЋ Р·Р°РєР°Р·Р°\n");
+                    CenterText ("Р”Р»СЏ СЌС‚РѕРіРѕ РЅР°Р¶РјРёС‚Рµ Y (Yes) - РґР»СЏ РІРєР»СЋС‡РµРЅРёСЏ\n");
+                    CenterText ("РР»Рё N (No) - РґР»СЏ РѕС‚РєР»СЋС‡РµРЅРёСЏ\n\n");
+                    CenterText ("Р’Р°С€ РІС‹Р±РѕСЂ: ");
 
                         while (true) {
 
@@ -125,14 +126,14 @@ const void Menu_Settings (Class_Settings& Settings) {
                         else
                             continue;
 
-                } // изменение автоматического запуска меню заказа
+                } // РёР·РјРµРЅРµРЅРёРµ Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРѕРіРѕ Р·Р°РїСѓСЃРєР° РјРµРЅСЋ Р·Р°РєР°Р·Р°
 
                 else if (ClickCatch ("3", ButtonNumber)) {
 
-                    CenterText ("Задайте булевое значение для автоматического закрытия приложения после меню заказа\n");
-                    CenterText ("Для этого нажмите Y (Yes) - для включения\n");
-                    CenterText ("Или N (No) - для отключения\n\n");
-                    CenterText ("Ваш выбор: ");
+                    CenterText ("Р—Р°РґР°Р№С‚Рµ Р±СѓР»РµРІРѕРµ Р·РЅР°С‡РµРЅРёРµ РґР»СЏ Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРѕРіРѕ Р·Р°РєСЂС‹С‚РёСЏ РїСЂРёР»РѕР¶РµРЅРёСЏ РїРѕСЃР»Рµ РјРµРЅСЋ Р·Р°РєР°Р·Р°\n");
+                    CenterText ("Р”Р»СЏ СЌС‚РѕРіРѕ РЅР°Р¶РјРёС‚Рµ Y (Yes) - РґР»СЏ РІРєР»СЋС‡РµРЅРёСЏ\n");
+                    CenterText ("РР»Рё N (No) - РґР»СЏ РѕС‚РєР»СЋС‡РµРЅРёСЏ\n\n");
+                    CenterText ("Р’Р°С€ РІС‹Р±РѕСЂ: ");
 
                         while (true) {
 
@@ -164,14 +165,14 @@ const void Menu_Settings (Class_Settings& Settings) {
                         else
                             continue;
 
-                } // изменение автоматического закрытия приложения после меню заказа
+                } // РёР·РјРµРЅРµРЅРёРµ Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРѕРіРѕ Р·Р°РєСЂС‹С‚РёСЏ РїСЂРёР»РѕР¶РµРЅРёСЏ РїРѕСЃР»Рµ РјРµРЅСЋ Р·Р°РєР°Р·Р°
 
                 else if (ClickCatch ("4", ButtonNumber)) {
 
-                    CenterText ("Вы действительно хотите восстановить настройки по умолчанию?\n");
-                    CenterText ("Для этого нажмите Y (Yes) - для восстановления\n");
-                    CenterText ("Или N (No) - для отмены восстановления\n\n");
-                    CenterText ("Ваш выбор: ");
+                    CenterText ("Р’С‹ РґРµР№СЃС‚РІРёС‚РµР»СЊРЅРѕ С…РѕС‚РёС‚Рµ РІРѕСЃСЃС‚Р°РЅРѕРІРёС‚СЊ РЅР°СЃС‚СЂРѕР№РєРё РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ?\n");
+                    CenterText ("Р”Р»СЏ СЌС‚РѕРіРѕ РЅР°Р¶РјРёС‚Рµ Y (Yes) - РґР»СЏ РІРѕСЃСЃС‚Р°РЅРѕРІР»РµРЅРёСЏ\n");
+                    CenterText ("РР»Рё N (No) - РґР»СЏ РѕС‚РјРµРЅС‹ РІРѕСЃСЃС‚Р°РЅРѕРІР»РµРЅРёСЏ\n\n");
+                    CenterText ("Р’Р°С€ РІС‹Р±РѕСЂ: ");
 
                         while (true) {
 
@@ -195,12 +196,12 @@ const void Menu_Settings (Class_Settings& Settings) {
                         else if (ClickCatch ("N", ButtonNumber) || ClickCatch ("Esc", ButtonNumber))
                             continue;
 
-                } // вернуть настройки по умолчанию
+                } // РІРµСЂРЅСѓС‚СЊ РЅР°СЃС‚СЂРѕР№РєРё РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ
 
             Settings.SaveSettings (true);
 
-    } // конец жизненного цикла меню настроек
+    } // РєРѕРЅРµС† Р¶РёР·РЅРµРЅРЅРѕРіРѕ С†РёРєР»Р° РјРµРЅСЋ РЅР°СЃС‚СЂРѕРµРє
 
-} // функция настроек приложения
+} // С„СѓРЅРєС†РёСЏ РЅР°СЃС‚СЂРѕРµРє РїСЂРёР»РѕР¶РµРЅРёСЏ
 
 #endif // _Menu_Settings_h_
