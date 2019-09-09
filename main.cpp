@@ -10,21 +10,21 @@
 #include <iomanip>
 #include <sstream>
 
-// РїРѕРґРєР»СЋС‡РµРЅРёРµ РІСЃРµС… РЅРµРѕР±С…РѕРґРёРјС‹С… СЃС‚Р°РЅРґР°СЂС‚РЅС‹С… Р±РёР±Р»РёРѕС‚РµРє РґР»СЏ РїСЂРѕРµРєС‚Р°
+// подключение всех необходимых стандартных библиотек для проекта
 
-#include "modules/classes/client_class.h" // РїРѕРґРєР»СЋС‡РµРЅРёРµ РјРѕРґСѓР»СЏ client_class - РєР»Р°СЃСЃ РґР°РЅРЅС‹С… РѕР± РєР»РёРµРЅС‚Рµ
-#include "modules/classes/settings_class.h" // РїРѕРґРєР»СЋС‡РµРЅРёСЏ РјРѕРґСѓР»СЏ settings_class - РєР»Р°СЃСЃ РЅР°СЃС‚СЂРѕРµРє РїСЂРёР»РѕР¶РµРЅРёСЏ
-#include "modules/classes/statistics_class.h" // РїРѕРґРєР»СЋС‡РµРЅРёРµ РјРѕРґСѓР»СЏ statistics_class - РєР»Р°СЃСЃ Р±Р°Р·С‹ РґР°РЅРЅС‹С… РІСЃРµС… Р·Р°РєР°Р·РѕРІ Рё РєР»РёРµРЅС‚РѕРІ
+#include "modules/classes/client_class.h" // подключение модуля client_class - класс данных об клиенте
+#include "modules/classes/settings_class.h" // подключения модуля settings_class - класс настроек приложения
+#include "modules/classes/statistics_class.h" // подключение модуля statistics_class - класс базы данных всех заказов и клиентов
 
-#include "modules/libs/clickcatcher.h" // РїРѕРґРєР»СЋС‡РµРЅРёРµ РјРѕРґСѓР»СЏ clickcatcher - СЃР°РјРѕРїРёСЃРЅР°СЏ Р±РёР±Р»РёРѕС‚РµРєР° РїРѕ РѕР±СЂР°Р±РѕС‚РєРµ РЅР°Р¶Р°С‚С‹С… РєР»Р°РІРёС€
-#include "modules/libs/additional_functions.h" // РїРѕРґРєР»СЋС‡РµРЅРёРµ РјРѕРґСѓР»СЏ additional_functions - Р±РёР±Р»РёРѕС‚РµРєР° РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅРёС… РѕР±С‰РёР№ С„СѓРЅРєС†РёР№
+#include "modules/libs/clickcatcher.h" // подключение модуля clickcatcher - самописная библиотека по обработке нажатых клавиш
+#include "modules/libs/additional_functions.h" // подключение модуля additional_functions - библиотека дополнительних общий функций
 
-#include "modules/Menu_Formation_order.h" // РїРѕРґРєР»СЋС‡РµРЅРёРµ РјРѕРґСѓР»СЏ Formation_order - РјРѕРґСѓР»СЊ С„РѕСЂРјРёСЂРѕРІР°РЅРёРµ Р·Р°РєР°Р·Р°
-#include "modules/Menu_Search_tasks.h" // РїРѕРґРєР»СЋС‡РµРЅРёРµ РјРѕРґСѓР»СЏ Search_tasks - РјРѕРґСѓР»СЊ РїРѕРёСЃРєР° Р·Р°РєР°Р·Р° РїРѕ РєР»СЋС‡РµРІС‹Рј СЃР»РѕРІР°Рј
-#include "modules/Menu_Settings.h" // РїРѕРґРєР»СЋС‡РµРЅРёРµ РјРѕРґСѓР»СЏ Menu_Settings - РјРѕРґСѓР»СЊ РЅР°СЃС‚СЂРѕРµРє РїСЂРёР»РѕР¶РµРЅРёСЏ
-#include "modules/Menu_Statistics.h" // РѕРґРєР»СЋС‡РµРЅРёРµ РјРѕРґСѓР»СЏ Menu_Statistics - РјРѕРґСѓР»СЊ СЃС‚Р°С‚РёСЃС‚РёРєРё РїРѕ Р±Р°Р·Рµ РґР°РЅРЅС‹С…
+#include "modules/Menu_Formation_order.h" // подключение модуля Formation_order - модуль формирование заказа
+#include "modules/Menu_Search_tasks.h" // подключение модуля Search_tasks - модуль поиска заказа по ключевым словам
+#include "modules/Menu_Settings.h" // подключение модуля Menu_Settings - модуль настроек приложения
+#include "modules/Menu_Statistics.h" // одключение модуля Menu_Statistics - модуль статистики по базе данных
 
-// РїРѕРґРєР»СЋС‡РµРЅРёРµ РІСЃРµС… РЅРµРѕР±С…РѕРґРёРјС‹С… СЃР°РјРѕРїРёСЃРЅС‹С… Р±РёР±Р»РёРѕС‚РµРє Рё РјРѕРґСѓР»РµР№ РґР»СЏ РїСЂРѕРµРєС‚Р°
+// подключение всех необходимых самописных библиотек и модулей для проекта
 
 const void Configure_Console_Window (void) {
 
@@ -32,17 +32,17 @@ const void Configure_Console_Window (void) {
     CONSOLE_CURSOR_INFO structCursorInfo;
     GetConsoleCursorInfo (handle, &structCursorInfo);
     structCursorInfo.bVisible = FALSE;
-    SetConsoleCursorInfo (handle, &structCursorInfo); // РѕС‚РєР»СЋС‡РµРЅРёРµ РєР°СЂРµС‚РєРё
+    SetConsoleCursorInfo (handle, &structCursorInfo); // отключение каретки
 
     SetConsoleCP(1251);
-    SetConsoleOutputCP(1251); // СѓСЃС‚Р°РЅРѕРІРєР° РєРёСЂРёР»Р»РёС†С‹
+    SetConsoleOutputCP(1251); // установка кириллицы
 
     system ("color A");
-    system ("mode con cols=125 lines=30"); // СѓСЃС‚Р°РЅРѕРІРєР° СЂР°Р·СЂРµС€РµРЅРёСЏ РєРѕРЅСЃРѕР»Рё, РѕС‚РєР»СЋС‡РµРЅРёСЏ Р±РѕРєРѕРІРѕРіРѕ СЃРєСЂРѕР»Р°
-    system ("title AutoTaskCreator"); // СѓСЃС‚Р°РЅРѕРІРєР° Р·Р°РіРѕР»РѕРІРєР° РєРѕРЅСЃРѕР»Рё
-    system ("@echo off"); // РїРµСЂРµРєР»СЋС‡РµРЅРёРµ СЂРµР¶РёРјР° РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ РєРѕРјР°РЅРґ РЅР° СЌРєСЂР°РЅРµ
+    system ("mode con cols=125 lines=30"); // установка разрешения консоли, отключения бокового скрола
+    system ("title AutoTaskCreator"); // установка заголовка консоли
+    system ("@echo off"); // переключение режима отображения команд на экране
 
-} // Р¤СѓРЅРєС†РёСЏ РЅР°СЃС‚СЂРѕРµРє РєРѕРЅСЃРѕР»СЊРЅРѕРіРѕ РѕРєРЅР°
+} // Функция настроек консольного окна
 
 const void Draw_Menu (const unsigned short int& MenuItem) {
 
@@ -53,7 +53,7 @@ const void Draw_Menu (const unsigned short int& MenuItem) {
             printf("                             ***********************                                            \n");
             printf("                             *|-------------------|*                      |-------------------| \n");
             printf("                             *|                   |*                      |                   | \n");
-            printf("                             *|   РЎРѕР·РґР°С‚СЊ Р·Р°РєР°Р·   |*                      |    РџРѕРёСЃРє СЂР°Р±РѕС‚    | \n");
+            printf("                             *|   Создать заказ   |*                      |    Поиск работ    | \n");
             printf("                             *|                   |*                      |                   | \n");
             printf("                             *|-------------------|*                      |-------------------| \n");
             printf("                             ***********************                                            \n");
@@ -65,7 +65,7 @@ const void Draw_Menu (const unsigned short int& MenuItem) {
             printf("                                                                         ***********************\n");
             printf("                              |-------------------|                      *|-------------------|*\n");
             printf("                              |                   |                      *|                   |*\n");
-            printf("                              |   РЎРѕР·РґР°С‚СЊ Р·Р°РєР°Р·   |                      *|    РџРѕРёСЃРє СЂР°Р±РѕС‚    |*\n");
+            printf("                              |   Создать заказ   |                      *|    Поиск работ    |*\n");
             printf("                              |                   |                      *|                   |*\n");
             printf("                              |-------------------|                      *|-------------------|*\n");
             printf("                                                                         ***********************\n");
@@ -77,7 +77,7 @@ const void Draw_Menu (const unsigned short int& MenuItem) {
             printf("                                                                                                \n");
             printf("                              |-------------------|                       |-------------------| \n");
             printf("                              |                   |                       |                   | \n");
-            printf("                              |   РЎРѕР·РґР°С‚СЊ Р·Р°РєР°Р·   |                       |    РџРѕРёСЃРє СЂР°Р±РѕС‚    | \n");
+            printf("                              |   Создать заказ   |                       |    Поиск работ    | \n");
             printf("                              |                   |                       |                   | \n");
             printf("                              |-------------------|                       |-------------------| \n");
             printf("                                                                                                \n");
@@ -91,7 +91,7 @@ const void Draw_Menu (const unsigned short int& MenuItem) {
             printf("                             ***********************                                            \n");
             printf("                             *|-------------------|*                      |-------------------| \n");
             printf("                             *|                   |*                      |                   | \n");
-            printf("                             *|     РќР°СЃС‚СЂРѕР№РєРё     |*                      |     РЎС‚Р°С‚РёСЃС‚РёРєР°    | \n");
+            printf("                             *|     Настройки     |*                      |     Статистика    | \n");
             printf("                             *|                   |*                      |                   | \n");
             printf("                             *|-------------------|*                      |-------------------| \n");
             printf("                             ***********************                                            \n");
@@ -104,7 +104,7 @@ const void Draw_Menu (const unsigned short int& MenuItem) {
             printf("                                                                         ***********************\n");
             printf("                              |-------------------|                      *|-------------------|*\n");
             printf("                              |                   |                      *|                   |*\n");
-            printf("                              |     РќР°СЃС‚СЂРѕР№РєРё     |                      *|     РЎС‚Р°С‚РёСЃС‚РёРєР°    |*\n");
+            printf("                              |     Настройки     |                      *|     Статистика    |*\n");
             printf("                              |                   |                      *|                   |*\n");
             printf("                              |-------------------|                      *|-------------------|*\n");
             printf("                                                                         ***********************\n");
@@ -116,21 +116,21 @@ const void Draw_Menu (const unsigned short int& MenuItem) {
             printf("                                                                                                \n");
             printf("                              |-------------------|                       |-------------------| \n");
             printf("                              |                   |                       |                   | \n");
-            printf("                              |     РќР°СЃС‚СЂРѕР№РєРё     |                       |     РЎС‚Р°С‚РёСЃС‚РёРєР°    | \n");
+            printf("                              |     Настройки     |                       |     Статистика    | \n");
             printf("                              |                   |                       |                   | \n");
             printf("                              |-------------------|                       |-------------------| \n");
             printf("                                                                                                \n");
 
         }
 
-} // С„СѓРЅРєС†РёСЏ РѕС‚СЂРёСЃРѕРІРєРё РјРµРЅСЋ
+} // функция отрисовки меню
 
 int main (void) {
 
     Configure_Console_Window ();
 
-    Class_Clients Client; // РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РѕР±СЉРµРєС‚Р° Client
-    Class_Settings Settings (Client); // РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РѕР±СЉРµРєС‚Р° Settings
+    Class_Clients Client; // инициализация объекта Client
+    Class_Settings Settings (Client); // инициализация объекта Settings
 
         if (Settings.getAutomatic_Order_Start () == true)
             Menu_Formation_Order (Client, Settings);
@@ -143,7 +143,7 @@ int main (void) {
                     return 0;
 
             cls ();
-            CenterText ("Р’С‹Р±РµСЂРёС‚Рµ РїСѓРЅРєС‚ РјРµРЅСЋ, РёСЃРїРѕР»СЊР·СѓСЏ РєР»Р°РІРёС€Рё СЃС‚СЂРµР»РѕС‡РµРє РЅР° РєР»Р°РІРёР°С‚СѓСЂРµ");
+            CenterText ("Выберите пункт меню, используя клавиши стрелочек на клавиатуре");
             Draw_Menu (MenuItem);
 
                 while (true) {
@@ -151,7 +151,7 @@ int main (void) {
                     ButtonNumber = getch ();
 
                         if (ClickCatch ("Esc", ButtonNumber))
-                            return 0; // РІС‹С…РѕРґ РёР· РїСЂРѕРіСЂР°РјРјС‹
+                            return 0; // выход из программы
 
                         if ((ClickCatch ("Arrow_Left", ButtonNumber)) || (ClickCatch ("Arrow_Right", ButtonNumber))) {
 
@@ -166,7 +166,7 @@ int main (void) {
 
                             break;
 
-                        } // РѕР±СЂР°Р±РѕС‚РєР° РЅР°Р¶Р°С‚РёСЏ РєР»Р°РІРёС€Рё СЃС‚СЂРµР»РєРё РІР»РµРІРѕ Рё РІРїСЂР°РІРѕ
+                        } // обработка нажатия клавиши стрелки влево и вправо
 
                         if ((ClickCatch ("Arrow_Up", ButtonNumber)) || (ClickCatch ("Arrow_Down", ButtonNumber))) {
 
@@ -181,7 +181,7 @@ int main (void) {
 
                             break;
 
-                        } // РѕР±СЂР°Р±РѕС‚РєР° РЅР°Р¶Р°С‚РёСЏ РєР»Р°РІРёС€Рё СЃС‚СЂРµР»РєРё РІРІРµСЂС… Рё РІРЅРёР·
+                        } // обработка нажатия клавиши стрелки вверх и вниз
 
                         if (ClickCatch ("Enter", ButtonNumber)) {
 
@@ -189,19 +189,19 @@ int main (void) {
 
                                 switch (MenuItem) {
 
-                                    case 1: CenterText ("РЎРѕР·РґР°РЅРёРµ РЅРѕРІРѕРіРѕ Р·Р°РєР°Р·Р°\n");                Menu_Formation_Order (Client, Settings);    break;
-                                    case 2: CenterText ("РџРѕРёСЃРє СЂР°Р±РѕС‚С‹ СЃСЂРµРґРё РёРјРµСЋС‰РёС…СЃСЏ РІ Р±Р°Р·Рµ\n");   Menu_Search_Tasks (Settings);                       break;
-                                    case 3: CenterText ("РќР°СЃС‚СЂРѕР№РєРё РїСЂРѕРіСЂР°РјРјС‹\n");                   Menu_Settings (Settings);                   break;
-                                    case 4: CenterText ("РЎС‚Р°С‚РёСЃС‚РёРєР° Р·Р°РєР°Р·РѕРІ\n");                    Menu_Statistics (Settings);                 break;
+                                    case 1: CenterText ("Создание нового заказа\n");                Menu_Formation_Order (Client, Settings);    break;
+                                    case 2: CenterText ("Поиск работы среди имеющихся в базе\n");   Menu_Search_Tasks (Settings);                       break;
+                                    case 3: CenterText ("Настройки программы\n");                   Menu_Settings (Settings);                   break;
+                                    case 4: CenterText ("Статистика заказов\n");                    Menu_Statistics (Settings);                 break;
 
                                 }
 
                             break;
 
-                        } // РѕР±СЂР°Р±РѕС‚РєР° РЅР°Р¶Р°С‚РёСЏ Enter
+                        } // обработка нажатия Enter
 
                 }
 
-        } // Р¶РёР·РЅРµРЅРЅС‹Р№ С†РёРєР» РїСЂРѕСЂР°РјРјС‹
+        } // жизненный цикл прораммы
 
 }

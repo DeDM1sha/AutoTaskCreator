@@ -1,4 +1,4 @@
-// РњРѕРґСѓР»СЊ - С…СЂР°РЅРёР»РёС‰Рµ РІСЃРµС… РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹С… РѕР±С‰РёС… РіР»РѕР±Р°Р»СЊРЅС‹С… РїРµСЂРµРјРµРЅРЅС‹С… Рё С„СѓРЅРєС†РёР№ РґР»СЏ РїСЂРѕРµРєС‚Р°
+// Модуль - хранилище всех дополнительных общих глобальных переменных и функций для проекта
 
 #pragma once
 
@@ -7,14 +7,14 @@
 
 //////////////////////////////////////////////////////////////////////////////
 
-/* Р“Р»РѕР±Р°Р»СЊРЅС‹Рµ РѕР±С‰РёРµ РїРµСЂРµРјРµРЅРЅС‹Рµ */
+/* Глобальные общие переменные */
 
-volatile unsigned int ButtonNumber = 0; // РїРµСЂРµРјРµРЅРЅР°СЏ РґР»СЏ РѕР±СЂР°Р±РѕС‚РєРё РЅР°Р¶Р°С‚РёР№ РІ РјРµРЅСЋ
-bool FirstOrderCreated = false; // РїРµСЂРµРјРµРЅРЅР°СЏ РґР»СЏ РѕС‚РјРµС‚РєРё Рѕ С‚РѕРј С‡С‚Рѕ РїРµСЂРІС‹Р№ Р·Р°РєР°Р· Р±С‹Р» СЃРѕР·РґР°РЅ
+volatile unsigned int ButtonNumber = 0; // переменная для обработки нажатий в меню
+bool FirstOrderCreated = false; // переменная для отметки о том что первый заказ был создан
 
 //////////////////////////////////////////////////////////////////////////////
 
-/* Р“Р»РѕР±Р°Р»СЊРЅС‹Рµ РѕР±С‰РёРµ С„СѓРЅРєС†РёРё */
+/* Глобальные общие функции */
 
 const void Delay (const unsigned short int Time) {
 
@@ -22,7 +22,7 @@ const void Delay (const unsigned short int Time) {
 
 		while (clock () < end_time);
 
-} // С„СѓРЅРєС†РёСЏ Р·Р°РґРµСЂР¶РєРё
+} // функция задержки
 
 const void Show_Text_Output (const std::string Text) {
 
@@ -32,30 +32,38 @@ const void Show_Text_Output (const std::string Text) {
 
 	SetConsoleTextAttribute (GetStdHandle (STD_OUTPUT_HANDLE), (WORD) ((0 << 4) | 10));
 
-} // С„СѓРЅРєС†РёСЏ РґР»СЏ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ РІС‹Р±СЂР°РЅРЅРѕРіРѕ СЂРµС€РµРЅРёСЏ РґСЂСѓРіРёРј С†РІРµС‚РѕРј
+} // функция для отображения выбранного решения другим цветом
 
 const std::string Show_Text_Input (void) {
 
     const unsigned short int StrokeSize = 128;
     char Stroke [StrokeSize];
 
-		for (unsigned short int i = 0; i < StrokeSize; i++)
-            Stroke[i] = '\0'; // РѕС‡РёСЃС‚РєР° СЃС‚СЂРѕРєРё РѕС‚ РјСѓСЃРѕСЂР°
+        while (true) {
 
-    SetConsoleTextAttribute (GetStdHandle (STD_OUTPUT_HANDLE), (WORD) ((0 << 4) | 11));
+                for (unsigned short int i = 0; i < StrokeSize; i++)
+                    Stroke[i] = '\0'; // очистка строки от мусора
 
-    fflush (stdin); // РѕС‡РёСЃС‚РєР° РїРѕС‚РѕРєР° РІРІРѕРґР°
-    fgets (Stroke, StrokeSize, stdin); // СЃС‡РёС‚С‹РІР°РµРј РІСЃСЋ СЃС‚СЂРѕРєСѓ СЃ РїСЂРѕР±РµР»Р°РјРё
+            SetConsoleTextAttribute (GetStdHandle (STD_OUTPUT_HANDLE), (WORD) ((0 << 4) | 11));
 
-    SetConsoleTextAttribute (GetStdHandle (STD_OUTPUT_HANDLE), (WORD) ((0 << 4) | 10));
+            fflush (stdin); // очистка потока ввода
+            fgets (Stroke, StrokeSize, stdin); // считываем всю строку с пробелами
 
-    std::string Str = std::string (Stroke); // РёРЅРёС†РёР°Р»РёР·РёСЂСѓРµРј СЃС‚СЂРѕРєСѓ С‚РёРїР° string, РІ РЅРµРµ Р·Р°РєРёРґС‹РІР°РµРј РІСЃСЋ СЃС‚СЂРѕРєСѓ Stroke
+            SetConsoleTextAttribute (GetStdHandle (STD_OUTPUT_HANDLE), (WORD) ((0 << 4) | 10));
 
-    Str.erase (Str.length () - 1, Str.length ()); // СЃС‚РёСЂР°РµРј РІСЃСЋ РѕСЃС‚Р°РІС€СѓСЋСЃСЏ РЅРµРЅСѓР¶РЅСѓСЋ С‡Р°СЃС‚СЊ СЃС‚СЂРѕРєРё (РІСЃРµ С‚Р°Р±С‹, Р»РёС€РЅРёРµ РїСЂРѕР±РµР»С‹)
+            std::string Str = std::string (Stroke); // инициализируем строку типа string, в нее закидываем всю строку Stroke
 
-    return Str;
+            Str.erase (Str.length () - 1, Str.length ()); // стираем всю оставшуюся ненужную часть строки (все табы, лишние пробелы)
 
-} // С„СѓРЅРєС†РёСЏ РґР»СЏ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ РІРІРѕРґРёРјС‹С… РґР°РЅРЅС‹С… РґСЂСѓРіРёРј С†РІРµС‚РѕРј
+                if (Str.length () > 0)
+                    return Str;
+
+                else
+                    std::cout << "\n\nИмя клиента:   ";
+
+        }
+
+} // функция для отображения вводимых данных другим цветом
 
 const void CenterText (const std::string Text) {
 
@@ -67,13 +75,13 @@ const void CenterText (const std::string Text) {
 
     printf ("%s", Text.c_str());
 
-} // С„СѓРЅРєС†РёСЏ С†РµРЅС‚РёСЂРѕРІР°РЅРёСЏ С‚РµРєСЃС‚Р° РЅР° СЌРєСЂР°РЅРµ
+} // функция центирования текста на экране
 
 const void cls (void) {
 
     system ("cls");
 
-} // С„СѓРЅРєС†РёСЏ РѕС‡РёСЃС‚РєРё СЌРєСЂР°РЅР°
+} // функция очистки экрана
 
 const void Exception (const std::string TextError) {
 
@@ -84,7 +92,7 @@ const void Exception (const std::string TextError) {
 
 	SetConsoleTextAttribute (GetStdHandle (STD_OUTPUT_HANDLE), (WORD) ((0 << 4) | 10));
 
-} // С„СѓРЅРєС†РёСЏ Exception - РґР»СЏ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ СЃР»СѓС‡РёРІС€РёС…СЃСЏ РѕС€РёР±РѕРє
+} // функция Exception - для отображения случившихся ошибок
 
 //////////////////////////////////////////////////////////////////////////////
 
@@ -95,13 +103,13 @@ const bool Check_Input_ForExit (const std::string& Str) {
 
     return false;
 
-} // С„СѓРЅРєС†РёСЏ РґР»СЏ РїСЂРѕРІРµСЂРєРё РІРІРѕРґР° РЅР° СЃС‚СЂРѕРєСѓ РІС‹С…РѕРґР°
+} // функция для проверки ввода на строку выхода
 
 const void Show_Text_ForExit (void) {
 
     printf ("                                                                                               Input Exit / Esc / !q for quit\n");
 
-} // С„СѓРЅРєС†РёСЏ РґР»СЏ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ РїРѕРґСЃРєР°Р·РєРё РґР»СЏ РІС‹С…РѕРґР° РёР· РјРµРЅСЋ
+} // функция для отображения подсказки для выхода из меню
 
 const std::string Convert_Int_toString (unsigned short int Number) {
 
@@ -110,6 +118,6 @@ const std::string Convert_Int_toString (unsigned short int Number) {
 
     return std::string(ConverInt_ToString.str());
 
-} // С„СѓРЅРєС†РёСЏ РєРѕРЅРІРµСЂС‚РёСЂРѕРІР°РЅРёСЏ РёР· int РІ string
+} // функция конвертирования из int в string
 
 #endif // _additional_functions_h_

@@ -120,7 +120,7 @@ class Class_Settings {
 
          const void SetDefault_Parameters (void) {
 
-            this->Labs_Path = "E:\\C++Tasks";
+            this->Labs_Path = "E:\\Orders\\C++Tasks";
             this->Automatic_Order_Start = false;
             this->Automatic_Close_Application = false;
 

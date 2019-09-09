@@ -53,3 +53,44 @@
 
 1565631363 e:\cplusplus_projects\autotaskcreator\modules\classes\settings_class.h
 
+1567832320 source:e:\projects\cplusplus_projects\automation\autotaskcreator\main.cpp
+	<stdio.h>
+	<iostream>
+	<windows.h>
+	<conio.h>
+	<fstream>
+	<string.h>
+	<queue>
+	<time.h>
+	<vector>
+	<iomanip>
+	<sstream>
+	"modules/classes/client_class.h"
+	"modules/classes/settings_class.h"
+	"modules/classes/statistics_class.h"
+	"modules/libs/clickcatcher.h"
+	"modules/libs/additional_functions.h"
+	"modules/Menu_Formation_order.h"
+	"modules/Menu_Search_tasks.h"
+	"modules/Menu_Settings.h"
+	"modules/Menu_Statistics.h"
+
+1567533105 e:\projects\cplusplus_projects\automation\autotaskcreator\modules\classes\client_class.h
+	"../libs/additional_functions.h"
+
+1567844951 e:\projects\cplusplus_projects\automation\autotaskcreator\modules\libs\additional_functions.h
+
+1567775966 e:\projects\cplusplus_projects\automation\autotaskcreator\modules\classes\settings_class.h
+
+1567533105 e:\projects\cplusplus_projects\automation\autotaskcreator\modules\classes\statistics_class.h
+
+1567533105 e:\projects\cplusplus_projects\automation\autotaskcreator\modules\libs\clickcatcher.h
+
+1567845866 e:\projects\cplusplus_projects\automation\autotaskcreator\modules\menu_formation_order.h
+
+1567533105 e:\projects\cplusplus_projects\automation\autotaskcreator\modules\menu_search_tasks.h
+
+1567775966 e:\projects\cplusplus_projects\automation\autotaskcreator\modules\menu_settings.h
+
+1567533105 e:\projects\cplusplus_projects\automation\autotaskcreator\modules\menu_statistics.h
+
