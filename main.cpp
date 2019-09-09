@@ -41,6 +41,8 @@ const void Configure_Console_Window (void) {
     system ("mode con cols=125 lines=30"); // установка разрешения консоли, отключения бокового скрола
     system ("title AutoTaskCreator"); // установка заголовка консоли
     system ("@echo off"); // переключение режима отображения команд на экране
+    
+    test unciode
 
 } // Функция настроек консольного окна
 
