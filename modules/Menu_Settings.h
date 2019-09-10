@@ -5,9 +5,26 @@
 #ifndef _Menu_Settings_h_
 #define _Menu_Settings_h_
 
+static std::string Convert_Bool_toString (const bool& Boolean) {
+
+    if (Boolean)
+        return "True";
+
+    return "False";
+
+} // функция конвертации из типа bool в тип std::string
+
+static void Show_TextHeader (std::string MainText) {
+
+    CenterText (MainText + "\n");
+    CenterText ("Для этого нажмите Y (Yes) - для включения\n");
+    CenterText ("Или N (No) - для отключения\n\n");
+    CenterText ("Ваш выбор: ");
+
+} // функция для отображения шапки в подпунктах меню
+
 const void Menu_Settings (Class_Settings& Settings) {
 
-    std::string String_AutomaticOrderStart = "\0";
     std::string String_AutomaticCloseApplication = "\0";
     unsigned short int ButtonNumber = 0; // переменная для обработки нажатий в меню
 
@@ -19,30 +36,34 @@ const void Menu_Settings (Class_Settings& Settings) {
 
         printf ("\n\n\n\n\n\n\n");
         CenterText ("Выберите пункт меню для изменения выбранных настроек\n\n\n");
-        printf ("%s%s\n", "                                     1. Путь к месту хранения заказов: ", Settings.getLabs_Path ().c_str ());
+        printf ("                                   1. Путь к месту хранения заказов: ");
+        Show_Text_Output(Settings.getLabs_Path () + "\n");
 
-            if (Settings.getAutomatic_Order_Start () == true)
-                String_AutomaticOrderStart = "True";
+        printf ("                                   2. Автоматический запуск создания нового заказа: ");
+        Show_Text_Output (Convert_Bool_toString (Settings.getAutomatic_Order_Start ()) + "\n");
 
-            else
-                String_AutomaticOrderStart = "False";
+        printf ("                                   3. Автоматическое завершение после заполнения заказа: ");
+        Show_Text_Output (Convert_Bool_toString (Settings.getAutomatic_Close_Application ()) + "\n");
 
-        printf ("%s%s\n", "                                     2. Автоматический запуск нового заказа: ", String_AutomaticOrderStart.c_str ());
+        printf ("                                   4. Автоматическое открытие заказа после его создания: ");
+        Show_Text_Output (Convert_Bool_toString (Settings.getAutomatic_Open_Order ()) + "\n");
 
-            if (Settings.getAutomatic_Close_Application () == true)
-                String_AutomaticCloseApplication = "True";
+        printf ("                                   5. Автоматическое ежемесячное обновление списка бан-листа: ");
+        Show_Text_Output (Convert_Bool_toString (Settings.getAutomatic_Update_BanList()) + "\n");
 
-            else
-                String_AutomaticCloseApplication = "False";
+        printf ("                                   6. Изменить адрес бан-листа клиентов: ");
+        Show_Text_Output (Settings.getUrl_BanList_Clients() + "\n");
 
-        printf ("%s%s\n", "                                     3. Автоматическое закрытие после заполнения заказа: ", String_AutomaticCloseApplication.c_str ());
-        printf ("                                     4. Восстановить настройки по умолчанию\n");
+        printf ("                                   7. Изменить адрес бан-листа исполнителей: ");
+        Show_Text_Output (Settings.getUrl_BanList_Workers() + "\n");
+
+        printf ("\n                                   Tab. Восстановить настройки по умолчанию\n");
 
             while (true) {
 
                 ButtonNumber = getch ();
 
-                    if (ClickCatch ("Esc", ButtonNumber) || ClickCatch ("1", ButtonNumber) || ClickCatch ("2", ButtonNumber) || (ClickCatch ("3", ButtonNumber)) || (ClickCatch ("4", ButtonNumber)))
+                    if (ClickCatch ("Esc", ButtonNumber) || ClickCatch ("1", ButtonNumber) || ClickCatch ("2", ButtonNumber) || ClickCatch ("3", ButtonNumber) || ClickCatch ("4", ButtonNumber) || ClickCatch ("5", ButtonNumber) || ClickCatch ("6", ButtonNumber) || ClickCatch ("7", ButtonNumber) || ClickCatch ("Tab", ButtonNumber))
                         break;
 
             }
@@ -55,7 +76,6 @@ const void Menu_Settings (Class_Settings& Settings) {
                 if (ClickCatch ("1", ButtonNumber)) {
 
                     std::string Str = "\0";
-                    std::string TestFilePath = "\0";
                     CenterText ("Введите новый путь к хранению заказов");
 
                         while (true) {
@@ -63,38 +83,26 @@ const void Menu_Settings (Class_Settings& Settings) {
                             printf ("\n");
                             CenterText ("Путь: ");
 
-                            Str = Show_Text_Input ();
+                            Str = Show_Text_Input ("Путь: ");
 
                                 if (Check_Input_ForExit (Str))
                                     break;
 
-                            TestFilePath = Str + "\\ValidTest.txt";
-                            std::ofstream Write (TestFilePath.c_str ());
-
-                                if (!Write.is_open() || Str.length () < 2)
-                                    CenterText ("Error! Not valid path\n\n");
-
-                                else
+                               else if (Str.length () > 1 && Settings.Check_FilePath (Str))
                                     break;
-
-                            Write.close ();
 
                         } // валидность на ввод пути
 
                         if (Check_Input_ForExit (Str))
                             continue;
 
-                    remove (TestFilePath.c_str ());
                     Settings.setLabs_Path (Str);
 
                 } // изменение пути места хранения заказов
 
                 else if (ClickCatch ("2", ButtonNumber)) {
 
-                    CenterText ("Задайте булевое значение для автоматического запуска меню заказа\n");
-                    CenterText ("Для этого нажмите Y (Yes) - для включения\n");
-                    CenterText ("Или N (No) - для отключения\n\n");
-                    CenterText ("Ваш выбор: ");
+                    Show_TextHeader ("Задайте булевое значение для автоматического запуска меню заказа");
 
                         while (true) {
 
@@ -130,10 +138,7 @@ const void Menu_Settings (Class_Settings& Settings) {
 
                 else if (ClickCatch ("3", ButtonNumber)) {
 
-                    CenterText ("Задайте булевое значение для автоматического закрытия приложения после меню заказа\n");
-                    CenterText ("Для этого нажмите Y (Yes) - для включения\n");
-                    CenterText ("Или N (No) - для отключения\n\n");
-                    CenterText ("Ваш выбор: ");
+                    Show_TextHeader ("Задайте булевое значение для автоматического закрытия приложения после меню заказа");
 
                         while (true) {
 
@@ -169,10 +174,79 @@ const void Menu_Settings (Class_Settings& Settings) {
 
                 else if (ClickCatch ("4", ButtonNumber)) {
 
-                    CenterText ("Вы действительно хотите восстановить настройки по умолчанию?\n");
-                    CenterText ("Для этого нажмите Y (Yes) - для восстановления\n");
-                    CenterText ("Или N (No) - для отмены восстановления\n\n");
-                    CenterText ("Ваш выбор: ");
+                    Show_TextHeader ("Задайте булевое значение для автоматического открытия заказа после его создания");
+
+                        while (true) {
+
+                            ButtonNumber = getch ();
+
+                                if (ClickCatch ("Y", ButtonNumber) || ClickCatch ("N", ButtonNumber) || ClickCatch ("Esc", ButtonNumber))
+                                        break;
+
+                        }
+
+                        if (ClickCatch ("Y", ButtonNumber) || ClickCatch ("N", ButtonNumber)) {
+
+                                if (ClickCatch ("Y", ButtonNumber)) {
+
+                                    Show_Text_Output ("Yes");
+                                    Settings.setAutomatic_Open_Order (true);
+
+                                }
+
+                                else {
+
+                                    Show_Text_Output ("No");
+                                    Settings.setAutomatic_Open_Order (false);
+
+                                }
+
+                        }
+
+                        else
+                            continue;
+
+                } // включение/отключение автоматического запуска заказа после его создания
+
+                else if (ClickCatch ("5", ButtonNumber)) {
+
+                    Show_TextHeader ("Задайте булевое значение для автоматического обновления списка бан-листа");
+
+                    while (true) {
+
+                            ButtonNumber = getch ();
+
+                                if (ClickCatch ("Y", ButtonNumber) || ClickCatch ("N", ButtonNumber) || ClickCatch ("Esc", ButtonNumber))
+                                        break;
+
+                        }
+
+                        if (ClickCatch ("Y", ButtonNumber) || ClickCatch ("N", ButtonNumber)) {
+
+                                if (ClickCatch ("Y", ButtonNumber)) {
+
+                                    Show_Text_Output ("Yes");
+                                    Settings.setAutomatic_Update_BanList (true);
+
+                                }
+
+                                else {
+
+                                    Show_Text_Output ("No");
+                                    Settings.setAutomatic_Update_BanList (false);
+
+                                }
+
+                        }
+
+                        else
+                            continue;
+
+                } // включение/отключение ежемесячного обновления списка бан-листа
+
+                else if (ClickCatch ("Tab", ButtonNumber)) {
+
+                    Show_TextHeader ("Вы действительно хотите восстановить настройки по умолчанию?");
 
                         while (true) {
 

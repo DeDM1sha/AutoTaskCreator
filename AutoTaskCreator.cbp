@@ -37,6 +37,7 @@
 		<Unit filename="modules/Menu_Search_tasks.h" />
 		<Unit filename="modules/Menu_Settings.h" />
 		<Unit filename="modules/Menu_Statistics.h" />
+		<Unit filename="modules/classes/banlist_class.h" />
 		<Unit filename="modules/classes/client_class.h" />
 		<Unit filename="modules/classes/settings_class.h" />
 		<Unit filename="modules/classes/statistics_class.h" />

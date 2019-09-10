@@ -8,6 +8,10 @@
 static std::string SaveTag_Path_to_Labs = "Path_to_Labs";
 static std::string SaveTag_Order_Start = "Order_Start";
 static std::string SaveTag_Close_Application = "Close_Application";
+static std::string SaveTag_Open_Order = "Open_Order";
+static std::string SaveTag_Update_BanList = "Update_BanList";
+static std::string SaveTag_Url_BanList_Clients = "Url_BanList_Clients";
+static std::string SaveTag_Url_BanList_Workers = "Url_BanList_Workers";
 
 class Class_Settings {
 
@@ -17,8 +21,10 @@ class Class_Settings {
         std::string Labs_Path; // место сохранения лаб
         bool Automatic_Order_Start; // автоматический запуск создания заказа
         bool Automatic_Close_Application; // автоматическое завершение приложения после заполнения заказа
-      /*  std::string Url_BanList_Clients; // ссылка на банлист клиентов
-        std::string Url_BanList_Workers; // ссылка на банлист исполнителей*/
+        bool Automatic_Open_Order; // автоматическое открытие заказа(ов) при создании
+        bool Automatic_Update_BanList; // автоматическое обновление списка бан-листа
+        std::string Url_BanList_Clients; // ссылка на банлист клиентов
+        std::string Url_BanList_Workers; // ссылка на банлист исполнителей
 
     public:
 
@@ -89,7 +95,35 @@ class Class_Settings {
         } // геттер для Automatic_Close_Applcation
 
     //////////////////////////////////////////////
-/*
+
+        const void setAutomatic_Open_Order (const bool Flag) {
+
+            this->Automatic_Open_Order = Flag;
+
+        } // сеттер для Automatic_Open_Order
+
+        const bool getAutomatic_Open_Order (void) const {
+
+            return this->Automatic_Open_Order;
+
+        } // геттер для Automatic_Open_Order
+
+    //////////////////////////////////////////////
+
+        const void setAutomatic_Update_BanList (const bool Flag) {
+
+            this->Automatic_Update_BanList = Flag;
+
+        } // сеттер для Automatic_Update_BanList
+
+        const bool getAutomatic_Update_BanList (void) const {
+
+            return this->Automatic_Update_BanList;
+
+        } // геттер для Automatic_Update_BanList
+
+        //////////////////////////////////////////////
+
         const void setUrl_BanList_Clients (const std::string Str) {
 
             this->Url_BanList_Clients = Str;
@@ -116,13 +150,17 @@ class Class_Settings {
 
         } // геттер для Url_BanList_Workers
 
-    //////////////////////////////////////////////*/
+    //////////////////////////////////////////////
 
          const void SetDefault_Parameters (void) {
 
             this->Labs_Path = "E:\\Orders\\C++Tasks";
             this->Automatic_Order_Start = false;
             this->Automatic_Close_Application = false;
+            this->Automatic_Open_Order = true;
+            this->Automatic_Update_BanList = true;
+            this->Url_BanList_Clients = "https://vk.com/topic-156779709_36343200";
+            this->Url_BanList_Workers = "https://vk.com/topic-156779709_39456558";
 
         } // метод установки настроек по умолчанию
 
@@ -131,6 +169,7 @@ class Class_Settings {
         const void Check_ConfigFile (void);
         const void Load_Parameters (void);
         const void SaveSettings (const bool) const;
+        const bool Check_FilePath (const std::string& Path);
 
 };
 
@@ -184,6 +223,10 @@ const void Class_Settings::Load_Parameters (void) {
     bool LabsPath_Founded = false;
     bool OrderStart_Founded = false;
     bool CloseApp_Founded = false;
+    bool Open_Order_Founded = false;
+    bool UpdateBanList_Founded = false;
+    bool Url_BanList_Clients_Founded = false;
+    bool Url_BanList_Workers_Founded = false;
 
     std::ifstream Read (Config_Path.c_str ());
 
@@ -215,6 +258,38 @@ const void Class_Settings::Load_Parameters (void) {
 
                 }
 
+                if (Str == SaveTag_Open_Order && Open_Order_Founded == false) {
+
+                    Read >> Str;
+                    Read >> Automatic_Open_Order;
+                    Open_Order_Founded = true;
+
+                }
+
+                if (Str == SaveTag_Update_BanList && UpdateBanList_Founded == false)  {
+
+                    Read >> Str;
+                    Read >> Automatic_Update_BanList;
+                    UpdateBanList_Founded = true;
+
+                }
+
+                if (Str == SaveTag_Url_BanList_Clients && Url_BanList_Clients_Founded == false) {
+
+                    Read >> Str;
+                    Read >> Url_BanList_Clients;
+                    Url_BanList_Clients_Founded = true;
+
+                }
+
+                if (Str == SaveTag_Url_BanList_Workers && Url_BanList_Workers_Founded == false) {
+
+                    Read >> Str;
+                    Read >> Url_BanList_Workers;
+                    Url_BanList_Workers_Founded = true;
+
+                }
+
             }
 
         }
@@ -233,7 +308,19 @@ const void Class_Settings::Load_Parameters (void) {
         if (CloseApp_Founded == false)
             Exception ("Not found Automatic_Close_Application in settings file");
 
-        if (!(((LabsPath_Founded == OrderStart_Founded) == CloseApp_Founded) == true)) {
+        if (Open_Order_Founded == false)
+            Exception ("Not found Automatic_Open_Order in settings file");
+
+        if (UpdateBanList_Founded == false)
+            Exception ("Not found Automatic_Update_BanList in settings file");
+
+        if (Url_BanList_Clients_Founded == false)
+            Exception ("Not found Url_BanList_Clients in settings file");
+
+        if (Url_BanList_Workers_Founded == false)
+            Exception ("Not found Url_BanList_Workers in settings file");
+
+        if (!( ( ((LabsPath_Founded == OrderStart_Founded) == (CloseApp_Founded == Open_Order_Founded)) == ( UpdateBanList_Founded == (Url_BanList_Clients_Founded == Url_BanList_Workers_Founded)) ) == true)) {
 
             remove (Config_Path.c_str ());
             Check_ConfigFile ();
@@ -252,7 +339,11 @@ const void Class_Settings::SaveSettings (const bool UsingDelay) const {
 
     Write   << SaveTag_Path_to_Labs << " = " << getLabs_Path () << "\n"
             << SaveTag_Order_Start << " = " << getAutomatic_Order_Start () << "\n"
-            << SaveTag_Close_Application << " = " << getAutomatic_Close_Application () << "\n";
+            << SaveTag_Close_Application << " = " << getAutomatic_Close_Application () << "\n"
+            << SaveTag_Open_Order << " = " << getAutomatic_Open_Order () << "\n"
+            << SaveTag_Update_BanList << " = " << getAutomatic_Update_BanList () << "\n"
+            << SaveTag_Url_BanList_Clients << " = " << getUrl_BanList_Clients () << "\n"
+            << SaveTag_Url_BanList_Workers << " = " << getUrl_BanList_Workers ();
 
     Write.close ();
 
@@ -272,5 +363,27 @@ const void Class_Settings::SaveSettings (const bool UsingDelay) const {
         }
 
 } // метод сохранения настроек
+
+const bool Class_Settings::Check_FilePath (const std::string& Path) {
+
+    bool Result = true;
+    std::string TestFilePath = Path + "\\ValidTest.txt";
+    std::ofstream Write (TestFilePath.c_str ());
+
+        if (!Write.is_open()) {
+
+            CenterText ("Error! Not valid path\n");
+            Result = false;
+
+        }
+
+    Write.close ();
+
+        if (Result)
+            remove (TestFilePath.c_str ());
+
+    return Result;
+
+} // метод проверки корректности пути к базе заказов
 
 #endif // _settings_class_h_

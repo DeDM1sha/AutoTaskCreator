@@ -7,6 +7,15 @@
 
 /* Глобальные общие функции */
 
+const std::string Convert_Int_toString (unsigned short int Number) {
+
+    std::ostringstream ConverInt_ToString;
+    ConverInt_ToString << Number;
+
+    return std::string(ConverInt_ToString.str());
+
+} // функция конвертирования из int в string
+
 const void Delay (const unsigned short int Time) {
 
 	const clock_t end_time = clock () + Time * CLOCKS_PER_SEC / 1000;
@@ -23,9 +32,15 @@ const void Show_Text_Output (const std::string Text) {
 
 	SetConsoleTextAttribute (GetStdHandle (STD_OUTPUT_HANDLE), (WORD) ((0 << 4) | 10));
 
-} // функция для отображения выбранного решения другим цветом
+} // функция для отображения заданной строки другим цветом
 
-const std::string Show_Text_Input (void) {
+const void Show_Number_Output (const unsigned short int& Number) {
+
+    Show_Text_Output (Convert_Int_toString (Number));
+
+} // функция для отображения заданного числа другим цветом
+
+const std::string Show_Text_Input (std::string ErrorText) {
 
     const unsigned short int StrokeSize = 128;
     char Stroke [StrokeSize];
@@ -50,7 +65,7 @@ const std::string Show_Text_Input (void) {
                     return Str;
 
                 else
-                    std::cout << "\n\nИмя клиента:   ";
+                    printf ("\n\n%s", ErrorText.c_str());
 
         }
 
@@ -101,14 +116,5 @@ const void Show_Text_ForExit (void) {
     printf ("                                                                                               Input Exit / Esc / !q for quit\n");
 
 } // функция для отображения подсказки для выхода из меню
-
-const std::string Convert_Int_toString (unsigned short int Number) {
-
-    std::ostringstream ConverInt_ToString;
-    ConverInt_ToString << Number;
-
-    return std::string(ConverInt_ToString.str());
-
-} // функция конвертирования из int в string
 
 #endif // _additional_functions_h_

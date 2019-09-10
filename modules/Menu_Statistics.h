@@ -17,15 +17,31 @@ const void Menu_Statistics (const Class_Settings& Settings) {
             printf ("                                                                                                Press F5 to update statistics\n");
             printf ("\n\n\n\n\n");
             printf ("                                      ------------------------------------------------\n");
-            std::cout << "                                      | Количество клиентов в базе: " << std::setw (16) << Statistics.getTotalNumber_ClientsInDB_Count () << " |\n";
+
+            std::cout << "                                      | Количество клиентов в базе: " << std::setw (16);
+            Show_Number_Output(Statistics.getTotalNumber_ClientsInDB_Count ());
+            std::cout << " |\n";
+
             printf ("                                      |----------------------------------------------|\n");
-            std::cout << "                                      | Количество выполненных заданий в базе: " << std::setw (5) << Statistics.getTotalNumber_CompletedTasks_Count () << " |\n";
+            std::cout << "                                      | Количество выполненных заданий в базе: " << std::setw (5);
+            Show_Number_Output (Statistics.getTotalNumber_CompletedTasks_Count ());
+            std::cout << " |\n";
+
             printf ("                                      |----------------------------------------------|\n");
-            std::cout << "                                      | Количество задач на C: " << std::setw (21) << Statistics.getTotalNumber_Technology_C () << " |\n";
+            std::cout << "                                      | Количество задач на C: " << std::setw (21);
+            Show_Number_Output(Statistics.getTotalNumber_Technology_C ());
+            std::cout << " |\n";
+
             printf ("                                      |----------------------------------------------|\n");
-            std::cout << "                                      | Количество задач на C++: " << std::setw (19) << Statistics.getTotalNumber_Technology_CPlusPlus () << " |\n";
+            std::cout << "                                      | Количество задач на C++: " << std::setw (19);
+            Show_Number_Output(Statistics.getTotalNumber_Technology_CPlusPlus ());
+            std::cout << " |\n";
+
             printf ("                                      |----------------------------------------------|\n");
-            std::cout << "                                      | Количество прочих задач: " << std::setw (19) << Statistics.getTotalNumber_Technology_Another () << " |\n";
+            std::cout << "                                      | Количество прочих задач: " << std::setw (19);
+            Show_Number_Output(Statistics.getTotalNumber_Technology_Another ());
+            std::cout << " |\n";
+
             printf ("                                      |----------------------------------------------|\n");
 
                 if (Statistics.getTotalNumber_CompletedTasks_Count () != (Statistics.getTotalNumber_Technology_C () + Statistics.getTotalNumber_Technology_CPlusPlus () + Statistics.getTotalNumber_Technology_Another ()))

@@ -22,7 +22,7 @@ static bool Fill_InputData (Class_Clients& Client) {
 
 	std::cout << "\n\nИмя клиента:   ";
 
-	const std::string Temp = Show_Text_Input ();
+	const std::string Temp = Show_Text_Input ("Имя клиента:   ");
 
         if (Check_Input_ForExit (Temp))
             return false; // если было введено одно из службных слов для выхода - возврат в главное меню программы
@@ -450,8 +450,11 @@ static void SendFiles_To_ClientFolders (const Class_Clients& Client, const Class
                 if (Client.getTechnology_Name () == CPlusPlus)
                         CPP = "pp";
 
-                for (unsigned short int i = Old_TasksCount + 1; i < Client.getTasksCount () + Old_TasksCount + 1; i++)
-                    system (("start " + Settings.getLabs_Path () + "\\\"" + Client.getName () + "\"\\Task_" + Convert_Int_toString (i) + "\\task.c" + CPP).c_str());
+                if (Settings.getAutomatic_Open_Order()) {
+
+                    for (unsigned short int i = Old_TasksCount + 1; i < Client.getTasksCount () + Old_TasksCount + 1; i++)
+                        system (("start " + Settings.getLabs_Path () + "\\\"" + Client.getName () + "\"\\Task_" + Convert_Int_toString (i) + "\\task.c" + CPP).c_str());
+                }
 
         }
 

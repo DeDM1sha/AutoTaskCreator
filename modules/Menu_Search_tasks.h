@@ -40,7 +40,7 @@ const void Menu_Search_Tasks (const Class_Settings& Settings) {
 
                     bool Founded = false;
                     CenterText ("Введите имя: ");
-                    std::string Name = Show_Text_Input ();
+                    std::string Name = Show_Text_Input ("Введите имя: ");
 
                     std::ofstream Write (std::string(Settings.getLabs_Path () + "\\" + Name + "\\CheckClient.txt").c_str ());
 
