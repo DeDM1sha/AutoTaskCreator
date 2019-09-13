@@ -13,7 +13,32 @@ static std::string SaveTag_Update_BanList = "Update_BanList";
 static std::string SaveTag_Url_BanList_Clients = "Url_BanList_Clients";
 static std::string SaveTag_Url_BanList_Workers = "Url_BanList_Workers";
 
-class Class_Settings {
+class AbstractClass_ConfigEditor {
+
+    public:
+
+        const void ConfigFile_Open (const std::string&) const;
+        const void ConfigFile_Close (const std::string&) const;
+
+}; // абстрактный класс-родитель для конфигурационных файлов
+
+const void AbstractClass_ConfigEditor::ConfigFile_Open (const std::string& Config_Path) const {
+
+    std::string attrib = "attrib -r -s -h -x " + Config_Path + " >nul";
+
+    system (attrib.c_str());
+
+} // метод открытия файла конфига
+
+const void AbstractClass_ConfigEditor::ConfigFile_Close (const std::string& Config_Path) const {
+
+    std::string attrib = "attrib +r +s +h +x " + Config_Path + " >nul";
+
+    system (attrib.c_str());
+
+} // метод сохранения файла конфига
+
+class Class_Settings : public AbstractClass_ConfigEditor {
 
     private:
 
@@ -164,8 +189,6 @@ class Class_Settings {
 
         } // метод установки настроек по умолчанию
 
-        const void ConfigFile_Open (void) const;
-        const void ConfigFile_Close (void) const;
         const void Check_ConfigFile (void);
         const void Load_Parameters (void);
         const void SaveSettings (const bool) const;
@@ -173,25 +196,9 @@ class Class_Settings {
 
 };
 
-const void Class_Settings::ConfigFile_Open (void) const {
-
-    std::string attrib = "attrib -r -s -h -x " + Config_Path;
-
-    system (attrib.c_str());
-
-} // метод открытия файла конфига
-
-const void Class_Settings::ConfigFile_Close (void) const {
-
-    std::string attrib = "attrib +r +s +h +x " + Config_Path;
-
-    system (attrib.c_str());
-
-} // метод сохранения файла конфига
-
 const void Class_Settings::Check_ConfigFile (void) {
 
-    ConfigFile_Open ();
+    ConfigFile_Open (Config_Path);
 
     std::ifstream Read (Config_Path.c_str ());
 
@@ -211,13 +218,13 @@ const void Class_Settings::Check_ConfigFile (void) {
 
     Read.close ();
 
-    ConfigFile_Close ();
+    ConfigFile_Close (Config_Path);
 
 } // метод проверки существования файла с конфигом
 
 const void Class_Settings::Load_Parameters (void) {
 
-    ConfigFile_Open ();
+    ConfigFile_Open (Config_Path);
 
     std::string Str = "\0";
     bool LabsPath_Founded = false;
@@ -327,13 +334,13 @@ const void Class_Settings::Load_Parameters (void) {
 
         }
 
-    ConfigFile_Close ();
+    ConfigFile_Close (Config_Path);
 
 } // метод загрузки параметров приложения
 
 const void Class_Settings::SaveSettings (const bool UsingDelay) const {
 
-    ConfigFile_Open ();
+    ConfigFile_Open (Config_Path);
 
     std::ofstream Write (Config_Path.c_str ());
 
@@ -347,7 +354,7 @@ const void Class_Settings::SaveSettings (const bool UsingDelay) const {
 
     Write.close ();
 
-    ConfigFile_Close ();
+    ConfigFile_Close (Config_Path);
 
         if (UsingDelay == true) {
 

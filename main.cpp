@@ -1,3 +1,5 @@
+// Главное окно приложения, настройки окна и единое описанное хранилище всех необходимых библиотек/модулей для проекта
+
 #include <stdio.h>
 #include <iostream>
 #include <windows.h>
@@ -12,17 +14,18 @@
 
 // подключение всех необходимых стандартных библиотек для проекта
 
-#include "modules/classes/client_class.h" // подключение модуля client_class - класс данных об клиенте
-#include "modules/classes/settings_class.h" // подключения модуля settings_class - класс настроек приложения
-#include "modules/classes/statistics_class.h" // подключение модуля statistics_class - класс базы данных всех заказов и клиентов
+#include "modules/classes/clients_class.h" // подключение  clients_class - класс данных об клиенте
+#include "modules/classes/settings_class.h" // подключение settings_class - класс настроек приложения
+#include "modules/classes/banlists_class.h" // подключение banlist_class - класс забаненных клиентов
+#include "modules/classes/statistics_class.h" // подключение statistics_class - класс базы данных всех заказов и клиентов
 
 #include "modules/libs/clickcatcher.h" // подключение модуля clickcatcher - самописная библиотека по обработке нажатых клавиш
 #include "modules/libs/additional_functions.h" // подключение модуля additional_functions - библиотека дополнительних общий функций
 
-#include "modules/Menu_Formation_order.h" // подключение модуля Formation_order - модуль формирование заказа
-#include "modules/Menu_Search_tasks.h" // подключение модуля Search_tasks - модуль поиска заказа по ключевым словам
-#include "modules/Menu_Settings.h" // подключение модуля Menu_Settings - модуль настроек приложения
-#include "modules/Menu_Statistics.h" // одключение модуля Menu_Statistics - модуль статистики по базе данных
+#include "modules/menu_forms/Menu_Formation_order.h" // подключение модуля Formation_order - модуль формирование заказа
+#include "modules/menu_forms/Menu_Search_tasks.h" // подключение модуля Search_tasks - модуль поиска заказа по ключевым словам
+#include "modules/menu_forms/Menu_Settings.h" // подключение модуля Menu_Settings - модуль настроек приложения
+#include "modules/menu_forms/Menu_Statistics.h" // одключение модуля Menu_Statistics - модуль статистики по базе данных
 
 // подключение всех необходимых самописных библиотек и модулей для проекта
 
@@ -131,6 +134,7 @@ int main (void) {
 
     Class_Clients Client; // инициализация объекта Client
     Class_Settings Settings (Client); // инициализация объекта Settings
+    Class_BanLists Banlists (Client, Settings); // инициализация объекта Banlist;
 
     bool FirstOrderCreated = false; // переменная для отметки о том что первый заказ был создан
 
@@ -201,10 +205,10 @@ int main (void) {
 
                                 switch (MenuItem) {
 
-                                    case 1: CenterText ("Создание нового заказа\n");                Menu_Formation_Order (Client, Settings, FirstOrderCreated);     break;
-                                    case 2: CenterText ("Поиск работы среди имеющихся в базе\n");   Menu_Search_Tasks (Settings);                                   break;
-                                    case 3: CenterText ("Настройки программы\n");                   Menu_Settings (Settings);                                       break;
-                                    case 4: CenterText ("Статистика заказов\n");                    Menu_Statistics (Settings);                                     break;
+                                    case 1: Menu_Formation_Order (Client, Settings, FirstOrderCreated); break;
+                                    case 2: Menu_Search_Tasks (Settings);                               break;
+                                    case 3: Menu_Settings (Settings, Banlists);                         break;
+                                    case 4: Menu_Statistics (Settings, Banlists);                       break;
 
                                 }
 

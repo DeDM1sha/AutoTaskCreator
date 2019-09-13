@@ -1,4 +1,4 @@
-// Модуль - хранилище всех дополнительных общих глобальных переменных и функций для проекта
+// Модуль-хранилище всех дополнительных общих глобальных функций для проекта
 
 #pragma once
 
@@ -15,6 +15,17 @@ const std::string Convert_Int_toString (unsigned short int Number) {
     return std::string(ConverInt_ToString.str());
 
 } // функция конвертирования из int в string
+
+const unsigned short int Convert_String_toInt (std::string Str) {
+
+    unsigned short int Number = 0;
+
+    std::stringstream ConvertString_toInt (Str);
+    ConvertString_toInt >> Number;
+
+    return Number;
+
+} // функция конвертациии из string в int
 
 const void Delay (const unsigned short int Time) {
 
@@ -111,9 +122,26 @@ const bool Check_Input_ForExit (const std::string& Str) {
 
 } // функция для проверки ввода на строку выхода
 
+const void Show_Text_In_Right_Corner (const std::string Str) {
+
+    HANDLE hWndConsole = GetStdHandle( STD_OUTPUT_HANDLE );
+    CONSOLE_SCREEN_BUFFER_INFO consoleInfo;
+
+	unsigned short int ConsoleWidht = 0;
+
+        if (GetConsoleScreenBufferInfo(hWndConsole, &consoleInfo))
+			ConsoleWidht = consoleInfo.srWindow.Right - consoleInfo.srWindow.Left + 1;
+
+        for (unsigned short int i = 0; i < ConsoleWidht - Str.length (); i++)
+            printf (" ");
+
+    std::cout << Str << "\n";
+
+} // функция для отображения текста в правом углу
+
 const void Show_Text_ForExit (void) {
 
-    printf ("                                                                                               Input Exit / Esc / !q for quit\n");
+    Show_Text_In_Right_Corner ("Input Exit / Esc / !q for quit");
 
 } // функция для отображения подсказки для выхода из меню
 
