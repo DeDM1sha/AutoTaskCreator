@@ -1,4 +1,4 @@
-// Класс клиента
+// РљР»Р°СЃСЃ РєР»РёРµРЅС‚Р°
 
 #pragma once
 
@@ -11,14 +11,14 @@ class Class_Clients {
 
 	private:
 
-        std::string Name; // имя клиента
-		std::string PK_Name; // имя профиля на пк исполнителя
-		std::string Technology_Name; // название технологии
-		std::string IDE_Name; // название IDE
-		std::string OS_Name; // название операционной системы
-		bool MenuFunctional; // базовый функционал для управления меню
-		unsigned short int TasksCount; // количество заданных заданий
-		unsigned short int Available_TasksCount; // количество уже имеющихся в базе заданий для этого клиента
+        std::string Name; // РёРјСЏ РєР»РёРµРЅС‚Р°
+		std::string PK_Name; // РёРјСЏ РїСЂРѕС„РёР»СЏ РЅР° РїРє РёСЃРїРѕР»РЅРёС‚РµР»СЏ
+		std::string Technology_Name; // РЅР°Р·РІР°РЅРёРµ С‚РµС…РЅРѕР»РѕРіРёРё
+		std::string IDE_Name; // РЅР°Р·РІР°РЅРёРµ IDE
+		std::string OS_Name; // РЅР°Р·РІР°РЅРёРµ РѕРїРµСЂР°С†РёРѕРЅРЅРѕР№ СЃРёСЃС‚РµРјС‹
+		bool MenuFunctional; // Р±Р°Р·РѕРІС‹Р№ С„СѓРЅРєС†РёРѕРЅР°Р» РґР»СЏ СѓРїСЂР°РІР»РµРЅРёСЏ РјРµРЅСЋ
+		unsigned short int TasksCount; // РєРѕР»РёС‡РµСЃС‚РІРѕ Р·Р°РґР°РЅРЅС‹С… Р·Р°РґР°РЅРёР№
+		unsigned short int Available_TasksCount; // РєРѕР»РёС‡РµСЃС‚РІРѕ СѓР¶Рµ РёРјРµСЋС‰РёС…СЃСЏ РІ Р±Р°Р·Рµ Р·Р°РґР°РЅРёР№ РґР»СЏ СЌС‚РѕРіРѕ РєР»РёРµРЅС‚Р°
 
 	public:
 
@@ -43,13 +43,13 @@ class Class_Clients {
 
 			this->Name = Str;
 
-		} // сеттер для Name
+		} // СЃРµС‚С‚РµСЂ РґР»СЏ Name
 
 		 const std::string getName (void) const {
 
 			return this->Name;
 
-		} // геттер для Name
+		} // РіРµС‚С‚РµСЂ РґР»СЏ Name
 
 	//////////////////////////////////////////////
 
@@ -57,13 +57,13 @@ class Class_Clients {
 
 			this->PK_Name = Str;
 
-		} // сеттер для PK_Name
+		} // СЃРµС‚С‚РµСЂ РґР»СЏ PK_Name
 
 		const std::string getPK_Name (void) const {
 
 			return this->PK_Name;
 
-		} // геттер для PK_Name
+		} // РіРµС‚С‚РµСЂ РґР»СЏ PK_Name
 
 	//////////////////////////////////////////////
 
@@ -71,13 +71,13 @@ class Class_Clients {
 
 			this->Technology_Name = Str;
 
-		} // сеттер для Technology_Name
+		} // СЃРµС‚С‚РµСЂ РґР»СЏ Technology_Name
 
 		const std::string getTechnology_Name (void) const {
 
 			return this->Technology_Name;
 
-		} // геттер для Technology_Name
+		} // РіРµС‚С‚РµСЂ РґР»СЏ Technology_Name
 
 	//////////////////////////////////////////////
 
@@ -85,13 +85,13 @@ class Class_Clients {
 
 			this->IDE_Name = Str;
 
-		} // сеттер для setIDE_Name
+		} // СЃРµС‚С‚РµСЂ РґР»СЏ setIDE_Name
 
 		const std::string getIDE_Name (void) const {
 
             return this->IDE_Name;
 
-		} // геттер для IDE_Name
+		} // РіРµС‚С‚РµСЂ РґР»СЏ IDE_Name
 
 	//////////////////////////////////////////////
 
@@ -99,13 +99,13 @@ class Class_Clients {
 
 			this->OS_Name = Str;
 
-		} // сеттер для OS_Name
+		} // СЃРµС‚С‚РµСЂ РґР»СЏ OS_Name
 
 		const std::string getOS_Name (void) const {
 
 			return this->OS_Name;
 
-		} // геттер для OS_Name
+		} // РіРµС‚С‚РµСЂ РґР»СЏ OS_Name
 
 	//////////////////////////////////////////////
 
@@ -113,13 +113,13 @@ class Class_Clients {
 
 			this->MenuFunctional = Flag;
 
-		} // сеттер для MenuFunctional
+		} // СЃРµС‚С‚РµСЂ РґР»СЏ MenuFunctional
 
 		const bool getMenuFunctional (void) const {
 
 			return this->MenuFunctional;
 
-		} // геттер для MenuFunctional
+		} // РіРµС‚С‚РµСЂ РґР»СЏ MenuFunctional
 
 	//////////////////////////////////////////////
 
@@ -127,13 +127,13 @@ class Class_Clients {
 
 			this->TasksCount = Number;
 
-		} // сеттер для TasksCount
+		} // СЃРµС‚С‚РµСЂ РґР»СЏ TasksCount
 
 		const unsigned short int getTasksCount (void) const {
 
 			return this->TasksCount;
 
-		} // геттер для TasksCount
+		} // РіРµС‚С‚РµСЂ РґР»СЏ TasksCount
 
 	//////////////////////////////////////////////
 
@@ -141,13 +141,13 @@ class Class_Clients {
 
 			this->Available_TasksCount = Number;
 
-		} // сеттер для Available_TasksCount
+		} // СЃРµС‚С‚РµСЂ РґР»СЏ Available_TasksCount
 
 		const unsigned short int getAvailable_TasksCount (void) const {
 
 			return this->Available_TasksCount;
 
-		} // геттер для Available_TasksCount
+		} // РіРµС‚С‚РµСЂ РґР»СЏ Available_TasksCount
 
     //////////////////////////////////////////////
 
@@ -161,12 +161,12 @@ class Class_Clients {
 			TasksCount = 0;
 			Available_TasksCount = 0;
 
-        } // очистка параметров клиента
+        } // РѕС‡РёСЃС‚РєР° РїР°СЂР°РјРµС‚СЂРѕРІ РєР»РёРµРЅС‚Р°
 
 		const std::string Load_PK_UserName (void) const;
 
 
-}; // класс данных о вводимом клиенте
+}; // РєР»Р°СЃСЃ РґР°РЅРЅС‹С… Рѕ РІРІРѕРґРёРјРѕРј РєР»РёРµРЅС‚Рµ
 
 const std::string Class_Clients::Load_PK_UserName (void) const {
 
@@ -182,7 +182,7 @@ const std::string Class_Clients::Load_PK_UserName (void) const {
             Read >> PK_Name;
 
         else
-            Exception ("File PK_UserName.txt didnt open"); // переписать
+            Exception ("File PK_UserName.txt didnt open"); // РїРµСЂРµРїРёСЃР°С‚СЊ
 
     Read.close ();
 
@@ -190,7 +190,7 @@ const std::string Class_Clients::Load_PK_UserName (void) const {
 
     return PK_Name;
 
-} // метод получения названия имени пользователя-пк
+} // РјРµС‚РѕРґ РїРѕР»СѓС‡РµРЅРёСЏ РЅР°Р·РІР°РЅРёСЏ РёРјРµРЅРё РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ-РїРє
 
 
 #endif // _client_class_h_
