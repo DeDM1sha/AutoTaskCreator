@@ -458,7 +458,7 @@ static void SendFiles_To_ClientFolders (const Class_Clients& Client, const Class
 
             std::string Path = Settings.getLabs_Path () + "\\" + Client.getName () + "\\Old_TasksCount.txt";
             std::string Str = "\0";
-            system (std::string("cd " + Settings.getLabs_Path () + "\\\"" + Client.getName () + "\" && dir /B > Old_TasksCount.txt").c_str());
+            system (std::string("dir /B > " + Settings.getLabs_Path () + "\\\"" + Client.getName () + "\"\\Old_TasksCount.txt").c_str());
 
             std::ifstream Read (Path.c_str ());
 
