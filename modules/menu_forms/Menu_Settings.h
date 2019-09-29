@@ -1,4 +1,4 @@
-// РњРѕРґСѓР»СЊ РґР»СЏ РЅР°СЃС‚СЂРѕРµРє РїСЂРёР»РѕР¶РµРЅРёСЏ. РРјРµРЅРЅРѕ Р·РґРµСЃСЊ РѕРїРёСЃР°РЅ РІРµСЃСЊ С„СѓРЅРєС†РёРѕРЅР°Р» РєРЅРѕРїРєРё "РќР°СЃС‚СЂРѕР№РєРё".
+// Модуль для настроек приложения. Именно здесь описан весь функционал кнопки "Настройки".
 
 #pragma once
 
@@ -12,81 +12,81 @@ static std::string Convert_Bool_toString (const bool& Boolean) {
 
     return "False";
 
-} // С„СѓРЅРєС†РёСЏ РєРѕРЅРІРµСЂС‚Р°С†РёРё РёР· С‚РёРїР° bool РІ С‚РёРї std::string
+} // функция конвертации из типа bool в тип std::string
 
 static void Show_TextHeader (std::string MainText) {
 
     CenterText (MainText + "\n");
-    CenterText ("Р”Р»СЏ СЌС‚РѕРіРѕ РЅР°Р¶РјРёС‚Рµ Y (Yes) - РґР»СЏ РїРѕРґС‚РІРµСЂР¶РґРµРЅРёСЏ\n");
-    CenterText ("РР»Рё N (No) - РґР»СЏ РѕС‚РјРµРЅС‹\n\n");
-    CenterText ("Р’Р°С€ РІС‹Р±РѕСЂ: ");
+    CenterText ("Для этого нажмите Y (Yes) - для подтверждения\n");
+    CenterText ("Или N (No) - для отмены\n\n");
+    CenterText ("Ваш выбор: ");
 
-} // С„СѓРЅРєС†РёСЏ РґР»СЏ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ С€Р°РїРєРё РІ РїРѕРґРїСѓРЅРєС‚Р°С… РјРµРЅСЋ
+} // функция для отображения шапки в подпунктах меню
 
 const void Menu_Settings (Class_Settings& Settings, Class_BanLists& Banlists) {
 
     std::string String_AutomaticCloseApplication = "\0";
-    unsigned short int ButtonNumber = 0; // РїРµСЂРµРјРµРЅРЅР°СЏ РґР»СЏ РѕР±СЂР°Р±РѕС‚РєРё РЅР°Р¶Р°С‚РёР№ РІ РјРµРЅСЋ
+    unsigned short int ButtonNumber = 0; // переменная для обработки нажатий в меню
 
     while (true) {
 
         cls ();
 
-        CenterText ("РќР°СЃС‚СЂРѕР№РєРё РїСЂРѕРіСЂР°РјРјС‹\n");
+        CenterText ("Настройки программы\n");
         Show_Text_ForExit ();
 
         printf ("\n\n\n\n");
-        CenterText ("Р’С‹Р±РµСЂРёС‚Рµ РїСѓРЅРєС‚ РјРµРЅСЋ РґР»СЏ РёР·РјРµРЅРµРЅРёСЏ РІС‹Р±СЂР°РЅРЅС‹С… РЅР°СЃС‚СЂРѕРµРє\n\n\n");
-        printf ("                                   1. РџСѓС‚СЊ Рє РјРµСЃС‚Сѓ С…СЂР°РЅРµРЅРёСЏ Р·Р°РєР°Р·РѕРІ: ");
+        CenterText ("Выберите пункт меню для изменения выбранных настроек\n\n\n");
+        printf ("                                   1. Путь к месту хранения заказов: ");
         Show_Text_Output(Settings.getLabs_Path () + "\n");
 
-        printf ("                                   2. РђРІС‚РѕРјР°С‚РёС‡РµСЃРєРёР№ Р·Р°РїСѓСЃРє СЃРѕР·РґР°РЅРёСЏ РЅРѕРІРѕРіРѕ Р·Р°РєР°Р·Р°: ");
+        printf ("                                   2. Автоматический запуск создания нового заказа: ");
         Show_Text_Output (Convert_Bool_toString (Settings.getAutomatic_Order_Start ()) + "\n");
 
-        printf ("                                   3. РђРІС‚РѕРјР°С‚РёС‡РµСЃРєРѕРµ Р·Р°РІРµСЂС€РµРЅРёРµ РїРѕСЃР»Рµ Р·Р°РїРѕР»РЅРµРЅРёСЏ Р·Р°РєР°Р·Р°: ");
+        printf ("                                   3. Автоматическое завершение после заполнения заказа: ");
         Show_Text_Output (Convert_Bool_toString (Settings.getAutomatic_Close_Application ()) + "\n");
 
-        printf ("                                   4. РђРІС‚РѕРјР°С‚РёС‡РµСЃРєРѕРµ РѕС‚РєСЂС‹С‚РёРµ Р·Р°РєР°Р·Р° РїРѕСЃР»Рµ РµРіРѕ СЃРѕР·РґР°РЅРёСЏ: ");
+        printf ("                                   4. Автоматическое открытие заказа после его создания: ");
         Show_Text_Output (Convert_Bool_toString (Settings.getAutomatic_Open_Order ()) + "\n");
 
-        printf ("                                   5. РђРІС‚РѕРјР°С‚РёС‡РµСЃРєРѕРµ РµР¶РµРјРµСЃСЏС‡РЅРѕРµ РѕР±РЅРѕРІР»РµРЅРёРµ СЃРїРёСЃРєР° Р±Р°РЅ-Р»РёСЃС‚Р°: ");
+        printf ("                                   5. Автоматическое ежемесячное обновление списка бан-листа: ");
         Show_Text_Output (Convert_Bool_toString (Settings.getAutomatic_Update_BanList()) + "\n");
 
-        printf ("                                   6. РР·РјРµРЅРёС‚СЊ Р°РґСЂРµСЃ Р±Р°РЅ-Р»РёСЃС‚Р° РєР»РёРµРЅС‚РѕРІ: ");
+        printf ("                                   6. Изменить адрес бан-листа клиентов: ");
         Show_Text_Output (Settings.getUrl_BanList_Clients() + "\n");
 
-        printf ("                                   7. РР·РјРµРЅРёС‚СЊ Р°РґСЂРµСЃ Р±Р°РЅ-Р»РёСЃС‚Р° РёСЃРїРѕР»РЅРёС‚РµР»РµР№: ");
+        printf ("                                   7. Изменить адрес бан-листа исполнителей: ");
         Show_Text_Output (Settings.getUrl_BanList_Workers() + "\n");
 
-        printf ("                                   8. РћР±РЅРѕРІРёС‚СЊ СЃРїРёСЃРѕРє Р±Р°РЅ-Р»РёСЃС‚Р°");
+        //printf ("                                   8. Обновить список бан-листа");
 
-        printf ("\n                                   Tab. Р’РѕСЃСЃС‚Р°РЅРѕРІРёС‚СЊ РЅР°СЃС‚СЂРѕР№РєРё РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ\n");
+        printf ("\n                                   Tab. Восстановить настройки по умолчанию\n");
 
             while (true) {
 
                 ButtonNumber = getch ();
 
-                    if (ClickCatch ("Esc", ButtonNumber) || ClickCatch ("1", ButtonNumber) || ClickCatch ("2", ButtonNumber) || ClickCatch ("3", ButtonNumber) || ClickCatch ("4", ButtonNumber) || ClickCatch ("5", ButtonNumber) || ClickCatch ("6", ButtonNumber) || ClickCatch ("7", ButtonNumber) || ClickCatch ("8", ButtonNumber) || ClickCatch ("Tab", ButtonNumber))
+                    if (ClickCatch ("Esc", &ButtonNumber) || ClickCatch ("1", &ButtonNumber) || ClickCatch ("2", &ButtonNumber) || ClickCatch ("3", &ButtonNumber) || ClickCatch ("4", &ButtonNumber) || ClickCatch ("5", &ButtonNumber) || ClickCatch ("6", &ButtonNumber) || ClickCatch ("7", &ButtonNumber) || ClickCatch ("Tab", &ButtonNumber))
                         break;
 
             }
 
-                if (ClickCatch ("Esc", ButtonNumber))
+                if (ClickCatch ("Esc", &ButtonNumber))
                     return;
 
             printf ("\n\n\n");
 
-                if (ClickCatch ("1", ButtonNumber)) {
+                if (ClickCatch ("1", &ButtonNumber)) {
 
                     std::string Str = "\0";
-                    CenterText ("Р’РІРµРґРёС‚Рµ РЅРѕРІС‹Р№ РїСѓС‚СЊ Рє С…СЂР°РЅРµРЅРёСЋ Р·Р°РєР°Р·РѕРІ");
+                    CenterText ("Введите новый путь к хранению заказов");
 
                         while (true) {
 
                             printf ("\n");
-                            CenterText ("РџСѓС‚СЊ: ");
+                            CenterText ("Путь: ");
 
-                            Str = Show_Text_Input ("РџСѓС‚СЊ: ");
+                            Str = Show_Text_Input ("Путь: ");
 
                                 if (Check_Input_ForExit (Str))
                                     break;
@@ -94,31 +94,31 @@ const void Menu_Settings (Class_Settings& Settings, Class_BanLists& Banlists) {
                                else if (Str.length () > 1 && Settings.Check_FilePath (Str))
                                     break;
 
-                        } // РІР°Р»РёРґРЅРѕСЃС‚СЊ РЅР° РІРІРѕРґ РїСѓС‚Рё
+                        } // валидность на ввод пути
 
                         if (Check_Input_ForExit (Str))
                             continue;
 
                     Settings.setLabs_Path (Str);
 
-                } // РёР·РјРµРЅРµРЅРёРµ РїСѓС‚Рё РјРµСЃС‚Р° С…СЂР°РЅРµРЅРёСЏ Р·Р°РєР°Р·РѕРІ
+                } // изменение пути места хранения заказов
 
-                else if (ClickCatch ("2", ButtonNumber)) {
+                else if (ClickCatch ("2", &ButtonNumber)) {
 
-                    Show_TextHeader ("Р—Р°РґР°Р№С‚Рµ Р±СѓР»РµРІРѕРµ Р·РЅР°С‡РµРЅРёРµ РґР»СЏ Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРѕРіРѕ Р·Р°РїСѓСЃРєР° РјРµРЅСЋ Р·Р°РєР°Р·Р°");
+                    Show_TextHeader ("Задайте булевое значение для автоматического запуска меню заказа");
 
                         while (true) {
 
                             ButtonNumber = getch ();
 
-                                if (ClickCatch ("Y", ButtonNumber) || ClickCatch ("N", ButtonNumber) || ClickCatch ("Esc", ButtonNumber))
+                                if (ClickCatch ("Y", &ButtonNumber) || ClickCatch ("N", &ButtonNumber) || ClickCatch ("Esc", &ButtonNumber))
                                         break;
 
                         }
 
-                        if (ClickCatch ("Y", ButtonNumber) || ClickCatch ("N", ButtonNumber)) {
+                        if (ClickCatch ("Y", &ButtonNumber) || ClickCatch ("N", &ButtonNumber)) {
 
-                                if (ClickCatch ("Y", ButtonNumber)) {
+                                if (ClickCatch ("Y", &ButtonNumber)) {
 
                                     Show_Text_Output ("Yes");
                                     Settings.setAutomatic_Order_Start (true);
@@ -137,24 +137,24 @@ const void Menu_Settings (Class_Settings& Settings, Class_BanLists& Banlists) {
                         else
                             continue;
 
-                } // РёР·РјРµРЅРµРЅРёРµ Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРѕРіРѕ Р·Р°РїСѓСЃРєР° РјРµРЅСЋ Р·Р°РєР°Р·Р°
+                } // изменение автоматического запуска меню заказа
 
-                else if (ClickCatch ("3", ButtonNumber)) {
+                else if (ClickCatch ("3", &ButtonNumber)) {
 
-                    Show_TextHeader ("Р—Р°РґР°Р№С‚Рµ Р±СѓР»РµРІРѕРµ Р·РЅР°С‡РµРЅРёРµ РґР»СЏ Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРѕРіРѕ Р·Р°РєСЂС‹С‚РёСЏ РїСЂРёР»РѕР¶РµРЅРёСЏ РїРѕСЃР»Рµ РјРµРЅСЋ Р·Р°РєР°Р·Р°");
+                    Show_TextHeader ("Задайте булевое значение для автоматического закрытия приложения после меню заказа");
 
                         while (true) {
 
                             ButtonNumber = getch ();
 
-                                if (ClickCatch ("Y", ButtonNumber) || ClickCatch ("N", ButtonNumber) || ClickCatch ("Esc", ButtonNumber))
+                                if (ClickCatch ("Y", &ButtonNumber) || ClickCatch ("N", &ButtonNumber) || ClickCatch ("Esc", &ButtonNumber))
                                         break;
 
                         }
 
-                        if (ClickCatch ("Y", ButtonNumber) || ClickCatch ("N", ButtonNumber)) {
+                        if (ClickCatch ("Y", &ButtonNumber) || ClickCatch ("N", &ButtonNumber)) {
 
-                                if (ClickCatch ("Y", ButtonNumber)) {
+                                if (ClickCatch ("Y", &ButtonNumber)) {
 
                                     Show_Text_Output ("Yes");
                                     Settings.setAutomatic_Close_Application (true);
@@ -173,24 +173,24 @@ const void Menu_Settings (Class_Settings& Settings, Class_BanLists& Banlists) {
                         else
                             continue;
 
-                } // РёР·РјРµРЅРµРЅРёРµ Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРѕРіРѕ Р·Р°РєСЂС‹С‚РёСЏ РїСЂРёР»РѕР¶РµРЅРёСЏ РїРѕСЃР»Рµ РјРµРЅСЋ Р·Р°РєР°Р·Р°
+                } // изменение автоматического закрытия приложения после меню заказа
 
-                else if (ClickCatch ("4", ButtonNumber)) {
+                else if (ClickCatch ("4", &ButtonNumber)) {
 
-                    Show_TextHeader ("Р—Р°РґР°Р№С‚Рµ Р±СѓР»РµРІРѕРµ Р·РЅР°С‡РµРЅРёРµ РґР»СЏ Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРѕРіРѕ РѕС‚РєСЂС‹С‚РёСЏ Р·Р°РєР°Р·Р° РїРѕСЃР»Рµ РµРіРѕ СЃРѕР·РґР°РЅРёСЏ");
+                    Show_TextHeader ("Задайте булевое значение для автоматического открытия заказа после его создания");
 
                         while (true) {
 
                             ButtonNumber = getch ();
 
-                                if (ClickCatch ("Y", ButtonNumber) || ClickCatch ("N", ButtonNumber) || ClickCatch ("Esc", ButtonNumber))
+                                if (ClickCatch ("Y", &ButtonNumber) || ClickCatch ("N", &ButtonNumber) || ClickCatch ("Esc", &ButtonNumber))
                                         break;
 
                         }
 
-                        if (ClickCatch ("Y", ButtonNumber) || ClickCatch ("N", ButtonNumber)) {
+                        if (ClickCatch ("Y", &ButtonNumber) || ClickCatch ("N", &ButtonNumber)) {
 
-                                if (ClickCatch ("Y", ButtonNumber)) {
+                                if (ClickCatch ("Y", &ButtonNumber)) {
 
                                     Show_Text_Output ("Yes");
                                     Settings.setAutomatic_Open_Order (true);
@@ -209,24 +209,24 @@ const void Menu_Settings (Class_Settings& Settings, Class_BanLists& Banlists) {
                         else
                             continue;
 
-                } // РІРєР»СЋС‡РµРЅРёРµ/РѕС‚РєР»СЋС‡РµРЅРёРµ Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРѕРіРѕ Р·Р°РїСѓСЃРєР° Р·Р°РєР°Р·Р° РїРѕСЃР»Рµ РµРіРѕ СЃРѕР·РґР°РЅРёСЏ
+                } // включение/отключение автоматического запуска заказа после его создания
 
-                else if (ClickCatch ("5", ButtonNumber)) {
+                else if (ClickCatch ("5", &ButtonNumber)) {
 
-                    Show_TextHeader ("Р—Р°РґР°Р№С‚Рµ Р±СѓР»РµРІРѕРµ Р·РЅР°С‡РµРЅРёРµ РґР»СЏ Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРѕРіРѕ РѕР±РЅРѕРІР»РµРЅРёСЏ СЃРїРёСЃРєР° Р±Р°РЅ-Р»РёСЃС‚Р°");
+                    Show_TextHeader ("Задайте булевое значение для автоматического обновления списка бан-листа");
 
                     while (true) {
 
                             ButtonNumber = getch ();
 
-                                if (ClickCatch ("Y", ButtonNumber) || ClickCatch ("N", ButtonNumber) || ClickCatch ("Esc", ButtonNumber))
+                                if (ClickCatch ("Y", &ButtonNumber) || ClickCatch ("N", &ButtonNumber) || ClickCatch ("Esc", &ButtonNumber))
                                         break;
 
                         }
 
-                        if (ClickCatch ("Y", ButtonNumber) || ClickCatch ("N", ButtonNumber)) {
+                        if (ClickCatch ("Y", &ButtonNumber) || ClickCatch ("N", &ButtonNumber)) {
 
-                                if (ClickCatch ("Y", ButtonNumber)) {
+                                if (ClickCatch ("Y", &ButtonNumber)) {
 
                                     Show_Text_Output ("Yes");
                                     Settings.setAutomatic_Update_BanList (true);
@@ -245,68 +245,61 @@ const void Menu_Settings (Class_Settings& Settings, Class_BanLists& Banlists) {
                         else
                             continue;
 
-                } // РІРєР»СЋС‡РµРЅРёРµ/РѕС‚РєР»СЋС‡РµРЅРёРµ РµР¶РµРјРµСЃСЏС‡РЅРѕРіРѕ РѕР±РЅРѕРІР»РµРЅРёСЏ СЃРїРёСЃРєР° Р±Р°РЅ-Р»РёСЃС‚Р°
+                } // включение/отключение ежемесячного обновления списка бан-листа
 
-                else if (ClickCatch ("6", ButtonNumber)) {
-
-                    continue;
-
-
-                } // РёР·РјРµРЅРµРЅРёРµ СЃСЃС‹Р»РєРё РЅР° СЃРїРёСЃРѕРє Р±Р°РЅ-Р»РёСЃС‚Р° РєР»РёРµРЅС‚РѕРІ
-
-                else if (ClickCatch ("7", ButtonNumber)) {
+                else if (ClickCatch ("6", &ButtonNumber)) {
 
                     continue;
 
-                } // РёР·РјРµРЅРµРЅРёРµ СЃСЃС‹Р»РєРё РЅР° СЃРїРёСЃРѕРє Р±Р°РЅ-Р»РёСЃС‚Р° РёСЃРїРѕР»РЅРёС‚РµР»РµР№
 
-                else if (ClickCatch ("8", ButtonNumber)) {
+                } // изменение ссылки на список бан-листа клиентов
 
-                        Show_TextHeader ("Р’С‹ РґРµР№СЃС‚РІРёС‚РµР»СЊРЅРѕ С…РѕС‚РёС‚Рµ РѕР±РЅРѕРІРёС‚СЊ СЃРїРёСЃРѕРє Р±Р°РЅ-Р»РёСЃС‚РѕРІ?");
+                else if (ClickCatch ("7", &ButtonNumber)) {
+
+                    continue;
+
+                } // изменение ссылки на список бан-листа исполнителей
+
+                /*else if (ClickCatch ("8", &ButtonNumber)) {
+
+                        Show_TextHeader ("Вы действительно хотите обновить список бан-листов?");
 
                         while (true) {
 
                             ButtonNumber = getch ();
 
-                                if (ClickCatch ("Y", ButtonNumber) || ClickCatch ("N", ButtonNumber) || ClickCatch ("Esc", ButtonNumber))
+                                if (ClickCatch ("Y", &ButtonNumber) || ClickCatch ("N", &ButtonNumber) || ClickCatch ("Esc", &ButtonNumber))
                                         break;
 
                         }
 
-                        if (ClickCatch ("Y", ButtonNumber)) {
+                        if (ClickCatch ("Y", &ButtonNumber)) {
 
                             Show_Text_Output ("Yes");
 
-                            Banlists.ConfigFile_Open (Banlists.getBanlist_Path ());
-
-                            remove (Banlists.getBanlist_Path().c_str ());
-
-                            Banlists.Check_BanlistsFile ();
-
-                            Banlists.ConfigFile_Close (Banlists.getBanlist_Path ());
-
+                            Banlists.Update_Banlists (Settings);
 
                         }
 
-                        else if (ClickCatch ("N", ButtonNumber) || ClickCatch ("Esc", ButtonNumber))
+                        else if (ClickCatch ("N", &ButtonNumber) || ClickCatch ("Esc", &ButtonNumber))
                             continue;
 
-                } // РѕР±РЅРѕРІРёС‚СЊ СЃРїРёСЃРѕРє Р±Р°РЅ-Р»РёСЃС‚Р°
+                } // обновить список бан-листа*/
 
-                else if (ClickCatch ("Tab", ButtonNumber)) {
+                else if (ClickCatch ("Tab", &ButtonNumber)) {
 
-                    Show_TextHeader ("Р’С‹ РґРµР№СЃС‚РІРёС‚РµР»СЊРЅРѕ С…РѕС‚РёС‚Рµ РІРѕСЃСЃС‚Р°РЅРѕРІРёС‚СЊ РЅР°СЃС‚СЂРѕР№РєРё РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ?");
+                    Show_TextHeader ("Вы действительно хотите восстановить настройки по умолчанию?");
 
                         while (true) {
 
                             ButtonNumber = getch ();
 
-                                if (ClickCatch ("Y", ButtonNumber) || ClickCatch ("N", ButtonNumber) || ClickCatch ("Esc", ButtonNumber))
+                                if (ClickCatch ("Y", &ButtonNumber) || ClickCatch ("N", &ButtonNumber) || ClickCatch ("Esc", &ButtonNumber))
                                         break;
 
                         }
 
-                        if (ClickCatch ("Y", ButtonNumber)) {
+                        if (ClickCatch ("Y", &ButtonNumber)) {
 
                             Show_Text_Output ("Yes");
 
@@ -320,15 +313,15 @@ const void Menu_Settings (Class_Settings& Settings, Class_BanLists& Banlists) {
 
                         }
 
-                        else if (ClickCatch ("N", ButtonNumber) || ClickCatch ("Esc", ButtonNumber))
+                        else if (ClickCatch ("N", &ButtonNumber) || ClickCatch ("Esc", &ButtonNumber))
                             continue;
 
-                } // РІРµСЂРЅСѓС‚СЊ РЅР°СЃС‚СЂРѕР№РєРё РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ
+                } // вернуть настройки по умолчанию
 
             Settings.SaveSettings (true);
 
-    } // РєРѕРЅРµС† Р¶РёР·РЅРµРЅРЅРѕРіРѕ С†РёРєР»Р° РјРµРЅСЋ РЅР°СЃС‚СЂРѕРµРє
+    } // конец жизненного цикла меню настроек
 
-} // С„СѓРЅРєС†РёСЏ РЅР°СЃС‚СЂРѕРµРє РїСЂРёР»РѕР¶РµРЅРёСЏ
+} // функция настроек приложения
 
 #endif // _Menu_Settings_h_

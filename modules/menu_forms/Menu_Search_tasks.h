@@ -1,4 +1,4 @@
-// РњРѕРґСѓР»СЊ РґР»СЏ РїРѕРёСЃРєР° Р·Р°РєР°Р·Р°. РРјРµРЅРЅРѕ Р·РґРµСЃСЊ РѕРїРёСЃР°РЅ РІРµСЃСЊ С„СѓРЅРєС†РёРѕРЅР°Р» РєРЅРѕРїРєРё "РџРѕРёСЃРє Р·Р°РєР°Р·Р°".
+// Модуль для поиска заказа. Именно здесь описан весь функционал кнопки "Поиск заказа".
 
 #pragma once
 
@@ -7,40 +7,40 @@
 
 static void Continue (void) {
 
-    CenterText ("Р”Р»СЏ РїСЂРѕРґРѕР»Р¶РµРЅРёСЏ РЅР°Р¶РјРёС‚Рµ Р»СЋР±СѓСЋ РєР»Р°РІРёС€Сѓ...");
+    CenterText ("Для продолжения нажмите любую клавишу...");
     getch ();
 
-} // С„СѓРЅРєС†РёСЏ РѕР¶РёРґР°РЅРёСЏ РЅР°Р¶Р°С‚РёСЏ РґР»СЏ РїСЂРѕРґРѕР»Р¶Р»РµРЅРёСЏ
+} // функция ожидания нажатия для продолжления
 
 const void Menu_Search_Tasks (const Class_Settings& Settings) {
 
-    unsigned short int ButtonNumber = 0; // РїРµСЂРµРјРµРЅРЅР°СЏ РґР»СЏ РѕР±СЂР°Р±РѕС‚РєРё РЅР°Р¶Р°С‚РёР№ РІ РјРµРЅСЋ
+    unsigned short int ButtonNumber = 0; // переменная для обработки нажатий в меню
 
         while (true) {
 
             cls ();
-            CenterText ("РџРѕРёСЃРє СЂР°Р±РѕС‚С‹ СЃСЂРµРґРё РёРјРµСЋС‰РёС…СЃСЏ РІ Р±Р°Р·Рµ\n");
+            CenterText ("Поиск работы среди имеющихся в базе\n");
             Show_Text_ForExit ();
 
-            printf ("1. РќР°Р№С‚Рё РєР»РёРµРЅС‚Р° РїРѕ РёРјРµРЅРё\n");
+            printf ("1. Найти клиента по имени\n");
 
                 while (true) {
 
                     ButtonNumber = getch ();
 
-                        if (ClickCatch ("Esc", ButtonNumber) || ClickCatch ("1", ButtonNumber))
+                        if (ClickCatch ("Esc", &ButtonNumber) || ClickCatch ("1", &ButtonNumber))
                             break;
 
                 }
 
-                if (ClickCatch ("Esc", ButtonNumber))
+                if (ClickCatch ("Esc", &ButtonNumber))
                     return;
 
-                else if (ClickCatch ("1", ButtonNumber)) {
+                else if (ClickCatch ("1", &ButtonNumber)) {
 
                     bool Founded = false;
-                    CenterText ("Р’РІРµРґРёС‚Рµ РёРјСЏ: ");
-                    std::string Name = Show_Text_Input ("Р’РІРµРґРёС‚Рµ РёРјСЏ: ");
+                    CenterText ("Введите имя: ");
+                    std::string Name = Show_Text_Input ("Введите имя: ");
 
                     std::ofstream Write (std::string(Settings.getLabs_Path () + "\\" + Name + "\\CheckClient.txt").c_str ());
 
@@ -76,7 +76,7 @@ const void Menu_Search_Tasks (const Class_Settings& Settings) {
 
                                 if (!Founded) {
 
-                                    Show_Text_Output (std::string ("РљР»РёРµРЅС‚ " + Name + " РЅРµ РЅР°Р№РґРµРЅ РІ Р±Р°Р·Рµ\n"));
+                                    Show_Text_Output (std::string ("Клиент " + Name + " не найден в базе\n"));
                                     Continue ();
 
                                 }
@@ -91,10 +91,10 @@ const void Menu_Search_Tasks (const Class_Settings& Settings) {
 
                         }
 
-                } // РїРѕРёСЃРє РєР»РёРµРЅС‚Р° РїРѕ РёРјРµРЅРё
+                } // поиск клиента по имени
 
         }
 
-} // С„СѓРЅРєС†РёСЏ РїРѕРёСЃРєР° Р·Р°РєР°Р·Р° / Р·Р°РґР°РЅРёСЏ / РєР»РёРµРЅС‚Р°
+} // функция поиска заказа / задания / клиента
 
 #endif // _Menu_Search_tasks_h_

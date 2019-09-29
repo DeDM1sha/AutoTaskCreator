@@ -37,6 +37,9 @@
 		<Unit filename="modules/classes/clients_class.h" />
 		<Unit filename="modules/classes/settings_class.h" />
 		<Unit filename="modules/classes/statistics_class.h" />
+		<Unit filename="modules/config/config.rc">
+			<Option compilerVar="WINDRES" />
+		</Unit>
 		<Unit filename="modules/libs/additional_functions.h" />
 		<Unit filename="modules/libs/clickcatcher.h" />
 		<Unit filename="modules/menu_forms/Menu_Formation_order.h" />

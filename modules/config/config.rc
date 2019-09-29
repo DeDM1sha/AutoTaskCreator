@@ -1,0 +1,23 @@
+MAINICON ICON "application.ico"
+1 VERSIONINFO
+FILEVERSION 3
+PRODUCTVERSION 0,0,0,1
+{
+ BLOCK "StringFileInfo"
+ {
+  BLOCK "040904E4"
+  {
+   VALUE "CompanyName", "Owned\000"
+   VALUE "FileDescription", "AutoTaskCreator\000"
+   VALUE "LegalCopyright", "Satsuk Mikhail Mikhailovich\000"
+   VALUE "LegalTrademarks", "Owned\000"
+   VALUE "OriginalFilename", "AutoTaskCreator\000"
+   VALUE "ProductName", "AutoTaskCreator\000"
+   VALUE "ProductVersion", "1.19.3\000"
+  }
+ }
+ BLOCK "VarFileInfo"
+ {
+  VALUE "Translation", 0x0409, 0x04E4
+ }
+}

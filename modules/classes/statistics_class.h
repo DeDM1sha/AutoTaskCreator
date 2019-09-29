@@ -1,4 +1,4 @@
-// РљР»Р°СЃСЃ Р±Р°Р·С‹ РґР°РЅРЅС‹С… РІСЃРµС… РєР»РёРµРЅС‚РѕРІ Рё Р·Р°РєР°Р·РѕРІ, РёРјРµСЋС‰РёС…СЃСЏ РІ Р±Р°Р·Рµ
+// Класс базы данных всех клиентов и заказов, имеющихся в базе
 
 #pragma once
 
@@ -15,12 +15,12 @@ class Class_Statistics {
 
     private:
 
-        unsigned short int TotalNumber_ClientsInDB_Count; // РѕР±С‰РµРµ РєРѕР»-РІРѕ РєР»РёРµРЅС‚РѕРІ РІ Р±Р°Р·Рµ
-        unsigned short int TotalNumber_CompletedTasks_Count; // РѕР±С‰РµРµ РєРѕР»-РІРѕ РІС‹РїРѕР»РЅРµРЅРЅС‹С… Р·Р°РґР°РЅРёР№ СЃРѕ РІСЃРµС… РєР»РёРµРЅС‚РѕРІ
-        unsigned short int TotalNumber_Technology_C; // РѕР±С‰РµРµ РєРѕР»РёС‡РµСЃС‚РІРѕ РІС‹РїРѕР»РЅРµРЅРЅС‹С… Р·Р°РґР°С‡ РЅР° РЎРё
-        unsigned short int TotalNumber_Technology_CPlusPlus; // РѕР±С‰РµРµ РєРѕР»РёС‡РµСЃС‚РІРѕ РІС‹РїРѕР»РЅРµРЅРЅС‹С… Р·Р°РґР°С‡ РЅР° C++
-        unsigned short int TotalNumber_Technology_Another; // РѕР±С‰РµРµ РєРѕР»РёС‡РµСЃС‚РІРѕ РІС‹РїРѕР»РЅРµРЅРЅС‹С… Р·Р°РґР°С‡ РїРѕ РґСЂСѓРіРёРј РЅР°РїСЂР°РІР»РµРЅРёСЏРј (РїРѕРјРѕС‰СЊ РЅР° СЌРєР·Р°РјРµРЅР°С…, РѕС‚РІРµС‚С‹ РЅР° РІРѕРїСЂРѕСЃС‹ Рё С‚.Рґ.)
-        std::vector <std::string> ClientsName; // РёРјРµРЅР° РІСЃРµС… РєР»РёРµРЅС‚РѕРІ
+        unsigned short int TotalNumber_ClientsInDB_Count; // общее кол-во клиентов в базе
+        unsigned short int TotalNumber_CompletedTasks_Count; // общее кол-во выполненных заданий со всех клиентов
+        unsigned short int TotalNumber_Technology_C; // общее количество выполненных задач на Си
+        unsigned short int TotalNumber_Technology_CPlusPlus; // общее количество выполненных задач на C++
+        unsigned short int TotalNumber_Technology_Another; // общее количество выполненных задач по другим направлениям (помощь на экзаменах, ответы на вопросы и т.д.)
+        std::vector <std::string> ClientsName; // имена всех клиентов
 
     public:
 
@@ -41,13 +41,13 @@ class Class_Statistics {
 
 			this->TotalNumber_CompletedTasks_Count = Number;
 
-		} // СЃРµС‚С‚РµСЂ РґР»СЏ TotalNumber_CompletedTasks_Count
+		} // сеттер для TotalNumber_CompletedTasks_Count
 
 		const unsigned short int getTotalNumber_CompletedTasks_Count (void) const {
 
 			return this->TotalNumber_CompletedTasks_Count;
 
-		} // РіРµС‚С‚РµСЂ РґР»СЏ TotalNumber_CompletedTasks_Count
+		} // геттер для TotalNumber_CompletedTasks_Count
 
 	//////////////////////////////////////////////
 
@@ -55,13 +55,13 @@ class Class_Statistics {
 
 			this->TotalNumber_ClientsInDB_Count = Number;
 
-		} // СЃРµС‚С‚РµСЂ РґР»СЏ TotalNumber_ClientsInDB_Count
+		} // сеттер для TotalNumber_ClientsInDB_Count
 
 		const unsigned short int getTotalNumber_ClientsInDB_Count (void) const {
 
 			return this->TotalNumber_ClientsInDB_Count;
 
-		} // РіРµС‚С‚РµСЂ РґР»СЏ TotalNumber_ClientsInDB_Count
+		} // геттер для TotalNumber_ClientsInDB_Count
 
 	//////////////////////////////////////////////
 
@@ -69,13 +69,13 @@ class Class_Statistics {
 
             this->TotalNumber_Technology_C = Number;
 
-        } // СЃРµС‚С‚РµСЂ РґР»СЏ TotalNumber_Technology_C
+        } // сеттер для TotalNumber_Technology_C
 
         const unsigned short int getTotalNumber_Technology_C (void) const {
 
             return this->TotalNumber_Technology_C;
 
-        } // РіРµС‚С‚РµСЂ РґР»СЏ TotalNumber_Technology_C
+        } // геттер для TotalNumber_Technology_C
 
     //////////////////////////////////////////////
 
@@ -83,13 +83,13 @@ class Class_Statistics {
 
             this->TotalNumber_Technology_CPlusPlus = Number;
 
-        } // СЃРµС‚С‚РµСЂ РґР»СЏ TotalNumber_Technology_CPlusPlus
+        } // сеттер для TotalNumber_Technology_CPlusPlus
 
         const unsigned short int getTotalNumber_Technology_CPlusPlus (void) const {
 
             return this->TotalNumber_Technology_CPlusPlus;
 
-        } // РіРµС‚С‚РµСЂ РґР»СЏ TotalNumber_Technology_CPlusPlus
+        } // геттер для TotalNumber_Technology_CPlusPlus
 
     //////////////////////////////////////////////
 
@@ -98,13 +98,13 @@ class Class_Statistics {
 
             this->TotalNumber_Technology_Another = Number;
 
-        } // СЃРµС‚С‚РµСЂ РґР»СЏ TotalNumber_Technology_Another
+        } // сеттер для TotalNumber_Technology_Another
 
         const unsigned short int getTotalNumber_Technology_Another (void) const {
 
             return this->TotalNumber_Technology_Another;
 
-        } // РіРµС‚С‚РµСЂ РґР»СЏ TotalNumber_Technology_Another
+        } // геттер для TotalNumber_Technology_Another
 
     //////////////////////////////////////////////
 
@@ -112,19 +112,19 @@ class Class_Statistics {
 
             this->ClientsName[Counter] = Str;
 
-        } // СЃРµС‚С‚РµСЂ РґР»СЏ ClientsName
+        } // сеттер для ClientsName
 
         const std::string getClientsName (const unsigned short int Counter) const {
 
             return this->ClientsName[Counter];
 
-        } // РіРµС‚С‚РµСЂ РґР»СЏ ClientsName
+        } // геттер для ClientsName
 
         const unsigned short int Load_TotalNumber_ClientsInDB_Count (const Class_Settings&);
         const void Load_ClientsName (const Class_Settings&);
         const unsigned short int Load_TotalNumber_CompletedTasks_Count (const Class_Settings&);
 
-}; // РєР»Р°СЃСЃ Р±Р°Р·С‹ РґР°РЅРЅС‹С… РІСЃРµС… Р·Р°РєР°Р·РѕРІ
+}; // класс базы данных всех заказов
 
 const unsigned short int Class_Statistics::Load_TotalNumber_ClientsInDB_Count (const Class_Settings& Settings) {
 
@@ -161,7 +161,7 @@ const unsigned short int Class_Statistics::Load_TotalNumber_ClientsInDB_Count (c
 
     return TotalCount;
 
-} // РјРµС‚РѕРґ РїРѕРґСЃС‡РµС‚Р° РєРѕР»-РІР° РєР»РёРµРЅС‚РѕРІ Рё РёС… РёРјРµРЅ РІ Р±Р°Р·Рµ
+} // метод подсчета кол-ва клиентов и их имен в базе
 
 const unsigned short int Class_Statistics::Load_TotalNumber_CompletedTasks_Count (const Class_Settings& Settings) {
 
@@ -235,6 +235,6 @@ const unsigned short int Class_Statistics::Load_TotalNumber_CompletedTasks_Count
 
     return TotalCount;
 
-} // РјРµС‚РѕРґ РїРѕРґСЃС‡РµС‚Р° РєРѕР»-РІР° РІС‹РїРѕР»РЅРµРЅРЅС‹С… Р·Р°РґР°РЅРёР№ РІ Р±Р°Р·Рµ
+} // метод подсчета кол-ва выполненных заданий в базе
 
 #endif // _statistics_class_h_
