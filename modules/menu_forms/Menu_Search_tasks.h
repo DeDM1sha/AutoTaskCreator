@@ -19,10 +19,13 @@ const void Menu_Search_Tasks (const Class_Settings& Settings) {
         while (true) {
 
             cls ();
-            CenterText ("Поиск работы среди имеющихся в базе\n");
+            CenterText ("Поиск работ среди имеющихся в базе\n");
             Show_Text_ForExit ();
 
-            printf ("1. Найти клиента по имени\n");
+            printf ("\n\n\n");
+            printf ("                                             ---------------------------------\n");
+            CenterText ("|   1. Найти клиента по имени   |\n");
+            printf ("                                             |_______________________________|\n\n\n");
 
                 while (true) {
 

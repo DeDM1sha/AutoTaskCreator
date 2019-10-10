@@ -7,10 +7,7 @@
 
 static std::string Convert_Bool_toString (const bool& Boolean) {
 
-    if (Boolean)
-        return "True";
-
-    return "False";
+    return Boolean ? "True" : "False";
 
 } // функция конвертации из типа bool в тип std::string
 
@@ -49,7 +46,7 @@ const void Menu_Settings (Class_Settings& Settings, Class_BanLists& Banlists) {
         printf ("                                   4. Автоматическое открытие заказа после его создания: ");
         Show_Text_Output (Convert_Bool_toString (Settings.getAutomatic_Open_Order ()) + "\n");
 
-        printf ("                                   5. Автоматическое ежемесячное обновление списка бан-листа: ");
+        /*printf ("                                   5. Автоматическое ежемесячное обновление списка бан-листа: ");
         Show_Text_Output (Convert_Bool_toString (Settings.getAutomatic_Update_BanList()) + "\n");
 
         printf ("                                   6. Изменить адрес бан-листа клиентов: ");
@@ -57,7 +54,7 @@ const void Menu_Settings (Class_Settings& Settings, Class_BanLists& Banlists) {
 
         printf ("                                   7. Изменить адрес бан-листа исполнителей: ");
         Show_Text_Output (Settings.getUrl_BanList_Workers() + "\n");
-
+        */
         //printf ("                                   8. Обновить список бан-листа");
 
         printf ("\n                                   Tab. Восстановить настройки по умолчанию\n");
@@ -66,7 +63,8 @@ const void Menu_Settings (Class_Settings& Settings, Class_BanLists& Banlists) {
 
                 ButtonNumber = getch ();
 
-                    if (ClickCatch ("Esc", &ButtonNumber) || ClickCatch ("1", &ButtonNumber) || ClickCatch ("2", &ButtonNumber) || ClickCatch ("3", &ButtonNumber) || ClickCatch ("4", &ButtonNumber) || ClickCatch ("5", &ButtonNumber) || ClickCatch ("6", &ButtonNumber) || ClickCatch ("7", &ButtonNumber) || ClickCatch ("Tab", &ButtonNumber))
+                    //if (ClickCatch ("Esc", &ButtonNumber) || ClickCatch ("1", &ButtonNumber) || ClickCatch ("2", &ButtonNumber) || ClickCatch ("3", &ButtonNumber) || ClickCatch ("4", &ButtonNumber) || ClickCatch ("5", &ButtonNumber) || ClickCatch ("6", &ButtonNumber) || ClickCatch ("7", &ButtonNumber) || ClickCatch ("Tab", &ButtonNumber))
+                    if (ClickCatch ("Esc", &ButtonNumber) || ClickCatch ("1", &ButtonNumber) || ClickCatch ("2", &ButtonNumber) || ClickCatch ("3", &ButtonNumber) || ClickCatch ("4", &ButtonNumber) || ClickCatch ("Tab", &ButtonNumber))
                         break;
 
             }

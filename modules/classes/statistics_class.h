@@ -130,7 +130,7 @@ const unsigned short int Class_Statistics::Load_TotalNumber_ClientsInDB_Count (c
 
     unsigned short int TotalCount = 0;
 
-    std::string Command = "cd " + Settings.getLabs_Path () + " && dir /B > CountClients.txt";
+    std::string Command = Settings.getDisk_Path () + " && cd " + Settings.getLabs_Path () + " && dir /B > CountClients.txt";
     system (Command.c_str ());
 
     std::string Str = "\0";
@@ -173,7 +173,7 @@ const unsigned short int Class_Statistics::Load_TotalNumber_CompletedTasks_Count
 
             unsigned short int LocalCountTasks = 0;
             std::string Path = Settings.getLabs_Path () + "\\" + ClientsName[i];
-            std::string Command = "cd " + Path  + " && dir /B > CountTasks.txt";
+            std::string Command = Settings.getDisk_Path () + " && cd " + Path  + " && dir /B > CountTasks.txt";
             Path = Path + "\\" + "CountTasks.txt";
 
             system (Command.c_str ());

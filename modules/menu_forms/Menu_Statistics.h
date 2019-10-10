@@ -46,7 +46,7 @@ const void Menu_Statistics (const Class_Settings& Settings, const Class_BanLists
             std::cout << " |\n";
 
             printf ("                                      |______________________________________________|\n");
-            std::cout << "                                      | Количество заблокированных клиентов: " << std::setw (7);
+            /*std::cout << "                                      | Количество заблокированных клиентов: " << std::setw (7);
             Show_Number_Output (Banlists.getTotalNumber_Clients_InBanList_Count ());
             std::cout << " |\n";
 
@@ -56,7 +56,7 @@ const void Menu_Statistics (const Class_Settings& Settings, const Class_BanLists
             std::cout << " |\n";
 
             printf ("                                      |----------------------------------------------|\n");
-
+*/
                 if (Statistics.getTotalNumber_CompletedTasks_Count () != (Statistics.getTotalNumber_Technology_C () + Statistics.getTotalNumber_Technology_CPlusPlus () + Statistics.getTotalNumber_Technology_Another ()))
                     Show_Text_Output ("\n                         Общее кол-во выполненных задач не совпадает в сумме по отдельности!");
 

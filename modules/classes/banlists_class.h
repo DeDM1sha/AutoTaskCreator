@@ -38,9 +38,9 @@ class Class_BanLists : public AbstractClass_ConfigEditor {
 
     public:
 
-        Class_BanLists (const Class_Clients& Client) {
+        Class_BanLists (const Class_Settings& Settings) {
 
-            Banlist_Path = "C:\\Users\\" + Client.getPK_Name () + "\\AppData\\Local\\Temp\\AutoTaskCreator_Banlists.cfg";
+            Banlist_Path = "C:\\Users\\" + Settings.getPK_Name () + "\\AppData\\Local\\Temp\\AutoTaskCreator_Banlists.cfg";
             TotalNumber_Clients_InBanList_Count = 0;
             TotalNumber_Workers_InBanList_Count = 0;
 

@@ -132,14 +132,13 @@ int main (void) {
 
     Configure_Console_Window ();
 
-    Class_Clients Client; // инициализация объекта Client
-    Class_Settings Settings (Client); // инициализация объекта Settings
-    Class_BanLists Banlists (Client); // инициализация объекта Banlist;
+    Class_Settings Settings; // инициализация объекта Settings
+    Class_BanLists Banlists (Settings); // инициализация объекта Banlist;
 
     bool FirstOrderCreated = false; // переменная для отметки о том что первый заказ был создан
 
         if (Settings.getAutomatic_Order_Start () == true)
-            Menu_Formation_Order (Client, Settings, Banlists, &FirstOrderCreated);
+            Menu_Formation_Order (Settings, Banlists, &FirstOrderCreated);
 
     unsigned short int ButtonNumber = 0; // переменная для обработки нажатий в меню
     unsigned short int MenuItem = 1;
@@ -164,10 +163,10 @@ int main (void) {
 
                                 switch (MenuItem) {
 
-                                    case 1: MenuItem = 2; break;
-                                    case 2: MenuItem = 1; break;
-                                    case 3: MenuItem = 4; break;
-                                    case 4: MenuItem = 3; break;
+                                    case 1: ++MenuItem; break;
+                                    case 2: --MenuItem; break;
+                                    case 3: ++MenuItem; break;
+                                    case 4: --MenuItem; break;
 
                                 }
 
@@ -179,10 +178,10 @@ int main (void) {
 
                                 switch (MenuItem) {
 
-                                    case 1: MenuItem = 3; break;
-                                    case 2: MenuItem = 4; break;
-                                    case 3: MenuItem = 1; break;
-                                    case 4: MenuItem = 2; break;
+                                    case 1: ++(++MenuItem);             break;
+                                    case 2: MenuItem = MenuItem << 1;   break;
+                                    case 3: --(--MenuItem);             break;
+                                    case 4: MenuItem = MenuItem >> 1;   break;
 
                                 }
 
@@ -204,7 +203,7 @@ int main (void) {
 
                                 switch (MenuItem) {
 
-                                    case 1: Menu_Formation_Order (Client, Settings, Banlists, &FirstOrderCreated);   break;
+                                    case 1: Menu_Formation_Order (Settings, Banlists, &FirstOrderCreated);  break;
                                     case 2: Menu_Search_Tasks (Settings);                                           break;
                                     case 3: Menu_Settings (Settings, Banlists);                                     break;
                                     case 4: Menu_Statistics (Settings, Banlists);                                   break;

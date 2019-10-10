@@ -5,6 +5,8 @@
 #ifndef _settings_class_h_
 #define _settings_class_h_
 
+#include "../libs/additional_functions.h"
+
 static std::string SaveTag_Path_to_Labs = "Path_to_Labs";
 static std::string SaveTag_Order_Start = "Order_Start";
 static std::string SaveTag_Close_Application = "Close_Application";
@@ -42,6 +44,8 @@ class Class_Settings : public AbstractClass_ConfigEditor {
 
     private:
 
+        std::string PK_Name; // имя профиля на пк исполнителя
+        std::string Disk_Path; // наименование логического жесткого диска на пк, где хранятся заказы
         std::string Config_Path; // место хранения файла с настройками
         std::string Labs_Path; // место сохранения лаб
         bool Automatic_Order_Start; // автоматический запуск создания заказа
@@ -53,17 +57,33 @@ class Class_Settings : public AbstractClass_ConfigEditor {
 
     public:
 
-        Class_Settings (const Class_Clients& Client) {
+        Class_Settings (void) {
 
-            Config_Path = "C:\\Users\\" + Client.getPK_Name () + "\\AppData\\Local\\Temp\\AutoTaskCreator_Settings.cfg";
+            PK_Name = Load_PK_UserName ();
+            Config_Path = "C:\\Users\\" + PK_Name + "\\AppData\\Local\\Temp\\AutoTaskCreator_Settings.cfg";
             Check_ConfigFile ();
             Load_Parameters ();
+            Disk_Path = Disk_Path + Labs_Path[0] + Labs_Path[1];
 
         }
 
         ~Class_Settings (void) {}
 
     //////////////////////////////////////////////
+
+        const void setPK_Name (const std::string Str) {
+
+			this->PK_Name = Str;
+
+		} // сеттер для PK_Name
+
+		const std::string getPK_Name (void) const {
+
+			return this->PK_Name;
+
+		} // геттер для PK_Name
+
+	//////////////////////////////////////////////
 
         const void setLabs_Path (const std::string Str) {
 
@@ -177,6 +197,20 @@ class Class_Settings : public AbstractClass_ConfigEditor {
 
     //////////////////////////////////////////////
 
+        const void setDisk_Path (const std::string Str) {
+
+            this->Disk_Path = Str;
+
+        } // сеттер для Disk_Path
+
+        const std::string getDisk_Path (void) const {
+
+            return this->Disk_Path;
+
+        } // геттер для Disk_Path
+
+    //////////////////////////////////////////////
+
          const void SetDefault_Parameters (void) {
 
             this->Labs_Path = "E:\\Orders\\C++Tasks";
@@ -184,17 +218,44 @@ class Class_Settings : public AbstractClass_ConfigEditor {
             this->Automatic_Close_Application = false;
             this->Automatic_Open_Order = true;
             this->Automatic_Update_BanList = true;
-            this->Url_BanList_Clients = "https://vk.com/topic-156779709_36343200";
-            this->Url_BanList_Workers = "https://vk.com/topic-156779709_39456558";
+            /*this->Url_BanList_Clients = "https://vk.com/topic-156779709_36343200";
+            this->Url_BanList_Workers = "https://vk.com/topic-156779709_39456558";*/
+            this->Url_BanList_Clients = "Debug";
+            this->Url_BanList_Workers = "Debug";
 
         } // метод установки настроек по умолчанию
 
+        const std::string Load_PK_UserName (void) const;
         const void Check_ConfigFile (void);
         const void Load_Parameters (void);
         const void SaveSettings (const bool) const;
         const bool Check_FilePath (const std::string& Path);
 
-};
+}; // класс настроек приложения
+
+const std::string Class_Settings::Load_PK_UserName (void) const {
+
+    const std::string PathPK_UserName = "C:\\Windows\\Temp\\PK_UserName.txt";
+    std::string Command = "@echo %UserName% > " + PathPK_UserName;
+    std::string PK_Name = "\0";
+
+    system (Command.c_str());
+
+    std::ifstream Read (PathPK_UserName.c_str ());
+
+        if (Read.is_open ())
+            Read >> PK_Name;
+
+        else
+            Exception ("File PK_UserName.txt didnt open");
+
+    Read.close ();
+
+    remove (PathPK_UserName.c_str ());
+
+    return PK_Name;
+
+} // метод получения названия имени пользователя-пк
 
 const void Class_Settings::Check_ConfigFile (void) {
 

@@ -5,14 +5,11 @@
 #ifndef _client_class_h_
 #define _client_class_h_
 
-#include "../libs/additional_functions.h"
-
 class Class_Clients {
 
 	private:
 
         std::string Name; // имя клиента
-		std::string PK_Name; // имя профиля на пк исполнителя
 		std::string Technology_Name; // название технологии
 		std::string IDE_Name; // название IDE
 		std::string OS_Name; // название операционной системы
@@ -25,7 +22,6 @@ class Class_Clients {
 		Class_Clients (void) {
 
             Name = "\0";
-			PK_Name = Load_PK_UserName ();
 			Technology_Name = "\0";
 			IDE_Name = "\0";
 			OS_Name = "\0";
@@ -50,20 +46,6 @@ class Class_Clients {
 			return this->Name;
 
 		} // геттер для Name
-
-	//////////////////////////////////////////////
-
-        const void setPK_Name (const std::string Str) {
-
-			this->PK_Name = Str;
-
-		} // сеттер для PK_Name
-
-		const std::string getPK_Name (void) const {
-
-			return this->PK_Name;
-
-		} // геттер для PK_Name
 
 	//////////////////////////////////////////////
 
@@ -163,34 +145,6 @@ class Class_Clients {
 
         } // очистка параметров клиента
 
-		const std::string Load_PK_UserName (void) const;
-
-
 }; // класс данных о вводимом клиенте
-
-const std::string Class_Clients::Load_PK_UserName (void) const {
-
-    const std::string PathPK_UserName = "C:\\Windows\\Temp\\PK_UserName.txt";
-    std::string Command = "@echo %UserName% > " + PathPK_UserName;
-    std::string PK_Name = "\0";
-
-    system (Command.c_str ());
-
-    std::ifstream Read (PathPK_UserName.c_str ());
-
-        if (Read.is_open ())
-            Read >> PK_Name;
-
-        else
-            Exception ("File PK_UserName.txt didnt open"); // переписать
-
-    Read.close ();
-
-    remove (PathPK_UserName.c_str ());
-
-    return PK_Name;
-
-} // метод получения названия имени пользователя-пк
-
 
 #endif // _client_class_h_

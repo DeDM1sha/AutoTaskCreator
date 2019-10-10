@@ -14,7 +14,7 @@ static std::string CodeBlocks = "Code::Blocks";
 static std::string Linux = "Linux";
 static std::string Windows = "Windows";
 
-static bool IsNumber (const std::string& Str){
+static bool IsNumber (const std::string& Str) {
 
         for (unsigned short int i = 0; i < Str.length(); i++) {
 
@@ -423,7 +423,7 @@ static std::string Create_Source_Code (const Class_Clients& Client, const Class_
 
 	Code.push ("}");
 
-    CodePath = "C:\\Users\\" + Client.getPK_Name () + "\\AppData\\Local\\Temp\\task.c";
+    CodePath = "C:\\Users\\" + Settings.getPK_Name () + "\\AppData\\Local\\Temp\\task.c";
 
 		if (Client.getTechnology_Name () == CPlusPlus)
 			CodePath += "pp";
@@ -458,7 +458,7 @@ static void SendFiles_To_ClientFolders (const Class_Clients& Client, const Class
 
             std::string Path = Settings.getLabs_Path () + "\\" + Client.getName () + "\\Old_TasksCount.txt";
             std::string Str = "\0";
-            system (std::string("dir /B > " + Settings.getLabs_Path () + "\\\"" + Client.getName () + "\"\\Old_TasksCount.txt").c_str());
+            system (std::string(Settings.getDisk_Path () + " && cd " + Settings.getLabs_Path () + "\\\"" + Client.getName () + "\" && dir /B > Old_TasksCount.txt").c_str());
 
             std::ifstream Read (Path.c_str ());
 
@@ -485,8 +485,13 @@ static void SendFiles_To_ClientFolders (const Class_Clients& Client, const Class
 
              std::ofstream Write ((Settings.getLabs_Path () + "\\" + Client.getName () + "\\Task_" + Convert_Int_toString (i) + "\\tz.txt").c_str ());
 
-                if (Write.is_open ())
+                if (Write.is_open ()) {
+
                     Write << "Technology = " << Client.getTechnology_Name () << "\n";
+                    Write << "IDE = " << Client.getIDE_Name () << "\n";
+                    Write << "OS = " << Client.getOS_Name ();
+
+                }
 
                 else
                     Exception ("tz.txt didnt created in new task folder");
@@ -510,8 +515,12 @@ static void SendFiles_To_ClientFolders (const Class_Clients& Client, const Class
 
                 if (Settings.getAutomatic_Open_Order()) {
 
-                    for (unsigned short int i = Old_TasksCount + 1; i < Client.getTasksCount () + Old_TasksCount + 1; i++)
-                        system (("start " + Settings.getLabs_Path () + "\\\"" + Client.getName () + "\"\\Task_" + Convert_Int_toString (i) + "\\task.c" + CPP).c_str());
+                    std::string Path = Settings.getLabs_Path () + "\\\"" + Client.getName () + "\"\\Task_";
+
+                    //for (unsigned short int i = Old_TasksCount + 1; i < Client.getTasksCount () + Old_TasksCount + 1; i++) // поочередное открытие
+                    for (unsigned short int i = Client.getTasksCount () + Old_TasksCount; i > Old_TasksCount; i--) // реверсивное открытие
+                        system (("start " + Path + Convert_Int_toString (i) + "\\task.c" + CPP).c_str());
+
                 }
 
         }
@@ -520,9 +529,10 @@ static void SendFiles_To_ClientFolders (const Class_Clients& Client, const Class
 
 } // функция отправки исходников по папкам проекта
 
-const void Menu_Formation_Order (Class_Clients& Client, const Class_Settings& Settings, const Class_BanLists& Banlists, bool* FirstOrderCreated) {
+const void Menu_Formation_Order (const Class_Settings& Settings, const Class_BanLists& Banlists, bool* FirstOrderCreated) {
 
     Show_Text_ForExit ();
+    Class_Clients Client; // инициализация объекта Client
 
         if (!Fill_InputData (Client, Banlists)) // заполнение данных по заказу
             return;

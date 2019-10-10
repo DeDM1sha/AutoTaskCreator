@@ -87,7 +87,7 @@ const void CenterText (const std::string Text) {
     CONSOLE_SCREEN_BUFFER_INFO consoleInfo;
     GetConsoleScreenBufferInfo ((GetStdHandle (STD_OUTPUT_HANDLE)), &consoleInfo);
 
-        for (unsigned short int i = 0; i < ((consoleInfo.srWindow.Right - consoleInfo.srWindow.Left + 1) / 2 - strlen (Text.c_str ()) / 2); i++)
+        for (unsigned short int i = 0; i < (((consoleInfo.srWindow.Right - consoleInfo.srWindow.Left + 1) >> 1) - (strlen (Text.c_str ()) >> 1)); ++i)
             printf (" ");
 
     printf ("%s", Text.c_str());
@@ -110,8 +110,6 @@ const void Exception (const std::string TextError) {
 	SetConsoleTextAttribute (GetStdHandle (STD_OUTPUT_HANDLE), (WORD) ((0 << 4) | 10));
 
 } // функция Exception - для отображения случившихся ошибок
-
-//////////////////////////////////////////////////////////////////////////////
 
 const bool Check_Input_ForExit (const std::string& Str) {
 
