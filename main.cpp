@@ -203,7 +203,7 @@ int main (void) {
 
                                 switch (MenuItem) {
 
-                                    case 1: Menu_Formation_Order (Settings, Banlists, &FirstOrderCreated);  break;
+                                    case 1: Menu_Formation_Order (Settings, Banlists, &FirstOrderCreated);          break;
                                     case 2: Menu_Search_Tasks (Settings);                                           break;
                                     case 3: Menu_Settings (Settings, Banlists);                                     break;
                                     case 4: Menu_Statistics (Settings, Banlists);                                   break;

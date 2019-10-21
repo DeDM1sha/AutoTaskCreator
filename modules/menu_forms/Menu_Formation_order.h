@@ -288,7 +288,7 @@ static std::string Create_Source_Code (const Class_Clients& Client, const Class_
 	std::queue <std::string> Code;
 
 		if (Client.getIDE_Name () == VisualStudio)
-			Code.push ("//#include \"stdafx.h\"\n");
+			Code.push ("//#pragma warning (disable:4786)\n");
 
     Code.push ("#include <windows.h>\n");
 
@@ -397,7 +397,7 @@ static std::string Create_Source_Code (const Class_Clients& Client, const Class_
 
 			Code.push ("						if (ButtonNumber == 27)\n");
 			Code.push ("							return 0; // завершение программы\n\n");
-			Code.push ("						if (ButtonNumber > 48 && ButtonNumber < 51) {\n\n");
+			Code.push ("						else if (ButtonNumber > 48 && ButtonNumber < 51) {\n\n");
 			Code.push ("							cls ();\n");
 			Code.push ("							break;\n\n");
 			Code.push ("						}\n\n");
