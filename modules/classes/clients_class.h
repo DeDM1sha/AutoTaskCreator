@@ -7,6 +7,9 @@
 
 class Class_Clients {
 
+public:
+    int NumB;
+
 	private:
 
         std::string Name; // имя клиента
@@ -16,6 +19,8 @@ class Class_Clients {
 		bool MenuFunctional; // базовый функционал для управления меню
 		unsigned short int TasksCount; // количество заданных заданий
 		unsigned short int Available_TasksCount; // количество уже имеющихся в базе заданий для этого клиента
+		unsigned short int MenuItems_Count; // количество пунктов в меню (для функционального управления программой)
+		std::vector <std::string> MenuItems_Title; // вектор заголовков к пунктам меню
 
 	public:
 
@@ -28,6 +33,10 @@ class Class_Clients {
 			MenuFunctional = false;
 			TasksCount = 0;
 			Available_TasksCount = 0;
+			MenuItems_Count = 3; // 3 пункта меню по умолчанию
+
+                if (MenuItems_Title.size () > 0)
+                    MenuItems_Title.clear ();
 
 		}
 
@@ -133,6 +142,42 @@ class Class_Clients {
 
     //////////////////////////////////////////////
 
+        const void setMenuItems_Count (const unsigned short int Number) {
+
+			this->MenuItems_Count = Number;
+
+		} // сеттер для MenuItems_Count
+
+		const unsigned short int getMenuItems_Count (void) const {
+
+			return this->MenuItems_Count;
+
+		} // геттер для MenuItems_Count
+
+	//////////////////////////////////////////////
+
+        const void setMenuItems_Title (const std::string Str) {
+
+            this->MenuItems_Title.push_back (Str);
+
+        } // сеттер для MenuItems_Title
+
+        const std::string getMenuItems_Title (const unsigned short int Index) const {
+
+            return this->MenuItems_Title[Index];
+
+        } // геттер для MenuItems_Title
+
+	//////////////////////////////////////////////
+
+        const unsigned short int get_Size_MenuItems_Title (void) const {
+
+            return this->MenuItems_Title.size ();
+
+        } // геттер для MenuItems_Title.size
+
+	//////////////////////////////////////////////
+
         const void Clear_Client_Parameters (void) {
 
             Name = "\0";
@@ -142,6 +187,10 @@ class Class_Clients {
 			MenuFunctional = false;
 			TasksCount = 0;
 			Available_TasksCount = 0;
+			MenuItems_Count = 3;
+
+                if (MenuItems_Title.size () > 0)
+                    MenuItems_Title.clear ();
 
         } // очистка параметров клиента
 

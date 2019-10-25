@@ -14,35 +14,19 @@ static std::string CodeBlocks = "Code::Blocks";
 static std::string Linux = "Linux";
 static std::string Windows = "Windows";
 
-static bool IsNumber (const std::string& Str) {
-
-        for (unsigned short int i = 0; i < Str.length(); i++) {
-
-            if (Str[i] != 45) // Проверка на знак минус
-                if ((Str[i] < 48) || (Str[i] > 57))
-                    return false;
-
-        } // Если в строке только цифровые символы значит это число
-
-    return true;
-
-} // функция проверки является ли строка - числом
-
 static bool Fill_InputData (Class_Clients& Client, const Class_BanLists& Banlists) {
 
-	unsigned short int Count = 0; // переменная отвечающая за созданное кол-во новых тасков
+	unsigned short int New_TasksCount = 0; // переменная отвечающая за созданное кол-во новых тасков
 	unsigned short int ButtonNumber = 0; // переменная для обработки нажатий в меню
 
         while (true) {
 
-            cls();
+            cls ();
             Client.Clear_Client_Parameters ();
 
             CenterText ("Создание нового заказа\n");
             Show_Text_ForExit ();
             Show_Text_In_Right_Corner ("Press F5 to reload formation order");
-
-            std::cout << "\n\nИмя клиента:   ";
 
             std::string Stroke = Show_Text_Input ("Имя клиента:   ");
 
@@ -187,7 +171,7 @@ static bool Fill_InputData (Class_Clients& Client, const Class_BanLists& Banlist
                                 if (ClickCatch ("Y", &ButtonNumber)) {
 
                                     Client.setMenuFunctional (true);
-                                    Show_Text_Output ("Yes");
+                                    Show_Text_Output ("Yes\n");
                                     break;
 
                                 }
@@ -195,7 +179,7 @@ static bool Fill_InputData (Class_Clients& Client, const Class_BanLists& Banlist
                                 else if (ClickCatch ("N", &ButtonNumber)) {
 
                                     Client.setMenuFunctional (false);
-                                    Show_Text_Output ("No");
+                                    Show_Text_Output ("No\n");
                                     break;
 
                                 }
@@ -213,42 +197,54 @@ static bool Fill_InputData (Class_Clients& Client, const Class_BanLists& Banlist
 
                 }
 
-            std::cout << "\n";
-
-                while (true) {
-
-                    std::cout << "\n\nКоличество заданий:   ";
-                    Stroke = Show_Text_Input ("\n\nКоличество заданий:   ");
-
-                        if (Check_Input_ForExit (Stroke))
-                            return false; // если было введено одно из службных слов для выхода - возврат в главное меню программы
-
-                        if (Stroke == "f5" || Stroke == "F5")
-                            break;
-
-                        if (IsNumber (Stroke))
-                            Count = Convert_String_toInt (Stroke);
-
-                        else
-                            continue;
-
-                        if (Count > -1 && Count < 1000)
-                            break;
-
-                } // проверка на дурака при вводе кол-ва заданий
+            GetNormal_Number_Value (&New_TasksCount, Stroke, "Количество заданий:   ", -1, 1000);
 
                 if (Stroke == "f5" || Stroke == "F5")
                     continue;
 
-                else if (Count == 0)
-                    return false;
+                if (Check_Input_ForExit (Stroke) || New_TasksCount == 0)
+                    return false; // если было введено одно из службных слов для выхода - возврат в главное меню программы
 
-                else
-                    break;
+            Client.setTasksCount (New_TasksCount);
+
+                if (Client.getMenuFunctional () == true && Client.getTasksCount () == 1) {
+
+                    unsigned short int Count_MenuItems = 0;
+
+                    GetNormal_Number_Value (&Count_MenuItems, Stroke, "Количество пунктов в меню:   ", -1, 100);
+
+                        if (Stroke == "f5" || Stroke == "F5")
+                            continue;
+
+                        if (Check_Input_ForExit (Stroke) || Count_MenuItems == 0)
+                            return false;
+
+                    Client.setMenuItems_Count (Count_MenuItems);
+
+                    std::cout << "\n\nНазвания к каждому пункту меню:\n";
+
+                        for (unsigned short int i = 0; i < Count_MenuItems; i++) {
+
+                            Stroke = Show_Text_Input (Convert_Int_toString (i + 1) + ")   ");
+
+                                    if (Stroke == "f5" || Stroke == "F5")
+                                        break;
+
+                                    if (Check_Input_ForExit (Stroke))
+                                        return false;
+
+                            Client.setMenuItems_Title (Stroke);
+
+                        }
+
+                        if (Stroke == "f5" || Stroke == "F5")
+                            continue;
+
+                } // если в программе будет меню, и всего 1 задача по заказу
+
+            break;
 
         } // конец жизненного цикла создания заказа
-
-    Client.setTasksCount (Count);
 
     return true;
 
@@ -284,6 +280,7 @@ static std::string Create_Source_Code (const Class_Clients& Client, const Class_
             return "\0";
 
     std::string CodePath = "\0";
+    std::string Stroke = "\0";
 
 	std::queue <std::string> Code;
 
@@ -369,23 +366,34 @@ static std::string Create_Source_Code (const Class_Clients& Client, const Class_
 			Code.push ("			ButtonNumber = 0;\n");
 			Code.push ("			cls ();\n\n");
 
-				if (Client.getTechnology_Name () == C) {
 
-					Code.push ("			printf (\"		Меню программы\\n\\n\");\n");
-					Code.push ("			printf (\"1. \\n\");\n");
-					Code.push ("			printf (\"2. \\n\");\n");
-					Code.push ("			printf (\"Esc. Выйти из программы\\n\");\n\n");
+                if (Client.getTechnology_Name () == C)
+                    Code.push ("			printf (\"		Меню программы\\n\\n\");\n");
 
-				}
+                else
+                    Code.push ("			cout << \"		Меню программы\\n\\n\";\n");
 
-				else {
+                for (unsigned short int i = 0; i < Client.getMenuItems_Count (); i++) {
 
-					Code.push ("			cout << \"		Меню программы\\n\\n\";\n");
-					Code.push ("			cout << \"1. \\n\";\n");
-					Code.push ("			cout << \"2. \\n\";\n");
-					Code.push ("			cout << \"Esc. Выйти из программы\\n\";\n\n");
+                    if (Client.getTasksCount () == 1) // если в программе будет функционал с меню, и создается только 1 задача
+                        Stroke = Client.getMenuItems_Title (i);
 
-				}
+                    else
+                        Stroke = "\0";
+
+                    if (Client.getTechnology_Name () == C)
+                        Code.push ("			printf (\"" + Convert_Int_toString (i + 1) + ". " + Stroke +"\\n\");\n");
+
+                    else
+                        Code.push ("			cout << \"" + Convert_Int_toString (i + 1) + ". " + Stroke + "\\n\";\n");
+
+                }
+
+                if (Client.getTechnology_Name () == C)
+                    Code.push ("			printf (\"Esc. Выйти из программы\\n\");\n\n");
+
+                else
+                    Code.push ("			cout << \"Esc. Выйти из программы\\n\";\n\n");
 
 			Code.push ("				while (true) { // защита от дурака по нажатию\n\n");
 
@@ -397,17 +405,32 @@ static std::string Create_Source_Code (const Class_Clients& Client, const Class_
 
 			Code.push ("						if (ButtonNumber == 27)\n");
 			Code.push ("							return 0; // завершение программы\n\n");
-			Code.push ("						else if (ButtonNumber > 48 && ButtonNumber < 51) {\n\n");
+			Code.push ("						else if (ButtonNumber > 48 && ButtonNumber < " + Convert_Int_toString (49 + Client.getMenuItems_Count ()) + ") {\n\n");
 			Code.push ("							cls ();\n");
 			Code.push ("							break;\n\n");
 			Code.push ("						}\n\n");
 			Code.push ("				}\n\n");
-			Code.push ("				if (ButtonNumber == 49) {\n\n\n\n");
-			Code.push ("					Continue ();\n\n");
-			Code.push ("				} //\n\n");
-			Code.push ("				if (ButtonNumber == 50) {\n\n\n\n");
-			Code.push ("					Continue ();\n\n");
-			Code.push ("				} //\n\n");
+
+			bool Flag = false;
+
+                for (unsigned short int i = 0; i < Client.getMenuItems_Count (); i++) {
+
+                        if (Flag == false) {
+
+                            Code.push ("				if (ButtonNumber == 49) {\n\n\n\n");
+                            Flag = true;
+
+                        }
+
+                        else
+                            Code.push ("				else if (ButtonNumber == " + Convert_Int_toString (49 + i) + ") {\n\n\n\n");
+
+
+                    Code.push ("					Continue ();\n\n");
+                    Code.push ("				} // " + Client.getMenuItems_Title (i) +"\n\n");
+
+                }
+
 			Code.push ("		} // конец жизненного цикла программы\n\n");
 
 		}

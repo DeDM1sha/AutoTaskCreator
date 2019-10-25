@@ -56,6 +56,8 @@ const std::string Show_Text_Input (std::string ErrorText) {
     const unsigned short int StrokeSize = 128;
     char Stroke [StrokeSize];
 
+    printf ("\n\n%s", ErrorText.c_str());
+
         while (true) {
 
                 for (unsigned short int i = 0; i < StrokeSize; i++)
@@ -142,5 +144,43 @@ const void Show_Text_ForExit (void) {
     Show_Text_In_Right_Corner ("Input Exit / Esc / !q for quit");
 
 } // функция для отображения подсказки для выхода из меню
+
+static bool IsNumber (const std::string& Str) {
+
+        for (unsigned short int i = 0; i < Str.length(); i++) {
+
+            if (Str[i] != 45) // Проверка на знак минус
+                if ((Str[i] < 48) || (Str[i] > 57))
+                    return false;
+
+        } // Если в строке только цифровые символы значит это число
+
+    return true;
+
+} // функция проверки является ли строка - числом
+
+const void GetNormal_Number_Value (unsigned short int *Count, std::string& Stroke, const std::string InputText, const short int LowerLimit, const short int UpperLimit) {
+
+        while (true) {
+
+            Stroke = Show_Text_Input (InputText);
+
+                if (Check_Input_ForExit (Stroke) || Stroke == "f5" || Stroke == "F5")
+                    return;
+
+                if (IsNumber (Stroke))
+                    *Count = Convert_String_toInt (Stroke);
+
+                else
+                    continue;
+
+                if (*Count > LowerLimit && *Count < UpperLimit)
+                    break;
+
+        } // проверка на дурака при вводе кол-ва заданий
+
+    return;
+
+} // функция для получения от пользователя корректного ввода числа
 
 #endif // _additional_functions_h_
