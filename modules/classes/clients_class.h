@@ -38,6 +38,9 @@ public:
                 if (MenuItems_Title.size () > 0)
                     MenuItems_Title.clear ();
 
+                for (unsigned short int i = 0; i < MenuItems_Count; i++)
+                    MenuItems_Title.push_back ("");
+
 		}
 
 		~Class_Clients (void) {}
@@ -168,13 +171,11 @@ public:
 
         } // геттер для MenuItems_Title
 
-	//////////////////////////////////////////////
+        const void Clear_MenuItems_Title (void) {
 
-        const unsigned short int get_Size_MenuItems_Title (void) const {
+            this->MenuItems_Title.clear ();
 
-            return this->MenuItems_Title.size ();
-
-        } // геттер для MenuItems_Title.size
+        } // clear для MenuItems_Title
 
 	//////////////////////////////////////////////
 
@@ -191,6 +192,9 @@ public:
 
                 if (MenuItems_Title.size () > 0)
                     MenuItems_Title.clear ();
+
+                for (unsigned short int i = 0; i < MenuItems_Count; i++)
+                    MenuItems_Title.push_back ("");
 
         } // очистка параметров клиента
 

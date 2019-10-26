@@ -33,7 +33,7 @@ static bool Fill_InputData (Class_Clients& Client, const Class_BanLists& Banlist
                 if (Check_Input_ForExit (Stroke))
                     return false; // если было введено одно из службных слов для выхода - возврат в главное меню программы
 
-                else if (Stroke == "f5" || Stroke == "F5")
+                else if (Check_Input_ForReload (Stroke))
                     continue;
 
                if (Banlists.Check_Client_inBanlists (Stroke)) {
@@ -199,7 +199,7 @@ static bool Fill_InputData (Class_Clients& Client, const Class_BanLists& Banlist
 
             GetNormal_Number_Value (&New_TasksCount, Stroke, "Количество заданий:   ", -1, 1000);
 
-                if (Stroke == "f5" || Stroke == "F5")
+                if (Check_Input_ForReload (Stroke))
                     continue;
 
                 if (Check_Input_ForExit (Stroke) || New_TasksCount == 0)
@@ -213,7 +213,7 @@ static bool Fill_InputData (Class_Clients& Client, const Class_BanLists& Banlist
 
                     GetNormal_Number_Value (&Count_MenuItems, Stroke, "Количество пунктов в меню:   ", -1, 100);
 
-                        if (Stroke == "f5" || Stroke == "F5")
+                        if (Check_Input_ForReload (Stroke))
                             continue;
 
                         if (Check_Input_ForExit (Stroke) || Count_MenuItems == 0)
@@ -221,13 +221,15 @@ static bool Fill_InputData (Class_Clients& Client, const Class_BanLists& Banlist
 
                     Client.setMenuItems_Count (Count_MenuItems);
 
+                    Client.Clear_MenuItems_Title ();
+
                     std::cout << "\n\nНазвания к каждому пункту меню:\n";
 
                         for (unsigned short int i = 0; i < Count_MenuItems; i++) {
 
                             Stroke = Show_Text_Input (Convert_Int_toString (i + 1) + ")   ");
 
-                                    if (Stroke == "f5" || Stroke == "F5")
+                                    if (Check_Input_ForReload (Stroke))
                                         break;
 
                                     if (Check_Input_ForExit (Stroke))
@@ -237,7 +239,7 @@ static bool Fill_InputData (Class_Clients& Client, const Class_BanLists& Banlist
 
                         }
 
-                        if (Stroke == "f5" || Stroke == "F5")
+                        if (Check_Input_ForReload (Stroke))
                             continue;
 
                 } // если в программе будет меню, и всего 1 задача по заказу
@@ -417,14 +419,19 @@ static std::string Create_Source_Code (const Class_Clients& Client, const Class_
 
                         if (Flag == false) {
 
-                            Code.push ("				if (ButtonNumber == 49) {\n\n\n\n");
+                            Code.push ("				if (ButtonNumber == 49) {\n\n");
                             Flag = true;
 
                         }
 
                         else
-                            Code.push ("				else if (ButtonNumber == " + Convert_Int_toString (49 + i) + ") {\n\n\n\n");
+                            Code.push ("				else if (ButtonNumber == " + Convert_Int_toString (49 + i) + ") {\n\n");
 
+                        if (Client.getTechnology_Name () == C)
+                            Code.push ("                    printf (\"      " + Client.getMenuItems_Title (i) + "\\n\\n\");\n\n\n\n");
+
+                        else
+                            Code.push ("                    cout << \"      " + Client.getMenuItems_Title (i) + "\\n\\n\";\n\n\n\n");
 
                     Code.push ("					Continue ();\n\n");
                     Code.push ("				} // " + Client.getMenuItems_Title (i) +"\n\n");
@@ -541,8 +548,12 @@ static void SendFiles_To_ClientFolders (const Class_Clients& Client, const Class
                     std::string Path = Settings.getLabs_Path () + "\\\"" + Client.getName () + "\"\\Task_";
 
                     //for (unsigned short int i = Old_TasksCount + 1; i < Client.getTasksCount () + Old_TasksCount + 1; i++) // поочередное открытие
-                    for (unsigned short int i = Client.getTasksCount () + Old_TasksCount; i > Old_TasksCount; i--) // реверсивное открытие
+                    for (unsigned short int i = Client.getTasksCount () + Old_TasksCount; i > Old_TasksCount; i--) { // реверсивное открытие
+
                         system (("start " + Path + Convert_Int_toString (i) + "\\task.c" + CPP).c_str());
+                        Delay (200);
+
+                    }
 
                 }
 

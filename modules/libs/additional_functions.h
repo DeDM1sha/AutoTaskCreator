@@ -115,12 +115,97 @@ const void Exception (const std::string TextError) {
 
 const bool Check_Input_ForExit (const std::string& Str) {
 
-        if (Str == "EXIT" || Str == "Exit" || Str == "exit" || Str == "ESC" || Str == "Esc" || Str == "esc" || Str == "!q")
-            return true;
+    bool Flag = false;
+
+        if (Str.length () == 2) { // для служебного слова !q
+
+            if (Str[0] == '!')
+                if (Str[1] == 'q' || Str[1] == 'Q')
+                    return true;
+
+        }
+
+        else if (Str.length () == 3) { // для служебного слова Esc
+
+            const std::string Small_Esc_Symbols = "esc";
+            const std::string Big_Esc_Symbols = "ESC";
+
+                for (unsigned short int i = 0; i < Str.length (); i++) {
+
+                    if (Str[i] == Small_Esc_Symbols[i] || Str[i] == Big_Esc_Symbols[i])
+                        Flag = true;
+
+                    else {
+
+                        Flag = false;
+                        break;
+
+                    }
+
+                }
+
+            return Flag;
+
+        }
+
+        else if (Str.length () == 4) { // для служебного слова Exit
+
+            const std::string Small_Exit_Symbols = "exit";
+            const std::string Big_Exit_Symbols = "EXIT";
+
+                for (unsigned short int i = 0; i < Str.length (); i++) {
+
+                    if (Str[i] == Small_Exit_Symbols[i] || Str[i] == Big_Exit_Symbols[i])
+                        Flag = true;
+
+                    else {
+
+                        Flag = false;
+                        break;
+
+                    }
+
+                }
+
+                if (Flag == false) { // для запасного слова Quit
+
+                    const std::string Small_Quit_Symbols = "quit";
+                    const std::string Big_Quit_Symbols = "QUIT";
+
+                        for (unsigned short int i = 0; i < Str.length (); i++) {
+
+                            if (Str[i] == Small_Quit_Symbols[i] || Str[i] == Big_Quit_Symbols[i])
+                                Flag = true;
+
+                            else {
+
+                                Flag = false;
+                                break;
+
+                            }
+
+                        }
+
+                }
+
+            return Flag;
+
+        }
+
 
     return false;
 
 } // функция для проверки ввода на строку выхода
+
+const bool Check_Input_ForReload (const std::string& Str) {
+
+        if (Str[0] == 'f' || Str[0] == 'F')
+            if (Str[1] == '5')
+                return true;
+
+    return false;
+
+} // функция для проверки ввода на строку перезагрузки
 
 const void Show_Text_In_Right_Corner (const std::string Str) {
 
@@ -141,7 +226,7 @@ const void Show_Text_In_Right_Corner (const std::string Str) {
 
 const void Show_Text_ForExit (void) {
 
-    Show_Text_In_Right_Corner ("Input Exit / Esc / !q for quit");
+    Show_Text_In_Right_Corner ("Input \"Exit\" / \"Esc\" / \"!q\" for quit");
 
 } // функция для отображения подсказки для выхода из меню
 
@@ -161,25 +246,23 @@ static bool IsNumber (const std::string& Str) {
 
 const void GetNormal_Number_Value (unsigned short int *Count, std::string& Stroke, const std::string InputText, const short int LowerLimit, const short int UpperLimit) {
 
-        while (true) {
+    while (true) {
 
-            Stroke = Show_Text_Input (InputText);
+        Stroke = Show_Text_Input (InputText);
 
-                if (Check_Input_ForExit (Stroke) || Stroke == "f5" || Stroke == "F5")
-                    return;
+            if (Check_Input_ForExit (Stroke) || Stroke == "f5" || Stroke == "F5")
+                return;
 
-                if (IsNumber (Stroke))
-                    *Count = Convert_String_toInt (Stroke);
+            if (IsNumber (Stroke))
+                *Count = Convert_String_toInt (Stroke);
 
-                else
-                    continue;
+            else
+                continue;
 
-                if (*Count > LowerLimit && *Count < UpperLimit)
-                    break;
+            if (*Count > LowerLimit && *Count < UpperLimit)
+                break;
 
-        } // проверка на дурака при вводе кол-ва заданий
-
-    return;
+    } // проверка на дурака при вводе числа
 
 } // функция для получения от пользователя корректного ввода числа
 
