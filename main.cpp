@@ -11,6 +11,7 @@
 #include <vector>
 #include <iomanip>
 #include <sstream>
+#include <stack>
 
 // подключение всех необходимых стандартных библиотек для проекта
 

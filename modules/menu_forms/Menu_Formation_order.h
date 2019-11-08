@@ -286,8 +286,12 @@ static std::string Create_Source_Code (const Class_Clients& Client, const Class_
 
 	std::queue <std::string> Code;
 
-		if (Client.getIDE_Name () == VisualStudio)
+		if (Client.getIDE_Name () == VisualStudio) {
+
 			Code.push ("//#pragma warning (disable:4786)\n");
+            Code.push ("#include <string>\n");
+
+		}
 
     Code.push ("#include <windows.h>\n");
 
@@ -541,13 +545,13 @@ static void SendFiles_To_ClientFolders (const Class_Clients& Client, const Class
             std::string CPP = "\0";
 
                 if (Client.getTechnology_Name () == CPlusPlus)
-                        CPP = "pp";
+                    CPP = "pp";
 
                 if (Settings.getAutomatic_Open_Order()) {
 
                     std::string Path = Settings.getLabs_Path () + "\\\"" + Client.getName () + "\"\\Task_";
 
-                    //for (unsigned short int i = Old_TasksCount + 1; i < Client.getTasksCount () + Old_TasksCount + 1; i++) // поочередное открытие
+                    //for (unsigned short int i = Old_TasksCount + 1; i < Client.getTasksCount () + Old_TasksCount + 1; i++) { // поочередное открытие
                     for (unsigned short int i = Client.getTasksCount () + Old_TasksCount; i > Old_TasksCount; i--) { // реверсивное открытие
 
                         system (("start " + Path + Convert_Int_toString (i) + "\\task.c" + CPP).c_str());
