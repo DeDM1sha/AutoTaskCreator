@@ -293,7 +293,8 @@ static std::string Create_Source_Code (const Class_Clients& Client, const Class_
 
 		}
 
-    Code.push ("#include <windows.h>\n");
+		if (Client.getOS_Name () == Windows)
+            Code.push ("#include <windows.h>\n");
 
 		if (Client.getMenuFunctional () == true) {
 
@@ -352,18 +353,20 @@ static std::string Create_Source_Code (const Class_Clients& Client, const Class_
 
 	Code.push ("int main (void) {\n\n");
 
+        if (Client.getOS_Name () == Windows) {
+
             Code.push ("	SetConsoleCP(1251);\n");
             Code.push ("	SetConsoleOutputCP(1251); // кириллица в консоли\n");
 
-        if (Client.getOS_Name () == Windows) {
+                if (Client.getIDE_Name () == Geany)
+                    Code.push ("	//system (\"title Лабораторная работа\");");
 
-            if (Client.getIDE_Name () == Geany)
-                Code.push ("	//system (\"title Лабораторная работа\");\n\n");
-
-            else
-                Code.push ("	system (\"title Лабораторная работа\");\n\n");
+                else
+                    Code.push ("	system (\"title Лабораторная работа\");");
 
         }
+
+    Code.push ("\n\n");
 
 		if (Client.getMenuFunctional () == true) {
 
@@ -555,7 +558,7 @@ static void SendFiles_To_ClientFolders (const Class_Clients& Client, const Class
                     for (unsigned short int i = Client.getTasksCount () + Old_TasksCount; i > Old_TasksCount; i--) { // реверсивное открытие
 
                         system (("start " + Path + Convert_Int_toString (i) + "\\task.c" + CPP).c_str());
-                        Delay (200);
+                        Delay (300);
 
                     }
 
