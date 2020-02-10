@@ -1,4 +1,4 @@
-// РљР»Р°СЃСЃ Р±Р°РЅ-Р»РёСЃС‚Р°
+// Класс бан-листа
 
 #pragma once
 
@@ -8,33 +8,33 @@
 static std::string SaveTag_ClientsList = "Clients:";
 static std::string SaveTag_WorkersList = "Workers:";
 
-/*static void SetProgramFile_Unicode (const std::string TypeUnicode) {
+static void SetProgramFile_Unicode (const std::string TypeUnicode) {
 
     if (TypeUnicode == "Program") {
 
         SetConsoleCP(1251);
         SetConsoleOutputCP(1251);
 
-    } // СѓСЃС‚Р°РЅРѕРІРєР° РєРёСЂРёР»Р»РёС†С‹ РґР»СЏ РїСЂРѕРіСЂР°РјРјС‹
+    } // установка кириллицы для программы
 
     else if (TypeUnicode == "File") {
 
         SetConsoleCP(CP_UTF8);
         SetConsoleOutputCP(CP_UTF8);
 
-    } // СѓСЃС‚Р°РЅРѕРІРєР° РєРёСЂРёР»Р»РёС†С‹ РґР»СЏ СЂР°Р±РѕС‚С‹ СЃ С„Р°Р№Р»РѕРј
+    } // установка кириллицы для работы с файлом
 
-} // С„СѓРЅРєС†РёСЏ РґР»СЏ СЃРјРµРЅС‹ РєРѕРґРёСЂРѕРІРєРё РІ Р·Р°РІРёСЃРёРјРѕСЃС‚Рё РѕС‚ Р·Р°РґР°С‡Рё*/
+} // функция для смены кодировки в зависимости от задачи
 
 class Class_BanLists : public AbstractClass_ConfigEditor {
 
     private:
 
-    std::string Banlist_Path; // РїСѓС‚СЊ Рє С…СЂР°РЅРµРЅРёСЋ Р±Р°РЅ-Р»РёСЃС‚Р°
-    unsigned short int TotalNumber_Clients_InBanList_Count; // РѕР±С‰РµРµ РєРѕР»-РІРѕ РєР»РёРµРЅС‚РѕРІ РІ Р±Р°РЅ-Р»РёСЃС‚Рµ
-    unsigned short int TotalNumber_Workers_InBanList_Count; // РѕР±С‰РµРµ РєРѕР»-РІРѕ РёСЃРїРѕР»РЅРёС‚РµР»РµР№ РІ Р±Р°РЅ-Р»РёСЃС‚Рµ
-    std::vector <std::string> ClientsBlockList; // СЃРїРёСЃРѕРє РІСЃРµС… Р·Р°Р±Р»РѕРєРёСЂРѕРІР°РЅРЅС‹С… РєР»РёРµРЅС‚РѕРІ
-    std::vector <std::string> WorkersBlockList; // СЃРїРёСЃРѕРє РІСЃРµС… Р·Р°Р±Р»РѕРєРёСЂРѕРІР°РЅРЅС‹С… РёСЃРїРѕР»РЅРёС‚РµР»РµР№
+    std::string Banlist_Path; // путь к хранению бан-листа
+    unsigned short int TotalNumber_Clients_InBanList_Count; // общее кол-во клиентов в бан-листе
+    unsigned short int TotalNumber_Workers_InBanList_Count; // общее кол-во исполнителей в бан-листе
+    std::vector <std::string> ClientsBlockList; // список всех заблокированных клиентов
+    std::vector <std::string> WorkersBlockList; // список всех заблокированных исполнителей
 
     public:
 
@@ -57,13 +57,13 @@ class Class_BanLists : public AbstractClass_ConfigEditor {
 
             this->Banlist_Path = Str;
 
-        } // СЃРµС‚С‚РµСЂ РґР»СЏ Banlist_Path
+        } // сеттер для Banlist_Path
 
         const std::string getBanlist_Path (void) const {
 
             return this->Banlist_Path;
 
-        } // РіРµС‚С‚РµСЂ РґР»СЏ Banlist_Path
+        } // геттер для Banlist_Path
 
     //////////////////////////////////////////////
 
@@ -71,13 +71,13 @@ class Class_BanLists : public AbstractClass_ConfigEditor {
 
             this->TotalNumber_Clients_InBanList_Count = Number;
 
-        } // СЃРµС‚С‚РµСЂ РґР»СЏ TotalNumber_Clients_InBanList_Count
+        } // сеттер для TotalNumber_Clients_InBanList_Count
 
         const unsigned short int getTotalNumber_Clients_InBanList_Count (void) const {
 
             return this->TotalNumber_Clients_InBanList_Count;
 
-        } // РіРµС‚С‚РµСЂ РґР»СЏ TotalNumber_Clients_InBanList_Count
+        } // геттер для TotalNumber_Clients_InBanList_Count
 
     //////////////////////////////////////////////
 
@@ -85,13 +85,13 @@ class Class_BanLists : public AbstractClass_ConfigEditor {
 
             this->TotalNumber_Workers_InBanList_Count = Number;
 
-        } // СЃРµС‚С‚РµСЂ РґР»СЏ TotalNumber_Workers_InBanList_Count
+        } // сеттер для TotalNumber_Workers_InBanList_Count
 
         const unsigned short int getTotalNumber_Workers_InBanList_Count (void) const {
 
             return this->TotalNumber_Workers_InBanList_Count;
 
-        } // РіРµС‚С‚РµСЂ РґР»СЏ TotalNumber_Workers_InBanList_Count
+        } // геттер для TotalNumber_Workers_InBanList_Count
 
     //////////////////////////////////////////////
 
@@ -102,20 +102,20 @@ class Class_BanLists : public AbstractClass_ConfigEditor {
             TotalNumber_Workers_InBanList_Count = 0;
             WorkersBlockList.clear ();
 
-        } // РјРµС‚РѕРґ РѕР±РЅСѓР»РµРЅРёСЏ Р±Р°РЅ-Р»РёСЃС‚РѕРІ
+        } // метод обнуления бан-листов
 
         const bool Check_BanlistsFile (void);
         const void Load_LocalBanlists (void);
         const void Update_Banlists (const Class_Settings&);
         const bool Check_Client_inBanlists (std::string&) const;
 
-}; // РєР»Р°СЃСЃ Р±Р°РЅ-Р»РёСЃС‚Р°
+}; // класс бан-листа
 
-const bool Class_BanLists::Check_BanlistsFile (void) { return false; } // РјРµС‚РѕРґ РІ СЃС‚Р°РґРёРё СЂР°Р·СЂР°Р±РѕС‚РєРё
+//const bool Class_BanLists::Check_BanlistsFile (void) { return false; } // метод в стадии разработки
 
-/*const bool Class_BanLists::Check_BanlistsFile (void) {
+const bool Class_BanLists::Check_BanlistsFile (void) {
 
-    bool Existence = true; // СЃСѓС‰РµСЃС‚РІРѕРІР°РЅРёРµ Р»РѕРєР°Р»СЊРЅРѕРіРѕ СЃРїРёСЃРєР° Р±Р°РЅ-Р»РёСЃС‚Р°
+    bool Existence = true; // существование локального списка бан-листа
     bool Clients_Founded = false;
     bool Workers_Founded = false;
     ConfigFile_Open (Banlist_Path);
@@ -156,7 +156,7 @@ const bool Class_BanLists::Check_BanlistsFile (void) { return false; } // РјРµС‚
 
             Clear_Banlists ();
 
-        } // РµСЃР»Рё С„Р°Р№Р»Р° РЅРµС‚, РёР»Рё С‡РµРіРѕ-С‚Рѕ РЅРµС…РІР°С‚Р°РµС‚ РІ РЅРµРј, С‚Рѕ СЃРѕР·РґР°РµРј С„Р°Р№Р» РєРѕРЅС„РёРіР° СЃ РґРµС„РѕР»С‚РЅС‹РјРё РЅР°СЃС‚СЂРѕР№РєР°РјРё
+        } // если файла нет, или чего-то нехватает в нем, то создаем файл конфига с дефолтными настройками
 
     std::ifstream Check (Banlist_Path.c_str ());
 
@@ -169,19 +169,19 @@ const bool Class_BanLists::Check_BanlistsFile (void) { return false; } // РјРµС‚
 
     return Existence;
 
-} // РјРµС‚РѕРґ РїСЂРѕРІРµСЂРєРё СЃСѓС‰РµСЃС‚РІРѕРІР°РЅРёСЏ С„Р°Р№Р»Р° СЃ РєРѕРЅС„РёРіРѕРј */
+} // метод проверки существования файла с конфигом
 
-const void Class_BanLists::Load_LocalBanlists (void) { return; } // РјРµС‚РѕРґ РІ СЃС‚Р°РґРёРё СЂР°Р·СЂР°Р±РѕС‚РєРё
+//const void Class_BanLists::Load_LocalBanlists (void) { return; } // метод в стадии разработки
 
-/* const void Class_BanLists::Load_LocalBanlists (void) {
+const void Class_BanLists::Load_LocalBanlists (void) {
 
     ConfigFile_Open (Banlist_Path);
+
+    SetProgramFile_Unicode("File");
 
     std::string Str = "\0";
     bool Clients_Founded = false;
     bool Workers_Founed = false;
-
-    SetProgramFile_Unicode ("File");
 
     std::ifstream Read (Banlist_Path.c_str ());
 
@@ -234,8 +234,6 @@ const void Class_BanLists::Load_LocalBanlists (void) { return; } // РјРµС‚РѕРґ Р
 
     Read.close ();
 
-    SetProgramFile_Unicode ("Program");
-
         if (Clients_Founded == false)
             Exception ("Not found clients in local ban-lists");
 
@@ -254,15 +252,18 @@ const void Class_BanLists::Load_LocalBanlists (void) { return; } // РјРµС‚РѕРґ Р
 
     ConfigFile_Close (Banlist_Path);
 
+    SetProgramFile_Unicode("Program");
+
     //system ("pause");
 
-} // РјРµС‚РѕРґ Р·Р°РіСЂСѓР·РєРё Р»РѕРєР°Р»СЊРЅРѕР№ Р±Р°Р·С‹ Р±Р°РЅ-Р»РёСЃС‚РѕРІ */
+} // метод загрузки локальной базы бан-листов
 
-const void Class_BanLists::Update_Banlists (const Class_Settings& Settings) { return; } // РјРµС‚РѕРґ РІ СЃС‚Р°РґРёРё СЂР°Р·СЂР°Р±РѕС‚РєРё
+//const void Class_BanLists::Update_Banlists (const Class_Settings& Settings) { return; } // метод в стадии разработки
 
-/*const void Class_BanLists::Update_Banlists (const Class_Settings& Settings) {
+const void Class_BanLists::Update_Banlists (const Class_Settings& Settings) {
 
-    std::string Parser_Clients_Command = "start modules\\parser_GnuWin32\\bin\\wget.exe " + Settings.getUrl_BanList_Clients () + " --no-check-certificate --html-extension --output-document=\"index.html\"";
+    //std::string Parser_Clients_Command = "start modules\\parser_GnuWin32\\bin\\wget.exe " + Settings.getUrl_BanList_Clients () + " --no-check-certificate --tries=1 --force-html --html-extension  --output-document=\"index.txt\"";
+	std::string Parser_Clients_Command = "start modules\\parser_GnuWin32\\bin\\wget.exe " + Settings.getUrl_BanList_Clients () + " --no-check-certificate —output-document=\"index.html\" —local-encoding=\"UTF-8\" —remote-encoding=\"UTF-8\"";
 	std::string Str = "\0";
 	system ((Parser_Clients_Command + " >nul").c_str ());
 
@@ -276,7 +277,7 @@ const void Class_BanLists::Update_Banlists (const Class_Settings& Settings) { re
 
         while (true) {
 
-            std::ifstream ReadCheck ("index.html");
+            std::ifstream ReadCheck ("topic-156779709_36343200");
 
                 while (ReadCheck >> Str);
 
@@ -287,13 +288,13 @@ const void Class_BanLists::Update_Banlists (const Class_Settings& Settings) { re
 
             Delay (1000);
 
-        } // РѕР¶РёРґР°РЅРёРµ РїРѕР»РЅРѕРіРѕ СЃРєР°С‡РёРІР°РЅРёСЏ РІСЃРµРіРѕ С„Р°Р№Р»Р°
+        } // ожидание полного скачивания всего файла
 
-    Delay (3000); // РїРµСЂРµРїРёСЃР°С‚СЊ Р·Р°РґРµСЂР¶РєСѓ РЅР° Р°РґРµРєРІР°С‚РЅСѓСЋ РїСЂРѕРІРµСЂРєСѓ РіРѕС‚РѕРІРЅРѕСЃС‚Рё
+    Delay (3000); // переписать задержку на адекватную проверку готовности
 
     system ("pause");
 
-	std::ifstream Read("index.html");
+	std::ifstream Read("topic-156779709_36343200");
 
         while (Read >> Str) {
 
@@ -369,8 +370,10 @@ const void Class_BanLists::Update_Banlists (const Class_Settings& Settings) { re
     Write << SaveTag_ClientsList << "\n";
 
         for (unsigned short int i = 0; i < ClientsBlockList.size (); i++) {
+
             Write << ClientsBlockList[i] << "\n";
             std::cout << ClientsBlockList[i] << "\n";
+
         }
 
         system ("pause");
@@ -384,12 +387,17 @@ const void Class_BanLists::Update_Banlists (const Class_Settings& Settings) { re
 
     remove ("index.html");
 
-} // РјРµС‚РѕРґ Р·Р°РіСЂСѓР·РєРё Р°РєС‚СѓР°Р»СЊРЅРѕРіРѕ Р±Р°РЅ-Р»РёСЃС‚Р° */
+} // метод загрузки актуального бан-листа
 
 const bool Class_BanLists::Check_Client_inBanlists (std::string& Str) const {
 
+    ConfigFile_Open (Banlist_Path);
+
+    // запись в файл на Си
+
+
     return false;
 
-} // РјРµС‚РѕРґ РїСЂРѕРІРµСЂРєРё РєР»РёРµРЅС‚Р° РІ Р±Р°РЅ-Р»РёСЃС‚Р°С…
+} // метод проверки клиента в бан-листах
 
 #endif // _banlist_class_h_

@@ -53,7 +53,7 @@
 
 1565631363 e:\cplusplus_projects\autotaskcreator\modules\classes\settings_class.h
 
-1574916068 source:e:\projects\cplusplus_projects\automation\autotaskcreator\main.cpp
+1581313013 source:e:\projects\cplusplus_projects\automation\autotaskcreator\main.cpp
 	<stdio.h>
 	<iostream>
 	<windows.h>
@@ -66,6 +66,7 @@
 	<iomanip>
 	<sstream>
 	<stack>
+	<iterator>
 	"modules/classes/clients_class.h"
 	"modules/classes/settings_class.h"
 	"modules/classes/banlists_class.h"
@@ -80,14 +81,14 @@
 1568086701 e:\projects\cplusplus_projects\automation\autotaskcreator\modules\classes\client_class.h
 	"../libs/additional_functions.h"
 
-1573233697 e:\projects\cplusplus_projects\automation\autotaskcreator\modules\libs\additional_functions.h
+1581339611 e:\projects\cplusplus_projects\automation\autotaskcreator\modules\libs\additional_functions.h
 
-1573233697 e:\projects\cplusplus_projects\automation\autotaskcreator\modules\classes\settings_class.h
+1581342362 e:\projects\cplusplus_projects\automation\autotaskcreator\modules\classes\settings_class.h
 	"../libs/additional_functions.h"
 
-1573233697 e:\projects\cplusplus_projects\automation\autotaskcreator\modules\classes\statistics_class.h
+1576005534 e:\projects\cplusplus_projects\automation\autotaskcreator\modules\classes\statistics_class.h
 
-1573233697 e:\projects\cplusplus_projects\automation\autotaskcreator\modules\libs\clickcatcher.h
+1581314998 e:\projects\cplusplus_projects\automation\autotaskcreator\modules\libs\clickcatcher.h
 
 1568211365 e:\projects\cplusplus_projects\automation\autotaskcreator\modules\menu_formation_order.h
 
@@ -97,19 +98,19 @@
 
 1568212623 e:\projects\cplusplus_projects\automation\autotaskcreator\modules\menu_statistics.h
 
-1573233697 e:\projects\cplusplus_projects\automation\autotaskcreator\modules\classes\clients_class.h
+1581306375 e:\projects\cplusplus_projects\automation\autotaskcreator\modules\classes\clients_class.h
 
 1568210622 e:\projects\cplusplus_projects\automation\autotaskcreator\modules\classes\banlist_class.h
 
-1573233697 e:\projects\cplusplus_projects\automation\autotaskcreator\modules\classes\banlists_class.h
+1581304836 e:\projects\cplusplus_projects\automation\autotaskcreator\modules\classes\banlists_class.h
 
-1576005134 e:\projects\cplusplus_projects\automation\autotaskcreator\modules\menu_forms\menu_formation_order.h
+1581339611 e:\projects\cplusplus_projects\automation\autotaskcreator\modules\menu_forms\menu_formation_order.h
 
-1573233697 e:\projects\cplusplus_projects\automation\autotaskcreator\modules\menu_forms\menu_search_tasks.h
+1581339611 e:\projects\cplusplus_projects\automation\autotaskcreator\modules\menu_forms\menu_search_tasks.h
 
-1573233697 e:\projects\cplusplus_projects\automation\autotaskcreator\modules\menu_forms\menu_settings.h
+1581342362 e:\projects\cplusplus_projects\automation\autotaskcreator\modules\menu_forms\menu_settings.h
 
-1573233697 e:\projects\cplusplus_projects\automation\autotaskcreator\modules\menu_forms\menu_statistics.h
+1576005534 e:\projects\cplusplus_projects\automation\autotaskcreator\modules\menu_forms\menu_statistics.h
 
 1570684434 source:e:\projects\cplusplus_projects\automation\autotaskcreator\modules\config\config.rc
 

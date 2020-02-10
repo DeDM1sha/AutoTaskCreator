@@ -1,28 +1,42 @@
-/*  Р”Р°РЅРЅР°СЏ Р±РёР±Р»РёРѕС‚РµРєР° РїРѕР·РІРѕР»СЏРµС‚ СѓРїСЂРѕСЃС‚РёС‚СЊ СЂР°Р±РѕС‚Сѓ СЃ С„СѓРЅРєС†РёРµР№ getch, РїСѓС‚РµРј РѕС‚РїСЂР°РІРєРё РІ РґР°РЅРЅСѓСЋ С„СѓРЅРєС†РёСЋ РЅР°Р·РІР°РЅРёСЏ Р¶РµР»Р°РµРјРѕР№
-    РЅР°Р¶Р°С‚РѕР№ РїРѕР»СЊР·РѕРІР°С‚РµР»РµРј РєРЅРѕРїРєРё, Рё РЅРѕРјРµСЂРѕРј СЌС‚РѕР№ РєРѕРЅРїРєРё.
+/*  Данная библиотека позволяет упростить работу с функцией getch, путем отправки в данную функцию названия желаемой
+    нажатой пользователем кнопки, и номером этой конпки.
 
-//  РџРµСЂРІС‹Р№ РїР°СЂР°РјРµС‚СЂ С„СѓРЅРєС†РёРё РѕС‚РІРµС‡Р°РµС‚ Р·Р° РЅР°Р·РІР°РЅРёРµ РЅСѓР¶РЅРѕР№ РЅР°Рј РєР»Р°РІРёС€Рё РЅР° РєР»Р°РІРёР°С‚СѓСЂРµ, Рё РёРјРµРµС‚ С‚РёРї std::string.
-    РџСЂРµРґСѓСЃРјРѕС‚СЂРµРЅРѕ РЅР°РїРёСЃР°РЅРёРµ РЅР°Р·РІР°РЅРёСЏ РєР»Р°РІРёС€Рё РІ СЂР°Р·РЅС‹С… СЂРµРіРёСЃС‚СЂР°С…, РЅРѕ С‚РѕР»СЊРєРѕ РЅР° Р»Р°С‚РёРЅРёС†Рµ.
-    РџСЂРёРјРµСЂ:
+///// Функция с одинарным параметром входной кнопки
 
-    * "Esc" - Рё РµС‰Рµ 3 РІР°СЂРёР°С†РёРё РЅР°РїРёСЃР°РЅРёСЏ СЌС‚РѕРіРѕ СЃР»РѕРІР° (esc, Esc, ESC)
-    * "Delete" - Рё РѕСЃС‚Р°Р»СЊРЅС‹Рµ 3 РІР°СЂРёР°С†РёРё (delete, Delete, DELETE)
-    * "3" - Рё РѕСЃС‚Р°Р»СЊРЅС‹Рµ 3 РІР°СЂРёР°С†РёРё (3, #, в„–)
-    * Рё С‚.Рґ.
+//  Первый параметр функции отвечает за название нужной нам клавиши на клавиатуре, и имеет тип std::string.
+    Предусмотрено написание названия клавиши в разных регистрах, но только на латинице.
+    Пример:
 
-//  Р’С‚РѕСЂРѕР№ РїР°СЂР°РјРµС‚СЂ С„СѓРЅРєС†РёРё РѕС‚РІРµС‡Р°РµС‚ Р·Р° ASCII РЅРѕРјРµСЂ РєР»Р°РІРёС€Рё, Рё РёРјРµРµС‚ С‚РёРї unsigned short int.
-    РџСЂРµРґСѓСЃРјРѕС‚СЂРµРЅС‹ РІСЃРµ РІРѕР·РјРѕР¶РЅС‹Рµ РІР°СЂРёР°РЅС‚С‹ РЅСѓРјРµСЂР°С†РёРё РєР°Р¶РґРѕР№ РєР»Р°РІРёС€Рё РёР· РІСЃРµС… РІРѕР·РјРѕР¶РЅС‹С…,
-    РІРєР»СЋС‡Р°СЏ Рё РѕР±Р° СЂРµРіРёСЃС‚СЂР°, Рё РѕР±Р° СЏР·С‹РєР° РґР»СЏ РєР°Р¶РґРѕР№ РєР»Р°РІРёС€Рё - С‚Рѕ Р±РёС€СЊ, РІР·СЏРІ РЅР°РїСЂРёРјРµСЂ РѕС‚РґРµР»СЊРЅРѕ РІР·СЏС‚СѓСЋ РєР»Р°РІРёС€Сѓ G -
-    Р±СѓРґРµС‚ СѓСЃРїРµС€РЅРѕ РѕР±СЂР°Р±РѕС‚Р°РЅРѕ РІСЃРµ 4 РІР°СЂРёР°РЅС‚Р° РєРѕРґР° СЌС‚РѕР№ РєР»Р°РІРёС€Рё, Р° РёРјРµРЅРЅРѕ:
+    * "Esc" - и еще 3 вариации написания этого слова (esc, Esc, ESC)
+    * "Delete" - и остальные 3 вариации (delete, Delete, DELETE)
+    * "3" - и остальные 3 вариации (3, #, №)
+    * и т.д.
 
-    * "Рї" - РјР°Р»РµРЅСЊРєР°СЏ Р±СѓРєРІР° РЅР° РєРёСЂРёР»Р»РёС†Рµ
-    * "Рџ" - Р±РѕР»СЊС€Р°СЏ Р±СѓРєРІР° РЅР° РєРёСЂРёР»Р»РёС†Рµ
-    * "g" - РјР°Р»РµРЅСЊРєР°СЏ Р±СѓРєРІР° РЅР° Р»Р°С‚РёРЅРёС†Рµ
-    * "G" - Р±РѕР»СЊС€Р°СЏ Р±СѓРєРІР° РЅР° Р»Р°С‚РёРЅРёС†Рµ.
+//  Второй параметр функции отвечает за ASCII номер клавиши, и имеет тип unsigned short int.
+    Предусмотрены все возможные варианты нумерации каждой клавиши из всех возможных,
+    включая и оба регистра, и оба языка для каждой клавиши - то бишь, взяв например отдельно взятую клавишу G -
+    будет успешно обработано все 4 варианта кода этой клавиши, а именно:
 
-    РЎСЋРґР° СЃР»РµРґСѓРµС‚ РѕС‚РїСЂР°РІР»СЏС‚СЊ Р·РЅР°С‡РµРЅРёРµ, РїРѕР»СѓС‡РµРЅРЅРѕРµ С„СѓРЅРєС†РёРµР№ getch РІ РѕСЃРЅРѕРІРЅРѕР№ РїСЂРѕРіСЂР°РјРјРµ.
+    * "п" - маленькая буква на кириллице
+    * "П" - большая буква на кириллице
+    * "g" - маленькая буква на латинице
+    * "G" - большая буква на латинице.
 
-    * Р”РѕРїСѓСЃРєР°РµС‚СЃСЏ Р»СЋР±РѕР№ РїРѕСЂСЏРґРѕРє РІРІРѕРґР° Р°СЂРіСѓРјРµРЅС‚Р°
+    Сюда следует отправлять значение, полученное функцией getch в основной программе.
+
+    * Допускается любой порядок ввода аргумента
+
+///// Функция с массивом параметров входных кнопок
+
+//  Первый параметр - ASCII номер клавиши, типа unsigned short int (передается аргумент по ссылке на переменную)
+
+//  Второй параметр - строка, в которой перечислено через запятую названия кнопок
+    Пример:
+
+    * ("Esc, 1, 2, 3, 4, 5, 6, 7, 8, Tab") - будут зафиксированы все 10 наименований кнопок,
+    с каждым из которых по отдельности будет сверен первый параметр
+    По аналогии с вышеописаным, предусмотрены разные регистры написания одних и тех же названия кнопок,
+    по 2-3 альтернативных варианта на каждую кнопку.
 
 */
 
@@ -74,9 +88,9 @@ const bool ClickCatch (const std::string Button_Name, const unsigned short int* 
 		else if ((Button_Name == "F12" || Button_Name == "f12") && (*Button_Number == 134 || *Button_Number == 136))
 			return true;
 
-		/* Esc -> F12 */
+    /* Esc -> F12 */
 
-		/* ~ -> - Page Up */
+    /* ~ -> - Page Up */
 
 		else if ((Button_Name == "`" || Button_Name == "~") && (*Button_Number == 96 || *Button_Number == 126 || *Button_Number == 184 || *Button_Number == 168))
 			return true;
@@ -87,7 +101,7 @@ const bool ClickCatch (const std::string Button_Name, const unsigned short int* 
 		else if ((Button_Name == "2" || Button_Name == "@" || Button_Name == "\"") && (*Button_Number == 50 || *Button_Number == 64 || *Button_Number == 34))
 			return true;
 
-		else if ((Button_Name == "3" || Button_Name == "#" || Button_Name == "в„–") && (*Button_Number == 51 || *Button_Number == 35 || *Button_Number == 185))
+		else if ((Button_Name == "3" || Button_Name == "#" || Button_Name == "№") && (*Button_Number == 51 || *Button_Number == 35 || *Button_Number == 185))
 			return true;
 
 		else if ((Button_Name == "4" || Button_Name == "$" || Button_Name == ";") && (*Button_Number == 52 || *Button_Number == 36 || *Button_Number == 59))
@@ -129,9 +143,9 @@ const bool ClickCatch (const std::string Button_Name, const unsigned short int* 
 		else if ((Button_Name == "PAGEUP" || Button_Name == "PAGE UP" || Button_Name == "PageUp" || Button_Name == "Page Up" || Button_Name == "pageup" || Button_Name == "page up") && *Button_Number == 73)
 			return true;
 
-		/* ~ -> Page Up */
+    /* ~ -> Page Up */
 
-		/* Tab -> Page Down */
+    /* Tab -> Page Down */
 
 		else if ((Button_Name == "TAB" || Button_Name == "Tab" || Button_Name == "tab") && *Button_Number == 9)
 			return true;
@@ -184,9 +198,9 @@ const bool ClickCatch (const std::string Button_Name, const unsigned short int* 
 		else if ((Button_Name == "PAGEDOWN" || Button_Name == "PAGE DOWN" || Button_Name == "PageDown" || Button_Name == "Page Down" || Button_Name == "pagedown" || Button_Name == "page down") && *Button_Number == 81)
 			return true;
 
-		/* Tab -> + Page Down */
+    /* Tab -> + Page Down */
 
-		/* A -> Enter */
+    /* A -> Enter */
 
 		else if ((Button_Name == "A" || Button_Name == "a") && (*Button_Number == 97 || *Button_Number == 65 || *Button_Number == 244 || *Button_Number == 212))
 			return true;
@@ -224,9 +238,9 @@ const bool ClickCatch (const std::string Button_Name, const unsigned short int* 
 		else if ((Button_Name == "ENTER" || Button_Name == "Enter" || Button_Name == "enter") && *Button_Number == 13)
 			return true;
 
-		/* A -> Enter */
+    /* A -> Enter */
 
-		/* Z -> Arrow_Up */
+    /* Z -> Arrow_Up */
 
 		else if ((Button_Name == "Z" || Button_Name == "z") && (*Button_Number == 90 || *Button_Number == 122 || *Button_Number == 223 || *Button_Number == 255))
 			return true;
@@ -261,9 +275,9 @@ const bool ClickCatch (const std::string Button_Name, const unsigned short int* 
 		else if ((Button_Name == "ARROW_UP" || Button_Name == "Arrow_Up" || Button_Name == "arror_up") && *Button_Number == 72)
 			return true;
 
-		/* Z -> Arrow_Up */
+    /* Z -> Arrow_Up */
 
-		/* Space -> Arrow_Right */
+    /* Space -> Arrow_Right */
 
 		else if ((Button_Name == "SPACE" || Button_Name == "Space" || Button_Name == "space") && *Button_Number == 32)
 			return true;
@@ -277,16 +291,39 @@ const bool ClickCatch (const std::string Button_Name, const unsigned short int* 
 		else if ((Button_Name == "ARROW_RIGHT" || Button_Name == "Arrow_Right" || Button_Name == "arrow_right") && *Button_Number == 77)
 			return true;
 
-		/* Space -> Arrow_Right */
+    /* Space -> Arrow_Right */
 
     return false;
 
-} // С„СѓРЅРєС†РёСЏ РѕР±СЂР°Р±РѕС‚РєРё РЅР°Р¶Р°С‚РѕР№ Рё С‚СЂРµР±СѓРµРјРѕР№ РєРЅРѕРїРєРё
+} // функция обработки нажатой и требуемой кнопки (одной)
 
-const bool ClickCatch (const unsigned short int* Button_Number, const std::string Button_Name) {
+const bool ClickCatch (const unsigned short int* Button_Number, const std::string Buttons_Massive_Name)  {
 
-    return ClickCatch (Button_Name, Button_Number);
+    std::vector <std::string> Buttons_Vector; // вектор входных строк-кнопок
+    std::string Temp = "\0";
 
-} // С„СѓРЅРєС†РёСЏ РЅР° СЃР»СѓС‡Р°Р№ РµСЃР»Рё РІРІРµРґСѓС‚ РёРЅРѕР№ РїРѕСЂСЏРґРѕРє Р°СЂРіСѓРјРµРЅС‚РѕРІ
+        for (unsigned short int i = 0; i < Buttons_Massive_Name.length (); i++) {
+
+            if (Buttons_Massive_Name[i] == ',') {
+
+                Buttons_Vector.push_back (Temp);
+                Temp = "\0";
+
+            }
+
+            else if (Buttons_Massive_Name[i] != '\0' && Buttons_Massive_Name[i] != ' ')
+                Temp += Buttons_Massive_Name[i];
+
+        }
+
+    Buttons_Vector.push_back (Temp);
+
+        for (unsigned short int i = 0; i < Buttons_Vector.size (); i++)
+            if (ClickCatch (Buttons_Vector[i], Button_Number) == true)
+                return true;
+
+    return false;
+
+} // функция для массива входных кнопок
 
 #endif // _click_catcher_h_

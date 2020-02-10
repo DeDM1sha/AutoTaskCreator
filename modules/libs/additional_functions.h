@@ -1,11 +1,11 @@
-// РњРѕРґСѓР»СЊ-С…СЂР°РЅРёР»РёС‰Рµ РІСЃРµС… РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹С… РѕР±С‰РёС… РіР»РѕР±Р°Р»СЊРЅС‹С… С„СѓРЅРєС†РёР№ РґР»СЏ РїСЂРѕРµРєС‚Р°
+// Модуль-хранилище всех дополнительных общих глобальных функций для проекта
 
 #pragma once
 
 #ifndef _additional_functions_h_
 #define _additional_functions_h_
 
-/* Р“Р»РѕР±Р°Р»СЊРЅС‹Рµ РѕР±С‰РёРµ С„СѓРЅРєС†РёРё */
+/* Глобальные общие функции */
 
 const std::string Convert_Int_toString (unsigned short int Number) {
 
@@ -14,7 +14,7 @@ const std::string Convert_Int_toString (unsigned short int Number) {
 
     return std::string(ConverInt_ToString.str());
 
-} // С„СѓРЅРєС†РёСЏ РєРѕРЅРІРµСЂС‚РёСЂРѕРІР°РЅРёСЏ РёР· int РІ string
+} // функция конвертирования из int в string
 
 const unsigned short int Convert_String_toInt (std::string Str) {
 
@@ -25,7 +25,7 @@ const unsigned short int Convert_String_toInt (std::string Str) {
 
     return Number;
 
-} // С„СѓРЅРєС†РёСЏ РєРѕРЅРІРµСЂС‚Р°С†РёРёРё РёР· string РІ int
+} // функция конвертациии из string в int
 
 const void Delay (const unsigned short int Time) {
 
@@ -33,7 +33,7 @@ const void Delay (const unsigned short int Time) {
 
 		while (clock () < end_time);
 
-} // С„СѓРЅРєС†РёСЏ Р·Р°РґРµСЂР¶РєРё
+} // функция задержки
 
 const void Show_Text_Output (const std::string Text) {
 
@@ -43,46 +43,58 @@ const void Show_Text_Output (const std::string Text) {
 
 	SetConsoleTextAttribute (GetStdHandle (STD_OUTPUT_HANDLE), (WORD) ((0 << 4) | 10));
 
-} // С„СѓРЅРєС†РёСЏ РґР»СЏ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ Р·Р°РґР°РЅРЅРѕР№ СЃС‚СЂРѕРєРё РґСЂСѓРіРёРј С†РІРµС‚РѕРј
+} // функция для отображения заданной строки другим цветом
 
 const void Show_Number_Output (const unsigned short int& Number) {
 
     Show_Text_Output (Convert_Int_toString (Number));
 
-} // С„СѓРЅРєС†РёСЏ РґР»СЏ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ Р·Р°РґР°РЅРЅРѕРіРѕ С‡РёСЃР»Р° РґСЂСѓРіРёРј С†РІРµС‚РѕРј
+} // функция для отображения заданного числа другим цветом
 
-const std::string Show_Text_Input (std::string ErrorText) {
+const std::string Show_Text_Input (std::string ErrorText, const bool Show_ErrorText_AtStart) {
 
     const unsigned short int StrokeSize = 128;
     char Stroke [StrokeSize];
+    std::string Str = "\0";
 
-    printf ("\n\n%s", ErrorText.c_str());
+        if (Show_ErrorText_AtStart == true)
+            printf ("\n\n%s", ErrorText.c_str());
 
         while (true) {
 
                 for (unsigned short int i = 0; i < StrokeSize; i++)
-                    Stroke[i] = '\0'; // РѕС‡РёСЃС‚РєР° СЃС‚СЂРѕРєРё РѕС‚ РјСѓСЃРѕСЂР°
+                    Stroke[i] = '\0'; // очистка строки от мусора
 
             SetConsoleTextAttribute (GetStdHandle (STD_OUTPUT_HANDLE), (WORD) ((0 << 4) | 11));
 
-            fflush (stdin); // РѕС‡РёСЃС‚РєР° РїРѕС‚РѕРєР° РІРІРѕРґР°
-            fgets (Stroke, StrokeSize, stdin); // СЃС‡РёС‚С‹РІР°РµРј РІСЃСЋ СЃС‚СЂРѕРєСѓ СЃ РїСЂРѕР±РµР»Р°РјРё
+            fflush (stdin); // очистка потока ввода
+            fgets (Stroke, StrokeSize, stdin); // считываем всю строку с пробелами
 
             SetConsoleTextAttribute (GetStdHandle (STD_OUTPUT_HANDLE), (WORD) ((0 << 4) | 10));
 
-            std::string Str = std::string (Stroke); // РёРЅРёС†РёР°Р»РёР·РёСЂСѓРµРј СЃС‚СЂРѕРєСѓ С‚РёРїР° string, РІ РЅРµРµ Р·Р°РєРёРґС‹РІР°РµРј РІСЃСЋ СЃС‚СЂРѕРєСѓ Stroke
+            std::string Temp = std::string (Stroke); // инициализируем строку типа string, в нее закидываем всю строку Stroke
 
-            Str.erase (Str.length () - 1, Str.length ()); // СЃС‚РёСЂР°РµРј РІСЃСЋ РѕСЃС‚Р°РІС€СѓСЋСЃСЏ РЅРµРЅСѓР¶РЅСѓСЋ С‡Р°СЃС‚СЊ СЃС‚СЂРѕРєРё (РІСЃРµ С‚Р°Р±С‹, Р»РёС€РЅРёРµ РїСЂРѕР±РµР»С‹)
+            Temp.erase (Temp.length () - 1, Temp.length ()); // стираем всю оставшуюся ненужную часть строки (все табы, лишние пробелы)
 
-                if (Str.length () > 0)
-                    return Str;
+                if (Temp.length () > 0) {
+
+                    Str = Temp;
+                    break;
+
+                }
 
                 else
                     printf ("\n\n%s", ErrorText.c_str());
 
         }
 
-} // С„СѓРЅРєС†РёСЏ РґР»СЏ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ РІРІРѕРґРёРјС‹С… РґР°РЅРЅС‹С… РґСЂСѓРіРёРј С†РІРµС‚РѕРј
+    return Str;
+
+} // функция для отображения вводимых данных другим цветом
+  // * первым аргументом выступает строка, которая будет выводиться в случае неверного ввода,
+  // для повторного запуска бесконечного цикла на ввод
+  // * второй аргумент отвечает за то, чтобы входная строка (первого аргумента) - отобразилась в самом начале,
+  // не дожидаясь неверного ввода (задавая тем самым текстовое поле-описание для пользователя при вводе)
 
 const void CenterText (const std::string Text) {
 
@@ -94,13 +106,13 @@ const void CenterText (const std::string Text) {
 
     printf ("%s", Text.c_str());
 
-} // С„СѓРЅРєС†РёСЏ С†РµРЅС‚РёСЂРѕРІР°РЅРёСЏ С‚РµРєСЃС‚Р° РЅР° СЌРєСЂР°РЅРµ
+} // функция центирования текста на экране
 
 const void cls (void) {
 
     system ("cls");
 
-} // С„СѓРЅРєС†РёСЏ РѕС‡РёСЃС‚РєРё СЌРєСЂР°РЅР°
+} // функция очистки экрана
 
 const void Exception (const std::string TextError) {
 
@@ -111,13 +123,13 @@ const void Exception (const std::string TextError) {
 
 	SetConsoleTextAttribute (GetStdHandle (STD_OUTPUT_HANDLE), (WORD) ((0 << 4) | 10));
 
-} // С„СѓРЅРєС†РёСЏ Exception - РґР»СЏ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ СЃР»СѓС‡РёРІС€РёС…СЃСЏ РѕС€РёР±РѕРє
+} // функция Exception - для отображения случившихся ошибок
 
 const bool Check_Input_ForExit (const std::string& Str) {
 
     bool Flag = false;
 
-        if (Str.length () == 2) { // РґР»СЏ СЃР»СѓР¶РµР±РЅРѕРіРѕ СЃР»РѕРІР° !q
+        if (Str.length () == 2) { // для служебного слова !q
 
             if (Str[0] == '!')
                 if (Str[1] == 'q' || Str[1] == 'Q')
@@ -125,7 +137,7 @@ const bool Check_Input_ForExit (const std::string& Str) {
 
         }
 
-        else if (Str.length () == 3) { // РґР»СЏ СЃР»СѓР¶РµР±РЅРѕРіРѕ СЃР»РѕРІР° Esc
+        else if (Str.length () == 3) { // для служебного слова Esc
 
             const std::string Small_Esc_Symbols = "esc";
             const std::string Big_Esc_Symbols = "ESC";
@@ -148,7 +160,7 @@ const bool Check_Input_ForExit (const std::string& Str) {
 
         }
 
-        else if (Str.length () == 4) { // РґР»СЏ СЃР»СѓР¶РµР±РЅРѕРіРѕ СЃР»РѕРІР° Exit
+        else if (Str.length () == 4) { // для служебного слова Exit
 
             const std::string Small_Exit_Symbols = "exit";
             const std::string Big_Exit_Symbols = "EXIT";
@@ -167,7 +179,7 @@ const bool Check_Input_ForExit (const std::string& Str) {
 
                 }
 
-                if (Flag == false) { // РґР»СЏ Р·Р°РїР°СЃРЅРѕРіРѕ СЃР»РѕРІР° Quit
+                if (Flag == false) { // для запасного слова Quit
 
                     const std::string Small_Quit_Symbols = "quit";
                     const std::string Big_Quit_Symbols = "QUIT";
@@ -195,7 +207,7 @@ const bool Check_Input_ForExit (const std::string& Str) {
 
     return false;
 
-} // С„СѓРЅРєС†РёСЏ РґР»СЏ РїСЂРѕРІРµСЂРєРё РІРІРѕРґР° РЅР° СЃС‚СЂРѕРєСѓ РІС‹С…РѕРґР°
+} // функция для проверки ввода на строку выхода
 
 const bool Check_Input_ForReload (const std::string& Str) {
 
@@ -205,7 +217,7 @@ const bool Check_Input_ForReload (const std::string& Str) {
 
     return false;
 
-} // С„СѓРЅРєС†РёСЏ РґР»СЏ РїСЂРѕРІРµСЂРєРё РІРІРѕРґР° РЅР° СЃС‚СЂРѕРєСѓ РїРµСЂРµР·Р°РіСЂСѓР·РєРё
+} // функция для проверки ввода на строку перезагрузки
 
 const void Show_Text_In_Right_Corner (const std::string Str) {
 
@@ -222,33 +234,33 @@ const void Show_Text_In_Right_Corner (const std::string Str) {
 
     std::cout << Str << "\n";
 
-} // С„СѓРЅРєС†РёСЏ РґР»СЏ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ С‚РµРєСЃС‚Р° РІ РїСЂР°РІРѕРј СѓРіР»Сѓ
+} // функция для отображения текста в правом углу
 
 const void Show_Text_ForExit (void) {
 
     Show_Text_In_Right_Corner ("Input \"Exit\" / \"Esc\" / \"!q\" for quit");
 
-} // С„СѓРЅРєС†РёСЏ РґР»СЏ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ РїРѕРґСЃРєР°Р·РєРё РґР»СЏ РІС‹С…РѕРґР° РёР· РјРµРЅСЋ
+} // функция для отображения подсказки для выхода из меню
 
 static bool IsNumber (const std::string& Str) {
 
         for (unsigned short int i = 0; i < Str.length(); i++) {
 
-            if (Str[i] != 45) // РџСЂРѕРІРµСЂРєР° РЅР° Р·РЅР°Рє РјРёРЅСѓСЃ
+            if (Str[i] != 45) // Проверка на знак минус
                 if ((Str[i] < 48) || (Str[i] > 57))
                     return false;
 
-        } // Р•СЃР»Рё РІ СЃС‚СЂРѕРєРµ С‚РѕР»СЊРєРѕ С†РёС„СЂРѕРІС‹Рµ СЃРёРјРІРѕР»С‹ Р·РЅР°С‡РёС‚ СЌС‚Рѕ С‡РёСЃР»Рѕ
+        } // Если в строке только цифровые символы значит это число
 
     return true;
 
-} // С„СѓРЅРєС†РёСЏ РїСЂРѕРІРµСЂРєРё СЏРІР»СЏРµС‚СЃСЏ Р»Рё СЃС‚СЂРѕРєР° - С‡РёСЃР»РѕРј
+} // функция проверки является ли строка - числом
 
 const void GetNormal_Number_Value (unsigned short int *Count, std::string& Stroke, const std::string InputText, const short int LowerLimit, const short int UpperLimit) {
 
     while (true) {
 
-        Stroke = Show_Text_Input (InputText);
+        Stroke = Show_Text_Input (InputText, true);
 
             if (Check_Input_ForExit (Stroke) || Stroke == "f5" || Stroke == "F5")
                 return;
@@ -262,8 +274,8 @@ const void GetNormal_Number_Value (unsigned short int *Count, std::string& Strok
             if (*Count > LowerLimit && *Count < UpperLimit)
                 break;
 
-    } // РїСЂРѕРІРµСЂРєР° РЅР° РґСѓСЂР°РєР° РїСЂРё РІРІРѕРґРµ С‡РёСЃР»Р°
+    } // проверка на дурака при вводе числа
 
-} // С„СѓРЅРєС†РёСЏ РґР»СЏ РїРѕР»СѓС‡РµРЅРёСЏ РѕС‚ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ РєРѕСЂСЂРµРєС‚РЅРѕРіРѕ РІРІРѕРґР° С‡РёСЃР»Р°
+} // функция для получения от пользователя корректного ввода числа
 
 #endif // _additional_functions_h_

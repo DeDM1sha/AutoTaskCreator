@@ -1,4 +1,4 @@
-// РљР»Р°СЃСЃ РЅР°СЃС‚СЂРѕРµРє РїСЂРёР»РѕР¶РµРЅРёСЏ
+// Класс настроек приложения
 
 #pragma once
 
@@ -22,7 +22,7 @@ class AbstractClass_ConfigEditor {
         const void ConfigFile_Open (const std::string&) const;
         const void ConfigFile_Close (const std::string&) const;
 
-}; // Р°Р±СЃС‚СЂР°РєС‚РЅС‹Р№ РєР»Р°СЃСЃ-СЂРѕРґРёС‚РµР»СЊ РґР»СЏ РєРѕРЅС„РёРіСѓСЂР°С†РёРѕРЅРЅС‹С… С„Р°Р№Р»РѕРІ
+}; // абстрактный класс-родитель для конфигурационных файлов
 
 const void AbstractClass_ConfigEditor::ConfigFile_Open (const std::string& Config_Path) const {
 
@@ -30,7 +30,7 @@ const void AbstractClass_ConfigEditor::ConfigFile_Open (const std::string& Confi
 
     system (attrib.c_str());
 
-} // РјРµС‚РѕРґ РѕС‚РєСЂС‹С‚РёСЏ С„Р°Р№Р»Р° РєРѕРЅС„РёРіР°
+} // метод открытия файла конфига
 
 const void AbstractClass_ConfigEditor::ConfigFile_Close (const std::string& Config_Path) const {
 
@@ -38,22 +38,22 @@ const void AbstractClass_ConfigEditor::ConfigFile_Close (const std::string& Conf
 
     system (attrib.c_str());
 
-} // РјРµС‚РѕРґ СЃРѕС…СЂР°РЅРµРЅРёСЏ С„Р°Р№Р»Р° РєРѕРЅС„РёРіР°
+} // метод закрытия файла конфига
 
 class Class_Settings : public AbstractClass_ConfigEditor {
 
     private:
 
-        std::string PK_Name; // РёРјСЏ РїСЂРѕС„РёР»СЏ РЅР° РїРє РёСЃРїРѕР»РЅРёС‚РµР»СЏ
-        std::string Disk_Path; // РЅР°РёРјРµРЅРѕРІР°РЅРёРµ Р»РѕРіРёС‡РµСЃРєРѕРіРѕ Р¶РµСЃС‚РєРѕРіРѕ РґРёСЃРєР° РЅР° РїРє, РіРґРµ С…СЂР°РЅСЏС‚СЃСЏ Р·Р°РєР°Р·С‹
-        std::string Config_Path; // РјРµСЃС‚Рѕ С…СЂР°РЅРµРЅРёСЏ С„Р°Р№Р»Р° СЃ РЅР°СЃС‚СЂРѕР№РєР°РјРё
-        std::string Labs_Path; // РјРµСЃС‚Рѕ СЃРѕС…СЂР°РЅРµРЅРёСЏ Р»Р°Р±
-        bool Automatic_Order_Start; // Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРёР№ Р·Р°РїСѓСЃРє СЃРѕР·РґР°РЅРёСЏ Р·Р°РєР°Р·Р°
-        bool Automatic_Close_Application; // Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРѕРµ Р·Р°РІРµСЂС€РµРЅРёРµ РїСЂРёР»РѕР¶РµРЅРёСЏ РїРѕСЃР»Рµ Р·Р°РїРѕР»РЅРµРЅРёСЏ Р·Р°РєР°Р·Р°
-        bool Automatic_Open_Order; // Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРѕРµ РѕС‚РєСЂС‹С‚РёРµ Р·Р°РєР°Р·Р°(РѕРІ) РїСЂРё СЃРѕР·РґР°РЅРёРё
-        bool Automatic_Update_BanList; // Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРѕРµ РѕР±РЅРѕРІР»РµРЅРёРµ СЃРїРёСЃРєР° Р±Р°РЅ-Р»РёСЃС‚Р°
-        std::string Url_BanList_Clients; // СЃСЃС‹Р»РєР° РЅР° Р±Р°РЅР»РёСЃС‚ РєР»РёРµРЅС‚РѕРІ
-        std::string Url_BanList_Workers; // СЃСЃС‹Р»РєР° РЅР° Р±Р°РЅР»РёСЃС‚ РёСЃРїРѕР»РЅРёС‚РµР»РµР№
+        std::string PK_Name; // имя профиля на пк исполнителя
+        std::string Disk_Path; // наименование логического жесткого диска на пк, где хранятся заказы
+        std::string Config_Path; // место хранения файла с настройками
+        std::string Labs_Path; // место сохранения лаб
+        bool Automatic_Order_Start; // автоматический запуск создания заказа
+        bool Automatic_Close_Application; // автоматическое завершение приложения после заполнения заказа
+        bool Automatic_Open_Order; // автоматическое открытие заказа(ов) при создании
+        bool Automatic_Update_BanList; // автоматическое обновление списка бан-листа
+        std::string Url_BanList_Clients; // ссылка на банлист клиентов
+        std::string Url_BanList_Workers; // ссылка на банлист исполнителей
 
     public:
 
@@ -75,13 +75,13 @@ class Class_Settings : public AbstractClass_ConfigEditor {
 
 			this->PK_Name = Str;
 
-		} // СЃРµС‚С‚РµСЂ РґР»СЏ PK_Name
+		} // сеттер для PK_Name
 
 		const std::string getPK_Name (void) const {
 
 			return this->PK_Name;
 
-		} // РіРµС‚С‚РµСЂ РґР»СЏ PK_Name
+		} // геттер для PK_Name
 
 	//////////////////////////////////////////////
 
@@ -89,13 +89,13 @@ class Class_Settings : public AbstractClass_ConfigEditor {
 
             this->Labs_Path = Str;
 
-        } // СЃРµС‚С‚РµСЂ РґР»СЏ Labs_Path
+        } // сеттер для Labs_Path
 
         const std::string getLabs_Path (void) const {
 
             return this->Labs_Path;
 
-        } // РіРµС‚С‚РµСЂ РґР»СЏ Labs_Path
+        } // геттер для Labs_Path
 
     //////////////////////////////////////////////
 
@@ -103,13 +103,13 @@ class Class_Settings : public AbstractClass_ConfigEditor {
 
             this->Config_Path = Str;
 
-        } // СЃРµС‚С‚РµСЂ РґР»СЏ Config_Path
+        } // сеттер для Config_Path
 
         const std::string getConfig_Path (void) const {
 
             return this->Config_Path;
 
-        } // РіРµС‚С‚РµСЂ РґР»СЏ Config_Path
+        } // геттер для Config_Path
 
     //////////////////////////////////////////////
 
@@ -117,13 +117,13 @@ class Class_Settings : public AbstractClass_ConfigEditor {
 
             this->Automatic_Order_Start = Flag;
 
-        } // СЃРµС‚С‚РµСЂ РґР»СЏ Automatic_Order_Start
+        } // сеттер для Automatic_Order_Start
 
         const bool getAutomatic_Order_Start (void) const {
 
             return this->Automatic_Order_Start;
 
-        } // РіРµС‚С‚РµСЂ РґР»СЏ Automatic_Order_Start
+        } // геттер для Automatic_Order_Start
 
     //////////////////////////////////////////////
 
@@ -131,13 +131,13 @@ class Class_Settings : public AbstractClass_ConfigEditor {
 
             this->Automatic_Close_Application = Flag;
 
-        } // СЃРµС‚С‚РµСЂ РґР»СЏ Automatic_Close_Application
+        } // сеттер для Automatic_Close_Application
 
         const bool getAutomatic_Close_Application (void) const {
 
             return this->Automatic_Close_Application;
 
-        } // РіРµС‚С‚РµСЂ РґР»СЏ Automatic_Close_Applcation
+        } // геттер для Automatic_Close_Applcation
 
     //////////////////////////////////////////////
 
@@ -145,13 +145,13 @@ class Class_Settings : public AbstractClass_ConfigEditor {
 
             this->Automatic_Open_Order = Flag;
 
-        } // СЃРµС‚С‚РµСЂ РґР»СЏ Automatic_Open_Order
+        } // сеттер для Automatic_Open_Order
 
         const bool getAutomatic_Open_Order (void) const {
 
             return this->Automatic_Open_Order;
 
-        } // РіРµС‚С‚РµСЂ РґР»СЏ Automatic_Open_Order
+        } // геттер для Automatic_Open_Order
 
     //////////////////////////////////////////////
 
@@ -159,13 +159,13 @@ class Class_Settings : public AbstractClass_ConfigEditor {
 
             this->Automatic_Update_BanList = Flag;
 
-        } // СЃРµС‚С‚РµСЂ РґР»СЏ Automatic_Update_BanList
+        } // сеттер для Automatic_Update_BanList
 
         const bool getAutomatic_Update_BanList (void) const {
 
             return this->Automatic_Update_BanList;
 
-        } // РіРµС‚С‚РµСЂ РґР»СЏ Automatic_Update_BanList
+        } // геттер для Automatic_Update_BanList
 
         //////////////////////////////////////////////
 
@@ -173,13 +173,13 @@ class Class_Settings : public AbstractClass_ConfigEditor {
 
             this->Url_BanList_Clients = Str;
 
-        } // СЃРµС‚С‚РµСЂ РґР»СЏ Url_BanList_Clients
+        } // сеттер для Url_BanList_Clients
 
         const std::string getUrl_BanList_Clients (void) const {
 
             return this->Url_BanList_Clients;
 
-        } // РіРµС‚С‚РµСЂ РґР»СЏ Url_BanList_Clients
+        } // геттер для Url_BanList_Clients
 
     //////////////////////////////////////////////
 
@@ -187,13 +187,13 @@ class Class_Settings : public AbstractClass_ConfigEditor {
 
             this->Url_BanList_Workers = Str;
 
-        } // СЃРµС‚С‚РµСЂ РґР»СЏ Url_BanList_Workers
+        } // сеттер для Url_BanList_Workers
 
         const std::string getUrl_BanList_Workers (void) const {
 
             return this->Url_BanList_Workers;
 
-        } // РіРµС‚С‚РµСЂ РґР»СЏ Url_BanList_Workers
+        } // геттер для Url_BanList_Workers
 
     //////////////////////////////////////////////
 
@@ -201,13 +201,13 @@ class Class_Settings : public AbstractClass_ConfigEditor {
 
             this->Disk_Path = Str;
 
-        } // СЃРµС‚С‚РµСЂ РґР»СЏ Disk_Path
+        } // сеттер для Disk_Path
 
         const std::string getDisk_Path (void) const {
 
             return this->Disk_Path;
 
-        } // РіРµС‚С‚РµСЂ РґР»СЏ Disk_Path
+        } // геттер для Disk_Path
 
     //////////////////////////////////////////////
 
@@ -218,12 +218,10 @@ class Class_Settings : public AbstractClass_ConfigEditor {
             this->Automatic_Close_Application = false;
             this->Automatic_Open_Order = true;
             this->Automatic_Update_BanList = true;
-            /*this->Url_BanList_Clients = "https://vk.com/topic-156779709_36343200";
-            this->Url_BanList_Workers = "https://vk.com/topic-156779709_39456558";*/
-            this->Url_BanList_Clients = "Debug";
-            this->Url_BanList_Workers = "Debug";
+            this->Url_BanList_Clients = "https://vk.com/topic-156779709_36343200";
+            this->Url_BanList_Workers = "https://vk.com/topic-156779709_39456558";
 
-        } // РјРµС‚РѕРґ СѓСЃС‚Р°РЅРѕРІРєРё РЅР°СЃС‚СЂРѕРµРє РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ
+        } // метод установки настроек по умолчанию
 
         const std::string Load_PK_UserName (void) const;
         const void Check_ConfigFile (void);
@@ -231,7 +229,7 @@ class Class_Settings : public AbstractClass_ConfigEditor {
         const void SaveSettings (const bool) const;
         const bool Check_FilePath (const std::string& Path);
 
-}; // РєР»Р°СЃСЃ РЅР°СЃС‚СЂРѕРµРє РїСЂРёР»РѕР¶РµРЅРёСЏ
+}; // класс настроек приложения
 
 const std::string Class_Settings::Load_PK_UserName (void) const {
 
@@ -255,7 +253,7 @@ const std::string Class_Settings::Load_PK_UserName (void) const {
 
     return PK_Name;
 
-} // РјРµС‚РѕРґ РїРѕР»СѓС‡РµРЅРёСЏ РЅР°Р·РІР°РЅРёСЏ РёРјРµРЅРё РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ-РїРє
+} // метод получения названия имени пользователя-пк
 
 const void Class_Settings::Check_ConfigFile (void) {
 
@@ -275,13 +273,13 @@ const void Class_Settings::Check_ConfigFile (void) {
 
             Check.close ();
 
-        } // РµСЃР»Рё С„Р°Р№Р»Р° РЅРµС‚, С‚Рѕ СЃРѕР·РґР°РµРј С„Р°Р№Р» РєРѕРЅС„РёРіР° СЃ РґРµС„РѕР»С‚РЅС‹РјРё РЅР°СЃС‚СЂРѕР№РєР°РјРё
+        } // если файла нет, то создаем файл конфига с дефолтными настройками
 
     Read.close ();
 
     ConfigFile_Close (Config_Path);
 
-} // РјРµС‚РѕРґ РїСЂРѕРІРµСЂРєРё СЃСѓС‰РµСЃС‚РІРѕРІР°РЅРёСЏ С„Р°Р№Р»Р° СЃ РєРѕРЅС„РёРіРѕРј
+} // метод проверки существования файла с конфигом
 
 const void Class_Settings::Load_Parameters (void) {
 
@@ -397,7 +395,7 @@ const void Class_Settings::Load_Parameters (void) {
 
     ConfigFile_Close (Config_Path);
 
-} // РјРµС‚РѕРґ Р·Р°РіСЂСѓР·РєРё РїР°СЂР°РјРµС‚СЂРѕРІ РїСЂРёР»РѕР¶РµРЅРёСЏ
+} // метод загрузки параметров приложения
 
 const void Class_Settings::SaveSettings (const bool UsingDelay) const {
 
@@ -419,7 +417,7 @@ const void Class_Settings::SaveSettings (const bool UsingDelay) const {
 
         if (UsingDelay == true) {
 
-            printf ("\n\n\nРЎРѕС…СЂР°РЅРµРЅРёРµ РёР·РјРµРЅРµРЅРёР№ ");
+            printf ("\n\n\nСохранение изменений ");
 
                 for (unsigned short int i = 0; i < 4; i++) {
 
@@ -430,28 +428,26 @@ const void Class_Settings::SaveSettings (const bool UsingDelay) const {
 
         }
 
-} // РјРµС‚РѕРґ СЃРѕС…СЂР°РЅРµРЅРёСЏ РЅР°СЃС‚СЂРѕРµРє
+} // метод сохранения настроек
 
 const bool Class_Settings::Check_FilePath (const std::string& Path) {
 
-    bool Result = true;
     std::string TestFilePath = Path + "\\ValidTest.txt";
     std::ofstream Write (TestFilePath.c_str ());
 
         if (!Write.is_open()) {
 
-            CenterText ("Error! Not valid path\n");
-            Result = false;
+            Exception ("New path is invalid, check this folder and repeat");
+            return false;
 
         }
 
     Write.close ();
 
-        if (Result)
-            remove (TestFilePath.c_str ());
+    remove (TestFilePath.c_str ());
 
-    return Result;
+    return true;
 
-} // РјРµС‚РѕРґ РїСЂРѕРІРµСЂРєРё РєРѕСЂСЂРµРєС‚РЅРѕСЃС‚Рё РїСѓС‚Рё Рє Р±Р°Р·Рµ Р·Р°РєР°Р·РѕРІ
+} // метод проверки корректности пути к базе заказов
 
 #endif // _settings_class_h_

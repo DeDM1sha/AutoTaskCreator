@@ -1,4 +1,4 @@
-// РњРѕРґСѓР»СЊ РґР»СЏ С„РѕСЂРјРёСЂРѕРІР°РЅРёСЏ Р·Р°РєР°Р·Р°. РРјРµРЅРЅРѕ Р·РґРµСЃСЊ РѕРїРёСЃР°РЅ РІРµСЃСЊ С„СѓРЅРєС†РёРѕРЅР°Р» РєРЅРѕРїРєРё "РЎРѕР·РґР°С‚СЊ Р·Р°РєР°Р·".
+// Модуль для формирования заказа. Именно здесь описан весь функционал кнопки "Создать заказ".
 
 #pragma once
 
@@ -11,27 +11,28 @@ static std::string Another = "Another";
 static std::string VisualStudio = "VisualStudio";
 static std::string Geany = "Geany";
 static std::string CodeBlocks = "Code::Blocks";
+static std::string None = "None";
 static std::string Linux = "Linux";
 static std::string Windows = "Windows";
 
 static bool Fill_InputData (Class_Clients& Client, const Class_BanLists& Banlists) {
 
-	unsigned short int New_TasksCount = 0; // РїРµСЂРµРјРµРЅРЅР°СЏ РѕС‚РІРµС‡Р°СЋС‰Р°СЏ Р·Р° СЃРѕР·РґР°РЅРЅРѕРµ РєРѕР»-РІРѕ РЅРѕРІС‹С… С‚Р°СЃРєРѕРІ
-	unsigned short int ButtonNumber = 0; // РїРµСЂРµРјРµРЅРЅР°СЏ РґР»СЏ РѕР±СЂР°Р±РѕС‚РєРё РЅР°Р¶Р°С‚РёР№ РІ РјРµРЅСЋ
+	unsigned short int New_TasksCount = 0; // переменная отвечающая за созданное кол-во новых тасков
+	unsigned short int ButtonNumber = 0; // переменная для обработки нажатий в меню
 
         while (true) {
 
             cls ();
             Client.Clear_Client_Parameters ();
 
-            CenterText ("РЎРѕР·РґР°РЅРёРµ РЅРѕРІРѕРіРѕ Р·Р°РєР°Р·Р°\n");
+            CenterText ("Создание нового заказа\n");
             Show_Text_ForExit ();
             Show_Text_In_Right_Corner ("Press F5 to reload formation order");
 
-            std::string Stroke = Show_Text_Input ("РРјСЏ РєР»РёРµРЅС‚Р°:   ");
+            std::string Stroke = Show_Text_Input ("Имя клиента:   ", true);
 
                 if (Check_Input_ForExit (Stroke))
-                    return false; // РµСЃР»Рё Р±С‹Р»Рѕ РІРІРµРґРµРЅРѕ РѕРґРЅРѕ РёР· СЃР»СѓР¶Р±РЅС‹С… СЃР»РѕРІ РґР»СЏ РІС‹С…РѕРґР° - РІРѕР·РІСЂР°С‚ РІ РіР»Р°РІРЅРѕРµ РјРµРЅСЋ РїСЂРѕРіСЂР°РјРјС‹
+                    return false; // если было введено одно из службных слов для выхода - возврат в главное меню программы
 
                 else if (Check_Input_ForReload (Stroke))
                     continue;
@@ -45,7 +46,7 @@ static bool Fill_InputData (Class_Clients& Client, const Class_BanLists& Banlist
 
             Client.setName (Stroke);
 
-            std::cout << "\n\nР’С‹Р±РѕСЂ С‚РµС…РЅРѕР»РѕРіРёРё: C / C++ / Another (C / + / A) ?:   ";
+            std::cout << "\n\nВыбор технологии: C / C++ / Another (C / + / A) ?:   ";
 
                 while (true) {
 
@@ -88,7 +89,7 @@ static bool Fill_InputData (Class_Clients& Client, const Class_BanLists& Banlist
 
                 if (Client.getTechnology_Name () != Another) {
 
-                    std::cout << "\n\n\nР’С‹Р±РѕСЂ IDE: Visual Studio / Geany / Code::Blocks (V / G / C) ?:   ";
+                    std::cout << "\n\n\nВыбор IDE: Visual Studio / Geany / Code::Blocks (V / G / C) ?:   ";
 
                         while (true) {
 
@@ -129,7 +130,7 @@ static bool Fill_InputData (Class_Clients& Client, const Class_BanLists& Banlist
                         if (ClickCatch ("F5", &ButtonNumber))
                             continue;
 
-                    std::cout << "\n\n\nР’С‹Р±РѕСЂ РћРЎ: Linux / Windows (L / W) ?:   ";
+                    std::cout << "\n\n\nВыбор ОС: Linux / Windows (L / W) ?:   ";
 
                         while (true) {
 
@@ -162,7 +163,7 @@ static bool Fill_InputData (Class_Clients& Client, const Class_BanLists& Banlist
                         if (ClickCatch ("F5", &ButtonNumber))
                             continue;
 
-                    std::cout << "\n\n\nР”РѕР±Р°РІРёС‚СЊ Р±Р°Р·РѕРІС‹Р№ С„СѓРЅРєС†РёРѕРЅР°Р» РґР»СЏ СѓРїСЂР°РІР»РµРЅРёСЏ РјРµРЅСЋ (Y / N) ?:   ";
+                    std::cout << "\n\n\nДобавить базовый функционал для управления меню (Y / N) ?:   ";
 
                         while (true) {
 
@@ -197,13 +198,21 @@ static bool Fill_InputData (Class_Clients& Client, const Class_BanLists& Banlist
 
                 }
 
-            GetNormal_Number_Value (&New_TasksCount, Stroke, "РљРѕР»РёС‡РµСЃС‚РІРѕ Р·Р°РґР°РЅРёР№:   ", -1, 1000);
+                else {
+
+                    printf ("\n");
+                    Client.setOS_Name (Windows);
+                    Client.setIDE_Name (None);
+
+                }
+
+            GetNormal_Number_Value (&New_TasksCount, Stroke, "Количество заданий:   ", -1, 1000);
 
                 if (Check_Input_ForReload (Stroke))
                     continue;
 
                 if (Check_Input_ForExit (Stroke) || New_TasksCount == 0)
-                    return false; // РµСЃР»Рё Р±С‹Р»Рѕ РІРІРµРґРµРЅРѕ РѕРґРЅРѕ РёР· СЃР»СѓР¶Р±РЅС‹С… СЃР»РѕРІ РґР»СЏ РІС‹С…РѕРґР° - РІРѕР·РІСЂР°С‚ РІ РіР»Р°РІРЅРѕРµ РјРµРЅСЋ РїСЂРѕРіСЂР°РјРјС‹
+                    return false; // если было введено одно из службных слов для выхода - возврат в главное меню программы
 
             Client.setTasksCount (New_TasksCount);
 
@@ -211,7 +220,7 @@ static bool Fill_InputData (Class_Clients& Client, const Class_BanLists& Banlist
 
                     unsigned short int Count_MenuItems = 0;
 
-                    GetNormal_Number_Value (&Count_MenuItems, Stroke, "РљРѕР»РёС‡РµСЃС‚РІРѕ РїСѓРЅРєС‚РѕРІ РІ РјРµРЅСЋ:   ", -1, 100);
+                    GetNormal_Number_Value (&Count_MenuItems, Stroke, "Количество пунктов в меню:   ", -1, 100);
 
                         if (Check_Input_ForReload (Stroke))
                             continue;
@@ -223,11 +232,11 @@ static bool Fill_InputData (Class_Clients& Client, const Class_BanLists& Banlist
 
                     Client.Clear_MenuItems_Title ();
 
-                    std::cout << "\n\nРќР°Р·РІР°РЅРёСЏ Рє РєР°Р¶РґРѕРјСѓ РїСѓРЅРєС‚Сѓ РјРµРЅСЋ:\n";
+                    std::cout << "\n\nНазвания к каждому пункту меню:\n";
 
                         for (unsigned short int i = 0; i < Count_MenuItems; i++) {
 
-                            Stroke = Show_Text_Input (Convert_Int_toString (i + 1) + ")   ");
+                            Stroke = Show_Text_Input (Convert_Int_toString (i + 1) + ")   ", true);
 
                                     if (Check_Input_ForReload (Stroke))
                                         break;
@@ -242,24 +251,24 @@ static bool Fill_InputData (Class_Clients& Client, const Class_BanLists& Banlist
                         if (Check_Input_ForReload (Stroke))
                             continue;
 
-                } // РµСЃР»Рё РІ РїСЂРѕРіСЂР°РјРјРµ Р±СѓРґРµС‚ РјРµРЅСЋ, Рё РІСЃРµРіРѕ 1 Р·Р°РґР°С‡Р° РїРѕ Р·Р°РєР°Р·Сѓ
+                } // если в программе будет меню, и всего 1 задача по заказу
 
             break;
 
-        } // РєРѕРЅРµС† Р¶РёР·РЅРµРЅРЅРѕРіРѕ С†РёРєР»Р° СЃРѕР·РґР°РЅРёСЏ Р·Р°РєР°Р·Р°
+        } // конец жизненного цикла создания заказа
 
     return true;
 
-} // С„СѓРЅРєС†РёСЏ Р·Р°РїРѕР»РЅРµРЅРёСЏ РґР°РЅРЅС‹С… РїРѕ РєР»РёРµРЅС‚Сѓ
+} // функция заполнения данных по клиенту
 
 static bool Create_Client_Folder (const Class_Clients& Client, const Class_Settings& Settings) {
 
     std::string Path = Settings.getLabs_Path () + "\\" + Client.getName () + "\\CheckFolder.txt";
-    bool FolderExists = true; // РЅР°Р»РёС‡РёРµ СѓР¶Рµ С‚Р°РєРѕР№ РїР°РїРєРё
+    bool FolderExists = true; // наличие уже такой папки
 
     std::ofstream Write (Path.c_str ());
 
-        if (!Write.is_open ()) { // РµСЃР»Рё С‚Р°РєРѕРіРѕ РєР»РёРµРЅС‚Р° РІ Р±Р°Р·Рµ РµС‰Рµ РЅРµ СЃСѓС‰РµСЃС‚РІСѓРµС‚, С‚Рѕ СЃРѕР·РґР°С‚СЊ РїР°РїРєСѓ
+        if (!Write.is_open ()) { // если такого клиента в базе еще не существует, то создать папку
 
             std::string Folder = "mkdir " + Settings.getLabs_Path () + "\\\"" + Client.getName () + "\"";
             system (Folder.c_str());
@@ -269,12 +278,12 @@ static bool Create_Client_Folder (const Class_Clients& Client, const Class_Setti
 
     Write.close ();
 
-        if (FolderExists) // РµСЃР»Рё СѓР¶Рµ СЃСѓС‰РµСЃС‚РІСѓРµС‚, С‚Рѕ СѓРґР°Р»РёС‚СЊ РїСЂРѕРІРµСЂРѕС‡РЅС‹Р№ С„Р°Р№Р»
+        if (FolderExists) // если уже существует, то удалить проверочный файл
             remove (Path.c_str ());
 
     return FolderExists;
 
-} // С„СѓРЅРєС†РёСЏ СЃРѕР·РґР°РЅРёСЏ РїР°РїРєРё РґР»СЏ РЅРѕРІРѕРіРѕ РєР»РёРµРЅС‚Р°
+} // функция создания папки для нового клиента
 
 static std::string Create_Source_Code (const Class_Clients& Client, const Class_Settings& Settings) {
 
@@ -323,7 +332,7 @@ static std::string Create_Source_Code (const Class_Clients& Client, const Class_
 				if (Client.getOS_Name () != Windows)
 					Code.push ("	//system (\"clear\");\n\n");
 
-			Code.push ("} // С„СѓРЅРєС†РёСЏ РѕС‡РёСЃС‚РєРё СЌРєСЂР°РЅР°\n\n");
+			Code.push ("} // функция очистки экрана\n\n");
 			Code.push ("void DrawLine (void) {\n\n");
 
 				if (Client.getTechnology_Name () == C)
@@ -332,14 +341,14 @@ static std::string Create_Source_Code (const Class_Clients& Client, const Class_
 				else
 					Code.push ("	cout << \"\\n--------------------------------------\\n\";\n\n");
 
-			Code.push ("} // С„СѓРЅРєС†РёСЏ РѕС‚СЂРёСЃРѕРІРєРё РїСѓРЅРєС‚РёСЂРЅРѕР№ Р»РёРЅРёРё\n\n");
+			Code.push ("} // функция отрисовки пунктирной линии\n\n");
 			Code.push ("void Continue (void) {\n\n");
 
 				if (Client.getTechnology_Name () == C)
-					Code.push ("	printf (\"\\nР”Р»СЏ РїСЂРѕРґРѕР»Р¶РµРЅРёСЏ РЅР°Р¶РјРёС‚Рµ Р»СЋР±СѓСЋ РєР»Р°РІРёС€Сѓ... \\n\");\n");
+					Code.push ("	printf (\"\\nДля продолжения нажмите любую клавишу... \\n\");\n");
 
 				else
-					Code.push ("	cout << \"\\nР”Р»СЏ РїСЂРѕРґРѕР»Р¶РµРЅРёСЏ РЅР°Р¶РјРёС‚Рµ Р»СЋР±СѓСЋ РєР»Р°РІРёС€Сѓ... \\n\";\n");
+					Code.push ("	cout << \"\\nДля продолжения нажмите любую клавишу... \\n\";\n");
 
 				if (Client.getIDE_Name () == VisualStudio)
 					Code.push ("	_getch ();\n\n");
@@ -347,7 +356,7 @@ static std::string Create_Source_Code (const Class_Clients& Client, const Class_
 				else
 					Code.push ("	getch ();\n\n");
 
-			Code.push ("} // С„СѓРЅРєС†РёСЏ РѕР¶РёРґР°РЅРёСЏ РЅР°Р¶Р°С‚РёСЏ\n\n");
+			Code.push ("} // функция ожидания нажатия\n\n");
 
 		}
 
@@ -356,13 +365,8 @@ static std::string Create_Source_Code (const Class_Clients& Client, const Class_
         if (Client.getOS_Name () == Windows) {
 
             Code.push ("	SetConsoleCP(1251);\n");
-            Code.push ("	SetConsoleOutputCP(1251); // РєРёСЂРёР»Р»РёС†Р° РІ РєРѕРЅСЃРѕР»Рё\n");
-
-                if (Client.getIDE_Name () == Geany)
-                    Code.push ("	//system (\"title Р›Р°Р±РѕСЂР°С‚РѕСЂРЅР°СЏ СЂР°Р±РѕС‚Р°\");");
-
-                else
-                    Code.push ("	system (\"title Р›Р°Р±РѕСЂР°С‚РѕСЂРЅР°СЏ СЂР°Р±РѕС‚Р°\");");
+            Code.push ("	SetConsoleOutputCP(1251); // кириллица в консоли\n");
+            Code.push ("	system (\"title Лабораторная работа\");");
 
         }
 
@@ -370,21 +374,21 @@ static std::string Create_Source_Code (const Class_Clients& Client, const Class_
 
 		if (Client.getMenuFunctional () == true) {
 
-			Code.push ("	int ButtonNumber = 0; // РїРµСЂРµРјРµРЅРЅР°СЏ РґР»СЏ СЂР°Р±РѕС‚Р° СЃ С„СѓРЅРєС†РёРµР№ getch\n\n\n\n");
-			Code.push ("		while (true) { // РЅР°С‡Р°Р»Рѕ Р¶РёР·РЅРµРЅРЅРѕРіРѕ С†РёРєР»Р° РїСЂРѕРіСЂР°РјРјС‹\n\n");
+			Code.push ("	int ButtonNumber = 0; // переменная для работа с функцией getch\n\n\n\n");
+			Code.push ("		while (true) { // начало жизненного цикла программы\n\n");
 			Code.push ("			ButtonNumber = 0;\n");
 			Code.push ("			cls ();\n\n");
 
 
                 if (Client.getTechnology_Name () == C)
-                    Code.push ("			printf (\"		РњРµРЅСЋ РїСЂРѕРіСЂР°РјРјС‹\\n\\n\");\n");
+                    Code.push ("			printf (\"		Меню программы\\n\\n\");\n");
 
                 else
-                    Code.push ("			cout << \"		РњРµРЅСЋ РїСЂРѕРіСЂР°РјРјС‹\\n\\n\";\n");
+                    Code.push ("			cout << \"		Меню программы\\n\\n\";\n");
 
                 for (unsigned short int i = 0; i < Client.getMenuItems_Count (); i++) {
 
-                    if (Client.getTasksCount () == 1) // РµСЃР»Рё РІ РїСЂРѕРіСЂР°РјРјРµ Р±СѓРґРµС‚ С„СѓРЅРєС†РёРѕРЅР°Р» СЃ РјРµРЅСЋ, Рё СЃРѕР·РґР°РµС‚СЃСЏ С‚РѕР»СЊРєРѕ 1 Р·Р°РґР°С‡Р°
+                    if (Client.getTasksCount () == 1) // если в программе будет функционал с меню, и создается только 1 задача
                         Stroke = Client.getMenuItems_Title (i);
 
                     else
@@ -399,12 +403,12 @@ static std::string Create_Source_Code (const Class_Clients& Client, const Class_
                 }
 
                 if (Client.getTechnology_Name () == C)
-                    Code.push ("			printf (\"Esc. Р’С‹Р№С‚Рё РёР· РїСЂРѕРіСЂР°РјРјС‹\\n\");\n\n");
+                    Code.push ("			printf (\"Esc. Выйти из программы\\n\");\n\n");
 
                 else
-                    Code.push ("			cout << \"Esc. Р’С‹Р№С‚Рё РёР· РїСЂРѕРіСЂР°РјРјС‹\\n\";\n\n");
+                    Code.push ("			cout << \"Esc. Выйти из программы\\n\";\n\n");
 
-			Code.push ("				while (true) { // Р·Р°С‰РёС‚Р° РѕС‚ РґСѓСЂР°РєР° РїРѕ РЅР°Р¶Р°С‚РёСЋ\n\n");
+			Code.push ("				while (true) { // защита от дурака по нажатию\n\n");
 
 				if (Client.getIDE_Name () == VisualStudio)
 					Code.push ("					ButtonNumber = _getch ();\n\n");
@@ -413,7 +417,7 @@ static std::string Create_Source_Code (const Class_Clients& Client, const Class_
 					Code.push ("					ButtonNumber = getch ();\n\n");
 
 			Code.push ("						if (ButtonNumber == 27)\n");
-			Code.push ("							return 0; // Р·Р°РІРµСЂС€РµРЅРёРµ РїСЂРѕРіСЂР°РјРјС‹\n\n");
+			Code.push ("							return 0; // завершение программы\n\n");
 			Code.push ("						else if (ButtonNumber > 48 && ButtonNumber < " + Convert_Int_toString (49 + Client.getMenuItems_Count ()) + ") {\n\n");
 			Code.push ("							cls ();\n");
 			Code.push ("							break;\n\n");
@@ -445,7 +449,7 @@ static std::string Create_Source_Code (const Class_Clients& Client, const Class_
 
                 }
 
-			Code.push ("		} // РєРѕРЅРµС† Р¶РёР·РЅРµРЅРЅРѕРіРѕ С†РёРєР»Р° РїСЂРѕРіСЂР°РјРјС‹\n\n");
+			Code.push ("		} // конец жизненного цикла программы\n\n");
 
 		}
 
@@ -454,7 +458,7 @@ static std::string Create_Source_Code (const Class_Clients& Client, const Class_
 				if (Client.getIDE_Name () == VisualStudio)
 					Code.push ("	//system (\"pause\");\n\n");
 
-			Code.push ("	return 0; // Р·Р°РІРµСЂС€РµРЅРёРµ РїСЂРѕРіСЂР°РјРјС‹\n\n");
+			Code.push ("	return 0; // завершение программы\n\n");
 
 		}
 
@@ -485,7 +489,7 @@ static std::string Create_Source_Code (const Class_Clients& Client, const Class_
 
 	return CodePath;
 
-} // С„СѓРЅРєС†РёСЏ СЃРѕР·РґР°РЅРёСЏ РёСЃС…РѕРґРЅРѕРіРѕ РєРѕРґР°
+} // функция создания исходного кода
 
 static void SendFiles_To_ClientFolders (const Class_Clients& Client, const Class_Settings& Settings, const std::string& CodePath, const bool* FolderExists) {
 
@@ -554,8 +558,8 @@ static void SendFiles_To_ClientFolders (const Class_Clients& Client, const Class
 
                     std::string Path = Settings.getLabs_Path () + "\\\"" + Client.getName () + "\"\\Task_";
 
-                    //for (unsigned short int i = Old_TasksCount + 1; i < Client.getTasksCount () + Old_TasksCount + 1; i++) { // РїРѕРѕС‡РµСЂРµРґРЅРѕРµ РѕС‚РєСЂС‹С‚РёРµ
-                    for (unsigned short int i = Client.getTasksCount () + Old_TasksCount; i > Old_TasksCount; i--) { // СЂРµРІРµСЂСЃРёРІРЅРѕРµ РѕС‚РєСЂС‹С‚РёРµ
+                    //for (unsigned short int i = Old_TasksCount + 1; i < Client.getTasksCount () + Old_TasksCount + 1; i++) { // поочередное открытие
+                    for (unsigned short int i = Client.getTasksCount () + Old_TasksCount; i > Old_TasksCount; i--) { // реверсивное открытие
 
                         system (("start " + Path + Convert_Int_toString (i) + "\\task.c" + CPP).c_str());
                         Delay (300);
@@ -568,23 +572,23 @@ static void SendFiles_To_ClientFolders (const Class_Clients& Client, const Class
 
     remove (CodePath.c_str ());
 
-} // С„СѓРЅРєС†РёСЏ РѕС‚РїСЂР°РІРєРё РёСЃС…РѕРґРЅРёРєРѕРІ РїРѕ РїР°РїРєР°Рј РїСЂРѕРµРєС‚Р°
+} // функция отправки исходников по папкам проекта
 
 const void Menu_Formation_Order (const Class_Settings& Settings, const Class_BanLists& Banlists, bool* FirstOrderCreated) {
 
     Show_Text_ForExit ();
-    Class_Clients Client; // РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РѕР±СЉРµРєС‚Р° Client
+    Class_Clients Client; // инициализация объекта Client
 
-        if (!Fill_InputData (Client, Banlists)) // Р·Р°РїРѕР»РЅРµРЅРёРµ РґР°РЅРЅС‹С… РїРѕ Р·Р°РєР°Р·Сѓ
+        if (!Fill_InputData (Client, Banlists)) // заполнение данных по заказу
             return;
 
-    bool FolderExists = Create_Client_Folder (Client, Settings); // СЃРѕР·РґР°РЅРёРµ РїР°РїРєРё РєР»РёРµРЅС‚Р°, РµСЃР»Рё РїР°РїРєР° СЃСѓС‰РµСЃС‚РІСѓРµС‚, С‚Рѕ false
-    const std::string CodePath = Create_Source_Code (Client, Settings); // СЃРѕР·РґР°РЅРёРµ РёСЃС…РѕРґРЅРёРєРѕРІ
-    SendFiles_To_ClientFolders (Client, Settings, CodePath, &FolderExists); // РѕС‚РїСЂР°РІРєР° РёСЃС…РѕРґРЅРёРєРѕРІ РїРѕ РЅРѕРІС‹Рј РїР°РїРєР°Рј СЃ Р·Р°РґР°РЅРёСЏРјРё
+    bool FolderExists = Create_Client_Folder (Client, Settings); // создание папки клиента, если папка существует, то false
+    const std::string CodePath = Create_Source_Code (Client, Settings); // создание исходников
+    SendFiles_To_ClientFolders (Client, Settings, CodePath, &FolderExists); // отправка исходников по новым папкам с заданиями
 
         if (*FirstOrderCreated == false)
             *FirstOrderCreated = true;
 
-} // С„СѓРЅРєС†РёСЏ С„РѕСЂРјРёСЂРѕРІР°РЅРёСЏ Р·Р°РєР°Р·Р°
+} // функция формирования заказа
 
 #endif // _Menu_formation_order_h_
