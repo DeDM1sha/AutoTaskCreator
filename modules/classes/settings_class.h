@@ -7,14 +7,6 @@
 
 #include "../libs/additional_functions.h"
 
-static std::string SaveTag_Path_to_Labs = "Path_to_Labs";
-static std::string SaveTag_Order_Start = "Order_Start";
-static std::string SaveTag_Close_Application = "Close_Application";
-static std::string SaveTag_Open_Order = "Open_Order";
-static std::string SaveTag_Update_BanList = "Update_BanList";
-static std::string SaveTag_Url_BanList_Clients = "Url_BanList_Clients";
-static std::string SaveTag_Url_BanList_Workers = "Url_BanList_Workers";
-
 class AbstractClass_ConfigEditor {
 
     public:
@@ -55,15 +47,51 @@ class Class_Settings : public AbstractClass_ConfigEditor {
         std::string Url_BanList_Clients; // ссылка на банлист клиентов
         std::string Url_BanList_Workers; // ссылка на банлист исполнителей
 
+        std::string SaveTag_Path_to_Labs; // Тэг-сохранения пути сохранения заказов
+        std::string SaveTag_Order_Start; // Тэг-сохранения автоматического запуска создания заказа
+        std::string SaveTag_Close_Application; // Тэг-сохранения автоматического завершения работы приложения
+        std::string SaveTag_Open_Order; // Тэг-сохранения автоматического открытия созданного заказа
+        std::string SaveTag_Update_BanList; // Тэг-сохранения автоматического обновления бан-листа
+        std::string SaveTag_Url_BanList_Clients; // Тэг-сохранения ссылки на бан-лист клиентов
+        std::string SaveTag_Url_BanList_Workers; // Тэг-сохранения ссылки на бан-лист исполнителей
+
+        std::string Technology_Name_C; // наименование технологии [Си]
+        std::string Technology_Name_CPlusPlus; // наименование технологии [C++]
+        std::string Technology_Name_Another; // наименование технологии Another
+        std::string IDE_Name_VisualStudio; // наименование среды разработки [VisualStudio]
+        std::string IDE_Name_Geany; // наименование среды разработки [Geany]
+        std::string IDE_Name_CodeBlocks; // наименование среды разработки [CodeBlocks[
+        std::string IDE_Name_NoneIDE; // наименование среды разработки [NoneIDE]
+        std::string OS_Name_Linux; // наименование операционный системы [Linux]
+        std::string OS_Name_Windows; // наименование операционной системы [Windows]
+
     public:
 
         Class_Settings (void) {
 
-            PK_Name = Load_PK_UserName ();
-            Config_Path = "C:\\Users\\" + PK_Name + "\\AppData\\Local\\Temp\\AutoTaskCreator_Settings.cfg";
+            this->SaveTag_Path_to_Labs = "Path_to_Labs";
+            this->SaveTag_Order_Start = "Order_Start";
+            this->SaveTag_Close_Application = "Close_Application";
+            this->SaveTag_Open_Order = "Open_Order";
+            this->SaveTag_Update_BanList = "Update_BanList";
+            this->SaveTag_Url_BanList_Clients = "this->Url_BanList_Clients";
+            this->SaveTag_Url_BanList_Workers = "this->Url_BanList_Workers";
+
+            this->PK_Name = Load_PK_UserName ();
+            this->Config_Path = "C:\\Users\\" + this->PK_Name + "\\AppData\\Local\\Temp\\AutoTaskCreator_Settings.cfg";
             Check_ConfigFile ();
             Load_Parameters ();
-            Disk_Path = Disk_Path + Labs_Path[0] + Labs_Path[1];
+            this->Disk_Path = this->Disk_Path + this->Labs_Path[0] + this->Labs_Path[1];
+
+            this->Technology_Name_C = "C";
+            this->Technology_Name_CPlusPlus = "C++" ;
+            this->Technology_Name_Another = "Another";
+            this->IDE_Name_Geany = "Geany";
+            this->IDE_Name_CodeBlocks = "Code::Blocks";
+            this->IDE_Name_VisualStudio = "VisualStudio";
+            this->IDE_Name_NoneIDE = "NoneIDE";
+            this->OS_Name_Linux = "Linux";
+            this->OS_Name_Windows = "Windows";
 
         }
 
@@ -211,6 +239,62 @@ class Class_Settings : public AbstractClass_ConfigEditor {
 
     //////////////////////////////////////////////
 
+        const std::string getTechnology_Name_C (void) const {
+
+            return this->Technology_Name_C;
+
+        } // геттер для Technology_Name_C
+
+        const std::string getTechnology_Name_CPlusPlus (void) const {
+
+            return this->Technology_Name_CPlusPlus;
+
+        } // геттер для Technology_Name_CPlusPlus
+
+        const std::string getTechnology_Name_Another (void) const {
+
+            return this->Technology_Name_Another;
+
+        } // геттер для Technology_Name_Another
+
+        const std::string getIDE_Name_Geany (void) const {
+
+            return this->IDE_Name_Geany;
+
+        } // геттер для IDE_Name_Geany
+
+        const std::string getIDE_Name_CodeBlocks (void) const {
+
+            return this->IDE_Name_CodeBlocks;
+
+        } // геттер для IDE_Name_CodeBlocks
+
+        const std::string getIDE_Name_VisualStudio (void) const {
+
+            return this->IDE_Name_VisualStudio;
+
+        } // геттер для IDE_Name_VisualStudio
+
+        const std::string getIDE_Name_NoneIDE (void) const {
+
+            return this->IDE_Name_NoneIDE;
+
+        } // геттер для IDE_Name_NoneIDE
+
+        const std::string getOS_Name_Windows (void) const {
+
+            return this->OS_Name_Windows;
+
+        } // геттер для OS_Name_Windows
+
+        const std::string getOS_Name_Linux (void) const {
+
+            return this->OS_Name_Linux;
+
+        } // геттер для OS_Name_Linux
+
+    //////////////////////////////////////////////
+
          const void SetDefault_Parameters (void) {
 
             this->Labs_Path = "E:\\Orders\\C++Tasks";
@@ -235,14 +319,14 @@ const std::string Class_Settings::Load_PK_UserName (void) const {
 
     const std::string PathPK_UserName = "C:\\Windows\\Temp\\PK_UserName.txt";
     std::string Command = "@echo %UserName% > " + PathPK_UserName;
-    std::string PK_Name = "\0";
+    std::string PK_User_Name = "\0";
 
     system (Command.c_str());
 
     std::ifstream Read (PathPK_UserName.c_str ());
 
         if (Read.is_open ())
-            Read >> PK_Name;
+            Read >> PK_User_Name;
 
         else
             Exception ("File PK_UserName.txt didnt open");
@@ -251,22 +335,22 @@ const std::string Class_Settings::Load_PK_UserName (void) const {
 
     remove (PathPK_UserName.c_str ());
 
-    return PK_Name;
+    return PK_User_Name;
 
 } // метод получения названия имени пользователя-пк
 
 const void Class_Settings::Check_ConfigFile (void) {
 
-    ConfigFile_Open (Config_Path);
+    ConfigFile_Open (this->Config_Path);
 
-    std::ifstream Read (Config_Path.c_str ());
+    std::ifstream Read (this->Config_Path.c_str ());
 
         if (!Read.is_open ()) {
 
             SetDefault_Parameters ();
             SaveSettings (false);
 
-            std::ifstream Check (Config_Path.c_str ());
+            std::ifstream Check (this->Config_Path.c_str ());
 
                 if (!Check.is_open ())
                     Exception ("Default settings didnt created");
@@ -277,13 +361,13 @@ const void Class_Settings::Check_ConfigFile (void) {
 
     Read.close ();
 
-    ConfigFile_Close (Config_Path);
+    ConfigFile_Close (this->Config_Path);
 
 } // метод проверки существования файла с конфигом
 
 const void Class_Settings::Load_Parameters (void) {
 
-    ConfigFile_Open (Config_Path);
+    ConfigFile_Open (this->Config_Path);
 
     std::string Str = "\0";
     bool LabsPath_Founded = false;
@@ -294,64 +378,64 @@ const void Class_Settings::Load_Parameters (void) {
     bool Url_BanList_Clients_Founded = false;
     bool Url_BanList_Workers_Founded = false;
 
-    std::ifstream Read (Config_Path.c_str ());
+    std::ifstream Read (this->Config_Path.c_str ());
 
         if (Read.is_open ()) {
 
             while (Read >> Str) {
 
-                if (Str == SaveTag_Path_to_Labs && LabsPath_Founded == false) {
+                if (Str == this->SaveTag_Path_to_Labs && LabsPath_Founded == false) {
 
                     Read >> Str;
-                    Read >> Labs_Path;
+                    Read >> this->Labs_Path;
                     LabsPath_Founded = true;
 
                 }
 
-                if (Str == SaveTag_Order_Start && OrderStart_Founded == false) {
+                if (Str == this->SaveTag_Order_Start && OrderStart_Founded == false) {
 
                     Read >> Str;
-                    Read >> Automatic_Order_Start;
+                    Read >> this->Automatic_Order_Start;
                     OrderStart_Founded = true;
 
                 }
 
-                if (Str == SaveTag_Close_Application && CloseApp_Founded == false) {
+                if (Str == this->SaveTag_Close_Application && CloseApp_Founded == false) {
 
                     Read >> Str;
-                    Read >> Automatic_Close_Application;
+                    Read >> this->Automatic_Close_Application;
                     CloseApp_Founded = true;
 
                 }
 
-                if (Str == SaveTag_Open_Order && Open_Order_Founded == false) {
+                if (Str == this->SaveTag_Open_Order && Open_Order_Founded == false) {
 
                     Read >> Str;
-                    Read >> Automatic_Open_Order;
+                    Read >> this->Automatic_Open_Order;
                     Open_Order_Founded = true;
 
                 }
 
-                if (Str == SaveTag_Update_BanList && UpdateBanList_Founded == false)  {
+                if (Str == this->SaveTag_Update_BanList && UpdateBanList_Founded == false)  {
 
                     Read >> Str;
-                    Read >> Automatic_Update_BanList;
+                    Read >> this->Automatic_Update_BanList;
                     UpdateBanList_Founded = true;
 
                 }
 
-                if (Str == SaveTag_Url_BanList_Clients && Url_BanList_Clients_Founded == false) {
+                if (Str == this->SaveTag_Url_BanList_Clients && Url_BanList_Clients_Founded == false) {
 
                     Read >> Str;
-                    Read >> Url_BanList_Clients;
+                    Read >> this->Url_BanList_Clients;
                     Url_BanList_Clients_Founded = true;
 
                 }
 
-                if (Str == SaveTag_Url_BanList_Workers && Url_BanList_Workers_Founded == false) {
+                if (Str == this->SaveTag_Url_BanList_Workers && Url_BanList_Workers_Founded == false) {
 
                     Read >> Str;
-                    Read >> Url_BanList_Workers;
+                    Read >> this->Url_BanList_Workers;
                     Url_BanList_Workers_Founded = true;
 
                 }
@@ -369,39 +453,39 @@ const void Class_Settings::Load_Parameters (void) {
             Exception ("Not found Path_to_Labs in settings file");
 
         if (OrderStart_Founded == false)
-            Exception ("Not found Automatic_Order_Start in settings file");
+            Exception ("Not found this->Automatic_Order_Start in settings file");
 
         if (CloseApp_Founded == false)
-            Exception ("Not found Automatic_Close_Application in settings file");
+            Exception ("Not found this->Automatic_Close_Application in settings file");
 
         if (Open_Order_Founded == false)
-            Exception ("Not found Automatic_Open_Order in settings file");
+            Exception ("Not found this->Automatic_Open_Order in settings file");
 
         if (UpdateBanList_Founded == false)
-            Exception ("Not found Automatic_Update_BanList in settings file");
+            Exception ("Not found this->Automatic_Update_BanList in settings file");
 
         if (Url_BanList_Clients_Founded == false)
-            Exception ("Not found Url_BanList_Clients in settings file");
+            Exception ("Not found this->Url_BanList_Clients in settings file");
 
         if (Url_BanList_Workers_Founded == false)
-            Exception ("Not found Url_BanList_Workers in settings file");
+            Exception ("Not found this->Url_BanList_Workers in settings file");
 
         if (!( ( ((LabsPath_Founded == OrderStart_Founded) == (CloseApp_Founded == Open_Order_Founded)) == ( UpdateBanList_Founded == (Url_BanList_Clients_Founded == Url_BanList_Workers_Founded)) ) == true)) {
 
-            remove (Config_Path.c_str ());
+            remove (this->Config_Path.c_str ());
             Check_ConfigFile ();
 
         }
 
-    ConfigFile_Close (Config_Path);
+    ConfigFile_Close (this->Config_Path);
 
 } // метод загрузки параметров приложения
 
 const void Class_Settings::SaveSettings (const bool UsingDelay) const {
 
-    ConfigFile_Open (Config_Path);
+    ConfigFile_Open (this->Config_Path);
 
-    std::ofstream Write (Config_Path.c_str ());
+    std::ofstream Write (this->Config_Path.c_str ());
 
     Write   << SaveTag_Path_to_Labs << " = " << getLabs_Path () << "\n"
             << SaveTag_Order_Start << " = " << getAutomatic_Order_Start () << "\n"
@@ -413,7 +497,7 @@ const void Class_Settings::SaveSettings (const bool UsingDelay) const {
 
     Write.close ();
 
-    ConfigFile_Close (Config_Path);
+    ConfigFile_Close (this->Config_Path);
 
         if (UsingDelay == true) {
 

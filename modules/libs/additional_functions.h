@@ -7,7 +7,7 @@
 
 /* Глобальные общие функции */
 
-const std::string Convert_Int_toString (unsigned short int Number) {
+const static std::string Convert_Int_toString (unsigned short int Number) {
 
     std::ostringstream ConverInt_ToString;
     ConverInt_ToString << Number;
@@ -16,7 +16,7 @@ const std::string Convert_Int_toString (unsigned short int Number) {
 
 } // функция конвертирования из int в string
 
-const unsigned short int Convert_String_toInt (std::string Str) {
+const static unsigned short int Convert_String_toInt (std::string Str) {
 
     unsigned short int Number = 0;
 
@@ -27,7 +27,7 @@ const unsigned short int Convert_String_toInt (std::string Str) {
 
 } // функция конвертациии из string в int
 
-const void Delay (const unsigned short int Time) {
+const static void Delay (const unsigned short int Time) {
 
 	const clock_t end_time = clock () + Time * CLOCKS_PER_SEC / 1000;
 
@@ -35,7 +35,7 @@ const void Delay (const unsigned short int Time) {
 
 } // функция задержки
 
-const void Show_Text_Output (const std::string Text) {
+const static void Show_Text_Output (const std::string Text) {
 
 	SetConsoleTextAttribute (GetStdHandle (STD_OUTPUT_HANDLE), (WORD) ((0 << 4) | 11));
 
@@ -45,13 +45,13 @@ const void Show_Text_Output (const std::string Text) {
 
 } // функция для отображения заданной строки другим цветом
 
-const void Show_Number_Output (const unsigned short int& Number) {
+const static void Show_Number_Output (const unsigned short int& Number) {
 
     Show_Text_Output (Convert_Int_toString (Number));
 
 } // функция для отображения заданного числа другим цветом
 
-const std::string Show_Text_Input (std::string ErrorText, const bool Show_ErrorText_AtStart) {
+const static std::string Show_Text_Input (std::string ErrorText, const bool Show_ErrorText_AtStart) {
 
     const unsigned short int StrokeSize = 128;
     char Stroke [StrokeSize];
@@ -96,7 +96,7 @@ const std::string Show_Text_Input (std::string ErrorText, const bool Show_ErrorT
   // * второй аргумент отвечает за то, чтобы входная строка (первого аргумента) - отобразилась в самом начале,
   // не дожидаясь неверного ввода (задавая тем самым текстовое поле-описание для пользователя при вводе)
 
-const void CenterText (const std::string Text) {
+const static void CenterText (const std::string Text) {
 
     CONSOLE_SCREEN_BUFFER_INFO consoleInfo;
     GetConsoleScreenBufferInfo ((GetStdHandle (STD_OUTPUT_HANDLE)), &consoleInfo);
@@ -108,13 +108,13 @@ const void CenterText (const std::string Text) {
 
 } // функция центирования текста на экране
 
-const void cls (void) {
+const static void cls (void) {
 
     system ("cls");
 
 } // функция очистки экрана
 
-const void Exception (const std::string TextError) {
+const static void Exception (const std::string TextError) {
 
     SetConsoleTextAttribute (GetStdHandle (STD_OUTPUT_HANDLE), (WORD) ((0 << 4) | 12));
 
@@ -125,7 +125,7 @@ const void Exception (const std::string TextError) {
 
 } // функция Exception - для отображения случившихся ошибок
 
-const bool Check_Input_ForExit (const std::string& Str) {
+const static bool Check_Input_ForExit (const std::string& Str) {
 
     bool Flag = false;
 
@@ -209,7 +209,7 @@ const bool Check_Input_ForExit (const std::string& Str) {
 
 } // функция для проверки ввода на строку выхода
 
-const bool Check_Input_ForReload (const std::string& Str) {
+const static bool Check_Input_ForReload (const std::string& Str) {
 
         if (Str[0] == 'f' || Str[0] == 'F')
             if (Str[1] == '5')
@@ -219,7 +219,7 @@ const bool Check_Input_ForReload (const std::string& Str) {
 
 } // функция для проверки ввода на строку перезагрузки
 
-const void Show_Text_In_Right_Corner (const std::string Str) {
+const static void Show_Text_In_Right_Corner (const std::string Str) {
 
     HANDLE hWndConsole = GetStdHandle( STD_OUTPUT_HANDLE );
     CONSOLE_SCREEN_BUFFER_INFO consoleInfo;
@@ -236,13 +236,13 @@ const void Show_Text_In_Right_Corner (const std::string Str) {
 
 } // функция для отображения текста в правом углу
 
-const void Show_Text_ForExit (void) {
+const static void Show_Text_ForExit (void) {
 
     Show_Text_In_Right_Corner ("Input \"Exit\" / \"Esc\" / \"!q\" for quit");
 
 } // функция для отображения подсказки для выхода из меню
 
-static bool IsNumber (const std::string& Str) {
+const static bool IsNumber (const std::string& Str) {
 
         for (unsigned short int i = 0; i < Str.length(); i++) {
 
@@ -256,7 +256,7 @@ static bool IsNumber (const std::string& Str) {
 
 } // функция проверки является ли строка - числом
 
-const void GetNormal_Number_Value (unsigned short int *Count, std::string& Stroke, const std::string InputText, const short int LowerLimit, const short int UpperLimit) {
+const static void GetNormal_Number_Value (unsigned short int *Count, std::string& Stroke, const std::string InputText, const short int LowerLimit, const short int UpperLimit) {
 
     while (true) {
 

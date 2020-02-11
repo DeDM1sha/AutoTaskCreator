@@ -5,20 +5,14 @@
 #ifndef _statistics_class_h_
 #define _statistics_class_h_
 
-static std::string SaveTag_TechnologyName = "Technology";
-
-static std::string Technology_Name_C = "C";
-static std::string Technology_Name_CPlusPlus = "C++";
-static std::string Technology_Name_Another = "Another";
-
 class Class_Statistics {
 
     private:
 
         unsigned short int TotalNumber_ClientsInDB_Count; // общее кол-во клиентов в базе
         unsigned short int TotalNumber_CompletedTasks_Count; // общее кол-во выполненных заданий со всех клиентов
-        unsigned short int TotalNumber_Technology_C; // общее количество выполненных задач на Си
-        unsigned short int TotalNumber_Technology_CPlusPlus; // общее количество выполненных задач на C++
+        unsigned short int TotalNumber_Technology_C; // общее количество выполненных задач на [Си]
+        unsigned short int TotalNumber_Technology_CPlusPlus; // общее количество выполненных задач на [C++]
         unsigned short int TotalNumber_Technology_Another; // общее количество выполненных задач по другим направлениям (помощь на экзаменах, ответы на вопросы и т.д.)
         std::vector <std::string> ClientsName; // имена всех клиентов
 
@@ -26,12 +20,12 @@ class Class_Statistics {
 
         Class_Statistics (const Class_Settings& Settings) {
 
-            TotalNumber_ClientsInDB_Count = Load_TotalNumber_ClientsInDB_Count (Settings);
-            ClientsName.reserve (TotalNumber_ClientsInDB_Count);
-            TotalNumber_Technology_C = 0;
-            TotalNumber_Technology_CPlusPlus = 0;
-            TotalNumber_Technology_Another = 0;
-			TotalNumber_CompletedTasks_Count = Load_TotalNumber_CompletedTasks_Count (Settings);
+            this->TotalNumber_ClientsInDB_Count = Load_TotalNumber_ClientsInDB_Count (Settings);
+            this->ClientsName.reserve (TotalNumber_ClientsInDB_Count);
+            this->TotalNumber_Technology_C = 0;
+            this->TotalNumber_Technology_CPlusPlus = 0;
+            this->TotalNumber_Technology_Another = 0;
+			this->TotalNumber_CompletedTasks_Count = Load_TotalNumber_CompletedTasks_Count (Settings);
 
         }
 
@@ -92,7 +86,6 @@ class Class_Statistics {
         } // геттер для TotalNumber_Technology_CPlusPlus
 
     //////////////////////////////////////////////
-
 
         const void setTotalNumber_Technology_Another (const unsigned short int Number) {
 
@@ -169,7 +162,7 @@ const unsigned short int Class_Statistics::Load_TotalNumber_CompletedTasks_Count
     std::string Str = "\0";
     std::string LogPath = Settings.getLabs_Path () + "//CountClients.txt";
 
-        for (unsigned short int i = 0; i < TotalNumber_ClientsInDB_Count; i++) {
+        for (unsigned short int i = 0; i < this->TotalNumber_ClientsInDB_Count; i++) {
 
             unsigned short int LocalCountTasks = 0;
             std::string Path = Settings.getLabs_Path () + "\\" + ClientsName[i];
@@ -201,26 +194,26 @@ const unsigned short int Class_Statistics::Load_TotalNumber_CompletedTasks_Count
 
                         while (Read >> Str) {
 
-                            if (Str == Technology_Name_C) {
+                            if (Str == Settings.getTechnology_Name_C ()) {
 
-                                TotalNumber_Technology_C++;
-                                TypeTechnology = Technology_Name_C;
+                                this->TotalNumber_Technology_C++;
+                                TypeTechnology = Settings.getTechnology_Name_C ();
                                 break;
 
                             }
 
-                            if (Str == Technology_Name_CPlusPlus) {
+                            if (Str == Settings.getTechnology_Name_CPlusPlus ()) {
 
-                                TotalNumber_Technology_CPlusPlus++;
-                                TypeTechnology = Technology_Name_CPlusPlus;
+                                this->TotalNumber_Technology_CPlusPlus++;
+                                TypeTechnology = Settings.getTechnology_Name_CPlusPlus ();
                                 break;
 
                             }
 
-                            if (Str == Technology_Name_Another) {
+                            if (Str == Settings.getTechnology_Name_Another ()) {
 
-                                TotalNumber_Technology_Another++;
-                                TypeTechnology = Technology_Name_Another;
+                                this->TotalNumber_Technology_Another++;
+                                TypeTechnology = Settings.getTechnology_Name_Another ();
                                 break;
 
                             }

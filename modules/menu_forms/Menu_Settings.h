@@ -5,13 +5,13 @@
 #ifndef _Menu_Settings_h_
 #define _Menu_Settings_h_
 
-static std::string Convert_Bool_toString (const bool& Boolean) {
+const static std::string Convert_Bool_toString (const bool& Boolean) {
 
     return Boolean ? "True" : "False";
 
 } // функция конвертации из типа bool в тип std::string
 
-static void Show_TextHeader (std::string MainText) {
+const static void Show_TextHeader (std::string MainText) {
 
     CenterText (MainText + "\n");
     CenterText ("Для этого нажмите Y (Yes) - для подтверждения\n");
@@ -20,7 +20,7 @@ static void Show_TextHeader (std::string MainText) {
 
 } // функция для отображения шапки в подпунктах меню
 
-static bool ChoisenAnswer_SetSettings (unsigned short int* ButtonNumber) {
+const static bool ChoisenAnswer_SetSettings (unsigned short int* ButtonNumber) {
 
         while (true) {
 
@@ -38,7 +38,7 @@ static bool ChoisenAnswer_SetSettings (unsigned short int* ButtonNumber) {
 
 } // функция для проверки нажатой клавиши в отдельном пункте меню настроек (отдельно для каждого параметра настроек)
 
-static bool ChoisenAnswer_SetParams (unsigned short int* ButtonNumber) {
+const static bool ChoisenAnswer_SetParams (unsigned short int* ButtonNumber) {
 
         if (ClickCatch ("Y", ButtonNumber)) {
 
@@ -53,7 +53,7 @@ static bool ChoisenAnswer_SetParams (unsigned short int* ButtonNumber) {
 
 } // функция для проверки нажатой клавиши при выборе ответа [Y] / [N]
 
-static std::string InputAnswer_SetParams (std::string MainText, std::string SupportText) {
+const static std::string InputAnswer_SetParams (std::string MainText, std::string SupportText) {
 
     std::string Str = "\0";
     CenterText (MainText + "\n");
@@ -77,7 +77,7 @@ static std::string InputAnswer_SetParams (std::string MainText, std::string Supp
 
 } // функция для ввода произвольных параметров в меню настроек
 
-const void Menu_Settings (Class_Settings& Settings, Class_BanLists& Banlists) {
+const static void Menu_Settings (Class_Settings& Settings, Class_BanLists& Banlists) {
 
     std::string String_AutomaticCloseApplication = "\0";
     unsigned short int ButtonNumber = 0; // переменная для обработки нажатий в меню

@@ -5,14 +5,14 @@
 #ifndef _Menu_Search_tasks_h_
 #define _Menu_Search_tasks_h_
 
-static void Continue (void) {
+const static void Continue (void) {
 
     CenterText ("Для продолжения нажмите любую клавишу...");
     getch ();
 
 } // функция ожидания нажатия для продолжления
 
-const void Menu_Search_Tasks (const Class_Settings& Settings) {
+const static void Menu_Search_Tasks (const Class_Settings& Settings) {
 
     unsigned short int ButtonNumber = 0; // переменная для обработки нажатий в меню
 
@@ -31,7 +31,7 @@ const void Menu_Search_Tasks (const Class_Settings& Settings) {
 
                     ButtonNumber = getch ();
 
-                        if (ClickCatch ("Esc", &ButtonNumber) || ClickCatch ("1", &ButtonNumber))
+                        if (ClickCatch (&ButtonNumber, "Esc, 1"))
                             break;
 
                 }
@@ -90,7 +90,6 @@ const void Menu_Search_Tasks (const Class_Settings& Settings) {
 
                             remove (std::string(Settings.getLabs_Path () + "\\" + Name + "\\CheckClient.txt").c_str ());
                             system (std::string("explorer \"" + Settings.getLabs_Path () + "\\" + Name + "\"").c_str ());
-
 
                         }
 

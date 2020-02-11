@@ -11,8 +11,7 @@
 #include <vector>
 #include <iomanip>
 #include <sstream>
-#include <stack>
-#include<iterator>
+
 // подключение всех необходимых стандартных библиотек дл€ проекта
 
 #include "modules/classes/clients_class.h" // подключение  clients_class - класс данных об клиенте
@@ -30,7 +29,7 @@
 
 // подключение всех необходимых самописных библиотек и модулей дл€ проекта
 
-const void Configure_Console_Window (void) {
+const static void Configure_Console_Window (void) {
 
     void *handle = GetStdHandle (STD_OUTPUT_HANDLE);
     CONSOLE_CURSOR_INFO structCursorInfo;
@@ -48,9 +47,9 @@ const void Configure_Console_Window (void) {
 
 } // ‘ункци€ настроек консольного окна
 
-static void Draw_Menu (const unsigned short int* MenuItem) {
+const static void Draw_Menu (const unsigned short int* MenuItem) {
 
-    printf ("\n\n\n\n\n");
+    printf ("\n\n\n\n");
 
         if (*MenuItem == 1) {
 
@@ -142,7 +141,9 @@ int main (void) {
             Menu_Formation_Order (Settings, Banlists, &FirstOrderCreated);
 
     unsigned short int ButtonNumber = 0; // переменна€ дл€ обработки нажатий в меню
-    unsigned short int MenuItem = 1;
+    unsigned short int MenuItem = 1; // выбранный пункт в меню
+    const static std::string ProgramVersion = "2.12.02"; // номер версии продукта
+    const static std::string BuildType = "Debug"; // режим сборки
 
         while (true) {
 
@@ -151,6 +152,8 @@ int main (void) {
 
             cls ();
             CenterText ("¬ыберите пункт меню, использу€ клавиши стрелочек на клавиатуре (Esc - выход)");
+            printf ("\n");
+            Show_Text_In_Right_Corner (BuildType + " build (v" + ProgramVersion + ")");
             Draw_Menu (&MenuItem);
 
                 while (true) {
@@ -160,7 +163,7 @@ int main (void) {
                         if (ClickCatch ("Esc", &ButtonNumber))
                             return 0; // выход из программы
 
-                        if ((ClickCatch ("Arrow_Left", &ButtonNumber) || (ClickCatch ("Arrow_Right", &ButtonNumber)))) {
+                        if (ClickCatch (&ButtonNumber, "Arrow_Left, Arrow_Right")) {
 
                                 switch (MenuItem) {
 
@@ -175,7 +178,7 @@ int main (void) {
 
                         } // обработка нажати€ клавиши стрелки влево и вправо
 
-                        if ((ClickCatch ("Arrow_Up", &ButtonNumber)) || (ClickCatch ("Arrow_Down", &ButtonNumber))) {
+                        if (ClickCatch (&ButtonNumber, "Arrow_Up, Arrow_Down")) {
 
                                 switch (MenuItem) {
 
@@ -204,10 +207,10 @@ int main (void) {
 
                                 switch (MenuItem) {
 
-                                    case 1: Menu_Formation_Order (Settings, Banlists, &FirstOrderCreated);          break;
-                                    case 2: Menu_Search_Tasks (Settings);                                           break;
-                                    case 3: Menu_Settings (Settings, Banlists);                                     break;
-                                    case 4: Menu_Statistics (Settings, Banlists);                                   break;
+                                    case 1: Menu_Formation_Order (Settings, Banlists, &FirstOrderCreated);  break;
+                                    case 2: Menu_Search_Tasks (Settings);                                   break;
+                                    case 3: Menu_Settings (Settings, Banlists);                             break;
+                                    case 4: Menu_Statistics (Settings, Banlists);                           break;
 
                                 }
 

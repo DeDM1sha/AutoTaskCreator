@@ -23,20 +23,20 @@ class Class_Clients {
 
 		Class_Clients (void) {
 
-            Name = "\0";
-			Technology_Name = "\0";
-			IDE_Name = "\0";
-			OS_Name = "\0";
-			MenuFunctional = false;
-			TasksCount = 0;
-			Available_TasksCount = 0;
-			MenuItems_Count = 3; // 3 пункта меню по умолчанию
+            this->Name = "\0";
+			this->Technology_Name = "\0";
+			this->IDE_Name = "\0";
+			this->OS_Name = "\0";
+			this->MenuFunctional = false;
+			this->TasksCount = 0;
+			this->Available_TasksCount = 0;
+			this->MenuItems_Count = 3; // 3 пункта меню по умолчанию
 
-                if (MenuItems_Title.size () > 0)
-                    MenuItems_Title.clear ();
+                if (this->MenuItems_Title.size () > 0)
+                    this->MenuItems_Title.clear ();
 
-                for (unsigned short int i = 0; i < MenuItems_Count; i++)
-                    MenuItems_Title.push_back ("");
+                for (unsigned short int i = 0; i < this->MenuItems_Count; i++)
+                    this->MenuItems_Title.push_back ("");
 
 		}
 
@@ -178,20 +178,20 @@ class Class_Clients {
 
         const void Clear_Client_Parameters (void) {
 
-            Name = "\0";
-			Technology_Name = "\0";
-			IDE_Name = "\0";
-			OS_Name = "\0";
-			MenuFunctional = false;
-			TasksCount = 0;
-			Available_TasksCount = 0;
-			MenuItems_Count = 3;
+            this->Name = "\0";
+			this->Technology_Name = "\0";
+			this->IDE_Name = "\0";
+			this->OS_Name = "\0";
+			this->MenuFunctional = false;
+			this->TasksCount = 0;
+			this->Available_TasksCount = 0;
+			this->MenuItems_Count = 3;
 
-                if (MenuItems_Title.size () > 0)
-                    MenuItems_Title.clear ();
+                if (this->MenuItems_Title.size () > 0)
+                    this->MenuItems_Title.clear ();
 
-                for (unsigned short int i = 0; i < MenuItems_Count; i++)
-                    MenuItems_Title.push_back ("");
+                for (unsigned short int i = 0; i < this->MenuItems_Count; i++)
+                    this->MenuItems_Title.push_back ("");
 
         } // очистка параметров клиента
 

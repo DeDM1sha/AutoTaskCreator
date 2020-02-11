@@ -5,17 +5,7 @@
 #ifndef _Menu_formation_order_h_
 #define _Menu_formation_order_h_
 
-static std::string C = "C";
-static std::string CPlusPlus = "C++";
-static std::string Another = "Another";
-static std::string VisualStudio = "VisualStudio";
-static std::string Geany = "Geany";
-static std::string CodeBlocks = "Code::Blocks";
-static std::string None = "None";
-static std::string Linux = "Linux";
-static std::string Windows = "Windows";
-
-static bool Fill_InputData (Class_Clients& Client, const Class_BanLists& Banlists) {
+const static bool Fill_InputData (Class_Clients& Client, const Class_BanLists& Banlists, const Class_Settings& Settings) {
 
 	unsigned short int New_TasksCount = 0; // переменная отвечающая за созданное кол-во новых тасков
 	unsigned short int ButtonNumber = 0; // переменная для обработки нажатий в меню
@@ -54,24 +44,24 @@ static bool Fill_InputData (Class_Clients& Client, const Class_BanLists& Banlist
 
                         if (ClickCatch ("C", &ButtonNumber)) {
 
-                            Client.setTechnology_Name (C);
-                            Show_Text_Output (C);
+                            Client.setTechnology_Name (Settings.getTechnology_Name_C ());
+                            Show_Text_Output (Settings.getTechnology_Name_C ());
                             break;
 
                         }
 
                         else if (ClickCatch ("+", &ButtonNumber)) {
 
-                            Client.setTechnology_Name (CPlusPlus);
-                            Show_Text_Output (CPlusPlus);
+                            Client.setTechnology_Name (Settings.getTechnology_Name_CPlusPlus ());
+                            Show_Text_Output (Settings.getTechnology_Name_CPlusPlus ());
                             break;
 
                         }
 
                         else if (ClickCatch ("A", &ButtonNumber)) {
 
-                            Client.setTechnology_Name (Another);
-                            Show_Text_Output (Another);
+                            Client.setTechnology_Name (Settings.getIDE_Name_NoneIDE ());
+                            Show_Text_Output (Settings.getIDE_Name_NoneIDE ());
                             break;
 
                         }
@@ -87,7 +77,7 @@ static bool Fill_InputData (Class_Clients& Client, const Class_BanLists& Banlist
                 if (ClickCatch ("F5", &ButtonNumber))
                     continue;
 
-                if (Client.getTechnology_Name () != Another) {
+                if (Client.getTechnology_Name () != Settings.getIDE_Name_NoneIDE ()) {
 
                     std::cout << "\n\n\nВыбор IDE: Visual Studio / Geany / Code::Blocks (V / G / C) ?:   ";
 
@@ -97,24 +87,24 @@ static bool Fill_InputData (Class_Clients& Client, const Class_BanLists& Banlist
 
                                 if (ClickCatch ("V", &ButtonNumber)) {
 
-                                    Client.setIDE_Name (VisualStudio);
-                                    Show_Text_Output (VisualStudio);
+                                    Client.setIDE_Name (Settings.getIDE_Name_VisualStudio ());
+                                    Show_Text_Output (Settings.getIDE_Name_VisualStudio ());
                                     break;
 
                                 }
 
                                 else if (ClickCatch ("G", &ButtonNumber)) {
 
-                                    Client.setIDE_Name (Geany);
-                                    Show_Text_Output (Geany);
+                                    Client.setIDE_Name (Settings.getIDE_Name_Geany ());
+                                    Show_Text_Output (Settings.getIDE_Name_Geany ());
                                     break;
 
                                 }
 
                                 else if (ClickCatch ("C", &ButtonNumber)) {
 
-                                    Client.setIDE_Name (CodeBlocks);
-                                    Show_Text_Output (CodeBlocks);
+                                    Client.setIDE_Name (Settings.getIDE_Name_CodeBlocks ());
+                                    Show_Text_Output (Settings.getIDE_Name_CodeBlocks ());
                                     break;
 
                                 }
@@ -138,16 +128,16 @@ static bool Fill_InputData (Class_Clients& Client, const Class_BanLists& Banlist
 
                                 if (ClickCatch ("L", &ButtonNumber)) {
 
-                                    Client.setOS_Name (Linux);
-                                    Show_Text_Output (Linux);
+                                    Client.setOS_Name (Settings.getOS_Name_Linux ());
+                                    Show_Text_Output (Settings.getOS_Name_Linux ());
                                     break;
 
                                 }
 
                                 else if (ClickCatch ("W", &ButtonNumber)) {
 
-                                    Client.setOS_Name (Windows);
-                                    Show_Text_Output (Windows);
+                                    Client.setOS_Name (Settings.getOS_Name_Windows ());
+                                    Show_Text_Output (Settings.getOS_Name_Windows ());
                                     break;
 
                                 }
@@ -201,8 +191,8 @@ static bool Fill_InputData (Class_Clients& Client, const Class_BanLists& Banlist
                 else {
 
                     printf ("\n");
-                    Client.setOS_Name (Windows);
-                    Client.setIDE_Name (None);
+                    Client.setOS_Name (Settings.getOS_Name_Windows ());
+                    Client.setIDE_Name (Settings.getIDE_Name_NoneIDE ());
 
                 }
 
@@ -261,7 +251,7 @@ static bool Fill_InputData (Class_Clients& Client, const Class_BanLists& Banlist
 
 } // функция заполнения данных по клиенту
 
-static bool Create_Client_Folder (const Class_Clients& Client, const Class_Settings& Settings) {
+const static bool Create_Client_Folder (const Class_Clients& Client, const Class_Settings& Settings) {
 
     std::string Path = Settings.getLabs_Path () + "\\" + Client.getName () + "\\CheckFolder.txt";
     bool FolderExists = true; // наличие уже такой папки
@@ -285,9 +275,9 @@ static bool Create_Client_Folder (const Class_Clients& Client, const Class_Setti
 
 } // функция создания папки для нового клиента
 
-static std::string Create_Source_Code (const Class_Clients& Client, const Class_Settings& Settings) {
+const static std::string Create_Source_Code (const Class_Clients& Client, const Class_Settings& Settings) {
 
-        if (Client.getTechnology_Name () == Another)
+        if (Client.getTechnology_Name () == Settings.getIDE_Name_NoneIDE ())
             return "\0";
 
     std::string CodePath = "\0";
@@ -295,26 +285,26 @@ static std::string Create_Source_Code (const Class_Clients& Client, const Class_
 
 	std::queue <std::string> Code;
 
-		if (Client.getIDE_Name () == VisualStudio) {
+		if (Client.getIDE_Name () == Settings.getIDE_Name_VisualStudio ()) {
 
 			Code.push ("//#pragma warning (disable:4786)\n");
             Code.push ("#include <string>\n");
 
 		}
 
-		if (Client.getOS_Name () == Windows)
+		if (Client.getOS_Name () == Settings.getOS_Name_Windows ())
             Code.push ("#include <windows.h>\n");
 
 		if (Client.getMenuFunctional () == true) {
 
 			Code.push ("#include <conio.h>\n");
 
-				if (Client.getTechnology_Name () == C)
+				if (Client.getTechnology_Name () == Settings.getTechnology_Name_C ())
 					Code.push ("#include <stdbool.h>\n");
 
 		}
 
-		if (Client.getTechnology_Name () == C)
+		if (Client.getTechnology_Name () == Settings.getTechnology_Name_C ())
 			Code.push ("#include <stdio.h>\n\n");
 
 		else {
@@ -329,13 +319,13 @@ static std::string Create_Source_Code (const Class_Clients& Client, const Class_
 			Code.push ("void cls (void) {\n\n");
 			Code.push ("	system (\"cls\");\n\n");
 
-				if (Client.getOS_Name () != Windows)
+				if (Client.getOS_Name () != Settings.getOS_Name_Windows())
 					Code.push ("	//system (\"clear\");\n\n");
 
 			Code.push ("} // функция очистки экрана\n\n");
 			Code.push ("void DrawLine (void) {\n\n");
 
-				if (Client.getTechnology_Name () == C)
+				if (Client.getTechnology_Name () == Settings.getTechnology_Name_C ())
 					Code.push ("	printf (\"\\n--------------------------------------\\n\");\n\n");
 
 				else
@@ -344,13 +334,13 @@ static std::string Create_Source_Code (const Class_Clients& Client, const Class_
 			Code.push ("} // функция отрисовки пунктирной линии\n\n");
 			Code.push ("void Continue (void) {\n\n");
 
-				if (Client.getTechnology_Name () == C)
+				if (Client.getTechnology_Name () == Settings.getTechnology_Name_C ())
 					Code.push ("	printf (\"\\nДля продолжения нажмите любую клавишу... \\n\");\n");
 
 				else
 					Code.push ("	cout << \"\\nДля продолжения нажмите любую клавишу... \\n\";\n");
 
-				if (Client.getIDE_Name () == VisualStudio)
+				if (Client.getIDE_Name () == Settings.getIDE_Name_VisualStudio ())
 					Code.push ("	_getch ();\n\n");
 
 				else
@@ -362,7 +352,7 @@ static std::string Create_Source_Code (const Class_Clients& Client, const Class_
 
 	Code.push ("int main (void) {\n\n");
 
-        if (Client.getOS_Name () == Windows) {
+        if (Client.getOS_Name () == Settings.getOS_Name_Windows ()) {
 
             Code.push ("	SetConsoleCP(1251);\n");
             Code.push ("	SetConsoleOutputCP(1251); // кириллица в консоли\n");
@@ -380,7 +370,7 @@ static std::string Create_Source_Code (const Class_Clients& Client, const Class_
 			Code.push ("			cls ();\n\n");
 
 
-                if (Client.getTechnology_Name () == C)
+                if (Client.getTechnology_Name () == Settings.getTechnology_Name_C ())
                     Code.push ("			printf (\"		Меню программы\\n\\n\");\n");
 
                 else
@@ -394,7 +384,7 @@ static std::string Create_Source_Code (const Class_Clients& Client, const Class_
                     else
                         Stroke = "\0";
 
-                    if (Client.getTechnology_Name () == C)
+                    if (Client.getTechnology_Name () == Settings.getTechnology_Name_C ())
                         Code.push ("			printf (\"" + Convert_Int_toString (i + 1) + ". " + Stroke +"\\n\");\n");
 
                     else
@@ -402,7 +392,7 @@ static std::string Create_Source_Code (const Class_Clients& Client, const Class_
 
                 }
 
-                if (Client.getTechnology_Name () == C)
+                if (Client.getTechnology_Name () == Settings.getTechnology_Name_C ())
                     Code.push ("			printf (\"Esc. Выйти из программы\\n\");\n\n");
 
                 else
@@ -410,7 +400,7 @@ static std::string Create_Source_Code (const Class_Clients& Client, const Class_
 
 			Code.push ("				while (true) { // защита от дурака по нажатию\n\n");
 
-				if (Client.getIDE_Name () == VisualStudio)
+				if (Client.getIDE_Name () == Settings.getIDE_Name_VisualStudio ())
 					Code.push ("					ButtonNumber = _getch ();\n\n");
 
 				else
@@ -438,7 +428,7 @@ static std::string Create_Source_Code (const Class_Clients& Client, const Class_
                         else
                             Code.push ("				else if (ButtonNumber == " + Convert_Int_toString (49 + i) + ") {\n\n");
 
-                        if (Client.getTechnology_Name () == C)
+                        if (Client.getTechnology_Name () == Settings.getTechnology_Name_C ())
                             Code.push ("                    printf (\"      " + Client.getMenuItems_Title (i) + "\\n\\n\");\n\n\n\n");
 
                         else
@@ -455,7 +445,7 @@ static std::string Create_Source_Code (const Class_Clients& Client, const Class_
 
 		else {
 
-				if (Client.getIDE_Name () == VisualStudio)
+				if (Client.getIDE_Name () == Settings.getIDE_Name_VisualStudio ())
 					Code.push ("	//system (\"pause\");\n\n");
 
 			Code.push ("	return 0; // завершение программы\n\n");
@@ -466,7 +456,7 @@ static std::string Create_Source_Code (const Class_Clients& Client, const Class_
 
     CodePath = "C:\\Users\\" + Settings.getPK_Name () + "\\AppData\\Local\\Temp\\task.c";
 
-		if (Client.getTechnology_Name () == CPlusPlus)
+		if (Client.getTechnology_Name () == Settings.getTechnology_Name_CPlusPlus ())
 			CodePath += "pp";
 
     std::ofstream Write (CodePath.c_str());
@@ -491,7 +481,7 @@ static std::string Create_Source_Code (const Class_Clients& Client, const Class_
 
 } // функция создания исходного кода
 
-static void SendFiles_To_ClientFolders (const Class_Clients& Client, const Class_Settings& Settings, const std::string& CodePath, const bool* FolderExists) {
+const static void SendFiles_To_ClientFolders (const Class_Clients& Client, const Class_Settings& Settings, const std::string& CodePath, const bool* FolderExists) {
 
     unsigned short int Old_TasksCount = 0;
 
@@ -539,7 +529,7 @@ static void SendFiles_To_ClientFolders (const Class_Clients& Client, const Class
 
             Write.close ();
 
-                if (Client.getTechnology_Name () != Another)
+                if (Client.getTechnology_Name () != Settings.getIDE_Name_NoneIDE ())
                     system (("copy \"" + CodePath + "\" \"" + Settings.getLabs_Path () + "\\" + Client.getName () + "\\Task_" + Convert_Int_toString (i) + "\" /-Y >nul").c_str ());
 
                 else
@@ -547,11 +537,11 @@ static void SendFiles_To_ClientFolders (const Class_Clients& Client, const Class
 
         }
 
-        if (Client.getTechnology_Name () != Another) {
+        if (Client.getTechnology_Name () != Settings.getIDE_Name_NoneIDE ()) {
 
             std::string CPP = "\0";
 
-                if (Client.getTechnology_Name () == CPlusPlus)
+                if (Client.getTechnology_Name () == Settings.getTechnology_Name_CPlusPlus ())
                     CPP = "pp";
 
                 if (Settings.getAutomatic_Open_Order()) {
@@ -574,12 +564,12 @@ static void SendFiles_To_ClientFolders (const Class_Clients& Client, const Class
 
 } // функция отправки исходников по папкам проекта
 
-const void Menu_Formation_Order (const Class_Settings& Settings, const Class_BanLists& Banlists, bool* FirstOrderCreated) {
+const static void Menu_Formation_Order (const Class_Settings& Settings, const Class_BanLists& Banlists, bool* FirstOrderCreated) {
 
     Show_Text_ForExit ();
     Class_Clients Client; // инициализация объекта Client
 
-        if (!Fill_InputData (Client, Banlists)) // заполнение данных по заказу
+        if (!Fill_InputData (Client, Banlists, Settings)) // заполнение данных по заказу
             return;
 
     bool FolderExists = Create_Client_Folder (Client, Settings); // создание папки клиента, если папка существует, то false

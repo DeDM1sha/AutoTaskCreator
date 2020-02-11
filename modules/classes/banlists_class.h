@@ -5,9 +5,6 @@
 #ifndef _banlist_class_h_
 #define _banlist_class_h_
 
-static std::string SaveTag_ClientsList = "Clients:";
-static std::string SaveTag_WorkersList = "Workers:";
-
 static void SetProgramFile_Unicode (const std::string TypeUnicode) {
 
     if (TypeUnicode == "Program") {
@@ -30,22 +27,28 @@ class Class_BanLists : public AbstractClass_ConfigEditor {
 
     private:
 
-    std::string Banlist_Path; // путь к хранению бан-листа
-    unsigned short int TotalNumber_Clients_InBanList_Count; // общее кол-во клиентов в бан-листе
-    unsigned short int TotalNumber_Workers_InBanList_Count; // общее кол-во исполнителей в бан-листе
-    std::vector <std::string> ClientsBlockList; // список всех заблокированных клиентов
-    std::vector <std::string> WorkersBlockList; // список всех заблокированных исполнителей
+		std::string Banlist_Path; // путь к хранению бан-листа
+		unsigned short int TotalNumber_Clients_InBanList_Count; // общее кол-во клиентов в бан-листе
+		unsigned short int TotalNumber_Workers_InBanList_Count; // общее кол-во исполнителей в бан-листе
+		std::vector <std::string> ClientsBlockList; // список всех заблокированных клиентов
+		std::vector <std::string> WorkersBlockList; // список всех заблокированных исполнителей
+
+		std::string SaveTag_ClientsList; // “эг-сохранени€ клиентов в бан-листе
+		std::string SaveTag_WorkersList; // “эг-сохранени€ исполнителей в бан-листе
 
     public:
 
         Class_BanLists (const Class_Settings& Settings) {
 
-            Banlist_Path = "C:\\Users\\" + Settings.getPK_Name () + "\\AppData\\Local\\Temp\\AutoTaskCreator_Banlists.cfg";
-            TotalNumber_Clients_InBanList_Count = 0;
-            TotalNumber_Workers_InBanList_Count = 0;
+            this->Banlist_Path = "C:\\Users\\" + Settings.getPK_Name () + "\\AppData\\Local\\Temp\\AutoTaskCreator_Banlists.cfg";
+            this->TotalNumber_Clients_InBanList_Count = 0;
+            this->TotalNumber_Workers_InBanList_Count = 0;
 
                 if (Check_BanlistsFile ())
                     Load_LocalBanlists ();
+
+			this->SaveTag_ClientsList = "Clients:";
+			this->SaveTag_WorkersList = "Workers:";
 
         }
 
@@ -97,10 +100,10 @@ class Class_BanLists : public AbstractClass_ConfigEditor {
 
         const void Clear_Banlists (void) {
 
-            TotalNumber_Clients_InBanList_Count = 0;
-            ClientsBlockList.clear ();
-            TotalNumber_Workers_InBanList_Count = 0;
-            WorkersBlockList.clear ();
+            this->TotalNumber_Clients_InBanList_Count = 0;
+            this->ClientsBlockList.clear ();
+            this->TotalNumber_Workers_InBanList_Count = 0;
+            this->WorkersBlockList.clear ();
 
         } // метод обнулени€ бан-листов
 
@@ -118,9 +121,9 @@ const bool Class_BanLists::Check_BanlistsFile (void) {
     bool Existence = true; // существование локального списка бан-листа
     bool Clients_Founded = false;
     bool Workers_Founded = false;
-    ConfigFile_Open (Banlist_Path);
+    ConfigFile_Open (this->Banlist_Path);
 
-    std::ifstream Read (Banlist_Path.c_str ());
+    std::ifstream Read (this->Banlist_Path.c_str ());
 
         if (!Read.is_open ())
             Existence = false;
@@ -132,10 +135,10 @@ const bool Class_BanLists::Check_BanlistsFile (void) {
 
                 while (Read >> Str) {
 
-                    if (Str == SaveTag_ClientsList)
+                    if (Str == this->SaveTag_ClientsList)
                         Clients_Founded = true;
 
-                    if (Str == SaveTag_WorkersList)
+                    if (Str == this->SaveTag_WorkersList)
                         Workers_Founded = true;
 
                 }
@@ -146,11 +149,11 @@ const bool Class_BanLists::Check_BanlistsFile (void) {
 
         if (!Existence || (!Clients_Founded || !Workers_Founded)) {
 
-            remove (Banlist_Path.c_str ());
+            remove (this->Banlist_Path.c_str ());
 
-            std::ofstream Write (Banlist_Path.c_str ());
-            Write << SaveTag_ClientsList << "\n"
-                  << SaveTag_WorkersList << "\n";
+            std::ofstream Write (this->Banlist_Path.c_str ());
+            Write << this->SaveTag_ClientsList << "\n"
+                  << this->SaveTag_WorkersList << "\n";
 
             Write.close ();
 
@@ -158,14 +161,14 @@ const bool Class_BanLists::Check_BanlistsFile (void) {
 
         } // если файла нет, или чего-то нехватает в нем, то создаем файл конфига с дефолтными настройками
 
-    std::ifstream Check (Banlist_Path.c_str ());
+    std::ifstream Check (this->Banlist_Path.c_str ());
 
         if (!Check.is_open ())
             Exception ("Local ban-lists didnt created");
 
     Check.close ();
 
-    ConfigFile_Close (Banlist_Path);
+    ConfigFile_Close (this->Banlist_Path);
 
     return Existence;
 
@@ -175,7 +178,7 @@ const bool Class_BanLists::Check_BanlistsFile (void) {
 
 const void Class_BanLists::Load_LocalBanlists (void) {
 
-    ConfigFile_Open (Banlist_Path);
+    ConfigFile_Open (this->Banlist_Path);
 
     SetProgramFile_Unicode("File");
 
@@ -183,22 +186,22 @@ const void Class_BanLists::Load_LocalBanlists (void) {
     bool Clients_Founded = false;
     bool Workers_Founed = false;
 
-    std::ifstream Read (Banlist_Path.c_str ());
+    std::ifstream Read (this->Banlist_Path.c_str ());
 
         if (Read.is_open ()) {
 
             while (getline (Read, Str)) {
 
-                if (Str == SaveTag_ClientsList) {
+                if (Str == this->SaveTag_ClientsList) {
 
                         while (getline (Read, Str)) {
 
-                                if (Str == SaveTag_WorkersList)
+                                if (Str == this->SaveTag_WorkersList)
                                     break;
 
                             //printf ("%s%s\n", "Client: ", Str.c_str());
-                            ClientsBlockList.push_back (Str);
-                            ++TotalNumber_Clients_InBanList_Count;
+                            this->ClientsBlockList.push_back (Str);
+                            ++this->TotalNumber_Clients_InBanList_Count;
 
 
                         }
@@ -207,15 +210,15 @@ const void Class_BanLists::Load_LocalBanlists (void) {
 
                 }
 
-                if (Str == SaveTag_WorkersList) {
+                if (Str == this->SaveTag_WorkersList) {
 
                     std::cout << "\n\n\n\n\n";
 
                         while (getline (Read, Str)) {
 
-                            WorkersBlockList.push_back (Str);
+                            this->WorkersBlockList.push_back (Str);
                             //std::cout << "Worker: " << Str << "\n";
-                            ++TotalNumber_Workers_InBanList_Count;
+                            ++this->TotalNumber_Workers_InBanList_Count;
                             //system ("pause");
 
                         }
@@ -242,15 +245,15 @@ const void Class_BanLists::Load_LocalBanlists (void) {
 
         if ( !( (Clients_Founded == Workers_Founed) == true) ) {
 
-            remove (Banlist_Path.c_str ());
+            remove (this->Banlist_Path.c_str ());
             Check_BanlistsFile ();
 
         }
 
-    //std::cout << "\nClients: " << TotalNumber_Clients_InBanList_Count << "\n";
-    //std::cout << "Workers: " << TotalNumber_Workers_InBanList_Count << "\n";
+    //std::cout << "\nClients: " << this->TotalNumber_Clients_InBanList_Count << "\n";
+    //std::cout << "Workers: " << this->TotalNumber_Workers_InBanList_Count << "\n";
 
-    ConfigFile_Close (Banlist_Path);
+    ConfigFile_Close (this->Banlist_Path);
 
     SetProgramFile_Unicode("Program");
 
@@ -258,12 +261,10 @@ const void Class_BanLists::Load_LocalBanlists (void) {
 
 } // метод загрузки локальной базы бан-листов
 
-//const void Class_BanLists::Update_Banlists (const Class_Settings& Settings) { return; } // метод в стадии разработки
-
 const void Class_BanLists::Update_Banlists (const Class_Settings& Settings) {
 
-    //std::string Parser_Clients_Command = "start modules\\parser_GnuWin32\\bin\\wget.exe " + Settings.getUrl_BanList_Clients () + " --no-check-certificate --tries=1 --force-html --html-extension  --output-document=\"index.txt\"";
-	std::string Parser_Clients_Command = "start modules\\parser_GnuWin32\\bin\\wget.exe " + Settings.getUrl_BanList_Clients () + " --no-check-certificate Чoutput-document=\"index.html\" Чlocal-encoding=\"UTF-8\" Чremote-encoding=\"UTF-8\"";
+    std::string Parser_Clients_Command = "start modules\\parser_GnuWin32\\bin\\wget.exe " + Settings.getUrl_BanList_Clients () + " --no-check-certificate --tries=1 --force-html --html-extension  --output-document=\"index.html\"";
+	//std::string Parser_Clients_Command = "start modules\\parser_GnuWin32\\bin\\wget.exe " + Settings.getUrl_BanList_Clients () + " --no-check-certificate Чoutput-document=\"index.html\"";
 	std::string Str = "\0";
 	system ((Parser_Clients_Command + " >nul").c_str ());
 
@@ -277,7 +278,7 @@ const void Class_BanLists::Update_Banlists (const Class_Settings& Settings) {
 
         while (true) {
 
-            std::ifstream ReadCheck ("topic-156779709_36343200");
+            std::ifstream ReadCheck ("index.html");
 
                 while (ReadCheck >> Str);
 
@@ -294,7 +295,7 @@ const void Class_BanLists::Update_Banlists (const Class_Settings& Settings) {
 
     system ("pause");
 
-	std::ifstream Read("topic-156779709_36343200");
+	std::ifstream Read("index.html");
 
         while (Read >> Str) {
 
@@ -343,11 +344,11 @@ const void Class_BanLists::Update_Banlists (const Class_Settings& Settings) {
 
                 ClientNum_Count++;
                 ClientNum_Tag = "class=\"pi_text\">" + Convert_Int_toString (ClientNum_Count) + ")";
-                TotalNumber_Clients_InBanList_Count++;
+                this->TotalNumber_Clients_InBanList_Count++;
 
                 std::string Name = FirstName + " " + SecondName;
                 std::cout << "New Client: " << Name << "\n";
-                ClientsBlockList.push_back (FirstName + " " + SecondName);
+                this->ClientsBlockList.push_back (FirstName + " " + SecondName);
 
             }
 
@@ -356,32 +357,32 @@ const void Class_BanLists::Update_Banlists (const Class_Settings& Settings) {
         if (!MessageCount_Founded)
             Exception ("Not found MessageCount in clients ban-lists from URL");
 
-        if (NewTotal_Count != TotalNumber_Clients_InBanList_Count)
+        if (NewTotal_Count != this->TotalNumber_Clients_InBanList_Count)
             Exception ("New total count clients don`t add up");
 
     Read.close ();
 
-    ConfigFile_Open (Banlist_Path);
+    ConfigFile_Open (this->Banlist_Path);
 
-    remove (Banlist_Path.c_str ());
+    remove (this->Banlist_Path.c_str ());
 
-    std::ofstream Write (Banlist_Path.c_str ());
+    std::ofstream Write (this->Banlist_Path.c_str ());
     Write.imbue(std::locale(""));
-    Write << SaveTag_ClientsList << "\n";
+    Write << this->SaveTag_ClientsList << "\n";
 
-        for (unsigned short int i = 0; i < ClientsBlockList.size (); i++) {
+        for (unsigned short int i = 0; i < this->ClientsBlockList.size (); i++) {
 
-            Write << ClientsBlockList[i] << "\n";
-            std::cout << ClientsBlockList[i] << "\n";
+            Write << this->ClientsBlockList[i] << "\n";
+            std::cout << this->ClientsBlockList[i] << "\n";
 
         }
 
         system ("pause");
 
-    Write << SaveTag_WorkersList << "\n";
+    Write << this->SaveTag_WorkersList << "\n";
     Write.close ();
 
-    ConfigFile_Close (Banlist_Path);
+    ConfigFile_Close (this->Banlist_Path);
 
     Check_BanlistsFile ();
 
@@ -391,7 +392,7 @@ const void Class_BanLists::Update_Banlists (const Class_Settings& Settings) {
 
 const bool Class_BanLists::Check_Client_inBanlists (std::string& Str) const {
 
-    ConfigFile_Open (Banlist_Path);
+    ConfigFile_Open (this->Banlist_Path);
 
     // запись в файл на —и
 

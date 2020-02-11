@@ -5,7 +5,7 @@
 #ifndef _Menu_Statistics_h_
 #define _Menu_Statistics_h_
 
-const void Menu_Statistics (const Class_Settings& Settings, const Class_BanLists& Banlists) {
+const static void Menu_Statistics (const Class_Settings& Settings, const Class_BanLists& Banlists) {
 
     unsigned short int ButtonNumber = 0; // переменная для обработки нажатий в меню
 
@@ -64,7 +64,7 @@ const void Menu_Statistics (const Class_Settings& Settings, const Class_BanLists
 
                     ButtonNumber = getch ();
 
-                        if (ClickCatch ("Esc", &ButtonNumber) || ClickCatch ("F5", &ButtonNumber))
+                        if (ClickCatch (&ButtonNumber, "Esc, F5"))
                             break;
 
                 }
