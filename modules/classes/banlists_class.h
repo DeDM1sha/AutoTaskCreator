@@ -40,7 +40,12 @@ class Class_BanLists : public AbstractClass_ConfigEditor {
 
         Class_BanLists (const Class_Settings& Settings) {
 
-            this->Banlist_Path = "C:\\Users\\" + Settings.getPK_Name () + "\\AppData\\Local\\Temp\\AutoTaskCreator_Banlists.cfg";
+                if (Settings.getProjectBuild_Type () == "Debug")
+                    this->Banlist_Path = "C:\\Users\\" + Settings.getPK_Name () + "\\AppData\\Local\\Temp\\(Debug)_AutoTaskCreator_Banlists.cfg";
+
+                else
+                    this->Banlist_Path = "C:\\Users\\" + Settings.getPK_Name () + "\\AppData\\Local\\Temp\\AutoTaskCreator_Banlists.cfg";
+
             this->TotalNumber_Clients_InBanList_Count = 0;
             this->TotalNumber_Workers_InBanList_Count = 0;
 
@@ -173,8 +178,6 @@ const bool Class_BanLists::Check_BanlistsFile (void) {
     return Existence;
 
 } // метод проверки существования файла с конфигом
-
-//const void Class_BanLists::Load_LocalBanlists (void) { return; } // метод в стадии разработки
 
 const void Class_BanLists::Load_LocalBanlists (void) {
 

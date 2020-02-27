@@ -36,6 +36,9 @@ class Class_Settings : public AbstractClass_ConfigEditor {
 
     private:
 
+        std::string ProjectBuild_Type; // тип сборки проекта (debug / release)
+        std::string ProjectBuild_Version; // версия проекта
+
         std::string PK_Name; // имя профиля на пк исполнителя
         std::string Disk_Path; // наименование логического жесткого диска на пк, где хранятся заказы
         std::string Config_Path; // место хранения файла с настройками
@@ -65,21 +68,35 @@ class Class_Settings : public AbstractClass_ConfigEditor {
         std::string OS_Name_Linux; // наименование операционный системы [Linux]
         std::string OS_Name_Windows; // наименование операционной системы [Windows]
 
+        std::string SaveTag_Field_Technology; // Тэг-сохранения наименования технологии
+	    std::string SaveTag_Field_IDE; // Тэг-сохранения наименования среды разработки
+	    std::string SaveTag_Field_OS; // Тэг-сохранения наименования операционной системы
+
     public:
 
         Class_Settings (void) {
+
+            this->ProjectBuild_Type = "Debug";
+            this->ProjectBuild_Version = "2.27.02";
 
             this->SaveTag_Path_to_Labs = "Path_to_Labs";
             this->SaveTag_Order_Start = "Order_Start";
             this->SaveTag_Close_Application = "Close_Application";
             this->SaveTag_Open_Order = "Open_Order";
             this->SaveTag_Update_BanList = "Update_BanList";
-            this->SaveTag_Url_BanList_Clients = "this->Url_BanList_Clients";
-            this->SaveTag_Url_BanList_Workers = "this->Url_BanList_Workers";
+            this->SaveTag_Url_BanList_Clients = "Url_BanList_Clients";
+            this->SaveTag_Url_BanList_Workers = "Url_BanList_Workers";
 
             this->PK_Name = Load_PK_UserName ();
-            this->Config_Path = "C:\\Users\\" + this->PK_Name + "\\AppData\\Local\\Temp\\AutoTaskCreator_Settings.cfg";
-            Check_ConfigFile ();
+
+                if (this->ProjectBuild_Type == "Debug")
+                    this->Config_Path = "C:\\Users\\" + this->PK_Name + "\\AppData\\Local\\Temp\\(Debug)_AutoTaskCreator_Settings.cfg";
+
+                else
+                    this->Config_Path = "C:\\Users\\" + this->PK_Name + "\\AppData\\Local\\Temp\\AutoTaskCreator_Settings.cfg";
+
+
+            Check_ConfigFile (false);
             Load_Parameters ();
             this->Disk_Path = this->Disk_Path + this->Labs_Path[0] + this->Labs_Path[1];
 
@@ -93,9 +110,27 @@ class Class_Settings : public AbstractClass_ConfigEditor {
             this->OS_Name_Linux = "Linux";
             this->OS_Name_Windows = "Windows";
 
+            this->SaveTag_Field_Technology = "Technology";
+			this->SaveTag_Field_IDE = "IDE";
+			this->SaveTag_Field_OS = "OS";
+
         }
 
         ~Class_Settings (void) {}
+
+    //////////////////////////////////////////////
+
+        const std::string getProjectBuild_Type (void) const {
+
+            return this->ProjectBuild_Type;
+
+        } // геттер для ProjectBuild_Type
+
+        const std::string getProjectBuild_Version (void) const {
+
+            return this->ProjectBuild_Version;
+
+        } // геттер для ProjectBuild_Version
 
     //////////////////////////////////////////////
 
@@ -111,8 +146,6 @@ class Class_Settings : public AbstractClass_ConfigEditor {
 
 		} // геттер для PK_Name
 
-	//////////////////////////////////////////////
-
         const void setLabs_Path (const std::string Str) {
 
             this->Labs_Path = Str;
@@ -124,8 +157,6 @@ class Class_Settings : public AbstractClass_ConfigEditor {
             return this->Labs_Path;
 
         } // геттер для Labs_Path
-
-    //////////////////////////////////////////////
 
         const void setConfig_Path (const std::string Str) {
 
@@ -139,8 +170,6 @@ class Class_Settings : public AbstractClass_ConfigEditor {
 
         } // геттер для Config_Path
 
-    //////////////////////////////////////////////
-
         const void setAutomatic_Order_Start (const bool Flag) {
 
             this->Automatic_Order_Start = Flag;
@@ -152,8 +181,6 @@ class Class_Settings : public AbstractClass_ConfigEditor {
             return this->Automatic_Order_Start;
 
         } // геттер для Automatic_Order_Start
-
-    //////////////////////////////////////////////
 
         const void setAutomatic_Close_Application (const bool Flag) {
 
@@ -167,8 +194,6 @@ class Class_Settings : public AbstractClass_ConfigEditor {
 
         } // геттер для Automatic_Close_Applcation
 
-    //////////////////////////////////////////////
-
         const void setAutomatic_Open_Order (const bool Flag) {
 
             this->Automatic_Open_Order = Flag;
@@ -180,8 +205,6 @@ class Class_Settings : public AbstractClass_ConfigEditor {
             return this->Automatic_Open_Order;
 
         } // геттер для Automatic_Open_Order
-
-    //////////////////////////////////////////////
 
         const void setAutomatic_Update_BanList (const bool Flag) {
 
@@ -195,8 +218,6 @@ class Class_Settings : public AbstractClass_ConfigEditor {
 
         } // геттер для Automatic_Update_BanList
 
-        //////////////////////////////////////////////
-
         const void setUrl_BanList_Clients (const std::string Str) {
 
             this->Url_BanList_Clients = Str;
@@ -209,8 +230,6 @@ class Class_Settings : public AbstractClass_ConfigEditor {
 
         } // геттер для Url_BanList_Clients
 
-    //////////////////////////////////////////////
-
         const void setUrl_BanList_Workers (const std::string Str) {
 
             this->Url_BanList_Workers = Str;
@@ -222,8 +241,6 @@ class Class_Settings : public AbstractClass_ConfigEditor {
             return this->Url_BanList_Workers;
 
         } // геттер для Url_BanList_Workers
-
-    //////////////////////////////////////////////
 
         const void setDisk_Path (const std::string Str) {
 
@@ -295,6 +312,26 @@ class Class_Settings : public AbstractClass_ConfigEditor {
 
     //////////////////////////////////////////////
 
+        const std::string getSaveTag_Field_Technology (void) const {
+
+            return this->SaveTag_Field_Technology;
+
+        } // геттер для SaveTag_Field_Technology
+
+        const std::string getSaveTag_Field_IDE (void) const {
+
+            return this->SaveTag_Field_IDE;
+
+        } // геттер для SaveTag_Field_IDE
+
+        const std::string getSaveTag_Field_OS (void) const {
+
+            return this->SaveTag_Field_OS;
+
+        } // геттер для SaveTag_Field_OS
+
+    //////////////////////////////////////////////
+
          const void SetDefault_Parameters (void) {
 
             this->Labs_Path = "E:\\Orders\\C++Tasks";
@@ -308,7 +345,7 @@ class Class_Settings : public AbstractClass_ConfigEditor {
         } // метод установки настроек по умолчанию
 
         const std::string Load_PK_UserName (void) const;
-        const void Check_ConfigFile (void);
+        const void Check_ConfigFile (bool);
         const void Load_Parameters (void);
         const void SaveSettings (const bool) const;
         const bool Check_FilePath (const std::string& Path);
@@ -339,9 +376,12 @@ const std::string Class_Settings::Load_PK_UserName (void) const {
 
 } // метод получения названия имени пользователя-пк
 
-const void Class_Settings::Check_ConfigFile (void) {
+const void Class_Settings::Check_ConfigFile (bool ForceRewriteFile) {
 
     ConfigFile_Open (this->Config_Path);
+
+        if (ForceRewriteFile == true)
+            remove (Config_Path.c_str ());
 
     std::ifstream Read (this->Config_Path.c_str ());
 
@@ -453,31 +493,27 @@ const void Class_Settings::Load_Parameters (void) {
             Exception ("Not found Path_to_Labs in settings file");
 
         if (OrderStart_Founded == false)
-            Exception ("Not found this->Automatic_Order_Start in settings file");
+            Exception ("Not found Automatic_Order_Start in settings file");
 
         if (CloseApp_Founded == false)
-            Exception ("Not found this->Automatic_Close_Application in settings file");
+            Exception ("Not found Automatic_Close_Application in settings file");
 
         if (Open_Order_Founded == false)
-            Exception ("Not found this->Automatic_Open_Order in settings file");
+            Exception ("Not found Automatic_Open_Order in settings file");
 
         if (UpdateBanList_Founded == false)
-            Exception ("Not found this->Automatic_Update_BanList in settings file");
+            Exception ("Not found Automatic_Update_BanList in settings file");
 
         if (Url_BanList_Clients_Founded == false)
-            Exception ("Not found this->Url_BanList_Clients in settings file");
+            Exception ("Not found Url_BanList_Clients in settings file");
 
         if (Url_BanList_Workers_Founded == false)
-            Exception ("Not found this->Url_BanList_Workers in settings file");
-
-        if (!( ( ((LabsPath_Founded == OrderStart_Founded) == (CloseApp_Founded == Open_Order_Founded)) == ( UpdateBanList_Founded == (Url_BanList_Clients_Founded == Url_BanList_Workers_Founded)) ) == true)) {
-
-            remove (this->Config_Path.c_str ());
-            Check_ConfigFile ();
-
-        }
+            Exception ("Not found Url_BanList_Workers in settings file");
 
     ConfigFile_Close (this->Config_Path);
+
+        if (LabsPath_Founded != true || OrderStart_Founded != true || CloseApp_Founded != true || Open_Order_Founded != true || UpdateBanList_Founded != true || Url_BanList_Clients_Founded != true || Url_BanList_Workers_Founded != true)
+            Check_ConfigFile (true);
 
 } // метод загрузки параметров приложения
 

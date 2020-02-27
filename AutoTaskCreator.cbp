@@ -35,6 +35,8 @@
 		<Unit filename="main.cpp" />
 		<Unit filename="modules/classes/banlists_class.h" />
 		<Unit filename="modules/classes/clients_class.h" />
+		<Unit filename="modules/classes/formation_order_class.h" />
+		<Unit filename="modules/classes/search_class.h" />
 		<Unit filename="modules/classes/settings_class.h" />
 		<Unit filename="modules/classes/statistics_class.h" />
 		<Unit filename="modules/config/config.rc">
