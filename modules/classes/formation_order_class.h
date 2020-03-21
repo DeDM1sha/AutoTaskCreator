@@ -9,7 +9,6 @@ class Class_Formation_Order {
 
 	private:
 
-        bool* Error;
         bool FolderExists; // существует ли директория (папка) клиента
         std::string CodePath; // путь к создаваемому исходнику
 
@@ -19,12 +18,12 @@ class Class_Formation_Order {
 
             this->FolderExists = false;
             CodePath = "\0";
-            *Error = false;
 
 		}
 
 		~Class_Formation_Order (void) {}
 
+        const bool CheckFolder_Exists (const std::string);
         void Create_NewOrder (const Class_Clients&, const Class_Settings&);
         const bool Create_Client_Folder (const Class_Clients&, const Class_Settings&);
         const std::string Create_Source_Code (const Class_Clients&, const Class_Settings&);
@@ -33,9 +32,31 @@ class Class_Formation_Order {
 
 }; // класс формирования заказа
 
+const bool Class_Formation_Order::CheckFolder_Exists (const std::string FolderPath) {
+
+    bool Result = false;
+    std::string InputPath = FolderPath + "\\CheckFolder.txt";
+
+    std::ofstream Write (InputPath.c_str ());
+
+         if (Write.is_open ())
+            Result = true;
+
+    Write.close ();
+
+        if (Result == true)
+            remove (InputPath.c_str ());
+
+    return Result;
+
+} // метод проверки существовании директории (папки)
+
 void Class_Formation_Order::Create_NewOrder (const Class_Clients& Client, const Class_Settings& Settings) {
 
     this->FolderExists = Create_Client_Folder (Client, Settings); // создание папки клиента, если папка существует, то false
+
+        if (CheckFolder_Exists (Settings.getLabs_Path () + "\\" + Client.getName ()) == false)
+            Exception ("Client folder didn`t created");
 
     CodePath = Create_Source_Code (Client, Settings); // создание исходников
 
@@ -46,24 +67,20 @@ void Class_Formation_Order::Create_NewOrder (const Class_Clients& Client, const 
 const bool Class_Formation_Order::Create_Client_Folder (const Class_Clients& Client, const Class_Settings& Settings) {
 
     std::string Path = Settings.getLabs_Path () + "\\" + Client.getName () + "\\CheckFolder.txt";
-    bool FolderExists = true; // наличие уже такой папки
+    bool FolderExists_Check = true; // наличие уже такой папки
 
-    std::ofstream Write (Path.c_str ());
+        if (CheckFolder_Exists (Settings.getLabs_Path () + "\\" + Client.getName ()) == false) {
 
-        if (!Write.is_open ()) { // если такого клиента в базе еще не существует, то создать папку
-
-            std::string Folder = "mkdir " + Settings.getLabs_Path () + "\\\"" + Client.getName () + "\"";
-            system (Folder.c_str());
-            this->FolderExists = false;
+            std::string CreateFolder = "mkdir " + Settings.getLabs_Path () + "\\\"" + Client.getName () + "\"";
+            system (CreateFolder.c_str());
+            FolderExists_Check = false;
 
         }
 
-    Write.close ();
-
-        if (this->FolderExists) // если уже существует, то удалить проверочный файл
+        if (FolderExists_Check) // если уже существует, то удалить проверочный файл
             remove (Path.c_str ());
 
-    return FolderExists;
+    return FolderExists_Check;
 
 } // метод создания папки для нового клиента
 
@@ -80,7 +97,7 @@ const std::string Class_Formation_Order::Create_Source_Code (const Class_Clients
 		if (Client.getIDE_Name () == Settings.getIDE_Name_VisualStudio ()) {
 
 			Code.push ("//#pragma warning (disable:4786)\n");
-            Code.push ("#include <string>\n");
+            Code.push ("#include <string.h>\n");
 
 		}
 
@@ -310,9 +327,9 @@ const void Class_Formation_Order::SendFiles_To_ClientFolders (const Class_Client
 
                 if (Write.is_open ()) {
 
-                    Write << "Technology = " << Client.getTechnology_Name () << "\n";
-                    Write << "IDE = " << Client.getIDE_Name () << "\n";
-                    Write << "OS = " << Client.getOS_Name ();
+                    Write << Settings.getSaveTag_Field_Technology () << " = " << Client.getTechnology_Name () << "\n";
+                    Write << Settings.getSaveTag_Field_IDE () << " = " << Client.getIDE_Name () << "\n";
+                    Write << Settings.getSaveTag_Field_OS () << " = " << Client.getOS_Name ();
 
                 }
 

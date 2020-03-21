@@ -27,12 +27,14 @@ const static bool Fill_InputData (Class_Clients& Client, const Class_BanLists& B
                 else if (Check_Input_ForReload (Stroke))
                     continue;
 
-               if (Banlists.Check_Client_inBanlists (Stroke)) {
+            Stroke = GetExist_ClientName (Stroke, Settings);
+
+                if (Banlists.Check_Client_inBanlists (Stroke)) {
 
                     Exception ("This person in ban-list");
                     return false;
 
-               }
+                }
 
             Client.setName (Stroke);
 

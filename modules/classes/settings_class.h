@@ -58,7 +58,11 @@ class Class_Settings : public AbstractClass_ConfigEditor {
         std::string SaveTag_Url_BanList_Clients; // Тэг-сохранения ссылки на бан-лист клиентов
         std::string SaveTag_Url_BanList_Workers; // Тэг-сохранения ссылки на бан-лист исполнителей
 
-        std::string Technology_Name_C; // наименование технологии [Си]
+        std::string SaveTag_Field_Technology; // Тэг-сохранения наименования технологии
+	    std::string SaveTag_Field_IDE; // Тэг-сохранения наименования среды разработки
+	    std::string SaveTag_Field_OS; // Тэг-сохранения наименования операционной системы
+
+	    std::string Technology_Name_C; // наименование технологии [Си]
         std::string Technology_Name_CPlusPlus; // наименование технологии [C++]
         std::string Technology_Name_Another; // наименование технологии Another
         std::string IDE_Name_VisualStudio; // наименование среды разработки [VisualStudio]
@@ -68,16 +72,14 @@ class Class_Settings : public AbstractClass_ConfigEditor {
         std::string OS_Name_Linux; // наименование операционный системы [Linux]
         std::string OS_Name_Windows; // наименование операционной системы [Windows]
 
-        std::string SaveTag_Field_Technology; // Тэг-сохранения наименования технологии
-	    std::string SaveTag_Field_IDE; // Тэг-сохранения наименования среды разработки
-	    std::string SaveTag_Field_OS; // Тэг-сохранения наименования операционной системы
+	    std::string ERROR_Message_ClientExist; // сообщение об ошибки отсуствия введенного клиента в базе
 
     public:
 
         Class_Settings (void) {
 
-            this->ProjectBuild_Type = "Debug";
-            this->ProjectBuild_Version = "2.27.02";
+            this->ProjectBuild_Type = "Release";
+            this->ProjectBuild_Version = "2.22.03.20";
 
             this->SaveTag_Path_to_Labs = "Path_to_Labs";
             this->SaveTag_Order_Start = "Order_Start";
@@ -100,7 +102,11 @@ class Class_Settings : public AbstractClass_ConfigEditor {
             Load_Parameters ();
             this->Disk_Path = this->Disk_Path + this->Labs_Path[0] + this->Labs_Path[1];
 
-            this->Technology_Name_C = "C";
+            this->SaveTag_Field_Technology = "Technology";
+			this->SaveTag_Field_IDE = "IDE";
+			this->SaveTag_Field_OS = "OS";
+
+			this->Technology_Name_C = "C";
             this->Technology_Name_CPlusPlus = "C++" ;
             this->Technology_Name_Another = "Another";
             this->IDE_Name_Geany = "Geany";
@@ -110,9 +116,7 @@ class Class_Settings : public AbstractClass_ConfigEditor {
             this->OS_Name_Linux = "Linux";
             this->OS_Name_Windows = "Windows";
 
-            this->SaveTag_Field_Technology = "Technology";
-			this->SaveTag_Field_IDE = "IDE";
-			this->SaveTag_Field_OS = "OS";
+			this->ERROR_Message_ClientExist = "NoneClient";
 
         }
 
@@ -256,6 +260,26 @@ class Class_Settings : public AbstractClass_ConfigEditor {
 
     //////////////////////////////////////////////
 
+        const std::string getSaveTag_Field_Technology (void) const {
+
+            return this->SaveTag_Field_Technology;
+
+        } // геттер для SaveTag_Field_Technology
+
+        const std::string getSaveTag_Field_IDE (void) const {
+
+            return this->SaveTag_Field_IDE;
+
+        } // геттер для SaveTag_Field_IDE
+
+        const std::string getSaveTag_Field_OS (void) const {
+
+            return this->SaveTag_Field_OS;
+
+        } // геттер для SaveTag_Field_OS
+
+    //////////////////////////////////////////////
+
         const std::string getTechnology_Name_C (void) const {
 
             return this->Technology_Name_C;
@@ -310,25 +334,11 @@ class Class_Settings : public AbstractClass_ConfigEditor {
 
         } // геттер для OS_Name_Linux
 
-    //////////////////////////////////////////////
+        const std::string getERROR_Message_ClientExist (void) const {
 
-        const std::string getSaveTag_Field_Technology (void) const {
+            return this->ERROR_Message_ClientExist;
 
-            return this->SaveTag_Field_Technology;
-
-        } // геттер для SaveTag_Field_Technology
-
-        const std::string getSaveTag_Field_IDE (void) const {
-
-            return this->SaveTag_Field_IDE;
-
-        } // геттер для SaveTag_Field_IDE
-
-        const std::string getSaveTag_Field_OS (void) const {
-
-            return this->SaveTag_Field_OS;
-
-        } // геттер для SaveTag_Field_OS
+        } // геттер для ERROR_Message_ClientExist
 
     //////////////////////////////////////////////
 

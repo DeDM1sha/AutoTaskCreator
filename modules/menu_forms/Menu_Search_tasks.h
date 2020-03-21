@@ -5,13 +5,6 @@
 #ifndef _Menu_Search_tasks_h_
 #define _Menu_Search_tasks_h_
 
-const static void Continue (void) {
-
-    CenterText ("Для продолжения нажмите любую клавишу...");
-    getch ();
-
-} // функция ожидания нажатия для продолжления
-
 const static void Menu_Search_Tasks (const Class_Settings& Settings) {
 
     unsigned short int ButtonNumber = 0; // переменная для обработки нажатий в меню
@@ -43,10 +36,8 @@ const static void Menu_Search_Tasks (const Class_Settings& Settings) {
                 else if (ClickCatch ("1", &ButtonNumber)) {
 
                         CenterText ("Введите имя: ");
-                        std::string Name = Show_Text_Input ("Введите имя: ", true);
-                        //Searching.Search_Client(Settings);
-                        Continue ();
-
+                        std::string ClientName = Show_Text_Input ("Введите имя: ", true);
+                        Searching.Search_Client(ClientName, Settings);
 
                 } // поиск клиента по имени
 

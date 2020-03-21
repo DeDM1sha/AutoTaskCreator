@@ -5,6 +5,9 @@
 #ifndef _additional_functions_h_
 #define _additional_functions_h_
 
+#include <string.h>
+#include <cstring>
+
 /* Глобальные общие функции */
 
 const static std::string Convert_Int_toString (unsigned short int Number) {
@@ -278,4 +281,168 @@ const static void GetNormal_Number_Value (unsigned short int *Count, std::string
 
 } // функция для получения от пользователя корректного ввода числа
 
-#endif // _additional_functions_h_
+const static std::vector <std::string> GetVector_ReverseNames (const std::string InputName) {
+
+    std::vector <std::string> NamesVector;
+    NamesVector.reserve (2);
+
+    std::string FirstName = "\0";
+    std::string SecondName = "\0";
+    bool SpaceFounded = false;
+
+        for (unsigned short int i = 0; i < InputName.length (); i++) {
+
+            if (SpaceFounded == true)
+                SecondName += InputName[i];
+
+            else if (InputName[i] != ' ' && InputName[i] != '\0' && SpaceFounded == false)
+                FirstName += InputName[i];
+
+            else if (SpaceFounded == false)
+                SpaceFounded = true;
+
+        }
+
+    NamesVector.push_back (FirstName + " " + SecondName);
+    NamesVector.push_back (SecondName + " " + FirstName);
+
+    return NamesVector;
+
+} // функция для получения двух вариантов входного имени (клиента) - исходного и реверсивного
+
+#include "../classes/settings_class.h"
+
+const static std::string ToUpper_FirstSymbols_ClientNames (const std::string InputName) {
+
+    const int CountRus_Letters = 33;
+    const int CountEng_Letters = 26;
+
+    char Rus_Small_Letters [CountRus_Letters] = {'а', 'б', 'в', 'г', 'д', 'е', 'ё', 'ж', 'з', 'и', 'й', 'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ', 'ъ', 'ы', 'ь', 'э', 'ю', 'я'}; // строчные буквы кириллицы
+    char Rus_Big_Letters [CountRus_Letters] = {'А', 'Б', 'В', 'Г', 'Д', 'Е', 'Ё', 'Ж', 'З', 'И', 'Й', 'К', 'Л', 'М', 'Н', 'О', 'П', 'Р', 'С', 'Т', 'У', 'Ф', 'Х', 'Ц', 'Ч', 'Ш', 'Щ', 'Ъ', 'Ы', 'Ь', 'Э', 'Ю', 'Я'}; // прописные буквы кириллицы
+
+    char Eng_Small_Letters [CountEng_Letters] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'}; // строчные буквы латиницы
+    char Eng_Big_Letters [CountEng_Letters] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'}; // прописные буквы латиницы
+
+    std::string FirstName = "\0";
+    std::string SecondName = "\0";
+    bool Start = false;
+    bool Flag = false;
+
+        for (unsigned short int i = 0; i < InputName.length(); i++) {
+
+            if (InputName[i] != ' ' && InputName[i] != '\0')
+                Start = true;
+
+            if (Start == true && (InputName[i] == ' ' || InputName[i] == '\0'))
+                Flag = true;
+
+            if (Start == true && !Flag && InputName[i] != ' ' && InputName[i] != '\0')
+                FirstName += InputName[i];
+
+            else if (Start == true && Flag && InputName[i] != ' ' && InputName[i] != '\0')
+                SecondName += InputName[i];
+
+        }
+
+    bool Found_First = false;
+    bool Found_Second = false;
+
+        for (unsigned short int i = 0; i < CountRus_Letters; i++) {
+
+            if (Found_First == true && Found_Second == true)
+                break;
+
+            if (Found_First == false)
+                if (FirstName[0] == Rus_Small_Letters[i]) {
+
+                    FirstName[0] = Rus_Big_Letters[i];
+                    Found_First = true;
+
+                }
+
+            if (Found_Second == false)
+                if (SecondName[0] == Rus_Small_Letters[i]) {
+
+                    SecondName[0] = Rus_Big_Letters[i];
+                    Found_Second = true;
+
+                }
+
+        }
+
+        for (unsigned short int i = 0; i < CountEng_Letters; i++) {
+
+            if (Found_First == true && Found_Second == true)
+                break;
+
+            if (Found_First == false)
+                if (FirstName[0] == Eng_Small_Letters[i]) {
+
+                    FirstName[0] = Eng_Big_Letters[i];
+                    Found_First = true;
+
+                }
+
+            if (Found_Second == false)
+                if (SecondName[0] == Eng_Small_Letters[i]) {
+
+                    SecondName[0] = Eng_Big_Letters[i];
+                    Found_Second = true;
+
+                }
+
+        }
+
+    return FirstName + " " + SecondName;
+
+} // функция, возвращающая полное имя клиента с учетом регистра (заглавные буквы имени/фамилии)
+
+const static std::string CheckClientExist_ReturnTruthName (const std::string InputName, const Class_Settings& Settings) {
+
+    std::vector <std::string> NamesVector = GetVector_ReverseNames (InputName);
+
+    bool Founded = false;
+    bool Variant = false;
+
+        for (unsigned short int i = 0; i < NamesVector.size (); i++) {
+
+            std::ofstream Write (std::string (Settings.getLabs_Path () + "\\" + NamesVector[i] + "\\CheckClient.txt").c_str ());
+
+                if (Write.is_open ()) {
+
+                    Founded = true;
+
+                        if (i == 1)
+                            Variant = true;
+
+                }
+
+            Write.close ();
+
+        }
+
+        if (Founded) {
+
+            remove (std::string(Settings.getLabs_Path () + "\\" + NamesVector[Variant] + "\\CheckClient.txt").c_str ());
+            return NamesVector[Variant];
+
+        }
+
+
+    return Settings.getERROR_Message_ClientExist (); // возвращение сообщение об ошибки (не существует такого клиента)
+
+} // функция для возврата правильного написания имени клиента (исходя из 3 вариантов: 1-ый (исходный), 2-ой (наоборот), 3-ий (ошибка))
+
+const static std::string GetExist_ClientName (std::string InputName, const Class_Settings& Settings) {
+
+    InputName = ToUpper_FirstSymbols_ClientNames (InputName);
+    const std::string TruthName = CheckClientExist_ReturnTruthName (InputName, Settings);
+
+        if (TruthName == Settings.getERROR_Message_ClientExist ())
+            return InputName;
+
+    return TruthName;
+
+} // функция для получения существующего клиента в базе (если имя-фамилию ввели в обратном порядке, в случае полного отсутствия - вернет исходное введенное)
+
+#endif // _additional_functions_h_*/

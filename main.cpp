@@ -59,18 +59,21 @@
 #include <vector>
 #include <iomanip>
 #include <sstream>
+#include <cctype>
 
 // подключение всех необходимых стандартных библиотек для проекта
 
-#include "modules/classes/clients_class.h" // подключение  clients_class - класс данных об клиенте
+
+#include "modules/libs/clickcatcher.h" // подключение модуля clickcatcher - самописная библиотека по обработке нажатых клавиш
+#include "modules/libs/additional_functions.h" // подключение модуля additional_functions - библиотека дополнительних общий функций
+
 #include "modules/classes/settings_class.h" // подключение settings_class - класс настроек приложения
+#include "modules/classes/clients_class.h" // подключение  clients_class - класс данных об клиенте
 #include "modules/classes/banlists_class.h" // подключение banlist_class - класс забаненных клиентов
 #include "modules/classes/statistics_class.h" // подключение statistics_class - класс базы данных всех заказов и клиентов
 #include "modules/classes/search_class.h" // подключение search_class - класс поиска клиентов, заказов и т.д.
 #include "modules/classes/formation_order_class.h" // подключение formation_order_class - класс создания нового заказа
 
-#include "modules/libs/clickcatcher.h" // подключение модуля clickcatcher - самописная библиотека по обработке нажатых клавиш
-#include "modules/libs/additional_functions.h" // подключение модуля additional_functions - библиотека дополнительних общий функций
 
 #include "modules/menu_forms/Menu_Formation_order.h" // подключение модуля Formation_order - модуль формирование заказа
 #include "modules/menu_forms/Menu_Search_tasks.h" // подключение модуля Search_tasks - модуль поиска заказа по ключевым словам
