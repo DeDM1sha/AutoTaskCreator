@@ -82,12 +82,12 @@
 1568086701 e:\projects\cplusplus_projects\automation\autotaskcreator\modules\classes\client_class.h
 	"../libs/additional_functions.h"
 
-1584819247 e:\projects\cplusplus_projects\automation\autotaskcreator\modules\libs\additional_functions.h
+1584940001 e:\projects\cplusplus_projects\automation\autotaskcreator\modules\libs\additional_functions.h
 	<string.h>
 	<cstring>
 	"../classes/settings_class.h"
 
-1583998317 e:\projects\cplusplus_projects\automation\autotaskcreator\modules\classes\settings_class.h
+1584940093 e:\projects\cplusplus_projects\automation\autotaskcreator\modules\classes\settings_class.h
 	"../libs/additional_functions.h"
 
 1583997416 e:\projects\cplusplus_projects\automation\autotaskcreator\modules\classes\statistics_class.h
@@ -108,7 +108,7 @@
 
 1582786687 e:\projects\cplusplus_projects\automation\autotaskcreator\modules\classes\banlists_class.h
 
-1584077425 e:\projects\cplusplus_projects\automation\autotaskcreator\modules\menu_forms\menu_formation_order.h
+1584940016 e:\projects\cplusplus_projects\automation\autotaskcreator\modules\menu_forms\menu_formation_order.h
 
 1583999636 e:\projects\cplusplus_projects\automation\autotaskcreator\modules\menu_forms\menu_search_tasks.h
 
@@ -120,5 +120,5 @@
 
 1584070570 e:\projects\cplusplus_projects\automation\autotaskcreator\modules\classes\search_class.h
 
-1583997416 e:\projects\cplusplus_projects\automation\autotaskcreator\modules\classes\formation_order_class.h
+1584939745 e:\projects\cplusplus_projects\automation\autotaskcreator\modules\classes\formation_order_class.h
 

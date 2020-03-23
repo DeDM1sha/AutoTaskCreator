@@ -79,7 +79,7 @@ class Class_Settings : public AbstractClass_ConfigEditor {
         Class_Settings (void) {
 
             this->ProjectBuild_Type = "Release";
-            this->ProjectBuild_Version = "2.22.03.20";
+            this->ProjectBuild_Version = "2.23.03.20";
 
             this->SaveTag_Path_to_Labs = "Path_to_Labs";
             this->SaveTag_Order_Start = "Order_Start";

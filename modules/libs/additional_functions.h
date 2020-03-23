@@ -393,7 +393,19 @@ const static std::string ToUpper_FirstSymbols_ClientNames (const std::string Inp
 
         }
 
-    return FirstName + " " + SecondName;
+    std::string ResultName = FirstName + " " + SecondName;
+
+        if (ResultName[ResultName.length () - 1] == ' ' ||  ResultName[ResultName.length () - 1] == '\0') {
+
+            std::string Temp = ResultName;
+            ResultName = "\0";
+
+                for (unsigned short int i = 0; i < Temp.length () - 1; i++)
+                    ResultName += Temp[i];
+
+        }
+
+    return ResultName;
 
 } // функция, возвращающая полное имя клиента с учетом регистра (заглавные буквы имени/фамилии)
 
