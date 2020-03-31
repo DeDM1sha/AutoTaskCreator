@@ -12,8 +12,8 @@ PRODUCTVERSION 0,0,0,1
    VALUE "LegalCopyright", "Satsuk Mikhail Mikhailovich\000"
    VALUE "LegalTrademarks", "Owned\000"
    VALUE "OriginalFilename", "AutoTaskCreator\000"
-   VALUE "ProductName", "AutoTaskCreator\000"
-   VALUE "ProductVersion", "1.19.3\000"
+   VALUE "ProductName", "Release_Build\000"
+   VALUE "ProductVersion", "2.01.04.20\000"
   }
  }
  BLOCK "VarFileInfo"
