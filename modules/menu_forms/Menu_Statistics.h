@@ -1,4 +1,4 @@
-// РњРѕРґСѓР»СЊ РґР»СЏ СЃС‚Р°С‚РёСЃС‚РёРєРё. РРјРµРЅРЅРѕ Р·РґРµСЃСЊ РѕРїРёСЃР°РЅ РІРµСЃСЊ С„СѓРЅРєС†РёРѕРЅР°Р» РєРЅРѕРїРєРё "РЎС‚Р°С‚РёСЃС‚РёРєР°".
+// Модуль для статистики. Именно здесь описан весь функционал кнопки "Статистика".
 
 #pragma once
 
@@ -7,12 +7,12 @@
 
 const static void Menu_Statistics (const Class_Settings& Settings, const Class_BanLists& Banlists) {
 
-    unsigned short int ButtonNumber = 0; // РїРµСЂРµРјРµРЅРЅР°СЏ РґР»СЏ РѕР±СЂР°Р±РѕС‚РєРё РЅР°Р¶Р°С‚РёР№ РІ РјРµРЅСЋ
+    unsigned short int ButtonNumber = 0; // переменная для обработки нажатий в меню
 
         while (true) {
 
             cls ();
-            CenterText ("РЎС‚Р°С‚РёСЃС‚РёРєР° Р·Р°РєР°Р·РѕРІ\n");
+            CenterText ("Статистика заказов\n");
             Show_Text_ForExit ();
             Show_Text_In_Right_Corner ("Press F5 to update statistics");
 
@@ -22,72 +22,72 @@ const static void Menu_Statistics (const Class_Settings& Settings, const Class_B
             printf ("\n\n\n\n");
             printf ("                                       -----------------------------------------------\n");
 
-            std::cout << "                                       | РљРѕР»РёС‡РµСЃС‚РІРѕ РєР»РёРµРЅС‚РѕРІ РІ Р±Р°Р·Рµ: " << std::setw (15);
+            std::cout << "                                       | Количество клиентов в базе: " << std::setw (15);
             Show_Number_Output (Statistics.getTotalNumber_ClientsInDB_Count ());
             std::cout << " |\n";
 
             printf ("               |----------------------------------------------|----------------------------------------------|\n");
-            std::cout << "               | РљРѕР»РёС‡РµСЃС‚РІРѕ РІС‹РїРѕР»РЅРµРЅРЅС‹С… Р·Р°РґР°РЅРёР№ РІ Р±Р°Р·Рµ: " << std::setw (5);
+            std::cout << "               | Количество выполненных заданий в базе: " << std::setw (5);
             Show_Number_Output (Statistics.getTotalNumber_CompletedTasks_Count ());
-            std::cout << " | РљРѕР»РёС‡РµСЃС‚РІРѕ Р·Р°РґР°С‡ РїРѕРґ IDE Code::Blocks: " << std::setw (5);
+            std::cout << " | Количество задач под IDE Code::Blocks: " << std::setw (5);
             Show_Number_Output (Statistics.getTotalNumber_IDE_CodeBlocks ());
             std::cout << " |\n";
 
             printf ("               |----------------------------------------------|----------------------------------------------|\n");
-            std::cout << "               | РљРѕР»РёС‡РµСЃС‚РІРѕ Р·Р°РґР°С‡ РЅР° C: " << std::setw (21);
+            std::cout << "               | Количество задач на C: " << std::setw (21);
             Show_Number_Output (Statistics.getTotalNumber_Technology_C ());
-            std::cout << " | РљРѕР»РёС‡РµСЃС‚РІРѕ Р·Р°РґР°С‡ РїРѕРґ IDE Geany: " << std::setw (12);
+            std::cout << " | Количество задач под IDE Geany: " << std::setw (12);
             Show_Number_Output (Statistics.getTotalNumber_IDE_Geany ());
             std::cout << " |\n";
 
             printf ("               |----------------------------------------------|----------------------------------------------|\n");
-            std::cout << "               | РљРѕР»РёС‡РµСЃС‚РІРѕ Р·Р°РґР°С‡ РЅР° C++: " << std::setw (19);
+            std::cout << "               | Количество задач на C++: " << std::setw (19);
             Show_Number_Output (Statistics.getTotalNumber_Technology_CPlusPlus ());
-            std::cout << " | РљРѕР»РёС‡РµСЃС‚РІРѕ Р·Р°РґР°С‡ РїРѕРґ IDE VisualStudio: " << std::setw (5);
+            std::cout << " | Количество задач под IDE VisualStudio: " << std::setw (5);
             Show_Number_Output (Statistics.getTotalNumber_IDE_VisualStudio ());
             std::cout << " |\n";
 
             printf ("               |----------------------------------------------|----------------------------------------------|\n");
-            std::cout << "               | РљРѕР»РёС‡РµСЃС‚РІРѕ РїСЂРѕС‡РёС… Р·Р°РґР°С‡: " << std::setw (19);
+            std::cout << "               | Количество прочих задач: " << std::setw (19);
             Show_Number_Output (Statistics.getTotalNumber_Technology_Another ());
-            std::cout << " | РљРѕР»РёС‡РµСЃС‚РІРѕ Р·Р°РґР°С‡ РїРѕРґ None IDE: " << std::setw (13);
+            std::cout << " | Количество задач под None IDE: " << std::setw (13);
             Show_Number_Output (Statistics.getTotalNumber_IDE_NoneIDE ());
             std::cout << " |\n";
 
             printf ("               |----------------------------------------------|----------------------------------------------|\n");
-            std::cout << "               | РљРѕР»РёС‡РµСЃС‚РІРѕ Р·Р°Р±Р»РѕРєРёСЂРѕРІР°РЅРЅС‹С… РєР»РёРµРЅС‚РѕРІ: " << std::setw (7);
+            std::cout << "               | Количество заблокированных клиентов: " << std::setw (7);
             Show_Number_Output (Banlists.getTotalNumber_Clients_InBanList_Count ());
-            std::cout << " | РљРѕР»РёС‡РµСЃС‚РІРѕ Р·Р°РґР°С‡ РїРѕРґ Windows: " << std::setw (14);
+            std::cout << " | Количество задач под Windows: " << std::setw (14);
             Show_Number_Output (Statistics.getTotalNumber_OS_Windows ());
             std::cout << " |\n";
 
             printf ("               |----------------------------------------------|----------------------------------------------|\n");
-            std::cout << "               | РљРѕР»РёС‡РµСЃС‚РІРѕ Р·Р°Р±Р»РѕРєРёСЂРѕРІР°РЅРЅС‹С… РёСЃРїРѕР»РЅРёС‚РµР»РµР№: " << std::setw (3);
+            std::cout << "               | Количество заблокированных исполнителей: " << std::setw (3);
             Show_Number_Output (Banlists.getTotalNumber_Workers_InBanList_Count ());
-            std::cout << " | РљРѕР»РёС‡РµСЃС‚РІРѕ Р·Р°РґР°С‡ РїРѕРґ Linux / Mac: " << std::setw (10);
+            std::cout << " | Количество задач под Linux / Mac: " << std::setw (10);
             Show_Number_Output (Statistics.getTotalNumber_OS_Linux ());
             std::cout << " |\n";
 
             printf ("               |______________________________________________|______________________________________________|\n");
-            /*std::cout << "                                      | РљРѕР»РёС‡РµСЃС‚РІРѕ Р·Р°Р±Р»РѕРєРёСЂРѕРІР°РЅРЅС‹С… РєР»РёРµРЅС‚РѕРІ: " << std::setw (7);
+            /*std::cout << "                                      | Количество заблокированных клиентов: " << std::setw (7);
             Show_Number_Output (Banlists.getTotalNumber_Clients_InBanList_Count ());
             std::cout << " |\n";
 
             printf ("                                      |----------------------------------------------|\n");
-            std::cout << "                                      | РљРѕР»РёС‡РµСЃС‚РІРѕ Р·Р°Р±Р»РѕРєРёСЂРѕРІР°РЅРЅС‹С… РёСЃРїРѕР»РЅРёС‚РµР»РµР№: " << std::setw (3);
+            std::cout << "                                      | Количество заблокированных исполнителей: " << std::setw (3);
             Show_Number_Output (Banlists.getTotalNumber_Workers_InBanList_Count ());
             std::cout << " |\n";
 
             printf ("                                      |----------------------------------------------|\n");
 */
                 if (Statistics.getTotalNumber_CompletedTasks_Count () != (Statistics.getTotalNumber_Technology_C () + Statistics.getTotalNumber_Technology_CPlusPlus () + Statistics.getTotalNumber_Technology_Another ()))
-                    Show_Text_Output ("\n                           РћР±С‰РµРµ РєРѕР»-РІРѕ РІС‹РїРѕР»РЅРµРЅРЅС‹С… Р·Р°РґР°С‡ РЅРµ СЃРѕРІРїР°РґР°РµС‚ СЃ СЃСѓРјРјРѕР№ Р·Р°РґР°С‡ РїРѕ РѕС‚РґРµР»СЊРЅРѕСЃС‚Рё!");
+                    Show_Text_Output ("\n                           Общее кол-во выполненных задач не совпадает с суммой задач по отдельности!");
 
                 if (Statistics.getTotalNumber_CompletedTasks_Count () != (Statistics.getTotalNumber_IDE_CodeBlocks () + Statistics.getTotalNumber_IDE_Geany () + Statistics.getTotalNumber_IDE_VisualStudio () + Statistics.getTotalNumber_IDE_NoneIDE ()))
-                    Show_Text_Output ("\n                           РћР±С‰РµРµ РєРѕР»-РІРѕ РІС‹РїРѕР»РЅРµРЅРЅС‹С… Р·Р°РґР°С‡ РЅРµ СЃРѕРІРїР°РґР°РµС‚ СЃ СЃСѓРјРјРѕР№ Р·Р°РґР°С‡ РїРѕ IDE!");
+                    Show_Text_Output ("\n                           Общее кол-во выполненных задач не совпадает с суммой задач по IDE!");
 
                 if (Statistics.getTotalNumber_CompletedTasks_Count () != (Statistics.getTotalNumber_OS_Linux () + Statistics.getTotalNumber_OS_Windows ()))
-                    Show_Text_Output ("\n                           РћР±С‰РµРµ РєРѕР»-РІРѕ РІС‹РїРѕР»РЅРµРЅРЅС‹С… Р·Р°РґР°С‡ РЅРµ СЃРѕРІРїР°РґР°РµС‚ СЃ СЃСѓРјРјРѕР№ Р·Р°РґР°С‡ РїРѕ OS !");
+                    Show_Text_Output ("\n                           Общее кол-во выполненных задач не совпадает с суммой задач по OS !");
 
 
                 while (true) {
@@ -105,13 +105,13 @@ const static void Menu_Statistics (const Class_Settings& Settings, const Class_B
                 else if (ClickCatch ("F5", &ButtonNumber)) {
 
                     cls ();
-                    CenterText ("РЎС‚Р°С‚РёСЃС‚РёРєР° Р·Р°РєР°Р·РѕРІ\n");
+                    CenterText ("Статистика заказов\n");
                     continue;
 
                 }
 
-        } // РєРѕРЅРµС† Р¶РёР·РЅРµРЅРЅРѕРіРѕ С†РёРєР»Р° РјРµРЅСЋ СЃС‚Р°С‚РёСЃС‚РёРєРё
+        } // конец жизненного цикла меню статистики
 
-} // С„СѓРЅРєС†РёСЏ СЃС‚Р°С‚РёСЃС‚РёРєРё Р±Р°Р·С‹ Р·Р°РєР°Р·РѕРІ Рё РєР»РёРµРЅС‚РѕРІ
+} // функция статистики базы заказов и клиентов
 
 #endif // _Menu_Statistics_h_
