@@ -29,7 +29,6 @@ class Class_Formation_Order {
         const std::string Create_Source_Code (const Class_Clients&, const Class_Settings&);
         const void SendFiles_To_ClientFolders (const Class_Clients&, const Class_Settings&, const std::string&, const bool);
 
-
 }; // класс формирования заказа
 
 const bool Class_Formation_Order::CheckFolder_Exists (const std::string FolderPath) {
@@ -94,12 +93,11 @@ const std::string Class_Formation_Order::Create_Source_Code (const Class_Clients
 
 	std::queue <std::string> Code;
 
-		if (Client.getIDE_Name () == Settings.getIDE_Name_VisualStudio ()) {
-
+		if (Client.getIDE_Name () == Settings.getIDE_Name_VisualStudio ())
 			Code.push ("//#pragma warning (disable:4786)\n");
-            Code.push ("#include <string>\n");
 
-		}
+        if (Client.getTechnology_Name () == Settings.getTechnology_Name_CPlusPlus ())
+            Code.push ("#include <string>\n");
 
 		if (Client.getOS_Name () == Settings.getOS_Name_Windows ())
             Code.push ("#include <windows.h>\n");
@@ -110,6 +108,13 @@ const std::string Class_Formation_Order::Create_Source_Code (const Class_Clients
 
 				if (Client.getTechnology_Name () == Settings.getTechnology_Name_C ())
 					Code.push ("#include <stdbool.h>\n");
+
+		}
+
+		if (Client.getIDE_Name () == Settings.getIDE_Name_QtCreator ()) {
+
+            Code.push ("#include <QTextCodec>\n");
+             Code.push ("#include <QCoreApplication>\n");
 
 		}
 
@@ -159,13 +164,46 @@ const std::string Class_Formation_Order::Create_Source_Code (const Class_Clients
 
 		}
 
+		if (Client.getIDE_Name () == Settings.getIDE_Name_QtCreator ()) {
+
+                if (Client.getTechnology_Name () == Settings.getTechnology_Name_CPlusPlus ()) {
+
+                    Code.push ("void print (string Text) {\n\n");
+                    Code.push ("    cout << QString::fromUtf8(Text.c_str()).toLocal8Bit().data();\n\n");
+
+                }
+
+                else if (Client.getTechnology_Name () == Settings.getTechnology_Name_C ()) {
+
+                    Code.push ("void print (const char* Text) {\n\n");
+                    Code.push ("    printf (\"%s\" , QString::fromUtf8(Text).toLocal8Bit().data());\n\n");
+
+                }
+
+            Code.push ("}; // функция вывода текста кириллицы на экран\n\n");
+
+		}
+
 	Code.push ("int main (void) {\n\n");
 
         if (Client.getOS_Name () == Settings.getOS_Name_Windows ()) {
 
-            Code.push ("	SetConsoleCP(1251);\n");
-            Code.push ("	SetConsoleOutputCP(1251); // кириллица в консоли\n");
-            Code.push ("	system (\"title Лабораторная работа\");");
+                if (Client.getIDE_Name () != Settings.getIDE_Name_QtCreator ()) {
+
+                    Code.push ("	SetConsoleCP(1251);\n");
+                    Code.push ("	SetConsoleOutputCP(1251); // кириллица в консоли\n");
+                    Code.push ("	system (\"title Лабораторная работа\");");
+
+                }
+
+                else {
+
+                    Code.push ("    #ifdef Q_OS_WIN32\n");
+                    Code.push ("        QTextCodec::setCodecForLocale(QTextCodec::codecForName(\"IBM 866\"));\n");
+                    Code.push ("    #endif\n\n");
+                    Code.push ("    system (\"title Lab Work\");\n");
+
+                }
 
         }
 
@@ -340,30 +378,27 @@ const void Class_Formation_Order::SendFiles_To_ClientFolders (const Class_Client
 
                 if (Client.getTechnology_Name () != Settings.getTechnology_Name_Another ())
                     system (("copy \"" + CodePath + "\" \"" + Settings.getLabs_Path () + "\\" + Client.getName () + "\\Task_" + Convert_Int_toString (i) + "\" /-Y >nul").c_str ());
-
-                else
-                    system (std::string("start " + Settings.getLabs_Path () + "\\" + Client.getName () + "\\Task_" + Convert_Int_toString (i)).c_str());
-
         }
 
-        if (Client.getTechnology_Name () != Settings.getTechnology_Name_Another ()) {
+        if (Settings.getAutomatic_Open_Order()) {
 
+            std::string Path = Settings.getLabs_Path () + "\\\"" + Client.getName () + "\"\\Task_";
             std::string CPP = "\0";
 
                 if (Client.getTechnology_Name () == Settings.getTechnology_Name_CPlusPlus ())
-                    CPP = "pp";
+                            CPP = "pp";
 
-                if (Settings.getAutomatic_Open_Order()) {
+                //for (unsigned short int i = Old_TasksCount + 1; i < Client.getTasksCount () + Old_TasksCount + 1; i++) { // поочередное открытие
+                for (unsigned short int i = Client.getTasksCount () + Old_TasksCount; i > Old_TasksCount; i--) { // реверсивное открытие
 
-                    std::string Path = Settings.getLabs_Path () + "\\\"" + Client.getName () + "\"\\Task_";
+                     Sleep (1000);
 
-                    //for (unsigned short int i = Old_TasksCount + 1; i < Client.getTasksCount () + Old_TasksCount + 1; i++) { // поочередное открытие
-                    for (unsigned short int i = Client.getTasksCount () + Old_TasksCount; i > Old_TasksCount; i--) { // реверсивное открытие
+                        if (Client.getTechnology_Name () != Settings.getTechnology_Name_Another ())
+                            system (("start " + Path + Convert_Int_toString (i) + "\\task.c" + CPP).c_str());
 
-                        system (("start " + Path + Convert_Int_toString (i) + "\\task.c" + CPP).c_str());
-                        Delay (300);
+                        else
+                            system (("explorer " + Path + Convert_Int_toString (i)).c_str());
 
-                    }
 
                 }
 
@@ -371,6 +406,6 @@ const void Class_Formation_Order::SendFiles_To_ClientFolders (const Class_Client
 
     remove (CodePath.c_str ());
 
-} // метод отправки исходников по папкам проекта*/
+} // метод отправки исходников по папкам проекта
 
 #endif // _formation_order_class_h

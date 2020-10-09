@@ -16,13 +16,17 @@ class Class_Statistics {
         unsigned short int TotalNumber_Technology_CPlusPlus; // общее количество выполненных задач на [C++]
         unsigned short int TotalNumber_Technology_Another; // общее количество выполненных задач по другим направлениям (помощь на экзаменах, ответы на вопросы и т.д.)
 
-        unsigned short int TotalNumber_IDE_Geany; // общее количество выполненных задач под [Geany]
         unsigned short int TotalNumber_IDE_CodeBlocks; // общее количество выполненных задач под [Code::Blocks]
+        unsigned short int TotalNumber_IDE_Geany; // общее количество выполненных задач под [Geany]
+        unsigned short int TotalNumber_IDE_QtCreator; // общее количество выполненныл задач под [QtCreator]
         unsigned short int TotalNumber_IDE_VisualStudio; // общее количество выполненных задач под [VisualStudio]
         unsigned short int TotalNumber_IDE_NoneIDE; // общее количество выполненных задач для [Another] заказов
 
         unsigned short int TotalNumber_OS_Linux; // общее количество выполненных задач под [Linux]
         unsigned short int TotalNumber_OS_Windows; // общее количество выполненных задач под [Windows]
+
+        unsigned short int TotalNumber_Clients_InBanList_Count; // общее кол-во клиентов в бан-листе
+		unsigned short int TotalNumber_Workers_InBanList_Count; // общее кол-во исполнителей в бан-листе
 
         std::vector <std::string> ClientsName; // имена всех клиентов
 
@@ -37,8 +41,9 @@ class Class_Statistics {
             this->TotalNumber_Technology_CPlusPlus = 0;
             this->TotalNumber_Technology_Another = 0;
 
-            this->TotalNumber_IDE_Geany = 0;
             this->TotalNumber_IDE_CodeBlocks = 0;
+            this->TotalNumber_IDE_Geany = 0;
+            this->TotalNumber_IDE_QtCreator = 0;
             this->TotalNumber_IDE_VisualStudio = 0;
             this->TotalNumber_IDE_NoneIDE = 0;
 
@@ -47,10 +52,12 @@ class Class_Statistics {
 
             this->ClientsName.reserve (TotalNumber_ClientsInDB_Count);
 
+            this->TotalNumber_Clients_InBanList_Count = 0;
+            this->TotalNumber_Workers_InBanList_Count = 0;
+
         }
 
         ~Class_Statistics (void) {}
-
 
     //////////////////////////////////////////////
 
@@ -65,6 +72,8 @@ class Class_Statistics {
 			return this->TotalNumber_ClientsInDB_Count;
 
 		} // геттер для TotalNumber_ClientsInDB_Count
+
+    //////////////////////////////////////////////
 
         const unsigned short int getTotalNumber_Technology_C (void) const {
 
@@ -86,17 +95,23 @@ class Class_Statistics {
 
     //////////////////////////////////////////////
 
+        const unsigned short int getTotalNumber_IDE_CodeBlocks (void) const {
+
+            return this->TotalNumber_IDE_CodeBlocks;
+
+        } // геттер для TotalNumber_IDE_CodeBlocks
+
         const unsigned short int getTotalNumber_IDE_Geany (void) const {
 
             return this->TotalNumber_IDE_Geany;
 
         } // геттер для TotalNumber_IDE_Geany
 
-        const unsigned short int getTotalNumber_IDE_CodeBlocks (void) const {
+        const unsigned short int getTotalNumber_IDE_QtCreator (void) const {
 
-            return this->TotalNumber_IDE_CodeBlocks;
+            return this->TotalNumber_IDE_QtCreator;
 
-        } // геттер для TotalNumber_IDE_CodeBlocks
+        } // геттер для TotalNumber_IDE_QtCreator
 
         const unsigned short int getTotalNumber_IDE_VisualStudio (void) const {
 
@@ -109,6 +124,8 @@ class Class_Statistics {
             return this->TotalNumber_IDE_NoneIDE;
 
         } // геттер для TotalNumber_IDE_NoneIDE
+
+    //////////////////////////////////////////////
 
         const unsigned short int getTotalNumber_OS_Linux (void) const {
 
@@ -130,9 +147,25 @@ class Class_Statistics {
 
         } // геттер для ClientsName
 
+    //////////////////////////////////////////////
+
+        const unsigned short int getTotalNumber_Clients_InBanList_Count (void) const {
+
+            return this->TotalNumber_Clients_InBanList_Count;
+
+        } // геттер для TotalNumber_Clients_InBanList_Count
+
+        const unsigned short int getTotalNumber_Workers_InBanList_Count (void) const {
+
+            return this->TotalNumber_Workers_InBanList_Count;
+
+        } // геттер для TotalNumber_Workers_InBanList_Count
+
+    //////////////////////////////////////////////
+
         const unsigned short int Load_TotalNumber_ClientsInDB_Count (const Class_Settings&);
         const void Load_ClientsName (const Class_Settings&);
-        const void Load_TotalNumber_Information (const Class_Settings&);
+        const void Load_TotalNumber_Information (const Class_Settings&, const Class_BanLists&);
 
 }; // класс базы данных всех заказов
 
@@ -173,7 +206,7 @@ const unsigned short int Class_Statistics::Load_TotalNumber_ClientsInDB_Count (c
 
 } // метод подсчета кол-ва клиентов и их имен в базе
 
-const void Class_Statistics::Load_TotalNumber_Information (const Class_Settings& Settings) {
+const void Class_Statistics::Load_TotalNumber_Information (const Class_Settings& Settings, const Class_BanLists& Banlists) {
 
     std::string Str = "\0";
     std::string LogPath = Settings.getLabs_Path () + "//CountClients.txt";
@@ -236,6 +269,9 @@ const void Class_Statistics::Load_TotalNumber_Information (const Class_Settings&
                                     else if (Str == Settings.getIDE_Name_Geany ())
                                         this->TotalNumber_IDE_Geany++;
 
+                                    else if (Str == Settings.getIDE_Name_QtCreator ())
+                                        this->TotalNumber_IDE_QtCreator++;
+
                                     else if (Str == Settings.getIDE_Name_VisualStudio ())
                                         this->TotalNumber_IDE_VisualStudio++;
 
@@ -264,6 +300,9 @@ const void Class_Statistics::Load_TotalNumber_Information (const Class_Settings&
                 }
 
         }
+
+    this->TotalNumber_Clients_InBanList_Count = Banlists.getCount_ClientsBlockList ();
+    this->TotalNumber_Workers_InBanList_Count = Banlists.getCount_WorkersBlockList ();
 
 } // метод подсчета всей статистики
 

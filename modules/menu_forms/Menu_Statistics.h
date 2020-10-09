@@ -17,9 +17,9 @@ const static void Menu_Statistics (const Class_Settings& Settings, const Class_B
             Show_Text_In_Right_Corner ("Press F5 to update statistics");
 
             Class_Statistics Statistics (Settings);
-            Statistics.Load_TotalNumber_Information (Settings);
+            Statistics.Load_TotalNumber_Information (Settings, Banlists);
 
-            printf ("\n\n\n\n");
+            printf ("\n\n");
             printf ("                                       -----------------------------------------------\n");
 
             std::cout << "                                       | Количество клиентов в базе: " << std::setw (15);
@@ -55,40 +55,45 @@ const static void Menu_Statistics (const Class_Settings& Settings, const Class_B
             std::cout << " |\n";
 
             printf ("               |----------------------------------------------|----------------------------------------------|\n");
+            std::cout << "               | %%%%%%%%%%%%%%%%%%%%%: " << std::setw (21);
+            Show_Number_Output (0);
+            std::cout << " | Количество задач под IDE QtCreator: " << std::setw (8);
+            Show_Number_Output (Statistics.getTotalNumber_IDE_QtCreator ());
+            std::cout << " |\n";
+
+            printf ("               |----------------------------------------------|----------------------------------------------|\n");
             std::cout << "               | Количество заблокированных клиентов: " << std::setw (7);
-            Show_Number_Output (Banlists.getTotalNumber_Clients_InBanList_Count ());
+            Show_Number_Output (Statistics.getTotalNumber_Clients_InBanList_Count ());
             std::cout << " | Количество задач под Windows: " << std::setw (14);
             Show_Number_Output (Statistics.getTotalNumber_OS_Windows ());
             std::cout << " |\n";
 
             printf ("               |----------------------------------------------|----------------------------------------------|\n");
             std::cout << "               | Количество заблокированных исполнителей: " << std::setw (3);
-            Show_Number_Output (Banlists.getTotalNumber_Workers_InBanList_Count ());
+            Show_Number_Output (Statistics.getTotalNumber_Workers_InBanList_Count ());
             std::cout << " | Количество задач под Linux / Mac: " << std::setw (10);
             Show_Number_Output (Statistics.getTotalNumber_OS_Linux ());
             std::cout << " |\n";
 
             printf ("               |______________________________________________|______________________________________________|\n");
-            /*std::cout << "                                      | Количество заблокированных клиентов: " << std::setw (7);
-            Show_Number_Output (Banlists.getTotalNumber_Clients_InBanList_Count ());
-            std::cout << " |\n";
 
-            printf ("                                      |----------------------------------------------|\n");
-            std::cout << "                                      | Количество заблокированных исполнителей: " << std::setw (3);
-            Show_Number_Output (Banlists.getTotalNumber_Workers_InBanList_Count ());
-            std::cout << " |\n";
+            std::cout << "                                       | Заработано денег:   " << std::setw (15);
+            Show_Number_Output (999);
+            printf ("         |\n                                       -----------------------------------------------\n");
 
-            printf ("                                      |----------------------------------------------|\n");
-*/
-                if (Statistics.getTotalNumber_CompletedTasks_Count () != (Statistics.getTotalNumber_Technology_C () + Statistics.getTotalNumber_Technology_CPlusPlus () + Statistics.getTotalNumber_Technology_Another ()))
-                    Show_Text_Output ("\n                           Общее кол-во выполненных задач не совпадает с суммой задач по отдельности!");
 
-                if (Statistics.getTotalNumber_CompletedTasks_Count () != (Statistics.getTotalNumber_IDE_CodeBlocks () + Statistics.getTotalNumber_IDE_Geany () + Statistics.getTotalNumber_IDE_VisualStudio () + Statistics.getTotalNumber_IDE_NoneIDE ()))
-                    Show_Text_Output ("\n                           Общее кол-во выполненных задач не совпадает с суммой задач по IDE!");
+                if (Settings.getProjectBuild_Type () == Settings.getPorjectBuild_Name_Debug ()) {
 
-                if (Statistics.getTotalNumber_CompletedTasks_Count () != (Statistics.getTotalNumber_OS_Linux () + Statistics.getTotalNumber_OS_Windows ()))
-                    Show_Text_Output ("\n                           Общее кол-во выполненных задач не совпадает с суммой задач по OS !");
+                    if (Statistics.getTotalNumber_CompletedTasks_Count () != (Statistics.getTotalNumber_Technology_C () + Statistics.getTotalNumber_Technology_CPlusPlus () + Statistics.getTotalNumber_Technology_Another ()))
+                        Show_Text_Output ("\n                           Общее кол-во выполненных задач не совпадает с суммой задач по отдельности!");
 
+                    if (Statistics.getTotalNumber_CompletedTasks_Count () != (Statistics.getTotalNumber_IDE_CodeBlocks () + Statistics.getTotalNumber_IDE_Geany () + Statistics.getTotalNumber_IDE_VisualStudio () + Statistics.getTotalNumber_IDE_NoneIDE () + Statistics.getTotalNumber_IDE_QtCreator ()))
+                        Show_Text_Output ("\n                           Общее кол-во выполненных задач не совпадает с суммой задач по IDE!");
+
+                    if (Statistics.getTotalNumber_CompletedTasks_Count () != (Statistics.getTotalNumber_OS_Linux () + Statistics.getTotalNumber_OS_Windows ()))
+                        Show_Text_Output ("\n                           Общее кол-во выполненных задач не совпадает с суммой задач по OS !");
+
+                }
 
                 while (true) {
 

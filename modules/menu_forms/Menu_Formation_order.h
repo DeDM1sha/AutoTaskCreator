@@ -81,7 +81,7 @@ const static bool Fill_InputData (Class_Clients& Client, const Class_BanLists& B
 
                 if (Client.getTechnology_Name () != Settings.getTechnology_Name_Another()) {
 
-                    std::cout << "\n\n\nВыбор IDE: Visual Studio / Geany / Code::Blocks (V / G / C) ?:   ";
+                    std::cout << "\n\n\nВыбор IDE: Visual Studio / Geany / Code::Blocks / QtCreator (V / G / C / Q) ?:   ";
 
                         while (true) {
 
@@ -107,6 +107,14 @@ const static bool Fill_InputData (Class_Clients& Client, const Class_BanLists& B
 
                                     Client.setIDE_Name (Settings.getIDE_Name_CodeBlocks ());
                                     Show_Text_Output (Settings.getIDE_Name_CodeBlocks ());
+                                    break;
+
+                                }
+
+                                else if (ClickCatch ("Q", &ButtonNumber)) {
+
+                                    Client.setIDE_Name (Settings.getIDE_Name_QtCreator ());
+                                    Show_Text_Output (Settings.getIDE_Name_QtCreator ());
                                     break;
 
                                 }

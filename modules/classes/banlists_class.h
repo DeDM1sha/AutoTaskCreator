@@ -28,8 +28,7 @@ class Class_BanLists : public AbstractClass_ConfigEditor {
     private:
 
 		std::string Banlist_Path; // путь к хранению бан-листа
-		unsigned short int TotalNumber_Clients_InBanList_Count; // общее кол-во клиентов в бан-листе
-		unsigned short int TotalNumber_Workers_InBanList_Count; // общее кол-во исполнителей в бан-листе
+
 		std::vector <std::string> ClientsBlockList; // список всех заблокированных клиентов
 		std::vector <std::string> WorkersBlockList; // список всех заблокированных исполнителей
 
@@ -45,9 +44,6 @@ class Class_BanLists : public AbstractClass_ConfigEditor {
 
                 else
                     this->Banlist_Path = "C:\\Users\\" + Settings.getPK_Name () + "\\AppData\\Local\\Temp\\AutoTaskCreator_Banlists.cfg";
-
-            this->TotalNumber_Clients_InBanList_Count = 0;
-            this->TotalNumber_Workers_InBanList_Count = 0;
 
                 if (Check_BanlistsFile ())
                     Load_LocalBanlists ();
@@ -75,39 +71,23 @@ class Class_BanLists : public AbstractClass_ConfigEditor {
 
     //////////////////////////////////////////////
 
-        const void setTotalNumber_Clients_InBanList_Count (const unsigned short int Number) {
+        const unsigned short int getCount_ClientsBlockList (void) const {
 
-            this->TotalNumber_Clients_InBanList_Count = Number;
+            return this->ClientsBlockList.size ();
 
-        } // сеттер для TotalNumber_Clients_InBanList_Count
+        } // геттер для ClientsBlockList.size
 
-        const unsigned short int getTotalNumber_Clients_InBanList_Count (void) const {
+        const unsigned short int getCount_WorkersBlockList (void) const {
 
-            return this->TotalNumber_Clients_InBanList_Count;
+            return this->WorkersBlockList.size ();
 
-        } // геттер для TotalNumber_Clients_InBanList_Count
-
-    //////////////////////////////////////////////
-
-        const void setTotalNumber_Workers_InBanList_Count (const unsigned short int Number) {
-
-            this->TotalNumber_Workers_InBanList_Count = Number;
-
-        } // сеттер для TotalNumber_Workers_InBanList_Count
-
-        const unsigned short int getTotalNumber_Workers_InBanList_Count (void) const {
-
-            return this->TotalNumber_Workers_InBanList_Count;
-
-        } // геттер для TotalNumber_Workers_InBanList_Count
+        } // геттер для WorkersBlockList.size
 
     //////////////////////////////////////////////
 
         const void Clear_Banlists (void) {
 
-            this->TotalNumber_Clients_InBanList_Count = 0;
             this->ClientsBlockList.clear ();
-            this->TotalNumber_Workers_InBanList_Count = 0;
             this->WorkersBlockList.clear ();
 
         } // метод обнуления бан-листов
@@ -118,8 +98,6 @@ class Class_BanLists : public AbstractClass_ConfigEditor {
         const bool Check_Client_inBanlists (std::string&) const;
 
 }; // класс бан-листа
-
-//const bool Class_BanLists::Check_BanlistsFile (void) { return false; } // метод в стадии разработки
 
 const bool Class_BanLists::Check_BanlistsFile (void) {
 
@@ -204,7 +182,7 @@ const void Class_BanLists::Load_LocalBanlists (void) {
 
                             //printf ("%s%s\n", "Client: ", Str.c_str());
                             this->ClientsBlockList.push_back (Str);
-                            ++this->TotalNumber_Clients_InBanList_Count;
+                            //++this->TotalNumber_Clients_InBanList_Count;
 
 
                         }
@@ -221,7 +199,7 @@ const void Class_BanLists::Load_LocalBanlists (void) {
 
                             this->WorkersBlockList.push_back (Str);
                             //std::cout << "Worker: " << Str << "\n";
-                            ++this->TotalNumber_Workers_InBanList_Count;
+                            //++this->TotalNumber_Workers_InBanList_Count;
                             //system ("pause");
 
                         }
@@ -347,7 +325,6 @@ const void Class_BanLists::Update_Banlists (const Class_Settings& Settings) {
 
                 ClientNum_Count++;
                 ClientNum_Tag = "class=\"pi_text\">" + Convert_Int_toString (ClientNum_Count) + ")";
-                this->TotalNumber_Clients_InBanList_Count++;
 
                 std::string Name = FirstName + " " + SecondName;
                 std::cout << "New Client: " << Name << "\n";
@@ -360,7 +337,7 @@ const void Class_BanLists::Update_Banlists (const Class_Settings& Settings) {
         if (!MessageCount_Founded)
             Exception ("Not found MessageCount in clients ban-lists from URL");
 
-        if (NewTotal_Count != this->TotalNumber_Clients_InBanList_Count)
+        if (NewTotal_Count != this->getCount_ClientsBlockList ())
             Exception ("New total count clients don`t add up");
 
     Read.close ();

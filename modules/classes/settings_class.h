@@ -38,6 +38,8 @@ class Class_Settings : public AbstractClass_ConfigEditor {
 
         std::string ProjectBuild_Type; // тип сборки проекта (debug / release)
         std::string ProjectBuild_Version; // версия проекта
+        std::string ProjectBuild_Name_Release; // realease билд - использование исходный файловых настроек
+        std::string ProjectBuild_Name_Debug; // debug билд - использование дефолтных дебаг настроек
 
         std::string PK_Name; // имя профиля на пк исполнителя
         std::string Disk_Path; // наименование логического жесткого диска на пк, где хранятся заказы
@@ -65,10 +67,13 @@ class Class_Settings : public AbstractClass_ConfigEditor {
 	    std::string Technology_Name_C; // наименование технологии [Си]
         std::string Technology_Name_CPlusPlus; // наименование технологии [C++]
         std::string Technology_Name_Another; // наименование технологии Another
+
         std::string IDE_Name_VisualStudio; // наименование среды разработки [VisualStudio]
         std::string IDE_Name_Geany; // наименование среды разработки [Geany]
-        std::string IDE_Name_CodeBlocks; // наименование среды разработки [CodeBlocks[
+        std::string IDE_Name_CodeBlocks; // наименование среды разработки [CodeBlocks]
+        std::string IDE_Name_QtCreator; // наименование среды разработки [QtCreator]
         std::string IDE_Name_NoneIDE; // наименование среды разработки [NoneIDE]
+
         std::string OS_Name_Linux; // наименование операционный системы [Linux]
         std::string OS_Name_Windows; // наименование операционной системы [Windows]
 
@@ -78,8 +83,11 @@ class Class_Settings : public AbstractClass_ConfigEditor {
 
         Class_Settings (void) {
 
-            this->ProjectBuild_Type = "Release";
-            this->ProjectBuild_Version = "2.02.05.20";
+            this->ProjectBuild_Name_Release = "Release";
+            this->ProjectBuild_Name_Debug = "Debug";
+            this->ProjectBuild_Type = this->ProjectBuild_Name_Release;
+            //this->ProjectBuild_Type = this->ProjectBuild_Name_Debug;
+            this->ProjectBuild_Version = "2.09.10.2020";
 
             this->SaveTag_Path_to_Labs = "Path_to_Labs";
             this->SaveTag_Order_Start = "Order_Start";
@@ -109,10 +117,13 @@ class Class_Settings : public AbstractClass_ConfigEditor {
 			this->Technology_Name_C = "C";
             this->Technology_Name_CPlusPlus = "C++" ;
             this->Technology_Name_Another = "Another";
+
             this->IDE_Name_Geany = "Geany";
             this->IDE_Name_CodeBlocks = "Code::Blocks";
             this->IDE_Name_VisualStudio = "VisualStudio";
+            this->IDE_Name_QtCreator = "QtCreator";
             this->IDE_Name_NoneIDE = "NoneIDE";
+
             this->OS_Name_Linux = "Linux";
             this->OS_Name_Windows = "Windows";
 
@@ -135,6 +146,18 @@ class Class_Settings : public AbstractClass_ConfigEditor {
             return this->ProjectBuild_Version;
 
         } // геттер для ProjectBuild_Version
+
+        const std::string getProjectBuild_Name_Release (void) const {
+
+            return this->ProjectBuild_Name_Release;
+
+        } // геттер для ProjectBuild_Name_Release
+
+        const std::string getPorjectBuild_Name_Debug (void) const {
+
+            return this->ProjectBuild_Name_Debug;
+
+        } // геттер для ProjectBuild_Name_Debug
 
     //////////////////////////////////////////////
 
@@ -298,6 +321,8 @@ class Class_Settings : public AbstractClass_ConfigEditor {
 
         } // геттер для Technology_Name_Another
 
+    //////////////////////////////////////////////
+
         const std::string getIDE_Name_Geany (void) const {
 
             return this->IDE_Name_Geany;
@@ -316,11 +341,19 @@ class Class_Settings : public AbstractClass_ConfigEditor {
 
         } // геттер для IDE_Name_VisualStudio
 
+        const std::string getIDE_Name_QtCreator (void) const {
+
+            return this->IDE_Name_QtCreator;
+
+        } // геттер для IDE_Name_QtCreator
+
         const std::string getIDE_Name_NoneIDE (void) const {
 
             return this->IDE_Name_NoneIDE;
 
         } // геттер для IDE_Name_NoneIDE
+
+    //////////////////////////////////////////////
 
         const std::string getOS_Name_Windows (void) const {
 
@@ -333,6 +366,8 @@ class Class_Settings : public AbstractClass_ConfigEditor {
             return this->OS_Name_Linux;
 
         } // геттер для OS_Name_Linux
+
+    //////////////////////////////////////////////
 
         const std::string getERROR_Message_ClientExist (void) const {
 
