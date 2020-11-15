@@ -1,4 +1,4 @@
-// Класс базы данных всех клиентов и заказов, имеющихся в базе
+// РљР»Р°СЃСЃ Р±Р°Р·С‹ РґР°РЅРЅС‹С… РІСЃРµС… РєР»РёРµРЅС‚РѕРІ Рё Р·Р°РєР°Р·РѕРІ, РёРјРµСЋС‰РёС…СЃСЏ РІ Р±Р°Р·Рµ
 
 #pragma once
 
@@ -9,26 +9,26 @@ class Class_Statistics {
 
     private:
 
-        unsigned short int TotalNumber_ClientsInDB_Count; // общее кол-во клиентов в базе
-        unsigned short int TotalNumber_CompletedTasks_Count; // общее кол-во выполненных заданий со всех клиентов
+        unsigned short int TotalNumber_ClientsInDB_Count; // РѕР±С‰РµРµ РєРѕР»-РІРѕ РєР»РёРµРЅС‚РѕРІ РІ Р±Р°Р·Рµ
+        unsigned short int TotalNumber_CompletedTasks_Count; // РѕР±С‰РµРµ РєРѕР»-РІРѕ РІС‹РїРѕР»РЅРµРЅРЅС‹С… Р·Р°РґР°РЅРёР№ СЃРѕ РІСЃРµС… РєР»РёРµРЅС‚РѕРІ
 
-        unsigned short int TotalNumber_Technology_C; // общее количество выполненных задач на [Си]
-        unsigned short int TotalNumber_Technology_CPlusPlus; // общее количество выполненных задач на [C++]
-        unsigned short int TotalNumber_Technology_Another; // общее количество выполненных задач по другим направлениям (помощь на экзаменах, ответы на вопросы и т.д.)
+        unsigned short int TotalNumber_Technology_C; // РѕР±С‰РµРµ РєРѕР»РёС‡РµСЃС‚РІРѕ РІС‹РїРѕР»РЅРµРЅРЅС‹С… Р·Р°РґР°С‡ РЅР° [РЎРё]
+        unsigned short int TotalNumber_Technology_CPlusPlus; // РѕР±С‰РµРµ РєРѕР»РёС‡РµСЃС‚РІРѕ РІС‹РїРѕР»РЅРµРЅРЅС‹С… Р·Р°РґР°С‡ РЅР° [C++]
+        unsigned short int TotalNumber_Technology_Another; // РѕР±С‰РµРµ РєРѕР»РёС‡РµСЃС‚РІРѕ РІС‹РїРѕР»РЅРµРЅРЅС‹С… Р·Р°РґР°С‡ РїРѕ РґСЂСѓРіРёРј РЅР°РїСЂР°РІР»РµРЅРёСЏРј (РїРѕРјРѕС‰СЊ РЅР° СЌРєР·Р°РјРµРЅР°С…, РѕС‚РІРµС‚С‹ РЅР° РІРѕРїСЂРѕСЃС‹ Рё С‚.Рґ.)
 
-        unsigned short int TotalNumber_IDE_CodeBlocks; // общее количество выполненных задач под [Code::Blocks]
-        unsigned short int TotalNumber_IDE_Geany; // общее количество выполненных задач под [Geany]
-        unsigned short int TotalNumber_IDE_QtCreator; // общее количество выполненныл задач под [QtCreator]
-        unsigned short int TotalNumber_IDE_VisualStudio; // общее количество выполненных задач под [VisualStudio]
-        unsigned short int TotalNumber_IDE_NoneIDE; // общее количество выполненных задач для [Another] заказов
+        unsigned short int TotalNumber_IDE_CodeBlocks; // РѕР±С‰РµРµ РєРѕР»РёС‡РµСЃС‚РІРѕ РІС‹РїРѕР»РЅРµРЅРЅС‹С… Р·Р°РґР°С‡ РїРѕРґ [Code::Blocks]
+        unsigned short int TotalNumber_IDE_Geany; // РѕР±С‰РµРµ РєРѕР»РёС‡РµСЃС‚РІРѕ РІС‹РїРѕР»РЅРµРЅРЅС‹С… Р·Р°РґР°С‡ РїРѕРґ [Geany]
+        unsigned short int TotalNumber_IDE_QtCreator; // РѕР±С‰РµРµ РєРѕР»РёС‡РµСЃС‚РІРѕ РІС‹РїРѕР»РЅРµРЅРЅС‹Р» Р·Р°РґР°С‡ РїРѕРґ [QtCreator]
+        unsigned short int TotalNumber_IDE_VisualStudio; // РѕР±С‰РµРµ РєРѕР»РёС‡РµСЃС‚РІРѕ РІС‹РїРѕР»РЅРµРЅРЅС‹С… Р·Р°РґР°С‡ РїРѕРґ [VisualStudio]
+        unsigned short int TotalNumber_IDE_NoneIDE; // РѕР±С‰РµРµ РєРѕР»РёС‡РµСЃС‚РІРѕ РІС‹РїРѕР»РЅРµРЅРЅС‹С… Р·Р°РґР°С‡ РґР»СЏ [Another] Р·Р°РєР°Р·РѕРІ
 
-        unsigned short int TotalNumber_OS_Linux; // общее количество выполненных задач под [Linux]
-        unsigned short int TotalNumber_OS_Windows; // общее количество выполненных задач под [Windows]
+        unsigned short int TotalNumber_OS_Linux; // РѕР±С‰РµРµ РєРѕР»РёС‡РµСЃС‚РІРѕ РІС‹РїРѕР»РЅРµРЅРЅС‹С… Р·Р°РґР°С‡ РїРѕРґ [Linux]
+        unsigned short int TotalNumber_OS_Windows; // РѕР±С‰РµРµ РєРѕР»РёС‡РµСЃС‚РІРѕ РІС‹РїРѕР»РЅРµРЅРЅС‹С… Р·Р°РґР°С‡ РїРѕРґ [Windows]
 
-        unsigned short int TotalNumber_Clients_InBanList_Count; // общее кол-во клиентов в бан-листе
-		unsigned short int TotalNumber_Workers_InBanList_Count; // общее кол-во исполнителей в бан-листе
+        unsigned short int TotalNumber_Clients_InBanList_Count; // РѕР±С‰РµРµ РєРѕР»-РІРѕ РєР»РёРµРЅС‚РѕРІ РІ Р±Р°РЅ-Р»РёСЃС‚Рµ
+		unsigned short int TotalNumber_Workers_InBanList_Count; // РѕР±С‰РµРµ РєРѕР»-РІРѕ РёСЃРїРѕР»РЅРёС‚РµР»РµР№ РІ Р±Р°РЅ-Р»РёСЃС‚Рµ
 
-        std::vector <std::string> ClientsName; // имена всех клиентов
+        std::vector <std::string> ClientsName; // РёРјРµРЅР° РІСЃРµС… РєР»РёРµРЅС‚РѕРІ
 
     public:
 
@@ -65,13 +65,13 @@ class Class_Statistics {
 
 			return this->TotalNumber_CompletedTasks_Count;
 
-		} // геттер для TotalNumber_CompletedTasks_Count
+		} // РіРµС‚С‚РµСЂ РґР»СЏ TotalNumber_CompletedTasks_Count
 
 		const unsigned short int getTotalNumber_ClientsInDB_Count (void) const {
 
 			return this->TotalNumber_ClientsInDB_Count;
 
-		} // геттер для TotalNumber_ClientsInDB_Count
+		} // РіРµС‚С‚РµСЂ РґР»СЏ TotalNumber_ClientsInDB_Count
 
     //////////////////////////////////////////////
 
@@ -79,19 +79,19 @@ class Class_Statistics {
 
             return this->TotalNumber_Technology_C;
 
-        } // геттер для TotalNumber_Technology_C
+        } // РіРµС‚С‚РµСЂ РґР»СЏ TotalNumber_Technology_C
 
         const unsigned short int getTotalNumber_Technology_CPlusPlus (void) const {
 
             return this->TotalNumber_Technology_CPlusPlus;
 
-        } // геттер для TotalNumber_Technology_CPlusPlus
+        } // РіРµС‚С‚РµСЂ РґР»СЏ TotalNumber_Technology_CPlusPlus
 
         const unsigned short int getTotalNumber_Technology_Another (void) const {
 
             return this->TotalNumber_Technology_Another;
 
-        } // геттер для TotalNumber_Technology_Another
+        } // РіРµС‚С‚РµСЂ РґР»СЏ TotalNumber_Technology_Another
 
     //////////////////////////////////////////////
 
@@ -99,31 +99,31 @@ class Class_Statistics {
 
             return this->TotalNumber_IDE_CodeBlocks;
 
-        } // геттер для TotalNumber_IDE_CodeBlocks
+        } // РіРµС‚С‚РµСЂ РґР»СЏ TotalNumber_IDE_CodeBlocks
 
         const unsigned short int getTotalNumber_IDE_Geany (void) const {
 
             return this->TotalNumber_IDE_Geany;
 
-        } // геттер для TotalNumber_IDE_Geany
+        } // РіРµС‚С‚РµСЂ РґР»СЏ TotalNumber_IDE_Geany
 
         const unsigned short int getTotalNumber_IDE_QtCreator (void) const {
 
             return this->TotalNumber_IDE_QtCreator;
 
-        } // геттер для TotalNumber_IDE_QtCreator
+        } // РіРµС‚С‚РµСЂ РґР»СЏ TotalNumber_IDE_QtCreator
 
         const unsigned short int getTotalNumber_IDE_VisualStudio (void) const {
 
             return this->TotalNumber_IDE_VisualStudio;
 
-        } // геттер для TotalNumber_IDE_VisualStudio
+        } // РіРµС‚С‚РµСЂ РґР»СЏ TotalNumber_IDE_VisualStudio
 
         const unsigned short int getTotalNumber_IDE_NoneIDE (void) const {
 
             return this->TotalNumber_IDE_NoneIDE;
 
-        } // геттер для TotalNumber_IDE_NoneIDE
+        } // РіРµС‚С‚РµСЂ РґР»СЏ TotalNumber_IDE_NoneIDE
 
     //////////////////////////////////////////////
 
@@ -131,13 +131,13 @@ class Class_Statistics {
 
             return this->TotalNumber_OS_Linux;
 
-        } // геттер для TotalNumber_OS_Linux
+        } // РіРµС‚С‚РµСЂ РґР»СЏ TotalNumber_OS_Linux
 
         const unsigned short int getTotalNumber_OS_Windows (void) const {
 
             return this->TotalNumber_OS_Windows;
 
-        } // геттер для TotalNumber_OS_Windows
+        } // РіРµС‚С‚РµСЂ РґР»СЏ TotalNumber_OS_Windows
 
     //////////////////////////////////////////////
 
@@ -145,7 +145,7 @@ class Class_Statistics {
 
             return this->ClientsName[Counter];
 
-        } // геттер для ClientsName
+        } // РіРµС‚С‚РµСЂ РґР»СЏ ClientsName
 
     //////////////////////////////////////////////
 
@@ -153,13 +153,13 @@ class Class_Statistics {
 
             return this->TotalNumber_Clients_InBanList_Count;
 
-        } // геттер для TotalNumber_Clients_InBanList_Count
+        } // РіРµС‚С‚РµСЂ РґР»СЏ TotalNumber_Clients_InBanList_Count
 
         const unsigned short int getTotalNumber_Workers_InBanList_Count (void) const {
 
             return this->TotalNumber_Workers_InBanList_Count;
 
-        } // геттер для TotalNumber_Workers_InBanList_Count
+        } // РіРµС‚С‚РµСЂ РґР»СЏ TotalNumber_Workers_InBanList_Count
 
     //////////////////////////////////////////////
 
@@ -167,7 +167,7 @@ class Class_Statistics {
         const void Load_ClientsName (const Class_Settings&);
         const void Load_TotalNumber_Information (const Class_Settings&, const Class_BanLists&);
 
-}; // класс базы данных всех заказов
+}; // РєР»Р°СЃСЃ Р±Р°Р·С‹ РґР°РЅРЅС‹С… РІСЃРµС… Р·Р°РєР°Р·РѕРІ
 
 const unsigned short int Class_Statistics::Load_TotalNumber_ClientsInDB_Count (const Class_Settings& Settings) {
 
@@ -204,7 +204,7 @@ const unsigned short int Class_Statistics::Load_TotalNumber_ClientsInDB_Count (c
 
     return TotalCount;
 
-} // метод подсчета кол-ва клиентов и их имен в базе
+} // РјРµС‚РѕРґ РїРѕРґСЃС‡РµС‚Р° РєРѕР»-РІР° РєР»РёРµРЅС‚РѕРІ Рё РёС… РёРјРµРЅ РІ Р±Р°Р·Рµ
 
 const void Class_Statistics::Load_TotalNumber_Information (const Class_Settings& Settings, const Class_BanLists& Banlists) {
 
@@ -244,8 +244,8 @@ const void Class_Statistics::Load_TotalNumber_Information (const Class_Settings&
 
                             if (Str == Settings.getSaveTag_Field_Technology()) {
 
-                                Read >> Str; // считывание символа [=]
-                                Read >> Str; // считывание значения для поля [Technology]
+                                Read >> Str; // СЃС‡РёС‚С‹РІР°РЅРёРµ СЃРёРјРІРѕР»Р° [=]
+                                Read >> Str; // СЃС‡РёС‚С‹РІР°РЅРёРµ Р·РЅР°С‡РµРЅРёСЏ РґР»СЏ РїРѕР»СЏ [Technology]
 
                                     if (Str == Settings.getTechnology_Name_C ())
                                         this->TotalNumber_Technology_C++;
@@ -256,12 +256,12 @@ const void Class_Statistics::Load_TotalNumber_Information (const Class_Settings&
                                     else if (Str == Settings.getTechnology_Name_Another ())
                                         this->TotalNumber_Technology_Another++;
 
-                            } // проверка поля Technology
+                            } // РїСЂРѕРІРµСЂРєР° РїРѕР»СЏ Technology
 
                             else if (Str == Settings.getSaveTag_Field_IDE ()) {
 
-                                Read >> Str; // считывание символа [=]
-                                Read >> Str; // считывание значения для поля [IDE]
+                                Read >> Str; // СЃС‡РёС‚С‹РІР°РЅРёРµ СЃРёРјРІРѕР»Р° [=]
+                                Read >> Str; // СЃС‡РёС‚С‹РІР°РЅРёРµ Р·РЅР°С‡РµРЅРёСЏ РґР»СЏ РїРѕР»СЏ [IDE]
 
                                     if (Str == Settings.getIDE_Name_CodeBlocks ())
                                         this->TotalNumber_IDE_CodeBlocks++;
@@ -278,12 +278,12 @@ const void Class_Statistics::Load_TotalNumber_Information (const Class_Settings&
                                     else if (Str == Settings.getIDE_Name_NoneIDE ())
                                         this->TotalNumber_IDE_NoneIDE++;
 
-                            } // проверка поля IDE
+                            } // РїСЂРѕРІРµСЂРєР° РїРѕР»СЏ IDE
 
                             else if (Str == Settings.getSaveTag_Field_OS ()) {
 
-                                Read >> Str; // считывание символа [=]
-                                Read >> Str; // считывание значения для поля [OS]
+                                Read >> Str; // СЃС‡РёС‚С‹РІР°РЅРёРµ СЃРёРјРІРѕР»Р° [=]
+                                Read >> Str; // СЃС‡РёС‚С‹РІР°РЅРёРµ Р·РЅР°С‡РµРЅРёСЏ РґР»СЏ РїРѕР»СЏ [OS]
 
                                     if (Str == Settings.getOS_Name_Linux ())
                                         this->TotalNumber_OS_Linux++;
@@ -291,7 +291,7 @@ const void Class_Statistics::Load_TotalNumber_Information (const Class_Settings&
                                     else if (Str == Settings.getOS_Name_Windows ())
                                         this->TotalNumber_OS_Windows++;
 
-                            } // проверка поля OS
+                            } // РїСЂРѕРІРµСЂРєР° РїРѕР»СЏ OS
 
                         }
 
@@ -304,6 +304,6 @@ const void Class_Statistics::Load_TotalNumber_Information (const Class_Settings&
     this->TotalNumber_Clients_InBanList_Count = Banlists.getCount_ClientsBlockList ();
     this->TotalNumber_Workers_InBanList_Count = Banlists.getCount_WorkersBlockList ();
 
-} // метод подсчета всей статистики
+} // РјРµС‚РѕРґ РїРѕРґСЃС‡РµС‚Р° РІСЃРµР№ СЃС‚Р°С‚РёСЃС‚РёРєРё
 
 #endif // _statistics_class_h_
