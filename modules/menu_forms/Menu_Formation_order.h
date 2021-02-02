@@ -1,4 +1,4 @@
-// РњРѕРґСѓР»СЊ РґР»СЏ С„РѕСЂРјРёСЂРѕРІР°РЅРёСЏ Р·Р°РєР°Р·Р°. РРјРµРЅРЅРѕ Р·РґРµСЃСЊ РѕРїРёСЃР°РЅ РІРµСЃСЊ С„СѓРЅРєС†РёРѕРЅР°Р» РєРЅРѕРїРєРё "РЎРѕР·РґР°С‚СЊ Р·Р°РєР°Р·".
+// Модуль для формирования заказа. Именно здесь описан весь функционал кнопки "Создать заказ".
 
 #pragma once
 
@@ -7,22 +7,23 @@
 
 const static bool Fill_InputData (Class_Clients& Client, const Class_BanLists& Banlists, const Class_Settings& Settings) {
 
-	unsigned short int New_TasksCount = 0; // РїРµСЂРµРјРµРЅРЅР°СЏ РѕС‚РІРµС‡Р°СЋС‰Р°СЏ Р·Р° СЃРѕР·РґР°РЅРЅРѕРµ РєРѕР»-РІРѕ РЅРѕРІС‹С… С‚Р°СЃРєРѕРІ
-	unsigned short int ButtonNumber = 0; // РїРµСЂРµРјРµРЅРЅР°СЏ РґР»СЏ РѕР±СЂР°Р±РѕС‚РєРё РЅР°Р¶Р°С‚РёР№ РІ РјРµРЅСЋ
+	unsigned short int New_TasksCount = 0; // переменная отвечающая за созданное кол-во новых тасков
+	unsigned short int ButtonNumber = 0; // переменная для обработки нажатий в меню
+	unsigned short int OrderCost = 0; // стоимость заказа
 
         while (true) {
 
             cls ();
             Client.Clear_Client_Parameters ();
 
-            CenterText ("РЎРѕР·РґР°РЅРёРµ РЅРѕРІРѕРіРѕ Р·Р°РєР°Р·Р°\n");
+            CenterText ("Создание нового заказа\n");
             Show_Text_ForExit ();
             Show_Text_In_Right_Corner ("Press F5 to reload formation order");
 
-            std::string Stroke = Show_Text_Input ("РРјСЏ РєР»РёРµРЅС‚Р°:   ", true);
+            std::string Stroke = Show_Text_Input ("Имя клиента:   ", true);
 
                 if (Check_Input_ForExit (Stroke))
-                    return false; // РµСЃР»Рё Р±С‹Р»Рѕ РІРІРµРґРµРЅРѕ РѕРґРЅРѕ РёР· СЃР»СѓР¶Р±РЅС‹С… СЃР»РѕРІ РґР»СЏ РІС‹С…РѕРґР° - РІРѕР·РІСЂР°С‚ РІ РіР»Р°РІРЅРѕРµ РјРµРЅСЋ РїСЂРѕРіСЂР°РјРјС‹
+                    return false; // если было введено одно из службных слов для выхода - возврат в главное меню программы
 
                 else if (Check_Input_ForReload (Stroke))
                     continue;
@@ -38,7 +39,7 @@ const static bool Fill_InputData (Class_Clients& Client, const Class_BanLists& B
 
             Client.setName (Stroke);
 
-            std::cout << "\n\nР’С‹Р±РѕСЂ С‚РµС…РЅРѕР»РѕРіРёРё: C / C++ / Another (C / + / A) ?:   ";
+            std::cout << "\n\nВыбор технологии: C / C++ / Another (C / + / A) ?:   ";
 
                 while (true) {
 
@@ -81,7 +82,7 @@ const static bool Fill_InputData (Class_Clients& Client, const Class_BanLists& B
 
                 if (Client.getTechnology_Name () != Settings.getTechnology_Name_Another()) {
 
-                    std::cout << "\n\n\nР’С‹Р±РѕСЂ IDE: Visual Studio / Geany / Code::Blocks / QtCreator (V / G / C / Q) ?:   ";
+                    std::cout << "\n\n\nВыбор IDE: Visual Studio / Geany / Code::Blocks / QtCreator (V / G / C / Q) ?:   ";
 
                         while (true) {
 
@@ -130,7 +131,7 @@ const static bool Fill_InputData (Class_Clients& Client, const Class_BanLists& B
                         if (ClickCatch ("F5", &ButtonNumber))
                             continue;
 
-                    std::cout << "\n\n\nР’С‹Р±РѕСЂ РћРЎ: Linux / Windows (L / W) ?:   ";
+                    std::cout << "\n\n\nВыбор ОС: Linux / Windows (L / W) ?:   ";
 
                         while (true) {
 
@@ -163,7 +164,7 @@ const static bool Fill_InputData (Class_Clients& Client, const Class_BanLists& B
                         if (ClickCatch ("F5", &ButtonNumber))
                             continue;
 
-                    std::cout << "\n\n\nР”РѕР±Р°РІРёС‚СЊ Р±Р°Р·РѕРІС‹Р№ С„СѓРЅРєС†РёРѕРЅР°Р» РґР»СЏ СѓРїСЂР°РІР»РµРЅРёСЏ РјРµРЅСЋ (Y / N) ?:   ";
+                    std::cout << "\n\n\nДобавить базовый функционал для управления меню (Y / N) ?:   ";
 
                         while (true) {
 
@@ -206,21 +207,89 @@ const static bool Fill_InputData (Class_Clients& Client, const Class_BanLists& B
 
                 }
 
-            GetNormal_Number_Value (&New_TasksCount, Stroke, "РљРѕР»РёС‡РµСЃС‚РІРѕ Р·Р°РґР°РЅРёР№:   ", -1, 1000);
+            GetNormal_Number_Value (&New_TasksCount, Stroke, "Количество заданий:   ", -1, 1000);
 
                 if (Check_Input_ForReload (Stroke))
                     continue;
 
                 if (Check_Input_ForExit (Stroke) || New_TasksCount == 0)
-                    return false; // РµСЃР»Рё Р±С‹Р»Рѕ РІРІРµРґРµРЅРѕ РѕРґРЅРѕ РёР· СЃР»СѓР¶Р±РЅС‹С… СЃР»РѕРІ РґР»СЏ РІС‹С…РѕРґР° - РІРѕР·РІСЂР°С‚ РІ РіР»Р°РІРЅРѕРµ РјРµРЅСЋ РїСЂРѕРіСЂР°РјРјС‹
+                    return false; // если было введено одно из службных слов для выхода - возврат в главное меню программы
 
             Client.setTasksCount (New_TasksCount);
+
+                if (Client.getTasksCount () == 1) {
+
+                    std::cout << "\n\nВыберите тип работы - лабораторная / курсовая / диплом (L / C / D) ?:   ";
+
+                        while (true) {
+
+                            ButtonNumber = getch ();
+
+                                if (ClickCatch ("L", &ButtonNumber)) {
+
+                                    Client.setTypeWork (Settings.getTypeWork_Name_LabWork ());
+                                    Show_Text_Output ("лабораторная\n");
+                                    break;
+
+                                }
+
+                                else if (ClickCatch ("C", &ButtonNumber)) {
+
+                                    Client.setTypeWork (Settings.getTypeWork_Name_CourseWork ());
+                                    Show_Text_Output ("курсовая\n");
+                                    break;
+
+                                }
+
+                                else if (ClickCatch ("D", &ButtonNumber)) {
+
+                                    Client.setTypeWork (Settings.getTypeWork_Name_Diploma ());
+                                    Show_Text_Output ("диплом\n");
+                                    break;
+
+                                }
+
+                                else if (ClickCatch ("Esc", &ButtonNumber))
+                                    return false;
+
+                                else if (ClickCatch ("F5", &ButtonNumber))
+                                    break;
+
+                        }
+
+                        if (ClickCatch ("F5", &ButtonNumber))
+                            continue;
+
+                }
+
+                else
+                    Client.setTypeWork (Settings.getTypeWork_Name_LabWork ());
+
+                for (unsigned short int i = 0; i < Client.getTasksCount(); i++) {
+
+                        if (Client.getTasksCount () == 1)
+                            GetNormal_Number_Value (&OrderCost, Stroke, "Введите стоимость заказа:   ", -1, 32000);
+
+                        else if (Client.getTasksCount () > 1)
+                            GetNormal_Number_Value (&OrderCost, Stroke, "Введите стоимость заказа (Task № " + Convert_Int_toString(i + 1) + "):   ", -1, 32000);
+
+                    Show_Text_Output ("  руб");
+
+                        if (Check_Input_ForReload (Stroke))
+                            continue;
+
+                        if (Check_Input_ForExit (Stroke) || OrderCost == 0)
+                            return false; // если было введено одно из службных слов для выхода - возврат в главное меню программы
+
+                    Client.setOrder_Costs (OrderCost);
+
+                }
 
                 if (Client.getMenuFunctional () == true && Client.getTasksCount () == 1) {
 
                     unsigned short int Count_MenuItems = 0;
 
-                    GetNormal_Number_Value (&Count_MenuItems, Stroke, "РљРѕР»РёС‡РµСЃС‚РІРѕ РїСѓРЅРєС‚РѕРІ РІ РјРµРЅСЋ:   ", -1, 100);
+                    GetNormal_Number_Value (&Count_MenuItems, Stroke, "Количество пунктов в меню:   ", -1, 100);
 
                         if (Check_Input_ForReload (Stroke))
                             continue;
@@ -232,7 +301,7 @@ const static bool Fill_InputData (Class_Clients& Client, const Class_BanLists& B
 
                     Client.Clear_MenuItems_Title ();
 
-                    std::cout << "\n\nРќР°Р·РІР°РЅРёСЏ Рє РєР°Р¶РґРѕРјСѓ РїСѓРЅРєС‚Сѓ РјРµРЅСЋ:\n";
+                    std::cout << "\n\nНазвания к каждому пункту меню:\n";
 
                         for (unsigned short int i = 0; i < Count_MenuItems; i++) {
 
@@ -251,23 +320,23 @@ const static bool Fill_InputData (Class_Clients& Client, const Class_BanLists& B
                         if (Check_Input_ForReload (Stroke))
                             continue;
 
-                } // РµСЃР»Рё РІ РїСЂРѕРіСЂР°РјРјРµ Р±СѓРґРµС‚ РјРµРЅСЋ, Рё РІСЃРµРіРѕ 1 Р·Р°РґР°С‡Р° РїРѕ Р·Р°РєР°Р·Сѓ
+                } // если в программе будет меню, и всего 1 задача по заказу
 
             break;
 
-        } // РєРѕРЅРµС† Р¶РёР·РЅРµРЅРЅРѕРіРѕ С†РёРєР»Р° СЃРѕР·РґР°РЅРёСЏ Р·Р°РєР°Р·Р°
+        } // конец жизненного цикла создания заказа
 
     return true;
 
-} // С„СѓРЅРєС†РёСЏ Р·Р°РїРѕР»РЅРµРЅРёСЏ РґР°РЅРЅС‹С… РїРѕ РєР»РёРµРЅС‚Сѓ
+} // функция заполнения данных по клиенту
 
 const static void Menu_Formation_Order (const Class_Settings& Settings, const Class_BanLists& Banlists, bool* FirstOrderCreated) {
 
     Show_Text_ForExit ();
-    Class_Clients Client; // РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РѕР±СЉРµРєС‚Р° Client
-    Class_Formation_Order Order; // РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РѕР±СЉРµРєС‚Р° Order
+    Class_Clients Client; // инициализация объекта Client
+    Class_Formation_Order Order; // инициализация объекта Order
 
-        if (!Fill_InputData (Client, Banlists, Settings)) // Р·Р°РїРѕР»РЅРµРЅРёРµ РґР°РЅРЅС‹С… РїРѕ Р·Р°РєР°Р·Сѓ
+        if (!Fill_InputData (Client, Banlists, Settings)) // заполнение данных по заказу
             return;
 
     Order.Create_NewOrder (Client, Settings);
@@ -275,6 +344,6 @@ const static void Menu_Formation_Order (const Class_Settings& Settings, const Cl
         if (*FirstOrderCreated == false)
             *FirstOrderCreated = true;
 
-} // С„СѓРЅРєС†РёСЏ С„РѕСЂРјРёСЂРѕРІР°РЅРёСЏ Р·Р°РєР°Р·Р°
+} // функция формирования заказа
 
 #endif // _Menu_formation_order_h_
