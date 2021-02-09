@@ -1,4 +1,4 @@
-// Êëàññ íàñòðîåê ïðèëîæåíèÿ
+// ÐšÐ»Ð°ÑÑ Ð½Ð°ÑÑ‚Ñ€Ð¾ÐµÐº Ð¿Ñ€Ð¸Ð»Ð¾Ð¶ÐµÐ½Ð¸Ñ
 
 #pragma once
 
@@ -14,7 +14,7 @@ class AbstractClass_ConfigEditor {
         const void ConfigFile_Open (const std::string&) const;
         const void ConfigFile_Close (const std::string&) const;
 
-}; // àáñòðàêòíûé êëàññ-ðîäèòåëü äëÿ êîíôèãóðàöèîííûõ ôàéëîâ
+}; // Ð°Ð±ÑÑ‚Ñ€Ð°ÐºÑ‚Ð½Ñ‹Ð¹ ÐºÐ»Ð°ÑÑ-Ñ€Ð¾Ð´Ð¸Ñ‚ÐµÐ»ÑŒ Ð´Ð»Ñ ÐºÐ¾Ð½Ñ„Ð¸Ð³ÑƒÑ€Ð°Ñ†Ð¸Ð¾Ð½Ð½Ñ‹Ñ… Ñ„Ð°Ð¹Ð»Ð¾Ð²
 
 const void AbstractClass_ConfigEditor::ConfigFile_Open (const std::string& Config_Path) const {
 
@@ -22,7 +22,7 @@ const void AbstractClass_ConfigEditor::ConfigFile_Open (const std::string& Confi
 
     system (attrib.c_str());
 
-} // ìåòîä îòêðûòèÿ ôàéëà êîíôèãà
+} // Ð¼ÐµÑ‚Ð¾Ð´ Ð¾Ñ‚ÐºÑ€Ñ‹Ñ‚Ð¸Ñ Ñ„Ð°Ð¹Ð»Ð° ÐºÐ¾Ð½Ñ„Ð¸Ð³Ð°
 
 const void AbstractClass_ConfigEditor::ConfigFile_Close (const std::string& Config_Path) const {
 
@@ -30,64 +30,68 @@ const void AbstractClass_ConfigEditor::ConfigFile_Close (const std::string& Conf
 
     system (attrib.c_str());
 
-} // ìåòîä çàêðûòèÿ ôàéëà êîíôèãà
+} // Ð¼ÐµÑ‚Ð¾Ð´ Ð·Ð°ÐºÑ€Ñ‹Ñ‚Ð¸Ñ Ñ„Ð°Ð¹Ð»Ð° ÐºÐ¾Ð½Ñ„Ð¸Ð³Ð°
 
 class Class_Settings : public AbstractClass_ConfigEditor {
 
     private:
 
-        std::string ProjectBuild_Type; // òèï ñáîðêè ïðîåêòà (debug / release)
-        std::string ProjectBuild_Version; // âåðñèÿ ïðîåêòà
-        std::string ProjectBuild_Name_Release; // realease áèëä - èñïîëüçîâàíèå èñõîäíûé ôàéëîâûõ íàñòðîåê
-        std::string ProjectBuild_Name_Debug; // debug áèëä - èñïîëüçîâàíèå äåôîëòíûõ äåáàã íàñòðîåê
+        std::string ProjectBuild_Type; // Ñ‚Ð¸Ð¿ ÑÐ±Ð¾Ñ€ÐºÐ¸ Ð¿Ñ€Ð¾ÐµÐºÑ‚Ð° (debug / release)
+        std::string ProjectBuild_Version; // Ð²ÐµÑ€ÑÐ¸Ñ Ð¿Ñ€Ð¾ÐµÐºÑ‚Ð°
+        std::string ProjectBuild_Name_Release; // realease Ð±Ð¸Ð»Ð´ - Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ð½Ð¸Ðµ Ð¸ÑÑ…Ð¾Ð´Ð½Ñ‹Ð¹ Ñ„Ð°Ð¹Ð»Ð¾Ð²Ñ‹Ñ… Ð½Ð°ÑÑ‚Ñ€Ð¾ÐµÐº
+        std::string ProjectBuild_Name_Debug; // debug Ð±Ð¸Ð»Ð´ - Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ð½Ð¸Ðµ Ð´ÐµÑ„Ð¾Ð»Ñ‚Ð½Ñ‹Ñ… Ð´ÐµÐ±Ð°Ð³ Ð½Ð°ÑÑ‚Ñ€Ð¾ÐµÐº
 
-        std::string ProjectBuild_SavePath_DB_Release; // realese ïóòü ñîõðàíåíèÿ çàêàçîâ - îñíîâíàÿ ïàïêà äëÿ release áèëäà
-        std::string ProjectBUild_SavePath_DB_Debug; // debug ïóòü ñîõðàíåíèÿ çàêàçîâ - îòäåëüíàÿ ïàïêà äëÿ debug áèëäà
-        std::string PK_Name; // èìÿ ïðîôèëÿ íà ïê èñïîëíèòåëÿ
-        std::string Disk_Path; // íàèìåíîâàíèå ëîãè÷åñêîãî æåñòêîãî äèñêà íà ïê, ãäå õðàíÿòñÿ çàêàçû
-        std::string Config_Path; // ìåñòî õðàíåíèÿ ôàéëà ñ íàñòðîéêàìè
-        std::string Labs_Path; // ìåñòî ñîõðàíåíèÿ ëàá
-        bool Automatic_Order_Start; // àâòîìàòè÷åñêèé çàïóñê ñîçäàíèÿ çàêàçà
-        bool Automatic_Close_Application; // àâòîìàòè÷åñêîå çàâåðøåíèå ïðèëîæåíèÿ ïîñëå çàïîëíåíèÿ çàêàçà
-        bool Automatic_Open_Order; // àâòîìàòè÷åñêîå îòêðûòèå çàêàçà(îâ) ïðè ñîçäàíèè
-        bool Automatic_Update_BanList; // àâòîìàòè÷åñêîå îáíîâëåíèå ñïèñêà áàí-ëèñòà
-        std::string Url_BanList_Clients; // ññûëêà íà áàíëèñò êëèåíòîâ
-        std::string Url_BanList_Workers; // ññûëêà íà áàíëèñò èñïîëíèòåëåé
+        std::string ProjectBuild_SavePath_DB_Release; // realese Ð¿ÑƒÑ‚ÑŒ ÑÐ¾Ñ…Ñ€Ð°Ð½ÐµÐ½Ð¸Ñ Ð·Ð°ÐºÐ°Ð·Ð¾Ð² - Ð¾ÑÐ½Ð¾Ð²Ð½Ð°Ñ Ð¿Ð°Ð¿ÐºÐ° Ð´Ð»Ñ release Ð±Ð¸Ð»Ð´Ð°
+        std::string ProjectBUild_SavePath_DB_Debug; // debug Ð¿ÑƒÑ‚ÑŒ ÑÐ¾Ñ…Ñ€Ð°Ð½ÐµÐ½Ð¸Ñ Ð·Ð°ÐºÐ°Ð·Ð¾Ð² - Ð¾Ñ‚Ð´ÐµÐ»ÑŒÐ½Ð°Ñ Ð¿Ð°Ð¿ÐºÐ° Ð´Ð»Ñ debug Ð±Ð¸Ð»Ð´Ð°
 
-        std::string SaveTag_Path_to_Labs; // Òýã-ñîõðàíåíèÿ ïóòè ñîõðàíåíèÿ çàêàçîâ
-        std::string SaveTag_Order_Start; // Òýã-ñîõðàíåíèÿ àâòîìàòè÷åñêîãî çàïóñêà ñîçäàíèÿ çàêàçà
-        std::string SaveTag_Close_Application; // Òýã-ñîõðàíåíèÿ àâòîìàòè÷åñêîãî çàâåðøåíèÿ ðàáîòû ïðèëîæåíèÿ
-        std::string SaveTag_Open_Order; // Òýã-ñîõðàíåíèÿ àâòîìàòè÷åñêîãî îòêðûòèÿ ñîçäàííîãî çàêàçà
-        std::string SaveTag_Update_BanList; // Òýã-ñîõðàíåíèÿ àâòîìàòè÷åñêîãî îáíîâëåíèÿ áàí-ëèñòà
-        std::string SaveTag_Url_BanList_Clients; // Òýã-ñîõðàíåíèÿ ññûëêè íà áàí-ëèñò êëèåíòîâ
-        std::string SaveTag_Url_BanList_Workers; // Òýã-ñîõðàíåíèÿ ññûëêè íà áàí-ëèñò èñïîëíèòåëåé
+        std::string PK_Name; // Ð¸Ð¼Ñ Ð¿Ñ€Ð¾Ñ„Ð¸Ð»Ñ Ð½Ð° Ð¿Ðº Ð¸ÑÐ¿Ð¾Ð»Ð½Ð¸Ñ‚ÐµÐ»Ñ
+        std::string Disk_Path; // Ð½Ð°Ð¸Ð¼ÐµÐ½Ð¾Ð²Ð°Ð½Ð¸Ðµ Ð»Ð¾Ð³Ð¸Ñ‡ÐµÑÐºÐ¾Ð³Ð¾ Ð¶ÐµÑÑ‚ÐºÐ¾Ð³Ð¾ Ð´Ð¸ÑÐºÐ° Ð½Ð° Ð¿Ðº, Ð³Ð´Ðµ Ñ…Ñ€Ð°Ð½ÑÑ‚ÑÑ Ð·Ð°ÐºÐ°Ð·Ñ‹
+        std::string Config_Path; // Ð¼ÐµÑÑ‚Ð¾ Ñ…Ñ€Ð°Ð½ÐµÐ½Ð¸Ñ Ñ„Ð°Ð¹Ð»Ð° Ñ Ð½Ð°ÑÑ‚Ñ€Ð¾Ð¹ÐºÐ°Ð¼Ð¸
+        std::string Labs_Path; // Ð¼ÐµÑÑ‚Ð¾ ÑÐ¾Ñ…Ñ€Ð°Ð½ÐµÐ½Ð¸Ñ Ð»Ð°Ð±
+        bool Automatic_Order_Start; // Ð°Ð²Ñ‚Ð¾Ð¼Ð°Ñ‚Ð¸Ñ‡ÐµÑÐºÐ¸Ð¹ Ð·Ð°Ð¿ÑƒÑÐº ÑÐ¾Ð·Ð´Ð°Ð½Ð¸Ñ Ð·Ð°ÐºÐ°Ð·Ð°
+        bool Automatic_Close_Application; // Ð°Ð²Ñ‚Ð¾Ð¼Ð°Ñ‚Ð¸Ñ‡ÐµÑÐºÐ¾Ðµ Ð·Ð°Ð²ÐµÑ€ÑˆÐµÐ½Ð¸Ðµ Ð¿Ñ€Ð¸Ð»Ð¾Ð¶ÐµÐ½Ð¸Ñ Ð¿Ð¾ÑÐ»Ðµ Ð·Ð°Ð¿Ð¾Ð»Ð½ÐµÐ½Ð¸Ñ Ð·Ð°ÐºÐ°Ð·Ð°
+        bool Automatic_Open_Order; // Ð°Ð²Ñ‚Ð¾Ð¼Ð°Ñ‚Ð¸Ñ‡ÐµÑÐºÐ¾Ðµ Ð¾Ñ‚ÐºÑ€Ñ‹Ñ‚Ð¸Ðµ Ð·Ð°ÐºÐ°Ð·Ð°(Ð¾Ð²) Ð¿Ñ€Ð¸ ÑÐ¾Ð·Ð´Ð°Ð½Ð¸Ð¸
+        bool Automatic_Update_BanList; // Ð°Ð²Ñ‚Ð¾Ð¼Ð°Ñ‚Ð¸Ñ‡ÐµÑÐºÐ¾Ðµ Ð¾Ð±Ð½Ð¾Ð²Ð»ÐµÐ½Ð¸Ðµ ÑÐ¿Ð¸ÑÐºÐ° Ð±Ð°Ð½-Ð»Ð¸ÑÑ‚Ð°
+        bool Display_Money; // Ð¾Ñ‚Ð¾Ð±Ñ€Ð°Ð¶ÐµÐ½Ð¸Ðµ Ð·Ð°Ñ€Ð°Ð±Ð¾Ñ‚Ð°Ð½Ð½Ñ‹Ñ… ÑÑ€ÐµÐ´ÑÑ‚Ð² (true - Ð´Ð° / false - Ð½ÐµÑ‚)
+        std::string Banlist_Path; // Ð¿ÑƒÑ‚ÑŒ Ðº Ñ…Ñ€Ð°Ð½ÐµÐ½Ð¸ÑŽ Ð±Ð°Ð½-Ð»Ð¸ÑÑ‚Ð°
+        std::string Url_BanList_Clients; // ÑÑÑ‹Ð»ÐºÐ° Ð½Ð° Ð±Ð°Ð½Ð»Ð¸ÑÑ‚ ÐºÐ»Ð¸ÐµÐ½Ñ‚Ð¾Ð²
+        std::string Url_BanList_Workers; // ÑÑÑ‹Ð»ÐºÐ° Ð½Ð° Ð±Ð°Ð½Ð»Ð¸ÑÑ‚ Ð¸ÑÐ¿Ð¾Ð»Ð½Ð¸Ñ‚ÐµÐ»ÐµÐ¹
 
-        std::string SaveTag_Field_Technology; // Òýã-ñîõðàíåíèÿ íàèìåíîâàíèÿ òåõíîëîãèè
-	    std::string SaveTag_Field_IDE; // Òýã-ñîõðàíåíèÿ íàèìåíîâàíèÿ ñðåäû ðàçðàáîòêè
-	    std::string SaveTag_Field_OS; // Òýã-ñîõðàíåíèÿ íàèìåíîâàíèÿ îïåðàöèîííîé ñèñòåìû
-	    std::string SaveTag_Field_TypeWork; // Òýã-ñîõðàíåíèÿ íàèìåíîâàíèÿ òèïà âûïîëíåííîé ðàáîòû
-	    std::string SaveTag_Field_OrderCost; // Òýã-ñîõðàíåíèÿ ñòîèìîñòè âûïîëíåííîé ðàáîòû
-	    std::string SaveTag_Field_Date; // Òýã-ñõðàíåíèÿ äàòû ñîçäàíèÿ çàêàçà
-	    std::string SaveTag_Field_Keywords; // Òýã-ñîõðàíåíèÿ êëþ÷åâûõ ñëîâ
+        std::string LoadTag_Path_to_Labs; // Ð¢ÑÐ³-ÑÑ‡Ð¸Ñ‚Ñ‹Ð²Ð°Ð½Ð¸Ñ Ð¿ÑƒÑ‚Ð¸ ÑÐ¾Ñ…Ñ€Ð°Ð½ÐµÐ½Ð¸Ñ Ð·Ð°ÐºÐ°Ð·Ð¾Ð²
+        std::string LoadTag_Order_Start; // Ð¢ÑÐ³-ÑÑ‡Ð¸Ñ‚Ñ‹Ð²Ð°Ð½Ð¸Ñ Ð°Ð²Ñ‚Ð¾Ð¼Ð°Ñ‚Ð¸Ñ‡ÐµÑÐºÐ¾Ð³Ð¾ Ð·Ð°Ð¿ÑƒÑÐºÐ° ÑÐ¾Ð·Ð´Ð°Ð½Ð¸Ñ Ð·Ð°ÐºÐ°Ð·Ð°
+        std::string LoadTag_Close_Application; // Ð¢ÑÐ³-ÑÑ‡Ð¸Ñ‚Ñ‹Ð²Ð°Ð½Ð¸Ñ Ð°Ð²Ñ‚Ð¾Ð¼Ð°Ñ‚Ð¸Ñ‡ÐµÑÐºÐ¾Ð³Ð¾ Ð·Ð°Ð²ÐµÑ€ÑˆÐµÐ½Ð¸Ñ Ñ€Ð°Ð±Ð¾Ñ‚Ñ‹ Ð¿Ñ€Ð¸Ð»Ð¾Ð¶ÐµÐ½Ð¸Ñ
+        std::string LoadTag_Open_Order; // Ð¢ÑÐ³-ÑÑ‡Ð¸Ñ‚Ñ‹Ð²Ð°Ð½Ð¸Ñ Ð°Ð²Ñ‚Ð¾Ð¼Ð°Ñ‚Ð¸Ñ‡ÐµÑÐºÐ¾Ð³Ð¾ Ð¾Ñ‚ÐºÑ€Ñ‹Ñ‚Ð¸Ñ ÑÐ¾Ð·Ð´Ð°Ð½Ð½Ð¾Ð³Ð¾ Ð·Ð°ÐºÐ°Ð·Ð°
+        std::string LoadTag_Update_BanList; // Ð¢ÑÐ³-ÑÑ‡Ð¸Ñ‚Ñ‹Ð²Ð°Ð½Ð¸Ñ Ð°Ð²Ñ‚Ð¾Ð¼Ð°Ñ‚Ð¸Ñ‡ÐµÑÐºÐ¾Ð³Ð¾ Ð¾Ð±Ð½Ð¾Ð²Ð»ÐµÐ½Ð¸Ñ Ð±Ð°Ð½-Ð»Ð¸ÑÑ‚Ð°
+        std::string LoadTag_Display_Money; // Ð¢ÑÐ³-ÑÑ‡Ð¸Ñ‚Ñ‹Ð²Ð°Ð½Ð¸Ñ Ð¾Ñ‚Ð¾Ð±Ñ€Ð°Ð¶ÐµÐ½Ð¸Ñ Ð·Ð°Ñ€Ð°Ð±Ð¾Ñ‚Ð°Ð½Ð½Ñ‹Ñ… ÑÑ€ÐµÐ´ÑÑ‚Ð²
+        std::string LoadTag_Url_BanList_Clients; // Ð¢ÑÐ³-ÑÑ‡Ð¸Ñ‚Ñ‹Ð²Ð°Ð½Ð¸Ñ ÑÑÑ‹Ð»ÐºÐ¸ Ð½Ð° Ð±Ð°Ð½-Ð»Ð¸ÑÑ‚ ÐºÐ»Ð¸ÐµÐ½Ñ‚Ð¾Ð²
+        std::string LoadTag_Url_BanList_Workers; // Ð¢ÑÐ³-ÑÑ‡Ð¸Ñ‚Ñ‹Ð²Ð°Ð½Ð¸Ñ ÑÑÑ‹Ð»ÐºÐ¸ Ð½Ð° Ð±Ð°Ð½-Ð»Ð¸ÑÑ‚ Ð¸ÑÐ¿Ð¾Ð»Ð½Ð¸Ñ‚ÐµÐ»ÐµÐ¹
 
-	    std::string Technology_Name_C; // íàèìåíîâàíèå òåõíîëîãèè [Ñè]
-        std::string Technology_Name_CPlusPlus; // íàèìåíîâàíèå òåõíîëîãèè [C++]
-        std::string Technology_Name_Another; // íàèìåíîâàíèå òåõíîëîãèè Another
+        std::string SaveTag_Field_Technology; // Ð¢ÑÐ³-ÑÐ¾Ñ…Ñ€Ð°Ð½ÐµÐ½Ð¸Ñ Ð½Ð°Ð¸Ð¼ÐµÐ½Ð¾Ð²Ð°Ð½Ð¸Ñ Ñ‚ÐµÑ…Ð½Ð¾Ð»Ð¾Ð³Ð¸Ð¸
+	    std::string SaveTag_Field_IDE; // Ð¢ÑÐ³-ÑÐ¾Ñ…Ñ€Ð°Ð½ÐµÐ½Ð¸Ñ Ð½Ð°Ð¸Ð¼ÐµÐ½Ð¾Ð²Ð°Ð½Ð¸Ñ ÑÑ€ÐµÐ´Ñ‹ Ñ€Ð°Ð·Ñ€Ð°Ð±Ð¾Ñ‚ÐºÐ¸
+	    std::string SaveTag_Field_OS; // Ð¢ÑÐ³-ÑÐ¾Ñ…Ñ€Ð°Ð½ÐµÐ½Ð¸Ñ Ð½Ð°Ð¸Ð¼ÐµÐ½Ð¾Ð²Ð°Ð½Ð¸Ñ Ð¾Ð¿ÐµÑ€Ð°Ñ†Ð¸Ð¾Ð½Ð½Ð¾Ð¹ ÑÐ¸ÑÑ‚ÐµÐ¼Ñ‹
+	    std::string SaveTag_Field_TypeWork; // Ð¢ÑÐ³-ÑÐ¾Ñ…Ñ€Ð°Ð½ÐµÐ½Ð¸Ñ Ð½Ð°Ð¸Ð¼ÐµÐ½Ð¾Ð²Ð°Ð½Ð¸Ñ Ñ‚Ð¸Ð¿Ð° Ð²Ñ‹Ð¿Ð¾Ð»Ð½ÐµÐ½Ð½Ð¾Ð¹ Ñ€Ð°Ð±Ð¾Ñ‚Ñ‹
+	    std::string SaveTag_Field_OrderCost; // Ð¢ÑÐ³-ÑÐ¾Ñ…Ñ€Ð°Ð½ÐµÐ½Ð¸Ñ ÑÑ‚Ð¾Ð¸Ð¼Ð¾ÑÑ‚Ð¸ Ð²Ñ‹Ð¿Ð¾Ð»Ð½ÐµÐ½Ð½Ð¾Ð¹ Ñ€Ð°Ð±Ð¾Ñ‚Ñ‹
+	    std::string SaveTag_Field_Date; // Ð¢ÑÐ³-ÑÑ…Ñ€Ð°Ð½ÐµÐ½Ð¸Ñ Ð´Ð°Ñ‚Ñ‹ ÑÐ¾Ð·Ð´Ð°Ð½Ð¸Ñ Ð·Ð°ÐºÐ°Ð·Ð°
+	    std::string SaveTag_Field_Keywords; // Ð¢ÑÐ³-ÑÐ¾Ñ…Ñ€Ð°Ð½ÐµÐ½Ð¸Ñ ÐºÐ»ÑŽÑ‡ÐµÐ²Ñ‹Ñ… ÑÐ»Ð¾Ð²
 
-        std::string IDE_Name_VisualStudio; // íàèìåíîâàíèå ñðåäû ðàçðàáîòêè [VisualStudio]
-        std::string IDE_Name_Geany; // íàèìåíîâàíèå ñðåäû ðàçðàáîòêè [Geany]
-        std::string IDE_Name_CodeBlocks; // íàèìåíîâàíèå ñðåäû ðàçðàáîòêè [CodeBlocks]
-        std::string IDE_Name_QtCreator; // íàèìåíîâàíèå ñðåäû ðàçðàáîòêè [QtCreator]
-        std::string IDE_Name_NoneIDE; // íàèìåíîâàíèå ñðåäû ðàçðàáîòêè [NoneIDE]
+	    std::string Technology_Name_C; // Ð½Ð°Ð¸Ð¼ÐµÐ½Ð¾Ð²Ð°Ð½Ð¸Ðµ Ñ‚ÐµÑ…Ð½Ð¾Ð»Ð¾Ð³Ð¸Ð¸ [Ð¡Ð¸]
+        std::string Technology_Name_CPlusPlus; // Ð½Ð°Ð¸Ð¼ÐµÐ½Ð¾Ð²Ð°Ð½Ð¸Ðµ Ñ‚ÐµÑ…Ð½Ð¾Ð»Ð¾Ð³Ð¸Ð¸ [C++]
+        std::string Technology_Name_Another; // Ð½Ð°Ð¸Ð¼ÐµÐ½Ð¾Ð²Ð°Ð½Ð¸Ðµ Ñ‚ÐµÑ…Ð½Ð¾Ð»Ð¾Ð³Ð¸Ð¸ Another
 
-        std::string OS_Name_Linux; // íàèìåíîâàíèå îïåðàöèîííûé ñèñòåìû [Linux]
-        std::string OS_Name_Windows; // íàèìåíîâàíèå îïåðàöèîííîé ñèñòåìû [Windows]
+        std::string IDE_Name_VisualStudio; // Ð½Ð°Ð¸Ð¼ÐµÐ½Ð¾Ð²Ð°Ð½Ð¸Ðµ ÑÑ€ÐµÐ´Ñ‹ Ñ€Ð°Ð·Ñ€Ð°Ð±Ð¾Ñ‚ÐºÐ¸ [VisualStudio]
+        std::string IDE_Name_Geany; // Ð½Ð°Ð¸Ð¼ÐµÐ½Ð¾Ð²Ð°Ð½Ð¸Ðµ ÑÑ€ÐµÐ´Ñ‹ Ñ€Ð°Ð·Ñ€Ð°Ð±Ð¾Ñ‚ÐºÐ¸ [Geany]
+        std::string IDE_Name_CodeBlocks; // Ð½Ð°Ð¸Ð¼ÐµÐ½Ð¾Ð²Ð°Ð½Ð¸Ðµ ÑÑ€ÐµÐ´Ñ‹ Ñ€Ð°Ð·Ñ€Ð°Ð±Ð¾Ñ‚ÐºÐ¸ [CodeBlocks]
+        std::string IDE_Name_QtCreator; // Ð½Ð°Ð¸Ð¼ÐµÐ½Ð¾Ð²Ð°Ð½Ð¸Ðµ ÑÑ€ÐµÐ´Ñ‹ Ñ€Ð°Ð·Ñ€Ð°Ð±Ð¾Ñ‚ÐºÐ¸ [QtCreator]
+        std::string IDE_Name_NoneIDE; // Ð½Ð°Ð¸Ð¼ÐµÐ½Ð¾Ð²Ð°Ð½Ð¸Ðµ ÑÑ€ÐµÐ´Ñ‹ Ñ€Ð°Ð·Ñ€Ð°Ð±Ð¾Ñ‚ÐºÐ¸ [NoneIDE]
 
-        std::string TypeWork_Name_LabWork; // íàèìåíîâàíèå òèïà ðàáîòû [LabWork]
-        std::string TypeWork_Name_CourseWork; // íàèìåíîâàíèå òèïà ðàáîòû [CourseWork]
-        std::string TypeWork_Name_Diploma; // íàèìåíîâàíèå òèïà ðàáîòû [Diploma]
+        std::string OS_Name_Linux; // Ð½Ð°Ð¸Ð¼ÐµÐ½Ð¾Ð²Ð°Ð½Ð¸Ðµ Ð¾Ð¿ÐµÑ€Ð°Ñ†Ð¸Ð¾Ð½Ð½Ñ‹Ð¹ ÑÐ¸ÑÑ‚ÐµÐ¼Ñ‹ [Linux]
+        std::string OS_Name_Windows; // Ð½Ð°Ð¸Ð¼ÐµÐ½Ð¾Ð²Ð°Ð½Ð¸Ðµ Ð¾Ð¿ÐµÑ€Ð°Ñ†Ð¸Ð¾Ð½Ð½Ð¾Ð¹ ÑÐ¸ÑÑ‚ÐµÐ¼Ñ‹ [Windows]
 
-		std::string ERROR_Message_ClientExist; // ñîîáùåíèå îá îøèáêè îòñóñòâèÿ ââåäåííîãî êëèåíòà â áàçå
+        std::string TypeWork_Name_LabWork; // Ð½Ð°Ð¸Ð¼ÐµÐ½Ð¾Ð²Ð°Ð½Ð¸Ðµ Ñ‚Ð¸Ð¿Ð° Ñ€Ð°Ð±Ð¾Ñ‚Ñ‹ [LabWork]
+        std::string TypeWork_Name_CourseWork; // Ð½Ð°Ð¸Ð¼ÐµÐ½Ð¾Ð²Ð°Ð½Ð¸Ðµ Ñ‚Ð¸Ð¿Ð° Ñ€Ð°Ð±Ð¾Ñ‚Ñ‹ [CourseWork]
+        std::string TypeWork_Name_Diploma; // Ð½Ð°Ð¸Ð¼ÐµÐ½Ð¾Ð²Ð°Ð½Ð¸Ðµ Ñ‚Ð¸Ð¿Ð° Ñ€Ð°Ð±Ð¾Ñ‚Ñ‹ [Diploma]
+
+		std::string ERROR_Message_ClientExist; // ÑÐ¾Ð¾Ð±Ñ‰ÐµÐ½Ð¸Ðµ Ð¾Ð± Ð¾ÑˆÐ¸Ð±ÐºÐ¸ Ð¾Ñ‚ÑÑƒÑÑ‚Ð²Ð¸Ñ Ð²Ð²ÐµÐ´ÐµÐ½Ð½Ð¾Ð³Ð¾ ÐºÐ»Ð¸ÐµÐ½Ñ‚Ð° Ð² Ð±Ð°Ð·Ðµ
 
     public:
 
@@ -97,29 +101,46 @@ class Class_Settings : public AbstractClass_ConfigEditor {
             this->ProjectBuild_Name_Debug = "Debug";
             //this->ProjectBuild_Type = this->ProjectBuild_Name_Release;
             this->ProjectBuild_Type = this->ProjectBuild_Name_Debug;
-            this->ProjectBuild_Version = "2.25.01.2021";
+            this->ProjectBuild_Version = "2.04.02.2021";
 
             this->ProjectBuild_SavePath_DB_Release = "E:\\Orders\\C++Tasks";
             this->ProjectBUild_SavePath_DB_Debug = "E:\\Orders\\C++Tasks(Debug)";
 
-            this->SaveTag_Path_to_Labs = "Path_to_Labs";
-            this->SaveTag_Order_Start = "Order_Start";
-            this->SaveTag_Close_Application = "Close_Application";
-            this->SaveTag_Open_Order = "Open_Order";
-            this->SaveTag_Update_BanList = "Update_BanList";
-            this->SaveTag_Url_BanList_Clients = "Url_BanList_Clients";
-            this->SaveTag_Url_BanList_Workers = "Url_BanList_Workers";
+            this->LoadTag_Path_to_Labs = "Path_to_Labs";
+            this->LoadTag_Order_Start = "Order_Start";
+            this->LoadTag_Close_Application = "Close_Application";
+            this->LoadTag_Open_Order = "Open_Order";
+            this->LoadTag_Update_BanList = "Update_BanList";
+            this->LoadTag_Display_Money = "Display_Money";
+            this->LoadTag_Url_BanList_Clients = "Url_BanList_Clients";
+            this->LoadTag_Url_BanList_Workers = "Url_BanList_Workers";
 
             this->PK_Name = Load_PK_UserName ();
 
-                if (this->ProjectBuild_Type == this->ProjectBuild_Name_Debug)
+                if (this->ProjectBuild_Type == this->ProjectBuild_Name_Debug) {
+
                     this->Config_Path = "C:\\Users\\" + this->PK_Name + "\\AppData\\Local\\Temp\\(Debug)_AutoTaskCreator_Settings.cfg";
+                    this->Banlist_Path = "C:\\Users\\" + this->PK_Name + "\\AppData\\Local\\Temp\\(Debug)_AutoTaskCreator_Banlists.cfg";
 
-                else
+                }
+
+                else {
+
                     this->Config_Path = "C:\\Users\\" + this->PK_Name + "\\AppData\\Local\\Temp\\AutoTaskCreator_Settings.cfg";
+                    this->Banlist_Path = "C:\\Users\\" + this->PK_Name + "\\AppData\\Local\\Temp\\AutoTaskCreator_Banlists.cfg";
 
+                }
 
             Check_ConfigFile (false);
+
+            Automatic_Order_Start = false;
+            Automatic_Close_Application = false;
+            Automatic_Open_Order = false;
+            Automatic_Update_BanList = false;
+            Display_Money = false;
+            Url_BanList_Clients = "\0";
+            Url_BanList_Workers = "\0";
+
             Load_Parameters ();
             this->Disk_Path = this->Disk_Path + this->Labs_Path[0] + this->Labs_Path[1];
 
@@ -160,25 +181,25 @@ class Class_Settings : public AbstractClass_ConfigEditor {
 
             return this->ProjectBuild_Type;
 
-        } // ãåòòåð äëÿ ProjectBuild_Type
+        } // Ð³ÐµÑ‚Ñ‚ÐµÑ€ Ð´Ð»Ñ ProjectBuild_Type
 
         const std::string getProjectBuild_Version (void) const {
 
             return this->ProjectBuild_Version;
 
-        } // ãåòòåð äëÿ ProjectBuild_Version
+        } // Ð³ÐµÑ‚Ñ‚ÐµÑ€ Ð´Ð»Ñ ProjectBuild_Version
 
         const std::string getProjectBuild_Name_Release (void) const {
 
             return this->ProjectBuild_Name_Release;
 
-        } // ãåòòåð äëÿ ProjectBuild_Name_Release
+        } // Ð³ÐµÑ‚Ñ‚ÐµÑ€ Ð´Ð»Ñ ProjectBuild_Name_Release
 
         const std::string getPorjectBuild_Name_Debug (void) const {
 
             return this->ProjectBuild_Name_Debug;
 
-        } // ãåòòåð äëÿ ProjectBuild_Name_Debug
+        } // Ð³ÐµÑ‚Ñ‚ÐµÑ€ Ð´Ð»Ñ ProjectBuild_Name_Debug
 
     //////////////////////////////////////////////
 
@@ -186,121 +207,145 @@ class Class_Settings : public AbstractClass_ConfigEditor {
 
 			this->PK_Name = Str;
 
-		} // ñåòòåð äëÿ PK_Name
+		} // ÑÐµÑ‚Ñ‚ÐµÑ€ Ð´Ð»Ñ PK_Name
 
 		const std::string getPK_Name (void) const {
 
 			return this->PK_Name;
 
-		} // ãåòòåð äëÿ PK_Name
+		} // Ð³ÐµÑ‚Ñ‚ÐµÑ€ Ð´Ð»Ñ PK_Name
 
         const void setLabs_Path (const std::string Str) {
 
             this->Labs_Path = Str;
 
-        } // ñåòòåð äëÿ Labs_Path
+        } // ÑÐµÑ‚Ñ‚ÐµÑ€ Ð´Ð»Ñ Labs_Path
 
         const std::string getLabs_Path (void) const {
 
             return this->Labs_Path;
 
-        } // ãåòòåð äëÿ Labs_Path
+        } // Ð³ÐµÑ‚Ñ‚ÐµÑ€ Ð´Ð»Ñ Labs_Path
 
         const void setConfig_Path (const std::string Str) {
 
             this->Config_Path = Str;
 
-        } // ñåòòåð äëÿ Config_Path
+        } // ÑÐµÑ‚Ñ‚ÐµÑ€ Ð´Ð»Ñ Config_Path
 
         const std::string getConfig_Path (void) const {
 
             return this->Config_Path;
 
-        } // ãåòòåð äëÿ Config_Path
+        } // Ð³ÐµÑ‚Ñ‚ÐµÑ€ Ð´Ð»Ñ Config_Path
 
         const void setAutomatic_Order_Start (const bool Flag) {
 
             this->Automatic_Order_Start = Flag;
 
-        } // ñåòòåð äëÿ Automatic_Order_Start
+        } // ÑÐµÑ‚Ñ‚ÐµÑ€ Ð´Ð»Ñ Automatic_Order_Start
 
         const bool getAutomatic_Order_Start (void) const {
 
             return this->Automatic_Order_Start;
 
-        } // ãåòòåð äëÿ Automatic_Order_Start
+        } // Ð³ÐµÑ‚Ñ‚ÐµÑ€ Ð´Ð»Ñ Automatic_Order_Start
 
         const void setAutomatic_Close_Application (const bool Flag) {
 
             this->Automatic_Close_Application = Flag;
 
-        } // ñåòòåð äëÿ Automatic_Close_Application
+        } // ÑÐµÑ‚Ñ‚ÐµÑ€ Ð´Ð»Ñ Automatic_Close_Application
 
         const bool getAutomatic_Close_Application (void) const {
 
             return this->Automatic_Close_Application;
 
-        } // ãåòòåð äëÿ Automatic_Close_Applcation
+        } // Ð³ÐµÑ‚Ñ‚ÐµÑ€ Ð´Ð»Ñ Automatic_Close_Applcation
 
         const void setAutomatic_Open_Order (const bool Flag) {
 
             this->Automatic_Open_Order = Flag;
 
-        } // ñåòòåð äëÿ Automatic_Open_Order
+        } // ÑÐµÑ‚Ñ‚ÐµÑ€ Ð´Ð»Ñ Automatic_Open_Order
 
         const bool getAutomatic_Open_Order (void) const {
 
             return this->Automatic_Open_Order;
 
-        } // ãåòòåð äëÿ Automatic_Open_Order
+        } // Ð³ÐµÑ‚Ñ‚ÐµÑ€ Ð´Ð»Ñ Automatic_Open_Order
 
         const void setAutomatic_Update_BanList (const bool Flag) {
 
             this->Automatic_Update_BanList = Flag;
 
-        } // ñåòòåð äëÿ Automatic_Update_BanList
+        } // ÑÐµÑ‚Ñ‚ÐµÑ€ Ð´Ð»Ñ Automatic_Update_BanList
 
         const bool getAutomatic_Update_BanList (void) const {
 
             return this->Automatic_Update_BanList;
 
-        } // ãåòòåð äëÿ Automatic_Update_BanList
+        } // Ð³ÐµÑ‚Ñ‚ÐµÑ€ Ð´Ð»Ñ Automatic_Update_BanList
+
+        const void setDisplay_Money (const bool Flag) {
+
+            this->Display_Money = Flag;
+
+        } // ÑÐµÑ‚Ñ‚ÐµÑ€ Ð´Ð»Ñ Display_Money
+
+        const bool getDisplay_Money (void) const {
+
+            return this->Display_Money;
+
+        } // Ð³ÐµÑ‚Ñ‚ÐµÑ€ Ð´Ð»Ñ Display_Money
 
         const void setUrl_BanList_Clients (const std::string Str) {
 
             this->Url_BanList_Clients = Str;
 
-        } // ñåòòåð äëÿ Url_BanList_Clients
+        } // ÑÐµÑ‚Ñ‚ÐµÑ€ Ð´Ð»Ñ Url_BanList_Clients
 
         const std::string getUrl_BanList_Clients (void) const {
 
             return this->Url_BanList_Clients;
 
-        } // ãåòòåð äëÿ Url_BanList_Clients
+        } // Ð³ÐµÑ‚Ñ‚ÐµÑ€ Ð´Ð»Ñ Url_BanList_Clients
 
         const void setUrl_BanList_Workers (const std::string Str) {
 
             this->Url_BanList_Workers = Str;
 
-        } // ñåòòåð äëÿ Url_BanList_Workers
+        } // ÑÐµÑ‚Ñ‚ÐµÑ€ Ð´Ð»Ñ Url_BanList_Workers
 
         const std::string getUrl_BanList_Workers (void) const {
 
             return this->Url_BanList_Workers;
 
-        } // ãåòòåð äëÿ Url_BanList_Workers
+        } // Ð³ÐµÑ‚Ñ‚ÐµÑ€ Ð´Ð»Ñ Url_BanList_Workers
 
         const void setDisk_Path (const std::string Str) {
 
             this->Disk_Path = Str;
 
-        } // ñåòòåð äëÿ Disk_Path
+        } // ÑÐµÑ‚Ñ‚ÐµÑ€ Ð´Ð»Ñ Disk_Path
 
         const std::string getDisk_Path (void) const {
 
             return this->Disk_Path;
 
-        } // ãåòòåð äëÿ Disk_Path
+        } // Ð³ÐµÑ‚Ñ‚ÐµÑ€ Ð´Ð»Ñ Disk_Path
+
+        const void setBanlist_Path (const std::string Str) {
+
+            this->Banlist_Path = Str;
+
+        } // ÑÐµÑ‚Ñ‚ÐµÑ€ Ð´Ð»Ñ Banlist_Path
+
+        const std::string getBanlist_Path (void) const {
+
+            return this->Banlist_Path;
+
+        } // Ð³ÐµÑ‚Ñ‚ÐµÑ€ Ð´Ð»Ñ Banlist_Path
 
     //////////////////////////////////////////////
 
@@ -308,37 +353,37 @@ class Class_Settings : public AbstractClass_ConfigEditor {
 
             return this->SaveTag_Field_Technology;
 
-        } // ãåòòåð äëÿ SaveTag_Field_Technology
+        } // Ð³ÐµÑ‚Ñ‚ÐµÑ€ Ð´Ð»Ñ SaveTag_Field_Technology
 
         const std::string getSaveTag_Field_IDE (void) const {
 
             return this->SaveTag_Field_IDE;
 
-        } // ãåòòåð äëÿ SaveTag_Field_IDE
+        } // Ð³ÐµÑ‚Ñ‚ÐµÑ€ Ð´Ð»Ñ SaveTag_Field_IDE
 
         const std::string getSaveTag_Field_OS (void) const {
 
             return this->SaveTag_Field_OS;
 
-        } // ãåòòåð äëÿ SaveTag_Field_OS
+        } // Ð³ÐµÑ‚Ñ‚ÐµÑ€ Ð´Ð»Ñ SaveTag_Field_OS
 
         const std::string getSaveTag_Field_OrderCost (void) const {
 
             return this->SaveTag_Field_OrderCost;
 
-        } // ãåòòåð äëÿ SaveTag_Field_OrderCost
+        } // Ð³ÐµÑ‚Ñ‚ÐµÑ€ Ð´Ð»Ñ SaveTag_Field_OrderCost
 
         const std::string getSaveTag_Field_Date (void) const {
 
             return this->SaveTag_Field_Date;
 
-        } // ãåòòåð äëÿ SaveTag_Field_Date
+        } // Ð³ÐµÑ‚Ñ‚ÐµÑ€ Ð´Ð»Ñ SaveTag_Field_Date
 
         const std::string getSaveTag_Field_Keywords (void) const {
 
             return this->SaveTag_Field_Keywords;
 
-        } // ãåòòåð äëÿ SaveTag_Field_Keywords
+        } // Ð³ÐµÑ‚Ñ‚ÐµÑ€ Ð´Ð»Ñ SaveTag_Field_Keywords
 
     //////////////////////////////////////////////
 
@@ -346,7 +391,7 @@ class Class_Settings : public AbstractClass_ConfigEditor {
 
             return this->SaveTag_Field_TypeWork;
 
-        } // ãåòòåð äëÿ SaveTag_Field_TypeWork
+        } // Ð³ÐµÑ‚Ñ‚ÐµÑ€ Ð´Ð»Ñ SaveTag_Field_TypeWork
 
     //////////////////////////////////////////////
 
@@ -354,19 +399,19 @@ class Class_Settings : public AbstractClass_ConfigEditor {
 
             return this->Technology_Name_C;
 
-        } // ãåòòåð äëÿ Technology_Name_C
+        } // Ð³ÐµÑ‚Ñ‚ÐµÑ€ Ð´Ð»Ñ Technology_Name_C
 
         const std::string getTechnology_Name_CPlusPlus (void) const {
 
             return this->Technology_Name_CPlusPlus;
 
-        } // ãåòòåð äëÿ Technology_Name_CPlusPlus
+        } // Ð³ÐµÑ‚Ñ‚ÐµÑ€ Ð´Ð»Ñ Technology_Name_CPlusPlus
 
         const std::string getTechnology_Name_Another (void) const {
 
             return this->Technology_Name_Another;
 
-        } // ãåòòåð äëÿ Technology_Name_Another
+        } // Ð³ÐµÑ‚Ñ‚ÐµÑ€ Ð´Ð»Ñ Technology_Name_Another
 
     //////////////////////////////////////////////
 
@@ -374,31 +419,31 @@ class Class_Settings : public AbstractClass_ConfigEditor {
 
             return this->IDE_Name_Geany;
 
-        } // ãåòòåð äëÿ IDE_Name_Geany
+        } // Ð³ÐµÑ‚Ñ‚ÐµÑ€ Ð´Ð»Ñ IDE_Name_Geany
 
         const std::string getIDE_Name_CodeBlocks (void) const {
 
             return this->IDE_Name_CodeBlocks;
 
-        } // ãåòòåð äëÿ IDE_Name_CodeBlocks
+        } // Ð³ÐµÑ‚Ñ‚ÐµÑ€ Ð´Ð»Ñ IDE_Name_CodeBlocks
 
         const std::string getIDE_Name_VisualStudio (void) const {
 
             return this->IDE_Name_VisualStudio;
 
-        } // ãåòòåð äëÿ IDE_Name_VisualStudio
+        } // Ð³ÐµÑ‚Ñ‚ÐµÑ€ Ð´Ð»Ñ IDE_Name_VisualStudio
 
         const std::string getIDE_Name_QtCreator (void) const {
 
             return this->IDE_Name_QtCreator;
 
-        } // ãåòòåð äëÿ IDE_Name_QtCreator
+        } // Ð³ÐµÑ‚Ñ‚ÐµÑ€ Ð´Ð»Ñ IDE_Name_QtCreator
 
         const std::string getIDE_Name_NoneIDE (void) const {
 
             return this->IDE_Name_NoneIDE;
 
-        } // ãåòòåð äëÿ IDE_Name_NoneIDE
+        } // Ð³ÐµÑ‚Ñ‚ÐµÑ€ Ð´Ð»Ñ IDE_Name_NoneIDE
 
     //////////////////////////////////////////////
 
@@ -406,13 +451,13 @@ class Class_Settings : public AbstractClass_ConfigEditor {
 
             return this->OS_Name_Windows;
 
-        } // ãåòòåð äëÿ OS_Name_Windows
+        } // Ð³ÐµÑ‚Ñ‚ÐµÑ€ Ð´Ð»Ñ OS_Name_Windows
 
         const std::string getOS_Name_Linux (void) const {
 
             return this->OS_Name_Linux;
 
-        } // ãåòòåð äëÿ OS_Name_Linux
+        } // Ð³ÐµÑ‚Ñ‚ÐµÑ€ Ð´Ð»Ñ OS_Name_Linux
 
     //////////////////////////////////////////////
 
@@ -420,19 +465,19 @@ class Class_Settings : public AbstractClass_ConfigEditor {
 
             return this->TypeWork_Name_LabWork;
 
-        } // ãåòòåð äëÿ TypeWork_Name_LabWork
+        } // Ð³ÐµÑ‚Ñ‚ÐµÑ€ Ð´Ð»Ñ TypeWork_Name_LabWork
 
          const std::string getTypeWork_Name_CourseWork (void) const {
 
             return this->TypeWork_Name_CourseWork;
 
-        } // ãåòòåð äëÿ TypeWork_Name_CourseWork
+        } // Ð³ÐµÑ‚Ñ‚ÐµÑ€ Ð´Ð»Ñ TypeWork_Name_CourseWork
 
         const std::string getTypeWork_Name_Diploma (void) const {
 
             return this->TypeWork_Name_Diploma;
 
-        } // ãåòòåð äëÿ TypeWork_Name_Diploma
+        } // Ð³ÐµÑ‚Ñ‚ÐµÑ€ Ð´Ð»Ñ TypeWork_Name_Diploma
 
     //////////////////////////////////////////////
 
@@ -440,7 +485,7 @@ class Class_Settings : public AbstractClass_ConfigEditor {
 
             return this->ERROR_Message_ClientExist;
 
-        } // ãåòòåð äëÿ ERROR_Message_ClientExist
+        } // Ð³ÐµÑ‚Ñ‚ÐµÑ€ Ð´Ð»Ñ ERROR_Message_ClientExist
 
     //////////////////////////////////////////////
 
@@ -456,10 +501,11 @@ class Class_Settings : public AbstractClass_ConfigEditor {
             this->Automatic_Close_Application = false;
             this->Automatic_Open_Order = true;
             this->Automatic_Update_BanList = true;
+            this->Display_Money = false;
             this->Url_BanList_Clients = "https://vk.com/topic-156779709_36343200";
             this->Url_BanList_Workers = "https://vk.com/topic-156779709_39456558";
 
-        } // ìåòîä óñòàíîâêè íàñòðîåê ïî óìîë÷àíèþ
+        } // Ð¼ÐµÑ‚Ð¾Ð´ ÑƒÑÑ‚Ð°Ð½Ð¾Ð²ÐºÐ¸ Ð½Ð°ÑÑ‚Ñ€Ð¾ÐµÐº Ð¿Ð¾ ÑƒÐ¼Ð¾Ð»Ñ‡Ð°Ð½Ð¸ÑŽ
 
         const std::string Load_PK_UserName (void) const;
         const void Check_ConfigFile (bool);
@@ -467,7 +513,7 @@ class Class_Settings : public AbstractClass_ConfigEditor {
         const void SaveSettings (const bool) const;
         const bool Check_FilePath (const std::string& Path);
 
-}; // êëàññ íàñòðîåê ïðèëîæåíèÿ
+}; // ÐºÐ»Ð°ÑÑ Ð½Ð°ÑÑ‚Ñ€Ð¾ÐµÐº Ð¿Ñ€Ð¸Ð»Ð¾Ð¶ÐµÐ½Ð¸Ñ
 
 const std::string Class_Settings::Load_PK_UserName (void) const {
 
@@ -491,7 +537,7 @@ const std::string Class_Settings::Load_PK_UserName (void) const {
 
     return PK_User_Name;
 
-} // ìåòîä ïîëó÷åíèÿ íàçâàíèÿ èìåíè ïîëüçîâàòåëÿ-ïê
+} // Ð¼ÐµÑ‚Ð¾Ð´ Ð¿Ð¾Ð»ÑƒÑ‡ÐµÐ½Ð¸Ñ Ð½Ð°Ð·Ð²Ð°Ð½Ð¸Ñ Ð¸Ð¼ÐµÐ½Ð¸ Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»Ñ-Ð¿Ðº
 
 const void Class_Settings::Check_ConfigFile (bool ForceRewriteFile) {
 
@@ -514,13 +560,13 @@ const void Class_Settings::Check_ConfigFile (bool ForceRewriteFile) {
 
             Check.close ();
 
-        } // åñëè ôàéëà íåò, òî ñîçäàåì ôàéë êîíôèãà ñ äåôîëòíûìè íàñòðîéêàìè
+        } // ÐµÑÐ»Ð¸ Ñ„Ð°Ð¹Ð»Ð° Ð½ÐµÑ‚, Ñ‚Ð¾ ÑÐ¾Ð·Ð´Ð°ÐµÐ¼ Ñ„Ð°Ð¹Ð» ÐºÐ¾Ð½Ñ„Ð¸Ð³Ð° Ñ Ð´ÐµÑ„Ð¾Ð»Ñ‚Ð½Ñ‹Ð¼Ð¸ Ð½Ð°ÑÑ‚Ñ€Ð¾Ð¹ÐºÐ°Ð¼Ð¸
 
     Read.close ();
 
     ConfigFile_Close (this->Config_Path);
 
-} // ìåòîä ïðîâåðêè ñóùåñòâîâàíèÿ ôàéëà ñ êîíôèãîì
+} // Ð¼ÐµÑ‚Ð¾Ð´ Ð¿Ñ€Ð¾Ð²ÐµÑ€ÐºÐ¸ ÑÑƒÑ‰ÐµÑÑ‚Ð²Ð¾Ð²Ð°Ð½Ð¸Ñ Ñ„Ð°Ð¹Ð»Ð° Ñ ÐºÐ¾Ð½Ñ„Ð¸Ð³Ð¾Ð¼
 
 const void Class_Settings::Load_Parameters (void) {
 
@@ -532,6 +578,7 @@ const void Class_Settings::Load_Parameters (void) {
     bool CloseApp_Founded = false;
     bool Open_Order_Founded = false;
     bool UpdateBanList_Founded = false;
+    bool DisplayMoney_Founded = false;
     bool Url_BanList_Clients_Founded = false;
     bool Url_BanList_Workers_Founded = false;
 
@@ -541,7 +588,7 @@ const void Class_Settings::Load_Parameters (void) {
 
             while (Read >> Str) {
 
-                if (Str == this->SaveTag_Path_to_Labs && LabsPath_Founded == false) {
+                if (Str == this->LoadTag_Path_to_Labs && LabsPath_Founded == false) {
 
                     Read >> Str;
                     Read >> this->Labs_Path;
@@ -549,7 +596,7 @@ const void Class_Settings::Load_Parameters (void) {
 
                 }
 
-                if (Str == this->SaveTag_Order_Start && OrderStart_Founded == false) {
+                if (Str == this->LoadTag_Order_Start && OrderStart_Founded == false) {
 
                     Read >> Str;
                     Read >> this->Automatic_Order_Start;
@@ -557,7 +604,7 @@ const void Class_Settings::Load_Parameters (void) {
 
                 }
 
-                if (Str == this->SaveTag_Close_Application && CloseApp_Founded == false) {
+                if (Str == this->LoadTag_Close_Application && CloseApp_Founded == false) {
 
                     Read >> Str;
                     Read >> this->Automatic_Close_Application;
@@ -565,7 +612,7 @@ const void Class_Settings::Load_Parameters (void) {
 
                 }
 
-                if (Str == this->SaveTag_Open_Order && Open_Order_Founded == false) {
+                if (Str == this->LoadTag_Open_Order && Open_Order_Founded == false) {
 
                     Read >> Str;
                     Read >> this->Automatic_Open_Order;
@@ -573,7 +620,7 @@ const void Class_Settings::Load_Parameters (void) {
 
                 }
 
-                if (Str == this->SaveTag_Update_BanList && UpdateBanList_Founded == false)  {
+                if (Str == this->LoadTag_Update_BanList && UpdateBanList_Founded == false)  {
 
                     Read >> Str;
                     Read >> this->Automatic_Update_BanList;
@@ -581,7 +628,15 @@ const void Class_Settings::Load_Parameters (void) {
 
                 }
 
-                if (Str == this->SaveTag_Url_BanList_Clients && Url_BanList_Clients_Founded == false) {
+                if (Str == this->LoadTag_Display_Money && DisplayMoney_Founded == false) {
+
+                    Read >> Str;
+                    Read >> this->Display_Money;
+                    DisplayMoney_Founded = true;
+
+                }
+
+                if (Str == this->LoadTag_Url_BanList_Clients && Url_BanList_Clients_Founded == false) {
 
                     Read >> Str;
                     Read >> this->Url_BanList_Clients;
@@ -589,7 +644,7 @@ const void Class_Settings::Load_Parameters (void) {
 
                 }
 
-                if (Str == this->SaveTag_Url_BanList_Workers && Url_BanList_Workers_Founded == false) {
+                if (Str == this->LoadTag_Url_BanList_Workers && Url_BanList_Workers_Founded == false) {
 
                     Read >> Str;
                     Read >> this->Url_BanList_Workers;
@@ -621,6 +676,9 @@ const void Class_Settings::Load_Parameters (void) {
         if (UpdateBanList_Founded == false)
             Exception ("Not found Automatic_Update_BanList in settings file");
 
+        if (DisplayMoney_Founded == false)
+            Exception ("Not found Display_Money in settings file");
+
         if (Url_BanList_Clients_Founded == false)
             Exception ("Not found Url_BanList_Clients in settings file");
 
@@ -629,10 +687,10 @@ const void Class_Settings::Load_Parameters (void) {
 
     ConfigFile_Close (this->Config_Path);
 
-        if (LabsPath_Founded != true || OrderStart_Founded != true || CloseApp_Founded != true || Open_Order_Founded != true || UpdateBanList_Founded != true || Url_BanList_Clients_Founded != true || Url_BanList_Workers_Founded != true)
+        if (LabsPath_Founded != true || OrderStart_Founded != true || CloseApp_Founded != true || Open_Order_Founded != true || UpdateBanList_Founded != true || DisplayMoney_Founded != true || Url_BanList_Clients_Founded != true || Url_BanList_Workers_Founded != true)
             Check_ConfigFile (true);
 
-} // ìåòîä çàãðóçêè ïàðàìåòðîâ ïðèëîæåíèÿ
+} // Ð¼ÐµÑ‚Ð¾Ð´ Ð·Ð°Ð³Ñ€ÑƒÐ·ÐºÐ¸ Ð¿Ð°Ñ€Ð°Ð¼ÐµÑ‚Ñ€Ð¾Ð² Ð¿Ñ€Ð¸Ð»Ð¾Ð¶ÐµÐ½Ð¸Ñ
 
 const void Class_Settings::SaveSettings (const bool UsingDelay) const {
 
@@ -640,13 +698,14 @@ const void Class_Settings::SaveSettings (const bool UsingDelay) const {
 
     std::ofstream Write (this->Config_Path.c_str ());
 
-    Write   << SaveTag_Path_to_Labs << " = " << getLabs_Path () << "\n"
-            << SaveTag_Order_Start << " = " << getAutomatic_Order_Start () << "\n"
-            << SaveTag_Close_Application << " = " << getAutomatic_Close_Application () << "\n"
-            << SaveTag_Open_Order << " = " << getAutomatic_Open_Order () << "\n"
-            << SaveTag_Update_BanList << " = " << getAutomatic_Update_BanList () << "\n"
-            << SaveTag_Url_BanList_Clients << " = " << getUrl_BanList_Clients () << "\n"
-            << SaveTag_Url_BanList_Workers << " = " << getUrl_BanList_Workers ();
+    Write   << this->LoadTag_Path_to_Labs << " = " << getLabs_Path () << "\n"
+            << this->LoadTag_Order_Start << " = " << getAutomatic_Order_Start () << "\n"
+            << this->LoadTag_Close_Application << " = " << getAutomatic_Close_Application () << "\n"
+            << this->LoadTag_Open_Order << " = " << getAutomatic_Open_Order () << "\n"
+            << this->LoadTag_Update_BanList << " = " << getAutomatic_Update_BanList () << "\n"
+            << this->LoadTag_Display_Money << " = " << getDisplay_Money () << "\n"
+            << this->LoadTag_Url_BanList_Clients << " = " << getUrl_BanList_Clients () << "\n"
+            << this->LoadTag_Url_BanList_Workers << " = " << getUrl_BanList_Workers ();
 
     Write.close ();
 
@@ -654,7 +713,7 @@ const void Class_Settings::SaveSettings (const bool UsingDelay) const {
 
         if (UsingDelay == true) {
 
-            printf ("\n\n\nÑîõðàíåíèå èçìåíåíèé ");
+            printf ("\n\n\nÐ¡Ð¾Ñ…Ñ€Ð°Ð½ÐµÐ½Ð¸Ðµ Ð¸Ð·Ð¼ÐµÐ½ÐµÐ½Ð¸Ð¹ ");
 
                 for (unsigned short int i = 0; i < 4; i++) {
 
@@ -665,7 +724,7 @@ const void Class_Settings::SaveSettings (const bool UsingDelay) const {
 
         }
 
-} // ìåòîä ñîõðàíåíèÿ íàñòðîåê
+} // Ð¼ÐµÑ‚Ð¾Ð´ ÑÐ¾Ñ…Ñ€Ð°Ð½ÐµÐ½Ð¸Ñ Ð½Ð°ÑÑ‚Ñ€Ð¾ÐµÐº
 
 const bool Class_Settings::Check_FilePath (const std::string& Path) {
 
@@ -685,6 +744,6 @@ const bool Class_Settings::Check_FilePath (const std::string& Path) {
 
     return true;
 
-} // ìåòîä ïðîâåðêè êîððåêòíîñòè ïóòè ê áàçå çàêàçîâ
+} // Ð¼ÐµÑ‚Ð¾Ð´ Ð¿Ñ€Ð¾Ð²ÐµÑ€ÐºÐ¸ ÐºÐ¾Ñ€Ñ€ÐµÐºÑ‚Ð½Ð¾ÑÑ‚Ð¸ Ð¿ÑƒÑ‚Ð¸ Ðº Ð±Ð°Ð·Ðµ Ð·Ð°ÐºÐ°Ð·Ð¾Ð²
 
 #endif // _settings_class_h_

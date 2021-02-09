@@ -1,4 +1,4 @@
-// Класс клиента
+// РљР»Р°СЃСЃ РєР»РёРµРЅС‚Р°
 
 #pragma once
 
@@ -9,19 +9,20 @@ class Class_Clients {
 
 	private:
 
-        std::string Name; // имя клиента
-		std::string Technology_Name; // название технологии
-		std::string IDE_Name; // название IDE
-		std::string OS_Name; // название операционной системы
-		std::string TypeWork; // наименование типа работы
+        std::string Name; // РёРјСЏ РєР»РёРµРЅС‚Р°
+		std::string Technology_Name; // РЅР°Р·РІР°РЅРёРµ С‚РµС…РЅРѕР»РѕРіРёРё
+		std::string IDE_Name; // РЅР°Р·РІР°РЅРёРµ IDE
+		std::string OS_Name; // РЅР°Р·РІР°РЅРёРµ РѕРїРµСЂР°С†РёРѕРЅРЅРѕР№ СЃРёСЃС‚РµРјС‹
+		std::string TypeWork; // РЅР°РёРјРµРЅРѕРІР°РЅРёРµ С‚РёРїР° СЂР°Р±РѕС‚С‹
 
-		bool MenuFunctional; // базовый функционал для управления меню
-		unsigned short int TasksCount; // количество заданных заданий
-		unsigned short int Available_TasksCount; // количество уже имеющихся в базе заданий для этого клиента
-		unsigned short int MenuItems_Count; // количество пунктов в меню (для функционального управления программой)
+		bool MenuFunctional; // Р±Р°Р·РѕРІС‹Р№ С„СѓРЅРєС†РёРѕРЅР°Р» РґР»СЏ СѓРїСЂР°РІР»РµРЅРёСЏ РјРµРЅСЋ
+		unsigned short int TasksCount; // РєРѕР»РёС‡РµСЃС‚РІРѕ Р·Р°РґР°РЅРЅС‹С… Р·Р°РґР°РЅРёР№
+		unsigned short int Available_TasksCount; // РєРѕР»РёС‡РµСЃС‚РІРѕ СѓР¶Рµ РёРјРµСЋС‰РёС…СЃСЏ РІ Р±Р°Р·Рµ Р·Р°РґР°РЅРёР№ РґР»СЏ СЌС‚РѕРіРѕ РєР»РёРµРЅС‚Р°
+		unsigned short int MenuItems_Count; // РєРѕР»РёС‡РµСЃС‚РІРѕ РїСѓРЅРєС‚РѕРІ РІ РјРµРЅСЋ (РґР»СЏ С„СѓРЅРєС†РёРѕРЅР°Р»СЊРЅРѕРіРѕ СѓРїСЂР°РІР»РµРЅРёСЏ РїСЂРѕРіСЂР°РјРјРѕР№)
 
-		std::vector <std::string> MenuItems_Title; // вектор заголовков к пунктам меню
-		std::vector <int> Order_Costs; // стоимость каждой задачи по отдельности
+		std::vector <std::string> MenuItems_Title; // РІРµРєС‚РѕСЂ Р·Р°РіРѕР»РѕРІРєРѕРІ Рє РїСѓРЅРєС‚Р°Рј РјРµРЅСЋ
+		std::vector <int> Order_Costs; // СЃС‚РѕРёРјРѕСЃС‚СЊ РєР°Р¶РґРѕР№ Р·Р°РґР°С‡Рµ РїРѕ РѕС‚РґРµР»СЊРЅРѕСЃС‚Рё
+		std::vector <std::string> Keywords; // РєР»СЋС‡РµРІС‹Рµ СЃР»РѕРІР° Рє РєР°Р¶РґРѕР№ Р·Р°РґР°С‡Рµ РїРѕ РѕС‚РґРµР»СЊРЅРѕСЃС‚Рё
 
 	public:
 
@@ -35,7 +36,7 @@ class Class_Clients {
 			this->MenuFunctional = false;
 			this->TasksCount = 0;
 			this->Available_TasksCount = 0;
-			this->MenuItems_Count = 3; // 3 пункта меню по умолчанию
+			this->MenuItems_Count = 3; // 3 РїСѓРЅРєС‚Р° РјРµРЅСЋ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ
 
                 if (this->MenuItems_Title.size () > 0)
                     this->MenuItems_Title.clear ();
@@ -56,13 +57,13 @@ class Class_Clients {
 
 			this->Name = Str;
 
-		} // сеттер для Name
+		} // СЃРµС‚С‚РµСЂ РґР»СЏ Name
 
 		 const std::string getName (void) const {
 
 			return this->Name;
 
-		} // геттер для Name
+		} // РіРµС‚С‚РµСЂ РґР»СЏ Name
 
 	//////////////////////////////////////////////
 
@@ -70,13 +71,13 @@ class Class_Clients {
 
 			this->Technology_Name = Str;
 
-		} // сеттер для Technology_Name
+		} // СЃРµС‚С‚РµСЂ РґР»СЏ Technology_Name
 
 		const std::string getTechnology_Name (void) const {
 
 			return this->Technology_Name;
 
-		} // геттер для Technology_Name
+		} // РіРµС‚С‚РµСЂ РґР»СЏ Technology_Name
 
 	//////////////////////////////////////////////
 
@@ -84,13 +85,13 @@ class Class_Clients {
 
 			this->IDE_Name = Str;
 
-		} // сеттер для setIDE_Name
+		} // СЃРµС‚С‚РµСЂ РґР»СЏ setIDE_Name
 
 		const std::string getIDE_Name (void) const {
 
             return this->IDE_Name;
 
-		} // геттер для IDE_Name
+		} // РіРµС‚С‚РµСЂ РґР»СЏ IDE_Name
 
 	//////////////////////////////////////////////
 
@@ -98,13 +99,13 @@ class Class_Clients {
 
 			this->OS_Name = Str;
 
-		} // сеттер для OS_Name
+		} // СЃРµС‚С‚РµСЂ РґР»СЏ OS_Name
 
 		const std::string getOS_Name (void) const {
 
 			return this->OS_Name;
 
-		} // геттер для OS_Name
+		} // РіРµС‚С‚РµСЂ РґР»СЏ OS_Name
 
 	//////////////////////////////////////////////
 
@@ -112,13 +113,13 @@ class Class_Clients {
 
 			this->TypeWork = Str;
 
-		} // сеттер для TypeWork
+		} // СЃРµС‚С‚РµСЂ РґР»СЏ TypeWork
 
 		const std::string getTypeWork (void) const {
 
 			return this->TypeWork;
 
-		} // геттер для TypeWork
+		} // РіРµС‚С‚РµСЂ РґР»СЏ TypeWork
 
 	//////////////////////////////////////////////
 
@@ -126,13 +127,13 @@ class Class_Clients {
 
 			this->MenuFunctional = Flag;
 
-		} // сеттер для MenuFunctional
+		} // СЃРµС‚С‚РµСЂ РґР»СЏ MenuFunctional
 
 		const bool getMenuFunctional (void) const {
 
 			return this->MenuFunctional;
 
-		} // геттер для MenuFunctional
+		} // РіРµС‚С‚РµСЂ РґР»СЏ MenuFunctional
 
 	//////////////////////////////////////////////
 
@@ -140,13 +141,13 @@ class Class_Clients {
 
 			this->TasksCount = Number;
 
-		} // сеттер для TasksCount
+		} // СЃРµС‚С‚РµСЂ РґР»СЏ TasksCount
 
 		const unsigned short int getTasksCount (void) const {
 
 			return this->TasksCount;
 
-		} // геттер для TasksCount
+		} // РіРµС‚С‚РµСЂ РґР»СЏ TasksCount
 
 	//////////////////////////////////////////////
 
@@ -154,13 +155,13 @@ class Class_Clients {
 
 			this->Available_TasksCount = Number;
 
-		} // сеттер для Available_TasksCount
+		} // СЃРµС‚С‚РµСЂ РґР»СЏ Available_TasksCount
 
 		const unsigned short int getAvailable_TasksCount (void) const {
 
 			return this->Available_TasksCount;
 
-		} // геттер для Available_TasksCount
+		} // РіРµС‚С‚РµСЂ РґР»СЏ Available_TasksCount
 
     //////////////////////////////////////////////
 
@@ -168,13 +169,13 @@ class Class_Clients {
 
 			this->MenuItems_Count = Number;
 
-		} // сеттер для MenuItems_Count
+		} // СЃРµС‚С‚РµСЂ РґР»СЏ MenuItems_Count
 
 		const unsigned short int getMenuItems_Count (void) const {
 
 			return this->MenuItems_Count;
 
-		} // геттер для MenuItems_Count
+		} // РіРµС‚С‚РµСЂ РґР»СЏ MenuItems_Count
 
 	//////////////////////////////////////////////
 
@@ -182,37 +183,55 @@ class Class_Clients {
 
             this->MenuItems_Title.push_back (Str);
 
-        } // сеттер для MenuItems_Title
+        } // СЃРµС‚С‚РµСЂ РґР»СЏ MenuItems_Title
 
         const std::string getMenuItems_Title (const unsigned short int Index) const {
 
             return this->MenuItems_Title[Index];
 
-        } // геттер для MenuItems_Title
+        } // РіРµС‚С‚РµСЂ РґР»СЏ MenuItems_Title
 
         const void Clear_MenuItems_Title (void) {
 
             this->MenuItems_Title.clear ();
 
-        } // clear для MenuItems_Title
+        } // clear РґР»СЏ MenuItems_Title
 
         const void setOrder_Costs (const unsigned short int Sum) {
 
             this->Order_Costs.push_back (Sum);
 
-        } // сеттер для Order_Costs
+        } // СЃРµС‚С‚РµСЂ РґР»СЏ Order_Costs
 
         const int getOrder_Costs (const unsigned short int Index) const {
 
             return this->Order_Costs[Index];
 
-        } // геттер для Order_Costs
+        } // РіРµС‚С‚РµСЂ РґР»СЏ Order_Costs
 
         const void Clear_Order_Costs (void) {
 
             this->Order_Costs.clear ();
 
-        } // clear для Order_Costs
+        } // clear РґР»СЏ Order_Costs
+
+        const void setKeywords (const std::string Str) {
+
+            this->Keywords.push_back (Str);
+
+        } // СЃРµС‚С‚РµСЂ РґР»СЏ Keywords
+
+        const std::string getKeywords (const unsigned short int Index) const {
+
+            return this->Keywords[Index];
+
+        } // РіРµС‚С‚РµСЂ РґР»СЏ Keywords
+
+        const void Clear_Keywords (void) {
+
+            this->Keywords.clear ();
+
+        } // clear РґР»СЏ Keywords
 
 	//////////////////////////////////////////////
 
@@ -229,16 +248,19 @@ class Class_Clients {
 			this->MenuItems_Count = 3;
 
                 if (this->MenuItems_Title.size () > 0)
-                    this->MenuItems_Title.clear ();
+                    Clear_MenuItems_Title ();
 
                 for (unsigned short int i = 0; i < this->MenuItems_Count; i++)
                     this->MenuItems_Title.push_back ("");
 
                 if (this->Order_Costs.size () > 0)
-                    Order_Costs.clear ();
+                    Clear_Order_Costs ();
 
-        } // очистка параметров клиента
+                if (this->Keywords.size () > 0)
+                    Clear_Keywords ();
 
-}; // класс данных о вводимом клиенте
+        } // РѕС‡РёСЃС‚РєР° РїР°СЂР°РјРµС‚СЂРѕРІ РєР»РёРµРЅС‚Р°
+
+}; // РєР»Р°СЃСЃ РґР°РЅРЅС‹С… Рѕ РІРІРѕРґРёРјРѕРј РєР»РёРµРЅС‚Рµ
 
 #endif // _client_class_h_

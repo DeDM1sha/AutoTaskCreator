@@ -1,4 +1,4 @@
-// Модуль-хранилище всех дополнительных общих глобальных функций для проекта
+// РњРѕРґСѓР»СЊ-С…СЂР°РЅРёР»РёС‰Рµ РІСЃРµС… РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹С… РѕР±С‰РёС… РіР»РѕР±Р°Р»СЊРЅС‹С… С„СѓРЅРєС†РёР№ РґР»СЏ РїСЂРѕРµРєС‚Р°
 
 #pragma once
 
@@ -8,7 +8,7 @@
 #include <string.h>
 #include <cstring>
 
-/* Глобальные общие функции */
+/* Р“Р»РѕР±Р°Р»СЊРЅС‹Рµ РѕР±С‰РёРµ С„СѓРЅРєС†РёРё */
 
 const static void Debug (std::string Text, bool Pause = true) {
 
@@ -17,7 +17,7 @@ const static void Debug (std::string Text, bool Pause = true) {
         if (Pause)
             system ("pause");
 
-} // функция для отладки кода с паузой
+} // С„СѓРЅРєС†РёСЏ РґР»СЏ РѕС‚Р»Р°РґРєРё РєРѕРґР° СЃ РїР°СѓР·РѕР№
 
 const static std::string Convert_Int_toString (unsigned short int Number) {
 
@@ -26,7 +26,7 @@ const static std::string Convert_Int_toString (unsigned short int Number) {
 
     return std::string(ConverInt_ToString.str());
 
-} // функция конвертирования из int в string
+} // С„СѓРЅРєС†РёСЏ РєРѕРЅРІРµСЂС‚РёСЂРѕРІР°РЅРёСЏ РёР· int РІ string
 
 const static unsigned short int Convert_String_toInt (std::string Str) {
 
@@ -37,7 +37,13 @@ const static unsigned short int Convert_String_toInt (std::string Str) {
 
     return Number;
 
-} // функция конвертациии из string в int
+} // С„СѓРЅРєС†РёСЏ РєРѕРЅРІРµСЂС‚Р°С†РёРёРё РёР· string РІ int
+
+const static std::string Convert_Bool_toString (const bool& Boolean) {
+
+    return Boolean ? "True" : "False";
+
+} // С„СѓРЅРєС†РёСЏ РєРѕРЅРІРµСЂС‚Р°С†РёРё РёР· С‚РёРїР° bool РІ С‚РёРї std::string
 
 const static void Delay (const unsigned short int Time) {
 
@@ -45,7 +51,7 @@ const static void Delay (const unsigned short int Time) {
 
 		while (clock () < end_time);
 
-} // функция задержки
+} // С„СѓРЅРєС†РёСЏ Р·Р°РґРµСЂР¶РєРё
 
 const static void Show_Text_Output (const std::string Text) {
 
@@ -55,13 +61,13 @@ const static void Show_Text_Output (const std::string Text) {
 
 	SetConsoleTextAttribute (GetStdHandle (STD_OUTPUT_HANDLE), (WORD) ((0 << 4) | 10));
 
-} // функция для отображения заданной строки другим цветом
+} // С„СѓРЅРєС†РёСЏ РґР»СЏ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ Р·Р°РґР°РЅРЅРѕР№ СЃС‚СЂРѕРєРё РґСЂСѓРіРёРј С†РІРµС‚РѕРј
 
 const static void Show_Number_Output (const unsigned short int& Number) {
 
     Show_Text_Output (Convert_Int_toString (Number));
 
-} // функция для отображения заданного числа другим цветом
+} // С„СѓРЅРєС†РёСЏ РґР»СЏ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ Р·Р°РґР°РЅРЅРѕРіРѕ С‡РёСЃР»Р° РґСЂСѓРіРёРј С†РІРµС‚РѕРј
 
 const static std::string Show_Text_Input (std::string ErrorText, const bool Show_ErrorText_AtStart) {
 
@@ -75,18 +81,18 @@ const static std::string Show_Text_Input (std::string ErrorText, const bool Show
         while (true) {
 
                 for (unsigned short int i = 0; i < StrokeSize; i++)
-                    Stroke[i] = '\0'; // очистка строки от мусора
+                    Stroke[i] = '\0'; // РѕС‡РёСЃС‚РєР° СЃС‚СЂРѕРєРё РѕС‚ РјСѓСЃРѕСЂР°
 
             SetConsoleTextAttribute (GetStdHandle (STD_OUTPUT_HANDLE), (WORD) ((0 << 4) | 11));
 
-            fflush (stdin); // очистка потока ввода
-            fgets (Stroke, StrokeSize, stdin); // считываем всю строку с пробелами
+            fflush (stdin); // РѕС‡РёСЃС‚РєР° РїРѕС‚РѕРєР° РІРІРѕРґР°
+            fgets (Stroke, StrokeSize, stdin); // СЃС‡РёС‚С‹РІР°РµРј РІСЃСЋ СЃС‚СЂРѕРєСѓ СЃ РїСЂРѕР±РµР»Р°РјРё
 
             SetConsoleTextAttribute (GetStdHandle (STD_OUTPUT_HANDLE), (WORD) ((0 << 4) | 10));
 
-            std::string Temp = std::string (Stroke); // инициализируем строку типа string, в нее закидываем всю строку Stroke
+            std::string Temp = std::string (Stroke); // РёРЅРёС†РёР°Р»РёР·РёСЂСѓРµРј СЃС‚СЂРѕРєСѓ С‚РёРїР° string, РІ РЅРµРµ Р·Р°РєРёРґС‹РІР°РµРј РІСЃСЋ СЃС‚СЂРѕРєСѓ Stroke
 
-            Temp.erase (Temp.length () - 1, Temp.length ()); // стираем всю оставшуюся ненужную часть строки (все табы, лишние пробелы)
+            Temp.erase (Temp.length () - 1, Temp.length ()); // СЃС‚РёСЂР°РµРј РІСЃСЋ РѕСЃС‚Р°РІС€СѓСЋСЃСЏ РЅРµРЅСѓР¶РЅСѓСЋ С‡Р°СЃС‚СЊ СЃС‚СЂРѕРєРё (РІСЃРµ С‚Р°Р±С‹, Р»РёС€РЅРёРµ РїСЂРѕР±РµР»С‹)
 
                 if (Temp.length () > 0) {
 
@@ -102,11 +108,11 @@ const static std::string Show_Text_Input (std::string ErrorText, const bool Show
 
     return Str;
 
-} // функция для отображения вводимых данных другим цветом
-  // * первым аргументом выступает строка, которая будет выводиться в случае неверного ввода,
-  // для повторного запуска бесконечного цикла на ввод
-  // * второй аргумент отвечает за то, чтобы входная строка (первого аргумента) - отобразилась в самом начале,
-  // не дожидаясь неверного ввода (задавая тем самым текстовое поле-описание для пользователя при вводе)
+} // С„СѓРЅРєС†РёСЏ РґР»СЏ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ РІРІРѕРґРёРјС‹С… РґР°РЅРЅС‹С… РґСЂСѓРіРёРј С†РІРµС‚РѕРј
+  // * РїРµСЂРІС‹Рј Р°СЂРіСѓРјРµРЅС‚РѕРј РІС‹СЃС‚СѓРїР°РµС‚ СЃС‚СЂРѕРєР°, РєРѕС‚РѕСЂР°СЏ Р±СѓРґРµС‚ РІС‹РІРѕРґРёС‚СЊСЃСЏ РІ СЃР»СѓС‡Р°Рµ РЅРµРІРµСЂРЅРѕРіРѕ РІРІРѕРґР°,
+  // РґР»СЏ РїРѕРІС‚РѕСЂРЅРѕРіРѕ Р·Р°РїСѓСЃРєР° Р±РµСЃРєРѕРЅРµС‡РЅРѕРіРѕ С†РёРєР»Р° РЅР° РІРІРѕРґ
+  // * РІС‚РѕСЂРѕР№ Р°СЂРіСѓРјРµРЅС‚ РѕС‚РІРµС‡Р°РµС‚ Р·Р° С‚Рѕ, С‡С‚РѕР±С‹ РІС…РѕРґРЅР°СЏ СЃС‚СЂРѕРєР° (РїРµСЂРІРѕРіРѕ Р°СЂРіСѓРјРµРЅС‚Р°) - РѕС‚РѕР±СЂР°Р·РёР»Р°СЃСЊ РІ СЃР°РјРѕРј РЅР°С‡Р°Р»Рµ,
+  // РЅРµ РґРѕР¶РёРґР°СЏСЃСЊ РЅРµРІРµСЂРЅРѕРіРѕ РІРІРѕРґР° (Р·Р°РґР°РІР°СЏ С‚РµРј СЃР°РјС‹Рј С‚РµРєСЃС‚РѕРІРѕРµ РїРѕР»Рµ-РѕРїРёСЃР°РЅРёРµ РґР»СЏ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ РїСЂРё РІРІРѕРґРµ)
 
 const static void CenterText (const std::string Text) {
 
@@ -118,13 +124,40 @@ const static void CenterText (const std::string Text) {
 
     printf ("%s", Text.c_str());
 
-} // функция центирования текста на экране
+} // С„СѓРЅРєС†РёСЏ С†РµРЅС‚РёСЂРѕРІР°РЅРёСЏ С‚РµРєСЃС‚Р° РЅР° СЌРєСЂР°РЅРµ
 
 const static void cls (void) {
 
     system ("cls");
 
-} // функция очистки экрана
+} // С„СѓРЅРєС†РёСЏ РѕС‡РёСЃС‚РєРё СЌРєСЂР°РЅР°
+
+const static std::string String_DeleteSpaces (std::string Stroke) {
+
+        if (Stroke[Stroke.length () - 1] == ' ' ||  Stroke[Stroke.length () - 1] == '\0') {
+
+                std::string Temp = Stroke;
+                Stroke = "\0";
+
+                    for (unsigned short int i = 0; i < Temp.length () - 1; i++)
+                        Stroke += Temp[i];
+
+        } // СѓРґР°Р»РµРЅРёРµ РїСЂРѕР±РµР»РѕРІ РІ РєРѕРЅС†Рµ СЃС‚СЂРѕРєРё
+
+        if (Stroke[0] == ' ' || Stroke[0] == '\0') {
+
+            std::string Temp = Stroke;
+            Stroke = "\0";
+
+                    for (unsigned short int i = 1; i < Temp.length (); i++)
+                        Stroke += Temp[i];
+
+
+        } // СѓРґР°Р»РµРЅРёРµ РїСЂРѕР±РµР»РѕРІ РІ РЅР°С‡Р°Р»Рµ СЃС‚СЂРѕРєРё
+
+    return Stroke;
+
+} // С„СѓРЅРєС†РёСЏ СѓРґР°Р»РµРЅРёСЏ РїСЂРѕР±РµР»РѕРІ РёР· СЃС‚СЂРѕРєРё
 
 const static void Exception (const std::string TextError) {
 
@@ -135,13 +168,13 @@ const static void Exception (const std::string TextError) {
 
 	SetConsoleTextAttribute (GetStdHandle (STD_OUTPUT_HANDLE), (WORD) ((0 << 4) | 10));
 
-} // функция Exception - для отображения случившихся ошибок
+} // С„СѓРЅРєС†РёСЏ Exception - РґР»СЏ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ СЃР»СѓС‡РёРІС€РёС…СЃСЏ РѕС€РёР±РѕРє
 
 const static bool Check_Input_ForExit (const std::string& Str) {
 
     bool Flag = false;
 
-        if (Str.length () == 2) { // для служебного слова !q
+        if (Str.length () == 2) { // РґР»СЏ СЃР»СѓР¶РµР±РЅРѕРіРѕ СЃР»РѕРІР° !q
 
             if (Str[0] == '!')
                 if (Str[1] == 'q' || Str[1] == 'Q')
@@ -149,7 +182,7 @@ const static bool Check_Input_ForExit (const std::string& Str) {
 
         }
 
-        else if (Str.length () == 3) { // для служебного слова Esc
+        else if (Str.length () == 3) { // РґР»СЏ СЃР»СѓР¶РµР±РЅРѕРіРѕ СЃР»РѕРІР° Esc
 
             const std::string Small_Esc_Symbols = "esc";
             const std::string Big_Esc_Symbols = "ESC";
@@ -172,7 +205,7 @@ const static bool Check_Input_ForExit (const std::string& Str) {
 
         }
 
-        else if (Str.length () == 4) { // для служебного слова Exit
+        else if (Str.length () == 4) { // РґР»СЏ СЃР»СѓР¶РµР±РЅРѕРіРѕ СЃР»РѕРІР° Exit
 
             const std::string Small_Exit_Symbols = "exit";
             const std::string Big_Exit_Symbols = "EXIT";
@@ -191,7 +224,7 @@ const static bool Check_Input_ForExit (const std::string& Str) {
 
                 }
 
-                if (Flag == false) { // для запасного слова Quit
+                if (Flag == false) { // РґР»СЏ Р·Р°РїР°СЃРЅРѕРіРѕ СЃР»РѕРІР° Quit
 
                     const std::string Small_Quit_Symbols = "quit";
                     const std::string Big_Quit_Symbols = "QUIT";
@@ -216,10 +249,9 @@ const static bool Check_Input_ForExit (const std::string& Str) {
 
         }
 
-
     return false;
 
-} // функция для проверки ввода на строку выхода
+} // С„СѓРЅРєС†РёСЏ РґР»СЏ РїСЂРѕРІРµСЂРєРё РІРІРѕРґР° РЅР° СЃС‚СЂРѕРєСѓ РІС‹С…РѕРґР°
 
 const static bool Check_Input_ForReload (const std::string& Str) {
 
@@ -229,7 +261,7 @@ const static bool Check_Input_ForReload (const std::string& Str) {
 
     return false;
 
-} // функция для проверки ввода на строку перезагрузки
+} // С„СѓРЅРєС†РёСЏ РґР»СЏ РїСЂРѕРІРµСЂРєРё РІРІРѕРґР° РЅР° СЃС‚СЂРѕРєСѓ РїРµСЂРµР·Р°РіСЂСѓР·РєРё
 
 const static void Show_Text_In_Right_Corner (const std::string Str) {
 
@@ -246,27 +278,27 @@ const static void Show_Text_In_Right_Corner (const std::string Str) {
 
     std::cout << Str << "\n";
 
-} // функция для отображения текста в правом углу
+} // С„СѓРЅРєС†РёСЏ РґР»СЏ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ С‚РµРєСЃС‚Р° РІ РїСЂР°РІРѕРј СѓРіР»Сѓ
 
 const static void Show_Text_ForExit (void) {
 
     Show_Text_In_Right_Corner ("Input \"Exit\" / \"Esc\" / \"!q\" for quit");
 
-} // функция для отображения подсказки для выхода из меню
+} // С„СѓРЅРєС†РёСЏ РґР»СЏ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ РїРѕРґСЃРєР°Р·РєРё РґР»СЏ РІС‹С…РѕРґР° РёР· РјРµРЅСЋ
 
 const static bool IsNumber (const std::string& Str) {
 
         for (unsigned short int i = 0; i < Str.length(); i++) {
 
-            if (Str[i] != 45) // Проверка на знак минус
+            if (Str[i] != 45) // РџСЂРѕРІРµСЂРєР° РЅР° Р·РЅР°Рє РјРёРЅСѓСЃ
                 if ((Str[i] < 48) || (Str[i] > 57))
                     return false;
 
-        } // Если в строке только цифровые символы значит это число
+        } // Р•СЃР»Рё РІ СЃС‚СЂРѕРєРµ С‚РѕР»СЊРєРѕ С†РёС„СЂРѕРІС‹Рµ СЃРёРјРІРѕР»С‹ Р·РЅР°С‡РёС‚ СЌС‚Рѕ С‡РёСЃР»Рѕ
 
     return true;
 
-} // функция проверки является ли строка - числом
+} // С„СѓРЅРєС†РёСЏ РїСЂРѕРІРµСЂРєРё СЏРІР»СЏРµС‚СЃСЏ Р»Рё СЃС‚СЂРѕРєР° - С‡РёСЃР»РѕРј
 
 const static void GetNormal_Number_Value (unsigned short int *Count, std::string& Stroke, const std::string InputText, const short int LowerLimit, const short int UpperLimit) {
 
@@ -286,9 +318,9 @@ const static void GetNormal_Number_Value (unsigned short int *Count, std::string
             if (*Count > LowerLimit && *Count < UpperLimit)
                 break;
 
-    } // проверка на дурака при вводе числа
+    } // РїСЂРѕРІРµСЂРєР° РЅР° РґСѓСЂР°РєР° РїСЂРё РІРІРѕРґРµ С‡РёСЃР»Р°
 
-} // функция для получения от пользователя корректного ввода числа
+} // С„СѓРЅРєС†РёСЏ РґР»СЏ РїРѕР»СѓС‡РµРЅРёСЏ РѕС‚ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ РєРѕСЂСЂРµРєС‚РЅРѕРіРѕ РІРІРѕРґР° С‡РёСЃР»Р°
 
 const static std::vector <std::string> GetVector_ReverseNames (const std::string InputName) {
 
@@ -312,12 +344,12 @@ const static std::vector <std::string> GetVector_ReverseNames (const std::string
 
         }
 
-    NamesVector.push_back (FirstName + " " + SecondName);
-    NamesVector.push_back (SecondName + " " + FirstName);
+    NamesVector.push_back (String_DeleteSpaces(FirstName + " " + SecondName));
+    NamesVector.push_back (String_DeleteSpaces(SecondName + " " + FirstName));
 
     return NamesVector;
 
-} // функция для получения двух вариантов входного имени (клиента) - исходного и реверсивного
+} // С„СѓРЅРєС†РёСЏ РґР»СЏ РїРѕР»СѓС‡РµРЅРёСЏ РґРІСѓС… РІР°СЂРёР°РЅС‚РѕРІ РІС…РѕРґРЅРѕРіРѕ РёРјРµРЅРё (РєР»РёРµРЅС‚Р°) - РёСЃС…РѕРґРЅРѕРіРѕ Рё СЂРµРІРµСЂСЃРёРІРЅРѕРіРѕ
 
 #include "../classes/settings_class.h"
 
@@ -326,11 +358,11 @@ const static std::string ToUpper_FirstSymbols_ClientNames (const std::string Inp
     const int CountRus_Letters = 33;
     const int CountEng_Letters = 26;
 
-    char Rus_Small_Letters [CountRus_Letters] = {'а', 'б', 'в', 'г', 'д', 'е', 'ё', 'ж', 'з', 'и', 'й', 'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ', 'ъ', 'ы', 'ь', 'э', 'ю', 'я'}; // строчные буквы кириллицы
-    char Rus_Big_Letters [CountRus_Letters] = {'А', 'Б', 'В', 'Г', 'Д', 'Е', 'Ё', 'Ж', 'З', 'И', 'Й', 'К', 'Л', 'М', 'Н', 'О', 'П', 'Р', 'С', 'Т', 'У', 'Ф', 'Х', 'Ц', 'Ч', 'Ш', 'Щ', 'Ъ', 'Ы', 'Ь', 'Э', 'Ю', 'Я'}; // прописные буквы кириллицы
+    char Rus_Small_Letters [CountRus_Letters] = {'Р°', 'Р±', 'РІ', 'Рі', 'Рґ', 'Рµ', 'С‘', 'Р¶', 'Р·', 'Рё', 'Р№', 'Рє', 'Р»', 'Рј', 'РЅ', 'Рѕ', 'Рї', 'СЂ', 'СЃ', 'С‚', 'Сѓ', 'С„', 'С…', 'С†', 'С‡', 'С€', 'С‰', 'СЉ', 'С‹', 'СЊ', 'СЌ', 'СЋ', 'СЏ'}; // СЃС‚СЂРѕС‡РЅС‹Рµ Р±СѓРєРІС‹ РєРёСЂРёР»Р»РёС†С‹
+    char Rus_Big_Letters [CountRus_Letters] = {'Рђ', 'Р‘', 'Р’', 'Р“', 'Р”', 'Р•', 'РЃ', 'Р–', 'Р—', 'Р', 'Р™', 'Рљ', 'Р›', 'Рњ', 'Рќ', 'Рћ', 'Рџ', 'Р ', 'РЎ', 'Рў', 'РЈ', 'Р¤', 'РҐ', 'Р¦', 'Р§', 'РЁ', 'Р©', 'РЄ', 'Р«', 'Р¬', 'Р­', 'Р®', 'РЇ'}; // РїСЂРѕРїРёСЃРЅС‹Рµ Р±СѓРєРІС‹ РєРёСЂРёР»Р»РёС†С‹
 
-    char Eng_Small_Letters [CountEng_Letters] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'}; // строчные буквы латиницы
-    char Eng_Big_Letters [CountEng_Letters] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'}; // прописные буквы латиницы
+    char Eng_Small_Letters [CountEng_Letters] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'}; // СЃС‚СЂРѕС‡РЅС‹Рµ Р±СѓРєРІС‹ Р»Р°С‚РёРЅРёС†С‹
+    char Eng_Big_Letters [CountEng_Letters] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'}; // РїСЂРѕРїРёСЃРЅС‹Рµ Р±СѓРєРІС‹ Р»Р°С‚РёРЅРёС†С‹
 
     std::string FirstName = "\0";
     std::string SecondName = "\0";
@@ -404,19 +436,11 @@ const static std::string ToUpper_FirstSymbols_ClientNames (const std::string Inp
 
     std::string ResultName = FirstName + " " + SecondName;
 
-        if (ResultName[ResultName.length () - 1] == ' ' ||  ResultName[ResultName.length () - 1] == '\0') {
-
-            std::string Temp = ResultName;
-            ResultName = "\0";
-
-                for (unsigned short int i = 0; i < Temp.length () - 1; i++)
-                    ResultName += Temp[i];
-
-        }
+    ResultName = String_DeleteSpaces (ResultName);
 
     return ResultName;
 
-} // функция, возвращающая полное имя клиента с учетом регистра (заглавные буквы имени/фамилии)
+} // С„СѓРЅРєС†РёСЏ, РІРѕР·РІСЂР°С‰Р°СЋС‰Р°СЏ РїРѕР»РЅРѕРµ РёРјСЏ РєР»РёРµРЅС‚Р° СЃ СѓС‡РµС‚РѕРј СЂРµРіРёСЃС‚СЂР° (Р·Р°РіР»Р°РІРЅС‹Рµ Р±СѓРєРІС‹ РёРјРµРЅРё/С„Р°РјРёР»РёРё)
 
 const static std::string CheckClientExist_ReturnTruthName (const std::string InputName, const Class_Settings& Settings) {
 
@@ -436,13 +460,17 @@ const static std::string CheckClientExist_ReturnTruthName (const std::string Inp
 
         }
 
-    return Settings.getERROR_Message_ClientExist (); // возвращение сообщение об ошибки (не существует такого клиента)
+    return Settings.getERROR_Message_ClientExist (); // РІРѕР·РІСЂР°С‰РµРЅРёРµ СЃРѕРѕР±С‰РµРЅРёРµ РѕР± РѕС€РёР±РєРё (РЅРµ СЃСѓС‰РµСЃС‚РІСѓРµС‚ С‚Р°РєРѕРіРѕ РєР»РёРµРЅС‚Р°)
 
-} // функция для возврата правильного написания имени клиента (исходя из 3 вариантов: 1-ый (исходный), 2-ой (наоборот), 3-ий (ошибка))
+} // С„СѓРЅРєС†РёСЏ РґР»СЏ РІРѕР·РІСЂР°С‚Р° РїСЂР°РІРёР»СЊРЅРѕРіРѕ РЅР°РїРёСЃР°РЅРёСЏ РёРјРµРЅРё РєР»РёРµРЅС‚Р° (РёСЃС…РѕРґСЏ РёР· 3 РІР°СЂРёР°РЅС‚РѕРІ: 1-С‹Р№ (РёСЃС…РѕРґРЅС‹Р№), 2-РѕР№ (РЅР°РѕР±РѕСЂРѕС‚), 3-РёР№ (РѕС€РёР±РєР°))
 
-const static std::string GetExist_ClientName (std::string InputName, const Class_Settings& Settings) {
+const static std::string GetExist_ClientName (std::string InputName, const Class_Settings& Settings, const bool CreateNewOrder = false) {
 
     InputName = ToUpper_FirstSymbols_ClientNames (InputName);
+
+        if (CreateNewOrder == true)
+            return InputName;
+
     std::vector <std::string> NamesVector = GetVector_ReverseNames (InputName);
 
         for (unsigned short int i = 0; i < NamesVector.size (); i++)
@@ -451,11 +479,29 @@ const static std::string GetExist_ClientName (std::string InputName, const Class
         if (NamesVector[0] == Settings.getERROR_Message_ClientExist () && NamesVector[1] == Settings.getERROR_Message_ClientExist ())
             return Settings.getERROR_Message_ClientExist ();
 
-        else if (NamesVector[0] == Settings.getERROR_Message_ClientExist ())
-            return NamesVector[1];
+        else if (NamesVector[1] == Settings.getERROR_Message_ClientExist ())
+            return NamesVector[0];
 
-    return NamesVector[0];
+    return NamesVector[1];
 
-} // функция для получения существующего клиента в базе (если имя-фамилию ввели в обратном порядке, в случае полного отсутствия - вернет исходное введенное)
+} // С„СѓРЅРєС†РёСЏ РґР»СЏ РїРѕР»СѓС‡РµРЅРёСЏ СЃСѓС‰РµСЃС‚РІСѓСЋС‰РµРіРѕ РєР»РёРµРЅС‚Р° РІ Р±Р°Р·Рµ (РµСЃР»Рё РёРјСЏ-С„Р°РјРёР»РёСЋ РІРІРµР»Рё РІ РѕР±СЂР°С‚РЅРѕРј РїРѕСЂСЏРґРєРµ, РІ СЃР»СѓС‡Р°Рµ РїРѕР»РЅРѕРіРѕ РѕС‚СЃСѓС‚СЃС‚РІРёСЏ - РІРµСЂРЅРµС‚ РёСЃС…РѕРґРЅРѕРµ РІРІРµРґРµРЅРЅРѕРµ)
+
+const static std::string Get_DateToday (void) {
+
+    const std::string PathFile_Date = "C:\\Windows\\Temp\\date.txt"; // РїСѓС‚СЊ Рє С„Р°Р№Р»Сѓ СЃ СЃРµРіРѕРґРЅСЏС€РЅРµР№ РґР°С‚РѕР№
+    std::string GetDate_Command = "date /T > " + PathFile_Date; // РєРѕРјР°РЅРґР° РёР·РІР»РµС‡РµРЅРёРµ РґР°С‚С‹
+
+    system (GetDate_Command.c_str());
+    std::string DateToday = "\0";
+
+    std::ifstream Read (PathFile_Date.c_str());
+    Read >> DateToday;
+    Read.close ();
+
+    remove (PathFile_Date.c_str());
+
+    return DateToday;
+
+} // С„СѓРЅРєС†РёСЏ РґР»СЏ РїРѕР»СѓС‡РµРЅРёСЏ РґР°С‚С‹ СЃРµРіРѕРґРЅСЏС‰РЅРµРіРѕ РґРЅСЏ
 
 #endif // _additional_functions_h_*/
