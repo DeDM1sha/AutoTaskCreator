@@ -1,20 +1,19 @@
-// Модуль-хранилище всех дополнительных общих глобальных функций для проекта
+/* Модуль-хранилище всех дополнительных общих глобальных функций для проекта
 
+    Доступ ко всем нижеописанным функциям имеется из каждого файла и модуля.
+    Подключается ежиножды в main файле, и используется во всем проекте
+
+*/
 #pragma once
 
 #ifndef _additional_functions_h_
 #define _additional_functions_h_
 
-#include <string.h>
-#include <cstring>
-
-/* Глобальные общие функции */
-
 const static void Debug (std::string Text, bool Pause = true) {
 
-    printf ("%s\n", Text.c_str());
+    printf ("%s\n", Text.c_str()); // отображение текста дебагинга
 
-        if (Pause)
+        if (Pause) // пауза по необходимости, по умолчанию true
             system ("pause");
 
 } // функция для отладки кода с паузой
@@ -51,7 +50,7 @@ const static void Delay (const unsigned short int Time) {
 
 		while (clock () < end_time);
 
-} // функция задержки
+} // функция задержки, где Time указывается в микросекундах (1000 мс - 1с)
 
 const static void Show_Text_Output (const std::string Text) {
 
@@ -69,6 +68,15 @@ const static void Show_Number_Output (const unsigned short int& Number) {
 
 } // функция для отображения заданного числа другим цветом
 
+/*
+
+//  первым аргументом выступает строка, которая будет выводиться в случае неверного ввод
+    для повторного запуска бесконечного цикла на ввод
+
+//  второй аргумент отвечает за то, чтобы входная строка (первого аргумента) - отобразилась в самом начале,
+    не дожидаясь неверного ввода (задавая тем самым текстовое поле-описание для пользователя при вводе)
+
+*/
 const static std::string Show_Text_Input (std::string ErrorText, const bool Show_ErrorText_AtStart) {
 
     const unsigned short int StrokeSize = 128;
@@ -109,10 +117,6 @@ const static std::string Show_Text_Input (std::string ErrorText, const bool Show
     return Str;
 
 } // функция для отображения вводимых данных другим цветом
-  // * первым аргументом выступает строка, которая будет выводиться в случае неверного ввода,
-  // для повторного запуска бесконечного цикла на ввод
-  // * второй аргумент отвечает за то, чтобы входная строка (первого аргумента) - отобразилась в самом начале,
-  // не дожидаясь неверного ввода (задавая тем самым текстовое поле-описание для пользователя при вводе)
 
 const static void CenterText (const std::string Text) {
 
@@ -170,6 +174,14 @@ const static void Exception (const std::string TextError) {
 
 } // функция Exception - для отображения случившихся ошибок
 
+/*
+
+    Вспомогатель ф-ия для перехвата веденного стоп-слова при вводе данных. Возвращает:
+        *true - в случае если было введено стоп-слово (в нашем случае Exit, или !q, или Esc)
+        *false - оставляем все как есть
+
+*/
+
 const static bool Check_Input_ForExit (const std::string& Str) {
 
     bool Flag = false;
@@ -186,10 +198,11 @@ const static bool Check_Input_ForExit (const std::string& Str) {
 
             const std::string Small_Esc_Symbols = "esc";
             const std::string Big_Esc_Symbols = "ESC";
+            const std::string Normal_Esc_Symbols = "Esc";
 
                 for (unsigned short int i = 0; i < Str.length (); i++) {
 
-                    if (Str[i] == Small_Esc_Symbols[i] || Str[i] == Big_Esc_Symbols[i])
+                    if (Str[i] == Small_Esc_Symbols[i] || Str[i] == Big_Esc_Symbols[i] || Str[i] == Normal_Esc_Symbols[i])
                         Flag = true;
 
                     else {
@@ -209,10 +222,11 @@ const static bool Check_Input_ForExit (const std::string& Str) {
 
             const std::string Small_Exit_Symbols = "exit";
             const std::string Big_Exit_Symbols = "EXIT";
+            const std::string Normal_Exit_Symbols = "Exit";
 
                 for (unsigned short int i = 0; i < Str.length (); i++) {
 
-                    if (Str[i] == Small_Exit_Symbols[i] || Str[i] == Big_Exit_Symbols[i])
+                    if (Str[i] == Small_Exit_Symbols[i] || Str[i] == Big_Exit_Symbols[i] || Normal_Exit_Symbols[i])
                         Flag = true;
 
                     else {
@@ -228,10 +242,11 @@ const static bool Check_Input_ForExit (const std::string& Str) {
 
                     const std::string Small_Quit_Symbols = "quit";
                     const std::string Big_Quit_Symbols = "QUIT";
+                    const std::string Normal_Quit_Symbols = "Quit";
 
                         for (unsigned short int i = 0; i < Str.length (); i++) {
 
-                            if (Str[i] == Small_Quit_Symbols[i] || Str[i] == Big_Quit_Symbols[i])
+                            if (Str[i] == Small_Quit_Symbols[i] || Str[i] == Big_Quit_Symbols[i] || Str[i] == Normal_Quit_Symbols[i])
                                 Flag = true;
 
                             else {

@@ -69,7 +69,6 @@ class Class_Statistics {
 
     //////////////////////////////////////////////
 
-
 		const unsigned short int getTotalNumber_ClientsInDB_Count (void) const {
 
 			return this->TotalNumber_ClientsInDB_Count;

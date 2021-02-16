@@ -46,8 +46,6 @@ const bool Class_Formation_Order::CheckFolder_Exists (const std::string FolderPa
         if (Result == true)
             remove (InputPath.c_str ());
 
-    Debug ("Существует?: " + Convert_Bool_toString(Result));
-
     return Result;
 
 } // метод проверки существовании директории (папки)
@@ -58,8 +56,6 @@ void Class_Formation_Order::Create_NewOrder (const Class_Clients& Client, const 
 
         if (CheckFolder_Exists (Settings.getLabs_Path () + "\\" + Client.getName ()) == false)
             Exception ("Client folder didn`t created");
-
-    Debug ("Folder path: " + Settings.getLabs_Path () + "\\" + Client.getName ());
 
     CodePath = Create_Source_Code (Client, Settings); // создание исходников
 
