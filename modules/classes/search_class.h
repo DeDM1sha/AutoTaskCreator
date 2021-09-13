@@ -1,4 +1,4 @@
-// РљР»Р°СЃСЃ РїРѕРёСЃРєР° (РєР»РёРµРЅС‚РѕРІ, Р·Р°РєР°Р·РѕРІ Рё С‚.Рґ.)
+// Класс поиска (клиентов, заказов и т.д.)
 
 #pragma once
 
@@ -7,10 +7,10 @@
 
 const static void Continue (void) {
 
-    CenterText ("Р”Р»СЏ РїСЂРѕРґРѕР»Р¶РµРЅРёСЏ РЅР°Р¶РјРёС‚Рµ Р»СЋР±СѓСЋ РєР»Р°РІРёС€Сѓ...");
+    CenterText ("Для продолжения нажмите любую клавишу...");
     getch ();
 
-} // С„СѓРЅРєС†РёСЏ РѕР¶РёРґР°РЅРёСЏ РЅР°Р¶Р°С‚РёСЏ РґР»СЏ РїСЂРѕРґРѕР»Р¶Р»РµРЅРёСЏ
+} // функция ожидания нажатия для продолжления
 
 class Class_Search {
 
@@ -30,7 +30,7 @@ class Class_Search {
 
         const void Search_Client (const std::string, const Class_Settings&);
 
-}; // РєР»Р°СЃСЃ РїРѕРёСЃРєР°
+}; // класс поиска
 
 const void Class_Search::Search_Client (std::string InputName, const Class_Settings& Settings) {
 
@@ -38,7 +38,7 @@ const void Class_Search::Search_Client (std::string InputName, const Class_Setti
     Debug ("Finally Name: " + ClientName);
         if (ClientName == Settings.getERROR_Message_ClientExist ()) {
 
-            Show_Text_Output ("РўР°РєРѕРіРѕ РєР»РёРµРЅС‚Р° РЅРµС‚!");
+            Show_Text_Output ("Такого клиента нет!");
             Continue ();
 
         }
@@ -48,6 +48,6 @@ const void Class_Search::Search_Client (std::string InputName, const Class_Setti
 
 
 
-} // РјРµС‚РѕРґ РїРѕРёСЃРєР° РєР»РёРµРЅС‚Р° РїРѕ РёРјРµРЅРё
+} // метод поиска клиента по имени
 
 #endif // _search_class_h

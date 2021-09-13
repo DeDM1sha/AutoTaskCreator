@@ -1,4 +1,4 @@
-// РљР»Р°СЃСЃ С„РѕСЂРјРёСЂРѕРІР°РЅРёСЏ Р·Р°РєР°Р·Р°
+// Класс формирования заказа
 
 #pragma once
 
@@ -9,8 +9,8 @@ class Class_Formation_Order {
 
 	private:
 
-        bool FolderExists; // СЃСѓС‰РµСЃС‚РІСѓРµС‚ Р»Рё РґРёСЂРµРєС‚РѕСЂРёСЏ (РїР°РїРєР°) РєР»РёРµРЅС‚Р°
-        std::string CodePath; // РїСѓС‚СЊ Рє СЃРѕР·РґР°РІР°РµРјРѕРјСѓ РёСЃС…РѕРґРЅРёРєСѓ
+        bool FolderExists; // существует ли директория (папка) клиента
+        std::string CodePath; // путь к создаваемому исходнику
 
 	public:
 
@@ -29,7 +29,7 @@ class Class_Formation_Order {
         const std::string Create_Source_Code (const Class_Clients&, const Class_Settings&);
         const void SendFiles_To_ClientFolders (const Class_Clients&, const Class_Settings&, const std::string&, const bool);
 
-}; // РєР»Р°СЃСЃ С„РѕСЂРјРёСЂРѕРІР°РЅРёСЏ Р·Р°РєР°Р·Р°
+}; // класс формирования заказа
 
 const bool Class_Formation_Order::CheckFolder_Exists (const std::string FolderPath) {
 
@@ -48,25 +48,25 @@ const bool Class_Formation_Order::CheckFolder_Exists (const std::string FolderPa
 
     return Result;
 
-} // РјРµС‚РѕРґ РїСЂРѕРІРµСЂРєРё СЃСѓС‰РµСЃС‚РІРѕРІР°РЅРёРё РґРёСЂРµРєС‚РѕСЂРёРё (РїР°РїРєРё)
+} // метод проверки существовании директории (папки)
 
 void Class_Formation_Order::Create_NewOrder (const Class_Clients& Client, const Class_Settings& Settings) {
 
-    this->FolderExists = Create_Client_Folder (Client, Settings); // СЃРѕР·РґР°РЅРёРµ РїР°РїРєРё РєР»РёРµРЅС‚Р°, РµСЃР»Рё РїР°РїРєР° СЃСѓС‰РµСЃС‚РІСѓРµС‚, С‚Рѕ false
+    this->FolderExists = Create_Client_Folder (Client, Settings); // создание папки клиента, если папка существует, то false
 
         if (CheckFolder_Exists (Settings.getLabs_Path () + "\\" + Client.getName ()) == false)
             Exception ("Client folder didn`t created");
 
-    CodePath = Create_Source_Code (Client, Settings); // СЃРѕР·РґР°РЅРёРµ РёСЃС…РѕРґРЅРёРєРѕРІ
+    CodePath = Create_Source_Code (Client, Settings); // создание исходников
 
-    SendFiles_To_ClientFolders (Client, Settings, CodePath, &this->FolderExists); // РѕС‚РїСЂР°РІРєР° РёСЃС…РѕРґРЅРёРєРѕРІ РїРѕ РЅРѕРІС‹Рј РїР°РїРєР°Рј СЃ Р·Р°РґР°РЅРёСЏРјРё
+    SendFiles_To_ClientFolders (Client, Settings, CodePath, &this->FolderExists); // отправка исходников по новым папкам с заданиями
 
-} // РјРµС‚РѕРґ СЃРѕР·РґР°РЅРёСЏ РЅРѕРІРѕРіРѕ Р·Р°РєР°Р·Р°
+} // метод создания нового заказа
 
 const bool Class_Formation_Order::Create_Client_Folder (const Class_Clients& Client, const Class_Settings& Settings) {
 
     std::string Path = Settings.getLabs_Path () + "\\" + Client.getName () + "\\CheckFolder.txt";
-    bool FolderExists_Check = true; // РЅР°Р»РёС‡РёРµ СѓР¶Рµ С‚Р°РєРѕР№ РїР°РїРєРё
+    bool FolderExists_Check = true; // наличие уже такой папки
 
         if (CheckFolder_Exists (Settings.getLabs_Path () + "\\" + Client.getName ()) == false) {
 
@@ -76,12 +76,12 @@ const bool Class_Formation_Order::Create_Client_Folder (const Class_Clients& Cli
 
         }
 
-        if (FolderExists_Check) // РµСЃР»Рё СѓР¶Рµ СЃСѓС‰РµСЃС‚РІСѓРµС‚, С‚Рѕ СѓРґР°Р»РёС‚СЊ РїСЂРѕРІРµСЂРѕС‡РЅС‹Р№ С„Р°Р№Р»
+        if (FolderExists_Check) // если уже существует, то удалить проверочный файл
             remove (Path.c_str ());
 
     return FolderExists_Check;
 
-} // РјРµС‚РѕРґ СЃРѕР·РґР°РЅРёСЏ РїР°РїРєРё РґР»СЏ РЅРѕРІРѕРіРѕ РєР»РёРµРЅС‚Р°
+} // метод создания папки для нового клиента
 
 const std::string Class_Formation_Order::Create_Source_Code (const Class_Clients& Client, const Class_Settings& Settings) {
 
@@ -149,7 +149,7 @@ const std::string Class_Formation_Order::Create_Source_Code (const Class_Clients
 				if (Client.getOS_Name () != Settings.getOS_Name_Windows())
 					Code.push ("	//system (\"clear\");\n\n");
 
-			Code.push ("} // С„СѓРЅРєС†РёСЏ РѕС‡РёСЃС‚РєРё СЌРєСЂР°РЅР°\n\n");
+			Code.push ("} // функция очистки экрана\n\n");
 			Code.push ("void DrawLine (void) {\n\n");
 
 				if (Client.getTechnology_Name () == Settings.getTechnology_Name_C ())
@@ -158,14 +158,14 @@ const std::string Class_Formation_Order::Create_Source_Code (const Class_Clients
 				else
 					Code.push ("	cout << \"\\n--------------------------------------\\n\";\n\n");
 
-			Code.push ("} // С„СѓРЅРєС†РёСЏ РѕС‚СЂРёСЃРѕРІРєРё РїСѓРЅРєС‚РёСЂРЅРѕР№ Р»РёРЅРёРё\n\n");
+			Code.push ("} // функция отрисовки пунктирной линии\n\n");
 			Code.push ("void Continue (void) {\n\n");
 
 				if (Client.getTechnology_Name () == Settings.getTechnology_Name_C ())
-					Code.push ("	printf (\"\\nР”Р»СЏ РїСЂРѕРґРѕР»Р¶РµРЅРёСЏ РЅР°Р¶РјРёС‚Рµ Р»СЋР±СѓСЋ РєР»Р°РІРёС€Сѓ... \\n\");\n");
+					Code.push ("	printf (\"\\nДля продолжения нажмите любую клавишу... \\n\");\n");
 
 				else
-					Code.push ("	cout << \"\\nР”Р»СЏ РїСЂРѕРґРѕР»Р¶РµРЅРёСЏ РЅР°Р¶РјРёС‚Рµ Р»СЋР±СѓСЋ РєР»Р°РІРёС€Сѓ... \\n\";\n");
+					Code.push ("	cout << \"\\nДля продолжения нажмите любую клавишу... \\n\";\n");
 
 				if (Client.getIDE_Name () == Settings.getIDE_Name_VisualStudio ())
 					Code.push ("	_getch ();\n\n");
@@ -173,7 +173,7 @@ const std::string Class_Formation_Order::Create_Source_Code (const Class_Clients
 				else
 					Code.push ("	getch ();\n\n");
 
-			Code.push ("} // С„СѓРЅРєС†РёСЏ РѕР¶РёРґР°РЅРёСЏ РЅР°Р¶Р°С‚РёСЏ\n\n");
+			Code.push ("} // функция ожидания нажатия\n\n");
 
 		}
 
@@ -193,7 +193,7 @@ const std::string Class_Formation_Order::Create_Source_Code (const Class_Clients
 
                 }
 
-            Code.push ("}; // С„СѓРЅРєС†РёСЏ РІС‹РІРѕРґР° С‚РµРєСЃС‚Р° РєРёСЂРёР»Р»РёС†С‹ РЅР° СЌРєСЂР°РЅ\n\n");
+            Code.push ("}; // функция вывода текста кириллицы на экран\n\n");
 
 		}
 
@@ -204,8 +204,8 @@ const std::string Class_Formation_Order::Create_Source_Code (const Class_Clients
                 if (Client.getIDE_Name () != Settings.getIDE_Name_QtCreator ()) {
 
                     Code.push ("	SetConsoleCP(1251);\n");
-                    Code.push ("	SetConsoleOutputCP(1251); // РєРёСЂРёР»Р»РёС†Р° РІ РєРѕРЅСЃРѕР»Рё\n");
-                    Code.push ("	system (\"title Р›Р°Р±РѕСЂР°С‚РѕСЂРЅР°СЏ СЂР°Р±РѕС‚Р° \");");
+                    Code.push ("	SetConsoleOutputCP(1251); // кириллица в консоли\n");
+                    Code.push ("	system (\"title Лабораторная работа \");");
 
                 }
 
@@ -224,21 +224,21 @@ const std::string Class_Formation_Order::Create_Source_Code (const Class_Clients
 
 		if (Client.getMenuFunctional () == true) {
 
-			Code.push ("	int ButtonNumber = 0; // РїРµСЂРµРјРµРЅРЅР°СЏ РґР»СЏ СЂР°Р±РѕС‚Р° СЃ С„СѓРЅРєС†РёРµР№ getch\n\n\n\n");
-			Code.push ("		while (true) { // РЅР°С‡Р°Р»Рѕ Р¶РёР·РЅРµРЅРЅРѕРіРѕ С†РёРєР»Р° РїСЂРѕРіСЂР°РјРјС‹\n\n");
+			Code.push ("	int ButtonNumber = 0; // переменная для работа с функцией getch\n\n\n\n");
+			Code.push ("		while (true) { // начало жизненного цикла программы\n\n");
 			Code.push ("			ButtonNumber = 0;\n");
 			Code.push ("			cls ();\n\n");
 
 
                 if (Client.getTechnology_Name () == Settings.getTechnology_Name_C ())
-                    Code.push ("			printf (\"		РњРµРЅСЋ РїСЂРѕРіСЂР°РјРјС‹\\n\\n\");\n");
+                    Code.push ("			printf (\"		Меню программы\\n\\n\");\n");
 
                 else
-                    Code.push ("			cout << \"		РњРµРЅСЋ РїСЂРѕРіСЂР°РјРјС‹\\n\\n\";\n");
+                    Code.push ("			cout << \"		Меню программы\\n\\n\";\n");
 
                 for (unsigned short int i = 0; i < Client.getMenuItems_Count (); i++) {
 
-                    if (Client.getTasksCount () == 1) // РµСЃР»Рё РІ РїСЂРѕРіСЂР°РјРјРµ Р±СѓРґРµС‚ С„СѓРЅРєС†РёРѕРЅР°Р» СЃ РјРµРЅСЋ, Рё СЃРѕР·РґР°РµС‚СЃСЏ С‚РѕР»СЊРєРѕ 1 Р·Р°РґР°С‡Р°
+                    if (Client.getTasksCount () == 1) // если в программе будет функционал с меню, и создается только 1 задача
                         Stroke = Client.getMenuItems_Title (i);
 
                     else
@@ -253,12 +253,12 @@ const std::string Class_Formation_Order::Create_Source_Code (const Class_Clients
                 }
 
                 if (Client.getTechnology_Name () == Settings.getTechnology_Name_C ())
-                    Code.push ("			printf (\"Esc. Р’С‹Р№С‚Рё РёР· РїСЂРѕРіСЂР°РјРјС‹\\n\");\n\n");
+                    Code.push ("			printf (\"Esc. Выйти из программы\\n\");\n\n");
 
                 else
-                    Code.push ("			cout << \"Esc. Р’С‹Р№С‚Рё РёР· РїСЂРѕРіСЂР°РјРјС‹\\n\";\n\n");
+                    Code.push ("			cout << \"Esc. Выйти из программы\\n\";\n\n");
 
-			Code.push ("				while (true) { // Р·Р°С‰РёС‚Р° РѕС‚ РґСѓСЂР°РєР° РїРѕ РЅР°Р¶Р°С‚РёСЋ\n\n");
+			Code.push ("				while (true) { // защита от дурака по нажатию\n\n");
 
 				if (Client.getIDE_Name () == Settings.getIDE_Name_VisualStudio ())
 					Code.push ("					ButtonNumber = _getch ();\n\n");
@@ -268,7 +268,7 @@ const std::string Class_Formation_Order::Create_Source_Code (const Class_Clients
 
 			Code.push ("						if (ButtonNumber == 27) {\n\n");
 			Code.push ("							return 0;\n\n");
-			Code.push ("                        } // Р·Р°РІРµСЂС€РµРЅРёРµ РїСЂРѕРіСЂР°РјРјС‹\n\n");
+			Code.push ("                        } // завершение программы\n\n");
 			Code.push ("						else if (ButtonNumber > 48 && ButtonNumber < " + Convert_Int_toString (49 + Client.getMenuItems_Count ()) + ") {\n\n");
 			Code.push ("							cls ();\n");
 			Code.push ("							break;\n\n");
@@ -300,7 +300,7 @@ const std::string Class_Formation_Order::Create_Source_Code (const Class_Clients
 
                 }
 
-			Code.push ("		} // РєРѕРЅРµС† Р¶РёР·РЅРµРЅРЅРѕРіРѕ С†РёРєР»Р° РїСЂРѕРіСЂР°РјРјС‹\n\n");
+			Code.push ("		} // конец жизненного цикла программы\n\n");
 
 		}
 
@@ -309,7 +309,7 @@ const std::string Class_Formation_Order::Create_Source_Code (const Class_Clients
 				if (Client.getIDE_Name () == Settings.getIDE_Name_VisualStudio ())
 					Code.push ("	//system (\"pause\");\n\n");
 
-			Code.push ("	return 0; // Р·Р°РІРµСЂС€РµРЅРёРµ РїСЂРѕРіСЂР°РјРјС‹\n\n");
+			Code.push ("	return 0; // завершение программы\n\n");
 
 		}
 
@@ -340,7 +340,7 @@ const std::string Class_Formation_Order::Create_Source_Code (const Class_Clients
 
 	return CodePath;
 
-} // РјРµС‚РѕРґ СЃРѕР·РґР°РЅРёСЏ РёСЃС…РѕРґРЅРѕРіРѕ РєРѕРґР°
+} // метод создания исходного кода
 
 const void Class_Formation_Order::SendFiles_To_ClientFolders (const Class_Clients& Client, const Class_Settings& Settings, const std::string& CodePath, const bool FolderExists) {
 
@@ -406,8 +406,8 @@ const void Class_Formation_Order::SendFiles_To_ClientFolders (const Class_Client
                 if (Client.getTechnology_Name () == Settings.getTechnology_Name_CPlusPlus ())
                             CPP = "pp";
 
-                //for (unsigned short int i = Old_TasksCount + 1; i < Client.getTasksCount () + Old_TasksCount + 1; i++) { // РїРѕРѕС‡РµСЂРµРґРЅРѕРµ РѕС‚РєСЂС‹С‚РёРµ
-                for (unsigned short int i = Client.getTasksCount () + Old_TasksCount; i > Old_TasksCount; i--) { // СЂРµРІРµСЂСЃРёРІРЅРѕРµ РѕС‚РєСЂС‹С‚РёРµ
+                //for (unsigned short int i = Old_TasksCount + 1; i < Client.getTasksCount () + Old_TasksCount + 1; i++) { // поочередное открытие
+                for (unsigned short int i = Client.getTasksCount () + Old_TasksCount; i > Old_TasksCount; i--) { // реверсивное открытие
 
                      Sleep (1000);
 
@@ -423,6 +423,6 @@ const void Class_Formation_Order::SendFiles_To_ClientFolders (const Class_Client
 
     remove (CodePath.c_str ());
 
-} // РјРµС‚РѕРґ РѕС‚РїСЂР°РІРєРё РёСЃС…РѕРґРЅРёРєРѕРІ РїРѕ РїР°РїРєР°Рј РїСЂРѕРµРєС‚Р°
+} // метод отправки исходников по папкам проекта
 
 #endif // _formation_order_class_h
