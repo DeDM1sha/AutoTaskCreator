@@ -130,10 +130,7 @@ const static void Menu_Settings (Class_Settings& Settings, Class_BanLists& Banli
             CenterText ("| Tab. Восстановить настройки по умолчанию |\n");
             CenterText ("|__________________________________________|\n");
 
-
-            CenterText ("Выберите пункт меню для изменения выбранных настроек\n\n\n");
-
-            printf ("\n                                   Tab. Восстановить настройки по умолчанию\n");
+            CenterText ("\nВыберите пункт меню для изменения выбранных настроек\n\n\n");
 
                 while (true) {
 

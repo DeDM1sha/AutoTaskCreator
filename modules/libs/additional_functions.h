@@ -259,7 +259,7 @@ const static bool Check_Input_ForExit (const std::string& Str) {
                         }
 
                 }
-
+            Exception("Flag = " + Convert_Bool_toString(Flag));
             return Flag;
 
         }

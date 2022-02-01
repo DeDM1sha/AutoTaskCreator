@@ -101,10 +101,10 @@ class Class_Settings : public AbstractClass_ConfigEditor {
             this->ProjectBuild_Name_Debug = "Debug";
             //this->ProjectBuild_Type = this->ProjectBuild_Name_Release;
             this->ProjectBuild_Type = this->ProjectBuild_Name_Debug;
-            this->ProjectBuild_Version = "2.10.02.2021";
+            this->ProjectBuild_Version = "2.01.02.2022";
 
-            this->ProjectBuild_SavePath_DB_Release = "E:\\Orders\\C++Tasks";
-            this->ProjectBuild_SavePath_DB_Debug = "E:\\Orders\\C++Tasks(Debug)";
+            this->ProjectBuild_SavePath_DB_Release = "D:\\Orders\\C++Tasks";
+            this->ProjectBuild_SavePath_DB_Debug = "D:\\Orders\\C++Tasks(Debug)";
 
             this->LoadTag_Path_to_Labs = "Path_to_Labs";
             this->LoadTag_Order_Start = "Order_Start";
