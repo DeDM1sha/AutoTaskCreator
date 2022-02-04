@@ -91,7 +91,7 @@ const static void Menu_Statistics (const Class_Settings& Settings, const Class_B
 
                 }
 
-                if (Settings.getProjectBuild_Type () == Settings.getPorjectBuild_Name_Debug ()) {
+               if (Settings.getProjectBuild_Type () == Settings.getProjectBuild_Name_Debug ()) {
 
                     if (Statistics.getTotalNumber_CompletedTasks_Count () != (Statistics.getTotalNumber_Technology_C () + Statistics.getTotalNumber_Technology_CPlusPlus () + Statistics.getTotalNumber_Technology_Another ()))
                         Show_Text_Output ("\n                           Общее кол-во выполненных задач не совпадает с суммой задач по отдельности!");
@@ -133,4 +133,5 @@ const static void Menu_Statistics (const Class_Settings& Settings, const Class_B
 } // функция статистики базы заказов и клиентов
 
 #endif // _Menu_Statistics_h_
+
 

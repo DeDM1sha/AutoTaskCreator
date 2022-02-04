@@ -21,20 +21,20 @@ const static bool Fill_InputData (Class_Clients& Client, const Class_BanLists& B
             Show_Text_In_Right_Corner ("Press F5 to reload formation order");
 
             std::string Stroke = Show_Text_Input ("Имя клиента:   ", true);
-            Exception("Name0: " + Stroke);
+            //Exception("Name0: " + Stroke);
                 if (Check_Input_ForExit (Stroke)){
-                        Exception("Name1: " + Stroke);
-                    //return false; // если было введено одно из службных слов для выхода - возврат в главное меню программы
+                        //Exception("Name1: " + Stroke);
+                    return false; // если было введено одно из службных слов для выхода - возврат в главное меню программы
 
                 }
                 else if (Check_Input_ForReload (Stroke)){
-                         Exception("Name2: " + Stroke);
+                         //Exception("Name2: " + Stroke);
                     continue;
 
                 }
-            Exception("Name3: " + Stroke);
+            //Exception("Name3: " + Stroke);
             Stroke = GetExist_ClientName (Stroke, Settings, true);
-            Exception("Name4: " + Stroke);
+           // Exception("Name4: " + Stroke);
 
 
                 if (Banlists.Check_Client_inBanlists (Settings, Stroke)) {
@@ -377,4 +377,5 @@ const static void Menu_Formation_Order (const Class_Settings& Settings, const Cl
 } // функция формирования заказа
 
 #endif // _Menu_formation_order_h_
+
 

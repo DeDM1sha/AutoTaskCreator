@@ -9,7 +9,7 @@
 
 class AbstractClass_ConfigEditor {
 
-    public:
+    protected:
 
         const void ConfigFile_Open (const std::string&) const;
         const void ConfigFile_Close (const std::string&) const;
@@ -36,13 +36,17 @@ class Class_Settings : public AbstractClass_ConfigEditor {
 
     private:
 
-        std::string ProjectBuild_Type; // тип сборки проекта (debug / release)
-        std::string ProjectBuild_Version; // версия проекта
-        std::string ProjectBuild_Name_Release; // realease билд - использование исходный файловых настроек
+        std::string ProjectBuild_Name_Release; // release билд - использование исходный файловых настроек
         std::string ProjectBuild_Name_Debug; // debug билд - использование дефолтных дебаг настроек
 
-        std::string ProjectBuild_SavePath_DB_Release; // realese путь сохранения заказов - основная папка для release билда
+        std::string ProjectBuild_Type; // тип сборки проекта (debug / release)
+        std::string ProjectBuild_Version; // версия проекта
+
+        std::string ProjectBuild_SavePath_DB_Release; // release путь сохранения заказов - основная папка для release билда
         std::string ProjectBuild_SavePath_DB_Debug; // debug путь сохранения заказов - отдельная папка для debug билда
+
+        std::string ReleaseExeFile_Path; // путь к хранению release exe приложения
+        std::string DebugExeFile_Path; // путь к локальному хранилищу debug exe приложения
 
         std::string PK_Name; // имя профиля на пк исполнителя
         std::string Disk_Path; // наименование логического жесткого диска на пк, где хранятся заказы
@@ -56,6 +60,10 @@ class Class_Settings : public AbstractClass_ConfigEditor {
         std::string Banlist_Path; // путь к хранению бан-листа
         std::string Url_BanList_Clients; // ссылка на банлист клиентов
         std::string Url_BanList_Workers; // ссылка на банлист исполнителей
+        std::string LastTime_ProjectBuild_Type_Release; // время последней сборки проекта в режиме [Release]
+        std::string LastTime_ProjectBuild_Type_Debug; // время последней сборки проекта в режиме [Debug]
+        std::string NewTime_ProjectBuild_Type_Release; // время новой сборки проекта в режиме [Release]
+        std::string NewTime_ProjectBuild_Type_Debug; // время новой сборки проекта врежиме [Debug]
 
         std::string LoadTag_Path_to_Labs; // Тэг-считывания пути сохранения заказов
         std::string LoadTag_Order_Start; // Тэг-считывания автоматического запуска создания заказа
@@ -65,6 +73,11 @@ class Class_Settings : public AbstractClass_ConfigEditor {
         std::string LoadTag_Display_Money; // Тэг-считывания отображения заработанных средств
         std::string LoadTag_Url_BanList_Clients; // Тэг-считывания ссылки на бан-лист клиентов
         std::string LoadTag_Url_BanList_Workers; // Тэг-считывания ссылки на бан-лист исполнителей
+        std::string LoadTag_LastTime_ProjectBuild_Type_Debug; // Тэг-считывания времени последней сборки проекта в режиме [Debug]
+        std::string LoadTag_LastTime_ProjectBuild_Type_Release; // Тэг-ситывания времени последней сборки проекта в режиме [Release]
+
+        std::string ERROR_Message_ClientExist; // сообщение об ошибки отсуствия введенного клиента в базе
+		std::string ERROR_Message_BuildTimeExist; // сообщение об ошибки отсутствия собранных билдов проекта
 
         std::string SaveTag_Field_Technology; // Тэг-сохранения наименования технологии
 	    std::string SaveTag_Field_IDE; // Тэг-сохранения наименования среды разработки
@@ -91,20 +104,19 @@ class Class_Settings : public AbstractClass_ConfigEditor {
         std::string TypeWork_Name_CourseWork; // наименование типа работы [CourseWork]
         std::string TypeWork_Name_Diploma; // наименование типа работы [Diploma]
 
-		std::string ERROR_Message_ClientExist; // сообщение об ошибки отсуствия введенного клиента в базе
-
     public:
 
         Class_Settings (void) {
 
+            this->ProjectBuild_Version = "2";
             this->ProjectBuild_Name_Release = "Release";
             this->ProjectBuild_Name_Debug = "Debug";
-            //this->ProjectBuild_Type = this->ProjectBuild_Name_Release;
-            this->ProjectBuild_Type = this->ProjectBuild_Name_Debug;
-            this->ProjectBuild_Version = "2.01.02.2022";
 
             this->ProjectBuild_SavePath_DB_Release = "D:\\Orders\\C++Tasks";
             this->ProjectBuild_SavePath_DB_Debug = "D:\\Orders\\C++Tasks(Debug)";
+
+            this->ReleaseExeFile_Path = "D:\\Projects\\CPlusPlus_Projects\\Automation\\AutoTaskCreator\\bin\\Release\\AutoTaskCreator.exe";
+            this->DebugExeFile_Path = "D:\\Projects\\CPlusPlus_Projects\\Automation\\AutoTaskCreator\\bin\\Debug\\AutoTaskCreator.exe";
 
             this->LoadTag_Path_to_Labs = "Path_to_Labs";
             this->LoadTag_Order_Start = "Order_Start";
@@ -114,34 +126,49 @@ class Class_Settings : public AbstractClass_ConfigEditor {
             this->LoadTag_Display_Money = "Display_Money";
             this->LoadTag_Url_BanList_Clients = "Url_BanList_Clients";
             this->LoadTag_Url_BanList_Workers = "Url_BanList_Workers";
+            this->LoadTag_LastTime_ProjectBuild_Type_Release = "LastTime_Release_Build";
+            this->LoadTag_LastTime_ProjectBuild_Type_Debug = "LastTime_Debug_Build";
+
+            this->ERROR_Message_ClientExist = "NoneClient";
+			this->ERROR_Message_BuildTimeExist = "NoneTime";
 
             this->PK_Name = Load_PK_UserName ();
+            this->ProjectBuild_Type = "\0";
+            this->LastTime_ProjectBuild_Type_Release = "\0";
+            this->LastTime_ProjectBuild_Type_Debug = "\0";
+            this->NewTime_ProjectBuild_Type_Release = "\0";
+            this->NewTime_ProjectBuild_Type_Debug = "\0";
 
-                if (this->ProjectBuild_Type == this->ProjectBuild_Name_Debug) {
+            const std::string BuildDate = SetupBuild_TypeVersion ();
+            this->ProjectBuild_Version = ProjectBuild_Version + "." + BuildDate[0] + BuildDate[1] + "." + BuildDate[3] + BuildDate[4] +
+                                                    "." + BuildDate[6] + BuildDate[7] + BuildDate[8] + BuildDate[9];
 
-                    this->Config_Path = "C:\\Users\\" + this->PK_Name + "\\AppData\\Local\\Temp\\(Debug)_AutoTaskCreator_Settings.cfg";
-                    this->Banlist_Path = "C:\\Users\\" + this->PK_Name + "\\AppData\\Local\\Temp\\(Debug)_AutoTaskCreator_Banlists.cfg";
-
-                }
-
-                else {
+                if (this->ProjectBuild_Type == this->ProjectBuild_Name_Release) {
 
                     this->Config_Path = "C:\\Users\\" + this->PK_Name + "\\AppData\\Local\\Temp\\AutoTaskCreator_Settings.cfg";
                     this->Banlist_Path = "C:\\Users\\" + this->PK_Name + "\\AppData\\Local\\Temp\\AutoTaskCreator_Banlists.cfg";
 
                 }
 
+                else {
+
+                    this->Config_Path = "C:\\Users\\" + this->PK_Name + "\\AppData\\Local\\Temp\\(Debug)_AutoTaskCreator_Settings.cfg";
+                    this->Banlist_Path = "C:\\Users\\" + this->PK_Name + "\\AppData\\Local\\Temp\\(Debug)_AutoTaskCreator_Banlists.cfg";
+
+                }
+
             Check_ConfigFile (false);
 
-            Automatic_Order_Start = false;
-            Automatic_Close_Application = false;
-            Automatic_Open_Order = false;
-            Automatic_Update_BanList = false;
-            Display_Money = false;
-            Url_BanList_Clients = "\0";
-            Url_BanList_Workers = "\0";
+            this->Automatic_Order_Start = false;
+            this->Automatic_Close_Application = false;
+            this->Automatic_Open_Order = false;
+            this->Automatic_Update_BanList = false;
+            this->Display_Money = false;
+            this->Url_BanList_Clients = "\0";
+            this->Url_BanList_Workers = "\0";
 
             Load_Parameters ();
+
             this->Disk_Path = this->Disk_Path + this->Labs_Path[0] + this->Labs_Path[1];
 
             this->SaveTag_Field_Technology = "Technology";
@@ -169,7 +196,7 @@ class Class_Settings : public AbstractClass_ConfigEditor {
             this->TypeWork_Name_CourseWork = "CourseWork";
             this->TypeWork_Name_Diploma = "Diploma";
 
-			this->ERROR_Message_ClientExist = "NoneClient";
+            SaveSettings (false); // форсируем сохранение новых дат запуска [Debug] и [Release] билдов
 
         }
 
@@ -195,7 +222,7 @@ class Class_Settings : public AbstractClass_ConfigEditor {
 
         } // геттер для ProjectBuild_Name_Release
 
-        const std::string getPorjectBuild_Name_Debug (void) const {
+        const std::string getProjectBuild_Name_Debug(void) const {
 
             return this->ProjectBuild_Name_Debug;
 
@@ -322,6 +349,32 @@ class Class_Settings : public AbstractClass_ConfigEditor {
             return this->Url_BanList_Workers;
 
         } // геттер для Url_BanList_Workers
+
+        const std::string getLastTime_ProjectBuild_Type_Release (void) const {
+
+            return this->LastTime_ProjectBuild_Type_Release;
+
+        } // геттер для LastTime_ProjectBuild_Type_Release
+
+        const std::string getLastTime_ProjectBuild_Type_Debug (void) const {
+
+            return this->LastTime_ProjectBuild_Type_Debug;
+
+        } // геттер для LastTime_ProjectBuild_Type_Debug
+
+        const std::string getNewTime_ProjectBuild_Type_Release (void) const {
+
+            return this->NewTime_ProjectBuild_Type_Release;
+
+        } // геттер для NewTime_ProjectBuild_Type_Release
+
+        const std::string getNewTime_ProjectBuild_Type_Debug (void) const {
+
+            return this->NewTime_ProjectBuild_Type_Debug;
+
+        } // геттер для NewTime_ProjectBuild_Type_Debug
+
+    //////////////////////////////////////////////
 
         const void setDisk_Path (const std::string Str) {
 
@@ -487,6 +540,12 @@ class Class_Settings : public AbstractClass_ConfigEditor {
 
         } // геттер для ERROR_Message_ClientExist
 
+        const std::string getERROR_Message_BuildTimeExist (void) const {
+
+            return this->ERROR_Message_BuildTimeExist;
+
+        } // геттер для ERROR_Message_BuildTimeExist
+
     //////////////////////////////////////////////
 
         const void SetDefaultParameters_FormationOrder (void) {
@@ -511,13 +570,25 @@ class Class_Settings : public AbstractClass_ConfigEditor {
 
         } // метод установки настроек по умолчанию для модуля блокировки клиентов
 
+        const void SetDefaultParameters_BuildTypeTime (void) {
+
+            this->LastTime_ProjectBuild_Type_Release = CheckBuild_getTime (ReleaseExeFile_Path);
+            this->LastTime_ProjectBuild_Type_Debug = CheckBuild_getTime (DebugExeFile_Path);
+
+        } // метод установки настроек по умолчанию для данных по времени последних билдов
+
+        const void SetDefaultParameters_Statistics (void) {
+
+            this->Display_Money = false;
+
+        } // метод установки настроек по умолчанию для модуля статистики
+
          const void SetDefault_Parameters (void) {
 
             SetDefaultParameters_FormationOrder ();
             SetDefaultParameters_Banlists ();
-
-            this->Display_Money = false;
-
+            SetDefaultParameters_BuildTypeTime ();
+            SetDefaultParameters_Statistics ();
 
         } // метод установки настроек по умолчанию
 
@@ -525,7 +596,9 @@ class Class_Settings : public AbstractClass_ConfigEditor {
         const void Check_ConfigFile (bool);
         const void Load_Parameters (void);
         const void SaveSettings (const bool) const;
-        const bool Check_FilePath (const std::string& Path);
+        const bool Check_FilePath (const std::string&);
+        const std::string CheckBuild_getTime (const std::string&);
+        const std::string SetupBuild_TypeVersion (void);
 
 }; // класс настроек приложения
 
@@ -595,6 +668,8 @@ const void Class_Settings::Load_Parameters (void) {
     bool DisplayMoney_Founded = false;
     bool Url_BanList_Clients_Founded = false;
     bool Url_BanList_Workers_Founded = false;
+    bool LastTime_ProjectBuild_Type_Release_Founded = false;
+    bool LastTime_ProjectBuild_Type_Debug_Founded = false;
 
     std::ifstream Read (this->Config_Path.c_str ());
 
@@ -666,6 +741,22 @@ const void Class_Settings::Load_Parameters (void) {
 
                 }
 
+                if (Str == this->LoadTag_LastTime_ProjectBuild_Type_Release && LastTime_ProjectBuild_Type_Release_Founded == false) {
+
+                    Read >> Str;
+                    Read >> this->LastTime_ProjectBuild_Type_Release;
+                    LastTime_ProjectBuild_Type_Release_Founded = true;
+
+                }
+
+                if (Str == this->LoadTag_LastTime_ProjectBuild_Type_Debug && LastTime_ProjectBuild_Type_Debug_Founded == false) {
+
+                    Read >> Str;
+                    Read >> this->LastTime_ProjectBuild_Type_Debug;
+                    LastTime_ProjectBuild_Type_Debug_Founded = true;
+
+                }
+
             }
 
         }
@@ -699,10 +790,22 @@ const void Class_Settings::Load_Parameters (void) {
         if (Url_BanList_Workers_Founded == false)
             Exception ("Not found Url_BanList_Workers in settings file");
 
+        if (LastTime_ProjectBuild_Type_Release_Founded == false)
+            Exception ("Not found LastTime_ProjectBuild_Type_Release in settings file");
+
+        if (LastTime_ProjectBuild_Type_Debug_Founded == false)
+            Exception ("Not found LastTime_ProjectBuild_Type_Debug in settings file");
+
     ConfigFile_Close (this->Config_Path);
 
-        if (LabsPath_Founded != true || OrderStart_Founded != true || CloseApp_Founded != true || Open_Order_Founded != true || UpdateBanList_Founded != true || DisplayMoney_Founded != true || Url_BanList_Clients_Founded != true || Url_BanList_Workers_Founded != true)
-            Check_ConfigFile (true);
+        if (LabsPath_Founded != true || OrderStart_Founded != true || CloseApp_Founded != true ||
+            Open_Order_Founded != true || UpdateBanList_Founded != true || DisplayMoney_Founded != true ||
+            Url_BanList_Clients_Founded != true || Url_BanList_Workers_Founded != true ||
+            LastTime_ProjectBuild_Type_Release_Founded != true || LastTime_ProjectBuild_Type_Debug_Founded != true) {
+
+                Check_ConfigFile (true);
+
+            }
 
 } // метод загрузки параметров приложения
 
@@ -719,7 +822,9 @@ const void Class_Settings::SaveSettings (const bool UsingDelay) const {
             << this->LoadTag_Update_BanList << " = " << getAutomatic_Update_BanList () << "\n"
             << this->LoadTag_Display_Money << " = " << getDisplay_Money () << "\n"
             << this->LoadTag_Url_BanList_Clients << " = " << getUrl_BanList_Clients () << "\n"
-            << this->LoadTag_Url_BanList_Workers << " = " << getUrl_BanList_Workers ();
+            << this->LoadTag_Url_BanList_Workers << " = " << getUrl_BanList_Workers () << "\n"
+            << this->LoadTag_LastTime_ProjectBuild_Type_Release << " = " << getNewTime_ProjectBuild_Type_Release () << "\n"
+            << this->LoadTag_LastTime_ProjectBuild_Type_Debug << " = " << getNewTime_ProjectBuild_Type_Debug ();
 
     Write.close ();
 
@@ -760,5 +865,149 @@ const bool Class_Settings::Check_FilePath (const std::string& Path) {
 
 } // метод проверки корректности пути к базе заказов
 
+const std::string Class_Settings::CheckBuild_getTime (const std::string& ExeFile_Path) {
+
+    std::string Time = "\0";
+    WIN32_FILE_ATTRIBUTE_DATA ad;
+
+     //01/02/2022|23:43:13
+
+        if (GetFileAttributesEx(ExeFile_Path.c_str(), GetFileExInfoStandard, &ad) == TRUE) {
+
+            const int SizeDate = 19;
+            char strDate[SizeDate];
+
+            FILETIME ftWrite;
+            SYSTEMTIME stUTC, stLocal;
+
+            ftWrite = ad.ftLastWriteTime;
+            FileTimeToSystemTime(&ftWrite, &stUTC);
+            SystemTimeToTzSpecificLocalTime(NULL, &stUTC, &stLocal);
+
+        // преобразовать полученное время в строку
+
+            sprintf(strDate, "%02hu/%02hu/%02hu|%02hu:%02hu:%02hu",
+            stLocal.wDay, stLocal.wMonth, stLocal.wYear,
+            stLocal.wHour, stLocal.wMinute, stLocal.wSecond);
+
+                for (unsigned short int i = 0; i < SizeDate; i++)
+                    Time += strDate[i];
+
+        }
+
+        else
+            Time = getERROR_Message_BuildTimeExist ();
+
+    return Time;
+
+} // метод считывания времени последнего изменения файла
+
+class Class_DateTime {
+
+    private:
+
+        int Seconds; // кол-во секунд
+        int Minutes; // кол-во минут
+        int Hours; // кол-во часов
+
+        int Days; // кол-во дней
+        int Months; // кол-во недель
+        int Years; // кол-во лет
+
+    public:
+
+        Class_DateTime (void) {
+
+            Seconds = 0;
+            Minutes = 0;
+            Hours = 0;
+
+            Days = 0;
+            Months = 0;
+            Years = 0;
+
+        }
+
+        Class_DateTime (const std::string StrData) {
+
+            //01/02/2022|23:43:13
+            Days = Convert_String_toInt ((std::string) &StrData[0] + &StrData[1]);
+            Months = Convert_String_toInt ((std::string) &StrData[3] + &StrData[4]);
+            Years = Convert_String_toInt ((std::string) &StrData[6] + &StrData[7] + &StrData[8] + StrData[9]);
+
+            Hours = Convert_String_toInt ((std::string) &StrData[11] + &StrData[12]);
+            Minutes = Convert_String_toInt ((std::string) &StrData[14] + &StrData[15]);
+            Seconds = Convert_String_toInt ((std::string) &StrData[17]);
+
+        }
+
+        ~Class_DateTime (void) {}
+
+        const int Converting_Time_toSeconds (void) const {
+
+            return (Hours*60*60) + Minutes*60 + Seconds;
+
+        } // метод перевода времени в секунды
+
+        const int Converting_Date_toDays (void) const {
+
+            return (Years * 10000) + Months * 100 + Days;
+
+        } // метод перевода даты в дни
+
+        bool Compare_DateTimes (Class_DateTime& Object) {
+
+                /*Debug ("Old: " + Convert_Int_toString(Converting_Date_toDays ()) + "|" + Convert_Int_toString(Converting_Time_toSeconds ()), false);
+                Debug ("vs", false);
+                Debug ("New: " + Convert_Int_toString(Object.Converting_Date_toDays ()) + "|" + Convert_Int_toString(Object.Converting_Time_toSeconds ()), false);*/
+
+                if (Converting_Date_toDays () > Object.Converting_Date_toDays ())
+                    return false;
+
+                else if (Converting_Date_toDays () == Object.Converting_Date_toDays ()) {
+
+                    if (Converting_Time_toSeconds () > Object.Converting_Time_toSeconds ())
+                        return false;
+
+                }
+
+            return true;
+
+        } // метод сравнения даты + время
+
+}; // класс обработки времени и даты
+
+const std::string Class_Settings::SetupBuild_TypeVersion (void){
+
+    this->NewTime_ProjectBuild_Type_Release = CheckBuild_getTime (this->ReleaseExeFile_Path); // в этом свойстве хранится полученное время файла Release exe (преобразованное из char [])
+    this->NewTime_ProjectBuild_Type_Debug = CheckBuild_getTime (this->DebugExeFile_Path); // в этой свойстве хранится полученное время файла Debug exe (преобразованное из char [])
+
+    /*printf("\nNew release: %s", NewTime_ProjectBuild_Type_Release.c_str());
+    printf("\nNew debug: %s", NewTime_ProjectBuild_Type_Debug.c_str());
+
+    printf("\nOld release: %s", this->LastTime_ProjectBuild_Type_Release.c_str());
+    printf("\nOld debug: %s", this->LastTime_ProjectBuild_Type_Debug.c_str()); */
+
+
+        if (this->NewTime_ProjectBuild_Type_Release != getERROR_Message_BuildTimeExist ()) {
+
+            Class_DateTime NewTime_Build (this->LastTime_ProjectBuild_Type_Release);
+            Class_DateTime LastTime_Build (this->LastTime_ProjectBuild_Type_Debug);
+
+                if (NewTime_Build.Compare_DateTimes(LastTime_Build) == true) {
+
+                    this->ProjectBuild_Type = getProjectBuild_Name_Release ();
+                    return this->NewTime_ProjectBuild_Type_Release;
+
+                }
+
+        }
+
+    this->ProjectBuild_Type = getProjectBuild_Name_Debug ();
+    return this->NewTime_ProjectBuild_Type_Debug;
+
+} // метод, задающий тип сборки (билда) программы [Debug] / [Release]
+
 #endif // _settings_class_h_
+
 

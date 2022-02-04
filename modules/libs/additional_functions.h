@@ -9,7 +9,7 @@
 #ifndef _additional_functions_h_
 #define _additional_functions_h_
 
-const static void Debug (std::string Text, bool Pause = true) {
+const static void Debug (const std::string Text, bool Pause = true) {
 
     printf ("%s\n", Text.c_str()); // отображение текста дебагинга
 
@@ -18,7 +18,7 @@ const static void Debug (std::string Text, bool Pause = true) {
 
 } // функция для отладки кода с паузой
 
-const static std::string Convert_Int_toString (unsigned short int Number) {
+const static std::string Convert_Int_toString (const unsigned short int Number) {
 
     std::ostringstream ConverInt_ToString;
     ConverInt_ToString << Number;
@@ -27,7 +27,7 @@ const static std::string Convert_Int_toString (unsigned short int Number) {
 
 } // функция конвертирования из int в string
 
-const static unsigned short int Convert_String_toInt (std::string Str) {
+const static unsigned short int Convert_String_toInt (const std::string Str) {
 
     unsigned short int Number = 0;
 
@@ -174,6 +174,8 @@ const static void Exception (const std::string TextError) {
 
 } // функция Exception - для отображения случившихся ошибок
 
+const static bool Check_Input_ForExit (const std::string& Str) {
+
 /*
 
     Вспомогатель ф-ия для перехвата веденного стоп-слова при вводе данных. Возвращает:
@@ -181,8 +183,6 @@ const static void Exception (const std::string TextError) {
         *false - оставляем все как есть
 
 */
-
-const static bool Check_Input_ForExit (const std::string& Str) {
 
     bool Flag = false;
 
@@ -520,4 +520,3 @@ const static std::string Get_DateToday (void) {
 } // функция для получения даты сегоднящнего дня
 
 #endif // _additional_functions_h_*/
-

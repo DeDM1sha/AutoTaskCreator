@@ -51,3 +51,4 @@ const void Class_Search::Search_Client (std::string InputName, const Class_Setti
 } // метод поиска клиента по имени
 
 #endif // _search_class_h
+

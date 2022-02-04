@@ -343,3 +343,4 @@ const bool ClickCatch (const unsigned short int* Button_Number, const std::strin
 
 #endif // _clickcatcher_h_
 
+

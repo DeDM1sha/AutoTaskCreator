@@ -39,6 +39,7 @@
 		<Unit filename="modules/classes/search_class.h" />
 		<Unit filename="modules/classes/settings_class.h" />
 		<Unit filename="modules/classes/statistics_class.h" />
+		<Unit filename="modules/config/application.ico" />
 		<Unit filename="modules/config/config.rc">
 			<Option compilerVar="WINDRES" />
 		</Unit>
@@ -49,8 +50,6 @@
 		<Unit filename="modules/menu_forms/Menu_Settings.h" />
 		<Unit filename="modules/menu_forms/Menu_Statistics.h" />
 		<Unit filename="modules/parser_GnuWin32/bin/wget.exe" />
-		<Extensions>
-			<lib_finder disable_auto="1" />
-		</Extensions>
+		<Extensions />
 	</Project>
 </CodeBlocks_project_file>

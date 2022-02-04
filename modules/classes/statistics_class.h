@@ -350,3 +350,4 @@ const void Class_Statistics::Load_TotalNumber_Information (const Class_Settings&
 
 #endif // _statistics_class_h_
 
+

@@ -472,3 +472,4 @@ const static void Menu_Settings (Class_Settings& Settings, Class_BanLists& Banli
 
 #endif // _Menu_Settings_h_
 
+

@@ -360,4 +360,3 @@ const bool Class_BanLists::Check_Client_inBanlists (const Class_Settings& Settin
 } // метод проверки клиента в бан-листах
 
 #endif // _banlist_class_h_
-
