@@ -1,57 +1,57 @@
-/*  Данная библиотека позволяет упростить работу с функцией getch.
-Автор: Сацук Михаил Михайлович (vk.com/m1shaowned)
+/*  Р”Р°РЅРЅР°СЏ Р±РёР±Р»РёРѕС‚РµРєР° РїРѕР·РІРѕР»СЏРµС‚ СѓРїСЂРѕСЃС‚РёС‚СЊ СЂР°Р±РѕС‚Сѓ СЃ С„СѓРЅРєС†РёРµР№ getch.
+РђРІС‚РѕСЂ: РЎР°С†СѓРє РњРёС…Р°РёР» РњРёС…Р°Р№Р»РѕРІРёС‡ (vk.com/m1shaowned)
 
-При любом из доступных наборов входных параметров функция возвращает:
-    *true - пользователь нажал на нужную нам кнопку, можно выполнять дальнейшие действия
-    *false - была нажата любая другая кнопка, дальнейших действий не произойдет
+РџСЂРё Р»СЋР±РѕРј РёР· РґРѕСЃС‚СѓРїРЅС‹С… РЅР°Р±РѕСЂРѕРІ РІС…РѕРґРЅС‹С… РїР°СЂР°РјРµС‚СЂРѕРІ С„СѓРЅРєС†РёСЏ РІРѕР·РІСЂР°С‰Р°РµС‚:
+    *true - РїРѕР»СЊР·РѕРІР°С‚РµР»СЊ РЅР°Р¶Р°Р» РЅР° РЅСѓР¶РЅСѓСЋ РЅР°Рј РєРЅРѕРїРєСѓ, РјРѕР¶РЅРѕ РІС‹РїРѕР»РЅСЏС‚СЊ РґР°Р»СЊРЅРµР№С€РёРµ РґРµР№СЃС‚РІРёСЏ
+    *false - Р±С‹Р»Р° РЅР°Р¶Р°С‚Р° Р»СЋР±Р°СЏ РґСЂСѓРіР°СЏ РєРЅРѕРїРєР°, РґР°Р»СЊРЅРµР№С€РёС… РґРµР№СЃС‚РІРёР№ РЅРµ РїСЂРѕРёР·РѕР№РґРµС‚
 
-//// Вызов функции с одинарным параметром названия входной кнопки (название желаемой кнопки + номер фактически нажатой клавиши)
+//// Р’С‹Р·РѕРІ С„СѓРЅРєС†РёРё СЃ РѕРґРёРЅР°СЂРЅС‹Рј РїР°СЂР°РјРµС‚СЂРѕРј РЅР°Р·РІР°РЅРёСЏ РІС…РѕРґРЅРѕР№ РєРЅРѕРїРєРё (РЅР°Р·РІР°РЅРёРµ Р¶РµР»Р°РµРјРѕР№ РєРЅРѕРїРєРё + РЅРѕРјРµСЂ С„Р°РєС‚РёС‡РµСЃРєРё РЅР°Р¶Р°С‚РѕР№ РєР»Р°РІРёС€Рё)
 
-//  Первый параметр функции отвечает за название нужной нам клавиши на клавиатуре, и имеет тип [std::string].
-    Второй параметр отвечает за номер фактически нажатой клавиши, и имеет тип [unsigned short int]
-    Предусмотрено написание названия клавиши в разных регистрах, но только на латинице.
+//  РџРµСЂРІС‹Р№ РїР°СЂР°РјРµС‚СЂ С„СѓРЅРєС†РёРё РѕС‚РІРµС‡Р°РµС‚ Р·Р° РЅР°Р·РІР°РЅРёРµ РЅСѓР¶РЅРѕР№ РЅР°Рј РєР»Р°РІРёС€Рё РЅР° РєР»Р°РІРёР°С‚СѓСЂРµ, Рё РёРјРµРµС‚ С‚РёРї [std::string].
+    Р’С‚РѕСЂРѕР№ РїР°СЂР°РјРµС‚СЂ РѕС‚РІРµС‡Р°РµС‚ Р·Р° РЅРѕРјРµСЂ С„Р°РєС‚РёС‡РµСЃРєРё РЅР°Р¶Р°С‚РѕР№ РєР»Р°РІРёС€Рё, Рё РёРјРµРµС‚ С‚РёРї [unsigned short int]
+    РџСЂРµРґСѓСЃРјРѕС‚СЂРµРЅРѕ РЅР°РїРёСЃР°РЅРёРµ РЅР°Р·РІР°РЅРёСЏ РєР»Р°РІРёС€Рё РІ СЂР°Р·РЅС‹С… СЂРµРіРёСЃС‚СЂР°С…, РЅРѕ С‚РѕР»СЊРєРѕ РЅР° Р»Р°С‚РёРЅРёС†Рµ.
 
-        Пример вызова функции:
+        РџСЂРёРјРµСЂ РІС‹Р·РѕРІР° С„СѓРЅРєС†РёРё:
 
         ClickCatch ("Esc", &ButtonNumber);
-            где "Esc" - название той клавиши нажатие на которой мы ждем,
-            а "&ButtonNumber" фактический номер нажатой пользователем клавиши, полученный при помощи функции getch.
+            РіРґРµ "Esc" - РЅР°Р·РІР°РЅРёРµ С‚РѕР№ РєР»Р°РІРёС€Рё РЅР°Р¶Р°С‚РёРµ РЅР° РєРѕС‚РѕСЂРѕР№ РјС‹ Р¶РґРµРј,
+            Р° "&ButtonNumber" С„Р°РєС‚РёС‡РµСЃРєРёР№ РЅРѕРјРµСЂ РЅР°Р¶Р°С‚РѕР№ РїРѕР»СЊР·РѕРІР°С‚РµР»РµРј РєР»Р°РІРёС€Рё, РїРѕР»СѓС‡РµРЅРЅС‹Р№ РїСЂРё РїРѕРјРѕС‰Рё С„СѓРЅРєС†РёРё getch.
 
-    Каждая из кнопок на клавиатуре имеет свое название, и оно представлено здесь в большинстве возможных вариациях
+    РљР°Р¶РґР°СЏ РёР· РєРЅРѕРїРѕРє РЅР° РєР»Р°РІРёР°С‚СѓСЂРµ РёРјРµРµС‚ СЃРІРѕРµ РЅР°Р·РІР°РЅРёРµ, Рё РѕРЅРѕ РїСЂРµРґСЃС‚Р°РІР»РµРЅРѕ Р·РґРµСЃСЊ РІ Р±РѕР»СЊС€РёРЅСЃС‚РІРµ РІРѕР·РјРѕР¶РЅС‹С… РІР°СЂРёР°С†РёСЏС…
 
-        Пример написания названия нужной клавиши:
+        РџСЂРёРјРµСЂ РЅР°РїРёСЃР°РЅРёСЏ РЅР°Р·РІР°РЅРёСЏ РЅСѓР¶РЅРѕР№ РєР»Р°РІРёС€Рё:
 
-        * "Esc" - и еще 3 вариации написания этого слова (esc, Esc, ESC)
-        * "Delete" - и остальные 3 вариации (delete, Delete, DELETE)
-        * "3" - и остальные 3 вариации (3, #, №)
-        * и т.д.
+        * "Esc" - Рё РµС‰Рµ 3 РІР°СЂРёР°С†РёРё РЅР°РїРёСЃР°РЅРёСЏ СЌС‚РѕРіРѕ СЃР»РѕРІР° (esc, Esc, ESC)
+        * "Delete" - Рё РѕСЃС‚Р°Р»СЊРЅС‹Рµ 3 РІР°СЂРёР°С†РёРё (delete, Delete, DELETE)
+        * "3" - Рё РѕСЃС‚Р°Р»СЊРЅС‹Рµ 3 РІР°СЂРёР°С†РёРё (3, #, в„–)
+        * Рё С‚.Рґ.
 
-//// Вызов функции с множеством параметров назавний входной кнопки (номер фактически нажатой клавиши + перечень названий нужных кнопок)
+//// Р’С‹Р·РѕРІ С„СѓРЅРєС†РёРё СЃ РјРЅРѕР¶РµСЃС‚РІРѕРј РїР°СЂР°РјРµС‚СЂРѕРІ РЅР°Р·Р°РІРЅРёР№ РІС…РѕРґРЅРѕР№ РєРЅРѕРїРєРё (РЅРѕРјРµСЂ С„Р°РєС‚РёС‡РµСЃРєРё РЅР°Р¶Р°С‚РѕР№ РєР»Р°РІРёС€Рё + РїРµСЂРµС‡РµРЅСЊ РЅР°Р·РІР°РЅРёР№ РЅСѓР¶РЅС‹С… РєРЅРѕРїРѕРє)
 
-//  Первый параметр отвечает за номер фактически нажатой клавиши [unsigned short int]
-    Второй параметр отвечает за ASCII номер клавиши, которые нам нужны [std::string]
+//  РџРµСЂРІС‹Р№ РїР°СЂР°РјРµС‚СЂ РѕС‚РІРµС‡Р°РµС‚ Р·Р° РЅРѕРјРµСЂ С„Р°РєС‚РёС‡РµСЃРєРё РЅР°Р¶Р°С‚РѕР№ РєР»Р°РІРёС€Рё [unsigned short int]
+    Р’С‚РѕСЂРѕР№ РїР°СЂР°РјРµС‚СЂ РѕС‚РІРµС‡Р°РµС‚ Р·Р° ASCII РЅРѕРјРµСЂ РєР»Р°РІРёС€Рё, РєРѕС‚РѕСЂС‹Рµ РЅР°Рј РЅСѓР¶РЅС‹ [std::string]
 
-        Пример вызова функции:
+        РџСЂРёРјРµСЂ РІС‹Р·РѕРІР° С„СѓРЅРєС†РёРё:
 
         ClickCatch (&ButtonNumber, "Esc, 1, 2, 3, 4, 5, 6, 7, 8, 9, Tab");
-            где "&ButtonNumber" - фактический номер нажатой клавиши,
-            а "Esc, 1, 2, 3, 4, 5, 6, 7, 8, 9, Tab" - будут зафиксированы все 11 наименований кнопок,
-            с каждым из которых по отдельности будет сверен первый параметр
-            По аналогии с вышеописаным, предусмотрены разные регистры написания одних и тех же названия кнопок,
-            по 2-3 альтернативных варианта на каждую кнопку.
+            РіРґРµ "&ButtonNumber" - С„Р°РєС‚РёС‡РµСЃРєРёР№ РЅРѕРјРµСЂ РЅР°Р¶Р°С‚РѕР№ РєР»Р°РІРёС€Рё,
+            Р° "Esc, 1, 2, 3, 4, 5, 6, 7, 8, 9, Tab" - Р±СѓРґСѓС‚ Р·Р°С„РёРєСЃРёСЂРѕРІР°РЅС‹ РІСЃРµ 11 РЅР°РёРјРµРЅРѕРІР°РЅРёР№ РєРЅРѕРїРѕРє,
+            СЃ РєР°Р¶РґС‹Рј РёР· РєРѕС‚РѕСЂС‹С… РїРѕ РѕС‚РґРµР»СЊРЅРѕСЃС‚Рё Р±СѓРґРµС‚ СЃРІРµСЂРµРЅ РїРµСЂРІС‹Р№ РїР°СЂР°РјРµС‚СЂ
+            РџРѕ Р°РЅР°Р»РѕРіРёРё СЃ РІС‹С€РµРѕРїРёСЃР°РЅС‹Рј, РїСЂРµРґСѓСЃРјРѕС‚СЂРµРЅС‹ СЂР°Р·РЅС‹Рµ СЂРµРіРёСЃС‚СЂС‹ РЅР°РїРёСЃР°РЅРёСЏ РѕРґРЅРёС… Рё С‚РµС… Р¶Рµ РЅР°Р·РІР°РЅРёСЏ РєРЅРѕРїРѕРє,
+            РїРѕ 2-3 Р°Р»СЊС‚РµСЂРЅР°С‚РёРІРЅС‹С… РІР°СЂРёР°РЅС‚Р° РЅР° РєР°Р¶РґСѓСЋ РєРЅРѕРїРєСѓ.
 
-    Предусмотрены все возможные варианты нумерации каждой клавиши из всех возможных,
-    включая и оба регистра, и оба языка для каждой клавиши - то бишь, взяв например отдельно взятую клавишу G -
-    будет успешно обработано все 4 варианта кода этой клавиши, а именно:
+    РџСЂРµРґСѓСЃРјРѕС‚СЂРµРЅС‹ РІСЃРµ РІРѕР·РјРѕР¶РЅС‹Рµ РІР°СЂРёР°РЅС‚С‹ РЅСѓРјРµСЂР°С†РёРё РєР°Р¶РґРѕР№ РєР»Р°РІРёС€Рё РёР· РІСЃРµС… РІРѕР·РјРѕР¶РЅС‹С…,
+    РІРєР»СЋС‡Р°СЏ Рё РѕР±Р° СЂРµРіРёСЃС‚СЂР°, Рё РѕР±Р° СЏР·С‹РєР° РґР»СЏ РєР°Р¶РґРѕР№ РєР»Р°РІРёС€Рё - С‚Рѕ Р±РёС€СЊ, РІР·СЏРІ РЅР°РїСЂРёРјРµСЂ РѕС‚РґРµР»СЊРЅРѕ РІР·СЏС‚СѓСЋ РєР»Р°РІРёС€Сѓ G -
+    Р±СѓРґРµС‚ СѓСЃРїРµС€РЅРѕ РѕР±СЂР°Р±РѕС‚Р°РЅРѕ РІСЃРµ 4 РІР°СЂРёР°РЅС‚Р° РєРѕРґР° СЌС‚РѕР№ РєР»Р°РІРёС€Рё, Р° РёРјРµРЅРЅРѕ:
 
-        Пример написания названия нужной клавиши:
+        РџСЂРёРјРµСЂ РЅР°РїРёСЃР°РЅРёСЏ РЅР°Р·РІР°РЅРёСЏ РЅСѓР¶РЅРѕР№ РєР»Р°РІРёС€Рё:
 
-        * "п" - маленькая буква на кириллице
-        * "П" - большая буква на кириллице
-        * "g" - маленькая буква на латинице
-        * "G" - большая буква на латинице.
+        * "Рї" - РјР°Р»РµРЅСЊРєР°СЏ Р±СѓРєРІР° РЅР° РєРёСЂРёР»Р»РёС†Рµ
+        * "Рџ" - Р±РѕР»СЊС€Р°СЏ Р±СѓРєРІР° РЅР° РєРёСЂРёР»Р»РёС†Рµ
+        * "g" - РјР°Р»РµРЅСЊРєР°СЏ Р±СѓРєРІР° РЅР° Р»Р°С‚РёРЅРёС†Рµ
+        * "G" - Р±РѕР»СЊС€Р°СЏ Р±СѓРєРІР° РЅР° Р»Р°С‚РёРЅРёС†Рµ.
 
-    * Допускается любой порядок ввода аргумента
+    * Р”РѕРїСѓСЃРєР°РµС‚СЃСЏ Р»СЋР±РѕР№ РїРѕСЂСЏРґРѕРє РІРІРѕРґР° Р°СЂРіСѓРјРµРЅС‚Р°
 
 */
 
@@ -107,7 +107,7 @@ const bool ClickCatch (const std::string Button_Name, const unsigned short int* 
 
     /* ~ -> - Page Up */
 
-		else if ((Button_Name == "`" || Button_Name == "~") && (*Button_Number == 96 || *Button_Number == 126 || *Button_Number == 184 || *Button_Number == 168))
+		else if ((Button_Name == "`" || Button_Name == "~") && (*Button_Number == 96 || *Button_Number == 126 || *Button_Number == 81 || *Button_Number == 1))
 			return true;
 
 		else if ((Button_Name == "1" || Button_Name == "!") && (*Button_Number == 49 || *Button_Number == 33))
@@ -116,7 +116,7 @@ const bool ClickCatch (const std::string Button_Name, const unsigned short int* 
 		else if ((Button_Name == "2" || Button_Name == "@" || Button_Name == "\"") && (*Button_Number == 50 || *Button_Number == 64 || *Button_Number == 34))
 			return true;
 
-		else if ((Button_Name == "3" || Button_Name == "#" || Button_Name == "№") && (*Button_Number == 51 || *Button_Number == 35 || *Button_Number == 185))
+		else if ((Button_Name == "3" || Button_Name == "#" || Button_Name == "в„–") && (*Button_Number == 51 || *Button_Number == 35 || *Button_Number == 22))
 			return true;
 
 		else if ((Button_Name == "4" || Button_Name == "$" || Button_Name == ";") && (*Button_Number == 52 || *Button_Number == 36 || *Button_Number == 59))
@@ -134,7 +134,7 @@ const bool ClickCatch (const std::string Button_Name, const unsigned short int* 
 		else if ((Button_Name == "8" || Button_Name == "*") && (*Button_Number == 56 || *Button_Number == 42))
 			return true;
 
-		else if ((Button_Name == "9" || Button_Name == "(") && (*Button_Number == 57 || *Button_Number == 42))
+		else if ((Button_Name == "9" || Button_Name == "(") && (*Button_Number == 57 || *Button_Number == 40))
 			return true;
 
 		else if ((Button_Name == "0" || Button_Name == ")") && (*Button_Number == 48 || *Button_Number == 41))
@@ -165,40 +165,40 @@ const bool ClickCatch (const std::string Button_Name, const unsigned short int* 
 		else if ((Button_Name == "TAB" || Button_Name == "Tab" || Button_Name == "tab") && *Button_Number == 9)
 			return true;
 
-		else if ((Button_Name == "Q" || Button_Name == "q") && (*Button_Number == 81 || *Button_Number == 113 || *Button_Number == 201 || *Button_Number == 233))
+		else if ((Button_Name == "Q" || Button_Name == "q") && (*Button_Number == 81 || *Button_Number == 113 || *Button_Number == 57 || *Button_Number == 25))
 			return true;
 
-		else if ((Button_Name == "W" || Button_Name == "w") && (*Button_Number == 87 || *Button_Number == 119 || *Button_Number == 214 || *Button_Number == 246))
+		else if ((Button_Name == "W" || Button_Name == "w") && (*Button_Number == 87 || *Button_Number == 119 || *Button_Number == 70 || *Button_Number == 38))
 			return true;
 
-		else if ((Button_Name == "E" || Button_Name == "e") && (*Button_Number == 69 || *Button_Number == 101 || *Button_Number == 211 || *Button_Number == 243))
+		else if ((Button_Name == "E" || Button_Name == "e") && (*Button_Number == 69 || *Button_Number == 101 || *Button_Number == 67 || *Button_Number == 35))
 			return true;
 
-		else if ((Button_Name == "R" || Button_Name == "r") && (*Button_Number == 82 || *Button_Number == 114 || *Button_Number == 202 || *Button_Number == 234))
+		else if ((Button_Name == "R" || Button_Name == "r") && (*Button_Number == 82 || *Button_Number == 114 || *Button_Number == 58 || *Button_Number == 26))
 			return true;
 
-		else if ((Button_Name == "T" || Button_Name == "t") && (*Button_Number == 84 || *Button_Number == 116 || *Button_Number == 197 || *Button_Number == 229))
+		else if ((Button_Name == "T" || Button_Name == "t") && (*Button_Number == 84 || *Button_Number == 116 || *Button_Number == 53 || *Button_Number == 21))
 			return true;
 
-		else if ((Button_Name == "Y" || Button_Name == "y") && (*Button_Number == 89 || *Button_Number == 121 || *Button_Number == 205 || *Button_Number == 237))
+		else if ((Button_Name == "Y" || Button_Name == "y") && (*Button_Number == 89 || *Button_Number == 121 || *Button_Number == 61 || *Button_Number == 29))
 			return true;
 
-		else if ((Button_Name == "U" || Button_Name == "u") && (*Button_Number == 85 || *Button_Number == 117 || *Button_Number == 195 || *Button_Number == 227))
+		else if ((Button_Name == "U" || Button_Name == "u") && (*Button_Number == 85 || *Button_Number == 117 || *Button_Number == 51 || *Button_Number == 19))
 			return true;
 
-		else if ((Button_Name == "I" || Button_Name == "i") && (*Button_Number == 73 || *Button_Number == 105 || *Button_Number == 216 || *Button_Number == 248))
+		else if ((Button_Name == "I" || Button_Name == "i") && (*Button_Number == 73 || *Button_Number == 105 || *Button_Number == 72 || *Button_Number == 40))
 			return true;
 
-		else if ((Button_Name == "O" || Button_Name == "o") && (*Button_Number == 79 || *Button_Number == 111 || *Button_Number == 217 || *Button_Number == 249))
+		else if ((Button_Name == "O" || Button_Name == "o") && (*Button_Number == 79 || *Button_Number == 111 || *Button_Number == 73 || *Button_Number == 41))
 			return true;
 
-		else if ((Button_Name == "P" || Button_Name == "p") && (*Button_Number == 80 || *Button_Number == 112 || *Button_Number == 199 || *Button_Number == 231))
+		else if ((Button_Name == "P" || Button_Name == "p") && (*Button_Number == 80 || *Button_Number == 112 || *Button_Number == 55 || *Button_Number == 23))
 			return true;
 
-		else if ((Button_Name == "{" || Button_Name == "[") && (*Button_Number == 123 || *Button_Number == 91 || *Button_Number == 213 || *Button_Number == 245))
+		else if ((Button_Name == "{" || Button_Name == "[") && (*Button_Number == 123 || *Button_Number == 91 || *Button_Number == 69 || *Button_Number == 37))
 			return true;
 
-		else if ((Button_Name == "}" || Button_Name == "]") && (*Button_Number == 125 || *Button_Number == 93 || *Button_Number == 218 || *Button_Number == 250))
+		else if ((Button_Name == "}" || Button_Name == "]") && (*Button_Number == 125 || *Button_Number == 93 || *Button_Number == 74 || *Button_Number == 42))
 			return true;
 
 		else if ((Button_Name == "|" || Button_Name == "\"" || Button_Name == "/") && (*Button_Number == 124 || *Button_Number == 92 || *Button_Number == 47))
@@ -217,37 +217,37 @@ const bool ClickCatch (const std::string Button_Name, const unsigned short int* 
 
     /* A -> Enter */
 
-		else if ((Button_Name == "A" || Button_Name == "a") && (*Button_Number == 97 || *Button_Number == 65 || *Button_Number == 244 || *Button_Number == 212))
+		else if ((Button_Name == "A" || Button_Name == "a") && (*Button_Number == 97 || *Button_Number == 65 || *Button_Number == 68 || *Button_Number == 36))
 			return true;
 
-		else if ((Button_Name == "S" || Button_Name == "s") && (*Button_Number == 115 || *Button_Number == 83 || *Button_Number == 251 || *Button_Number == 219))
+		else if ((Button_Name == "S" || Button_Name == "s") && (*Button_Number == 115 || *Button_Number == 83 || *Button_Number == 75 || *Button_Number == 43))
 			return true;
 
-		else if ((Button_Name == "D" || Button_Name == "d") && (*Button_Number == 100 || *Button_Number == 68 || *Button_Number == 226 || *Button_Number == 194))
+		else if ((Button_Name == "D" || Button_Name == "d") && (*Button_Number == 100 || *Button_Number == 68 || *Button_Number == 50 || *Button_Number == 18))
 			return true;
 
-		else if ((Button_Name == "F" || Button_Name == "f") && (*Button_Number == 102 || *Button_Number == 70 || *Button_Number == 224 || *Button_Number == 192))
+		else if ((Button_Name == "F" || Button_Name == "f") && (*Button_Number == 102 || *Button_Number == 70 || *Button_Number == 48 || *Button_Number == 16))
 			return true;
 
-		else if ((Button_Name == "G" || Button_Name == "g") && (*Button_Number == 71 || *Button_Number == 103 || *Button_Number == 207 || *Button_Number == 239))
+		else if ((Button_Name == "G" || Button_Name == "g") && (*Button_Number == 71 || *Button_Number == 103 || *Button_Number == 63 || *Button_Number == 31))
 			return true;
 
-		else if ((Button_Name == "H" || Button_Name == "h") && (*Button_Number == 72 || *Button_Number == 104 || *Button_Number == 208 || *Button_Number == 240))
+		else if ((Button_Name == "H" || Button_Name == "h") && (*Button_Number == 72 || *Button_Number == 104 || *Button_Number == 64 || *Button_Number == 32))
 			return true;
 
-		else if ((Button_Name == "J" || Button_Name == "j") && (*Button_Number == 74 || *Button_Number == 106 || *Button_Number == 206 || *Button_Number == 238))
+		else if ((Button_Name == "J" || Button_Name == "j") && (*Button_Number == 74 || *Button_Number == 106 || *Button_Number == 62 || *Button_Number == 30))
 			return true;
 
-		else if ((Button_Name == "K" || Button_Name == "k") && (*Button_Number == 75 || *Button_Number == 107 || *Button_Number == 203 || *Button_Number == 235))
+		else if ((Button_Name == "K" || Button_Name == "k") && (*Button_Number == 75 || *Button_Number == 107 || *Button_Number == 59 || *Button_Number == 27))
 			return true;
 
-		else if ((Button_Name == "L" || Button_Name == "l") && (*Button_Number == 76 || *Button_Number == 108 || *Button_Number == 196 || *Button_Number == 228))
+		else if ((Button_Name == "L" || Button_Name == "l") && (*Button_Number == 76 || *Button_Number == 108 || *Button_Number == 52 || *Button_Number == 20))
 			return true;
 
 		else if ((Button_Name == ":" || Button_Name == ";") && (*Button_Number == 58 || *Button_Number == 59 || *Button_Number == 198 || *Button_Number == 230))
 			return true;
 
-		else if ((Button_Name == "\"" || Button_Name == "\'") && (*Button_Number == 34 || *Button_Number == 39 || *Button_Number == 221 || *Button_Number == 253))
+		else if ((Button_Name == "\"" || Button_Name == "\'") && (*Button_Number == 34 || *Button_Number == 39 || *Button_Number == 77 || *Button_Number == 45))
 			return true;
 
 		else if ((Button_Name == "ENTER" || Button_Name == "Enter" || Button_Name == "enter") && *Button_Number == 13)
@@ -257,31 +257,31 @@ const bool ClickCatch (const std::string Button_Name, const unsigned short int* 
 
     /* Z -> Arrow_Up */
 
-		else if ((Button_Name == "Z" || Button_Name == "z") && (*Button_Number == 90 || *Button_Number == 122 || *Button_Number == 223 || *Button_Number == 255))
+		else if ((Button_Name == "Z" || Button_Name == "z") && (*Button_Number == 90 || *Button_Number == 122 || *Button_Number == 79 || *Button_Number == 47))
 			return true;
 
-		else if ((Button_Name == "X" || Button_Name == "x") && (*Button_Number == 88 || *Button_Number == 120 || *Button_Number == 215 || *Button_Number == 247))
+		else if ((Button_Name == "X" || Button_Name == "x") && (*Button_Number == 88 || *Button_Number == 120 || *Button_Number == 71 || *Button_Number == 39))
 			return true;
 
-		else if ((Button_Name == "C" || Button_Name == "c") && (*Button_Number == 67 || *Button_Number == 99 || *Button_Number == 209 || *Button_Number == 241))
+		else if ((Button_Name == "C" || Button_Name == "c") && (*Button_Number == 67 || *Button_Number == 99 || *Button_Number == 65 || *Button_Number == 33))
 			return true;
 
-		else if ((Button_Name == "V" || Button_Name == "v") && (*Button_Number == 86 || *Button_Number == 118 || *Button_Number == 204 || *Button_Number == 236))
+		else if ((Button_Name == "V" || Button_Name == "v") && (*Button_Number == 86 || *Button_Number == 118 || *Button_Number == 60 || *Button_Number == 28))
 			return true;
 
-		else if ((Button_Name == "B" || Button_Name == "b") && (*Button_Number == 66 || *Button_Number == 98 || *Button_Number == 200 || *Button_Number == 232))
+		else if ((Button_Name == "B" || Button_Name == "b") && (*Button_Number == 66 || *Button_Number == 98 || *Button_Number == 56 || *Button_Number == 24))
 			return true;
 
-		else if ((Button_Name == "N" || Button_Name == "n") && (*Button_Number == 78 || *Button_Number == 110 || *Button_Number == 210 || *Button_Number == 242))
+		else if ((Button_Name == "N" || Button_Name == "n") && (*Button_Number == 78 || *Button_Number == 110 || *Button_Number == 66 || *Button_Number == 34))
 			return true;
 
-		else if ((Button_Name == "M" || Button_Name == "m") && (*Button_Number == 77 || *Button_Number == 109 || *Button_Number == 220 || *Button_Number == 252))
+		else if ((Button_Name == "M" || Button_Name == "m") && (*Button_Number == 77 || *Button_Number == 109 || *Button_Number == 76 || *Button_Number == 44))
 			return true;
 
-		else if ((Button_Name == "<" || Button_Name == ",") && (*Button_Number == 60 || *Button_Number == 44 || *Button_Number == 193 || *Button_Number == 225))
+		else if ((Button_Name == "<" || Button_Name == ",") && (*Button_Number == 60 || *Button_Number == 44 || *Button_Number == 49 || *Button_Number == 17))
 			return true;
 
-		else if ((Button_Name == ">" || Button_Name == ".") && (*Button_Number == 62 || *Button_Number == 46 || *Button_Number == 222 || *Button_Number == 254))
+		else if ((Button_Name == ">" || Button_Name == ".") && (*Button_Number == 62 || *Button_Number == 46 || *Button_Number == 78 || *Button_Number == 46))
 			return true;
 
 		else if ((Button_Name == "?" || Button_Name == "/") && (*Button_Number == 63 || *Button_Number == 47 || *Button_Number == 44 || *Button_Number == 46))
@@ -310,11 +310,11 @@ const bool ClickCatch (const std::string Button_Name, const unsigned short int* 
 
     return false;
 
-} // функция обработки нажатой и требуемой кнопки (одной)
+} // С„СѓРЅРєС†РёСЏ РѕР±СЂР°Р±РѕС‚РєРё РЅР°Р¶Р°С‚РѕР№ Рё С‚СЂРµР±СѓРµРјРѕР№ РєРЅРѕРїРєРё (РѕРґРЅРѕР№)
 
 const bool ClickCatch (const unsigned short int* Button_Number, const std::string Buttons_Massive_Name)  {
 
-    std::vector <std::string> Buttons_Vector; // вектор входных строк-кнопок
+    std::vector <std::string> Buttons_Vector; // РІРµРєС‚РѕСЂ РІС…РѕРґРЅС‹С… СЃС‚СЂРѕРє-РєРЅРѕРїРѕРє
     std::string Temp = "\0";
 
         for (unsigned short int i = 0; i < Buttons_Massive_Name.length (); i++) {
@@ -339,7 +339,7 @@ const bool ClickCatch (const unsigned short int* Button_Number, const std::strin
 
     return false;
 
-} // функция для массива входных кнопок
+} // С„СѓРЅРєС†РёСЏ РґР»СЏ РјР°СЃСЃРёРІР° РІС…РѕРґРЅС‹С… РєРЅРѕРїРѕРє
 
 #endif // _clickcatcher_h_
 

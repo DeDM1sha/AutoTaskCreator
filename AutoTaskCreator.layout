@@ -2,39 +2,14 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
-	<File name="modules\menu_forms\Menu_Settings.h" open="0" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="modules\libs\clickcatcher.h" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="21714" topLine="442" />
+			<Cursor1 position="17291" topLine="298" />
 		</Cursor>
 	</File>
-	<File name="modules\classes\search_class.h" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="modules\menu_forms\Menu_Settings.h" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1266" topLine="21" />
-		</Cursor>
-	</File>
-	<File name="modules\menu_forms\Menu_Formation_order.h" open="0" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="15106" topLine="348" />
-		</Cursor>
-	</File>
-	<File name="modules\classes\settings_class.h" open="1" top="1" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="915" topLine="7" />
-		</Cursor>
-	</File>
-	<File name="modules\classes\statistics_class.h" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="14683" topLine="320" />
-		</Cursor>
-	</File>
-	<File name="modules\menu_forms\Menu_Statistics.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="6231" topLine="82" />
-		</Cursor>
-	</File>
-	<File name="modules\classes\formation_order_class.h" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="16500" topLine="395" />
+			<Cursor1 position="12084" topLine="320" />
 		</Cursor>
 	</File>
 	<File name="modules\classes\banlists_class.h" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -42,19 +17,34 @@
 			<Cursor1 position="11293" topLine="329" />
 		</Cursor>
 	</File>
+	<File name="modules\classes\statistics_class.h" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="14683" topLine="320" />
+		</Cursor>
+	</File>
 	<File name="modules\menu_forms\Menu_Search_tasks.h" open="0" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="1772" topLine="17" />
 		</Cursor>
 	</File>
-	<File name="modules\libs\additional_functions.h" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="modules\classes\settings_class.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="7170" topLine="0" />
+			<Cursor1 position="36020" topLine="506" />
 		</Cursor>
 	</File>
-	<File name="modules\libs\clickcatcher.h" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="modules\classes\formation_order_class.h" open="1" top="1" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="18008" topLine="313" />
+			<Cursor1 position="16685" topLine="408" />
+		</Cursor>
+	</File>
+	<File name="modules\libs\additional_functions.h" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="11373" topLine="326" />
+		</Cursor>
+	</File>
+	<File name="modules\classes\search_class.h" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1266" topLine="21" />
 		</Cursor>
 	</File>
 	<File name="modules\classes\clients_class.h" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -62,9 +52,19 @@
 			<Cursor1 position="7420" topLine="235" />
 		</Cursor>
 	</File>
+	<File name="modules\menu_forms\Menu_Formation_order.h" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="10622" topLine="339" />
+		</Cursor>
+	</File>
+	<File name="modules\menu_forms\Menu_Statistics.h" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="6231" topLine="82" />
+		</Cursor>
+	</File>
 	<File name="main.cpp" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="14523" topLine="190" />
+			<Cursor1 position="14523" topLine="232" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>

@@ -1,4 +1,4 @@
-// Модуль для настроек приложения. Именно здесь описан весь функционал кнопки "Настройки".
+// РњРѕРґСѓР»СЊ РґР»СЏ РЅР°СЃС‚СЂРѕРµРє РїСЂРёР»РѕР¶РµРЅРёСЏ. РРјРµРЅРЅРѕ Р·РґРµСЃСЊ РѕРїРёСЃР°РЅ РІРµСЃСЊ С„СѓРЅРєС†РёРѕРЅР°Р» РєРЅРѕРїРєРё "РќР°СЃС‚СЂРѕР№РєРё".
 
 #pragma once
 
@@ -8,11 +8,11 @@
 const static void Show_TextHeader (std::string MainText) {
 
     CenterText (MainText + "\n");
-    CenterText ("Для этого нажмите Y (Yes) - для подтверждения\n");
-    CenterText ("Или N (No) - для отмены\n\n");
-    CenterText ("Ваш выбор: ");
+    CenterText ("Р”Р»СЏ СЌС‚РѕРіРѕ РЅР°Р¶РјРёС‚Рµ Y (Yes) - РґР»СЏ РїРѕРґС‚РІРµСЂР¶РґРµРЅРёСЏ\n");
+    CenterText ("РР»Рё N (No) - РґР»СЏ РѕС‚РјРµРЅС‹\n\n");
+    CenterText ("Р’Р°С€ РІС‹Р±РѕСЂ: ");
 
-} // функция для отображения шапки в подпунктах меню
+} // С„СѓРЅРєС†РёСЏ РґР»СЏ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ С€Р°РїРєРё РІ РїРѕРґРїСѓРЅРєС‚Р°С… РјРµРЅСЋ
 
 const static bool ChoisenAnswer_SetSettings (unsigned short int* ButtonNumber, bool OldParam) {
 
@@ -26,7 +26,7 @@ const static bool ChoisenAnswer_SetSettings (unsigned short int* ButtonNumber, b
         }
 
         if (ClickCatch ("Esc", ButtonNumber))
-            return false; // если был нажат Esc, то будет произведен дальшнейший выход в основное меню настроек
+            return false; // РµСЃР»Рё Р±С‹Р» РЅР°Р¶Р°С‚ Esc, С‚Рѕ Р±СѓРґРµС‚ РїСЂРѕРёР·РІРµРґРµРЅ РґР°Р»СЊС€РЅРµР№С€РёР№ РІС‹С…РѕРґ РІ РѕСЃРЅРѕРІРЅРѕРµ РјРµРЅСЋ РЅР°СЃС‚СЂРѕРµРє
 
         else if (ClickCatch ("Y", ButtonNumber)) {
 
@@ -44,13 +44,13 @@ const static bool ChoisenAnswer_SetSettings (unsigned short int* ButtonNumber, b
                 return false;
 
             else
-                OldParam = false;
+                OldParam = true;
 
         }
 
-    return true; // в обратном случае, будет вызвана функция, определяющая нажатие [Y] / [N]
+    return true; // РІ РѕР±СЂР°С‚РЅРѕРј СЃР»СѓС‡Р°Рµ, Р±СѓРґРµС‚ РІС‹Р·РІР°РЅР° С„СѓРЅРєС†РёСЏ, РѕРїСЂРµРґРµР»СЏСЋС‰Р°СЏ РЅР°Р¶Р°С‚РёРµ [Y] / [N]
 
-} // функция для проверки нажатой клавиши в отдельном пункте меню настроек (отдельно для каждого параметра настроек)
+} // С„СѓРЅРєС†РёСЏ РґР»СЏ РїСЂРѕРІРµСЂРєРё РЅР°Р¶Р°С‚РѕР№ РєР»Р°РІРёС€Рё РІ РѕС‚РґРµР»СЊРЅРѕРј РїСѓРЅРєС‚Рµ РјРµРЅСЋ РЅР°СЃС‚СЂРѕРµРє (РѕС‚РґРµР»СЊРЅРѕ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїР°СЂР°РјРµС‚СЂР° РЅР°СЃС‚СЂРѕРµРє)
 
 const static bool ChoisenAnswer_SetParams (unsigned short int* ButtonNumber) {
 
@@ -65,7 +65,7 @@ const static bool ChoisenAnswer_SetParams (unsigned short int* ButtonNumber) {
 
     return false;
 
-} // функция для проверки нажатой клавиши при выборе ответа [Y] / [N]
+} // С„СѓРЅРєС†РёСЏ РґР»СЏ РїСЂРѕРІРµСЂРєРё РЅР°Р¶Р°С‚РѕР№ РєР»Р°РІРёС€Рё РїСЂРё РІС‹Р±РѕСЂРµ РѕС‚РІРµС‚Р° [Y] / [N]
 
 const static std::string InputAnswer_SetParams (const std::string& MainText, const std::string& SupportText) {
 
@@ -85,52 +85,52 @@ const static std::string InputAnswer_SetParams (const std::string& MainText, con
                else if (Str.length () > 1)
                     break;
 
-        } // валидность на ввод пути
+        } // РІР°Р»РёРґРЅРѕСЃС‚СЊ РЅР° РІРІРѕРґ РїСѓС‚Рё
 
     return Str;
 
-} // функция для ввода произвольных параметров в меню настроек
+} // С„СѓРЅРєС†РёСЏ РґР»СЏ РІРІРѕРґР° РїСЂРѕРёР·РІРѕР»СЊРЅС‹С… РїР°СЂР°РјРµС‚СЂРѕРІ РІ РјРµРЅСЋ РЅР°СЃС‚СЂРѕРµРє
 
 const static void Draw_MenuHeader (void) {
 
     cls ();
 
-    CenterText ("Настройки программы\n");
+    CenterText ("РќР°СЃС‚СЂРѕР№РєРё РїСЂРѕРіСЂР°РјРјС‹\n");
     Show_Text_ForExit ();
 
     printf ("\n\n\n\n");
 
-} // функция отрисровки шапки меню настроек
+} // С„СѓРЅРєС†РёСЏ РѕС‚СЂРёСЃСЂРѕРІРєРё С€Р°РїРєРё РјРµРЅСЋ РЅР°СЃС‚СЂРѕРµРє
 
 const static void Menu_Settings (Class_Settings& Settings, Class_BanLists& Banlists) {
 
     std::string String_AutomaticCloseApplication = "\0";
-    unsigned short int ButtonNumber = 0; // переменная для обработки нажатий в меню
+    unsigned short int ButtonNumber = 0; // РїРµСЂРµРјРµРЅРЅР°СЏ РґР»СЏ РѕР±СЂР°Р±РѕС‚РєРё РЅР°Р¶Р°С‚РёР№ РІ РјРµРЅСЋ
 
         while (true) {
 
             Draw_MenuHeader ();
 
-            CenterText ("Выберите раздел настроек параметров программных модулей\n\n");
+            CenterText ("Р’С‹Р±РµСЂРёС‚Рµ СЂР°Р·РґРµР» РЅР°СЃС‚СЂРѕРµРє РїР°СЂР°РјРµС‚СЂРѕРІ РїСЂРѕРіСЂР°РјРјРЅС‹С… РјРѕРґСѓР»РµР№\n\n");
 
             CenterText ("|------------------------------------------|\n");
             CenterText ("|                                          |\n");
-            CenterText ("| 1.      Раздел формирования заказов      |\n");
+            CenterText ("| 1.      Р Р°Р·РґРµР» С„РѕСЂРјРёСЂРѕРІР°РЅРёСЏ Р·Р°РєР°Р·РѕРІ      |\n");
             CenterText ("|__________________________________________|\n");
             CenterText ("|                                          |\n");
-            CenterText ("| 2.   Раздел поиска заказов / клиентов    |\n");
+            CenterText ("| 2.   Р Р°Р·РґРµР» РїРѕРёСЃРєР° Р·Р°РєР°Р·РѕРІ / РєР»РёРµРЅС‚РѕРІ    |\n");
             CenterText ("|__________________________________________|\n");
             CenterText ("|                                          |\n");
-            CenterText ("| 3.      Раздел блокировки клиентов       |\n");
+            CenterText ("| 3.      Р Р°Р·РґРµР» Р±Р»РѕРєРёСЂРѕРІРєРё РєР»РёРµРЅС‚РѕРІ       |\n");
             CenterText ("|__________________________________________|\n");
             CenterText ("|                                          |\n");
-            CenterText ("| 4.      Раздел статистики и данных       |\n");
+            CenterText ("| 4.      Р Р°Р·РґРµР» СЃС‚Р°С‚РёСЃС‚РёРєРё Рё РґР°РЅРЅС‹С…       |\n");
             CenterText ("|__________________________________________|\n");
             CenterText ("|                                          |\n");
-            CenterText ("| Tab. Восстановить настройки по умолчанию |\n");
-            CenterText ("|__________________________________________|\n");
+            CenterText ("| Tab. Р’РѕСЃСЃС‚Р°РЅРѕРІРёС‚СЊ РЅР°СЃС‚СЂРѕР№РєРё РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ |\n");
+            CenterText (" |__________________________________________|\n\n");
 
-            CenterText ("\nВыберите пункт меню для изменения выбранных настроек\n\n\n");
+            CenterText ("Р’С‹Р±РµСЂРёС‚Рµ РїСѓРЅРєС‚ РјРµРЅСЋ РґР»СЏ РёР·РјРµРЅРµРЅРёСЏ РІС‹Р±СЂР°РЅРЅС‹С… РЅР°СЃС‚СЂРѕРµРє\n\n\n");
 
                 while (true) {
 
@@ -150,26 +150,29 @@ const static void Menu_Settings (Class_Settings& Settings, Class_BanLists& Banli
 
                         Draw_MenuHeader ();
 
-                        CenterText ("Раздел настроек модуля формирования заказов\n\n");
-                        printf ("                                   1. Путь к месту хранения заказов: ");
+                        CenterText ("Р Р°Р·РґРµР» РЅР°СЃС‚СЂРѕРµРє РјРѕРґСѓР»СЏ С„РѕСЂРјРёСЂРѕРІР°РЅРёСЏ Р·Р°РєР°Р·РѕРІ\n\n");
+                        printf ("                                   1. РџСѓС‚СЊ Рє РјРµСЃС‚Сѓ С…СЂР°РЅРµРЅРёСЏ Р·Р°РєР°Р·РѕРІ: ");
                         Show_Text_Output(Settings.getLabs_Path () + "\n");
 
-                        printf ("                                   2. Автоматический запуск создания нового заказа: ");
+                        printf ("                                   2. РђРІС‚РѕРјР°С‚РёС‡РµСЃРєРёР№ Р·Р°РїСѓСЃРє СЃРѕР·РґР°РЅРёСЏ РЅРѕРІРѕРіРѕ Р·Р°РєР°Р·Р°: ");
                         Show_Text_Output (Convert_Bool_toString (Settings.getAutomatic_Order_Start ()) + "\n");
 
-                        printf ("                                   3. Автоматическое завершение после заполнения заказа: ");
+                        printf ("                                   3. РђРІС‚РѕРјР°С‚РёС‡РµСЃРєРѕРµ Р·Р°РІРµСЂС€РµРЅРёРµ РїРѕСЃР»Рµ Р·Р°РїРѕР»РЅРµРЅРёСЏ Р·Р°РєР°Р·Р°: ");
                         Show_Text_Output (Convert_Bool_toString (Settings.getAutomatic_Close_Application ()) + "\n");
 
-                        printf ("                                   4. Автоматическое открытие заказа после его создания: ");
+                        printf ("                                   4. РђРІС‚РѕРјР°С‚РёС‡РµСЃРєРѕРµ РѕС‚РєСЂС‹С‚РёРµ Р·Р°РєР°Р·Р° РїРѕСЃР»Рµ РµРіРѕ СЃРѕР·РґР°РЅРёСЏ: ");
                         Show_Text_Output (Convert_Bool_toString (Settings.getAutomatic_Open_Order ()) + "\n");
 
-                        printf ("\n                                 Tab. Восстановить параметры формирования заказов по умолчанию\n");
+                        printf ("                                   5. РџСѓС‚СЊ РґР»СЏ Р·Р°РїСѓСЃРєР° IDE РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ: ");
+                        Show_Text_Output (Settings.getDefault_IDE_Path () + "\n");
+
+                        printf ("\n                                 Tab. Р’РѕСЃСЃС‚Р°РЅРѕРІРёС‚СЊ РїР°СЂР°РјРµС‚СЂС‹ С„РѕСЂРјРёСЂРѕРІР°РЅРёСЏ Р·Р°РєР°Р·РѕРІ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ\n");
 
                             while (true) {
 
                                 ButtonNumber = getch ();
 
-                                    if (ClickCatch (&ButtonNumber, "Esc, 1, 2, 3, 4, Tab"))
+                                    if (ClickCatch (&ButtonNumber, "Esc, 1, 2, 3, 4, 5, Tab"))
                                         break;
 
                             }
@@ -181,22 +184,26 @@ const static void Menu_Settings (Class_Settings& Settings, Class_BanLists& Banli
 
                             if (ClickCatch ("1", &ButtonNumber)) {
 
-                                std::string Str = InputAnswer_SetParams ("Введите новый путь к хранению заказов", "Путь");
+                                const std::string Str = InputAnswer_SetParams ("Р’РІРµРґРёС‚Рµ РЅРѕРІС‹Р№ РїСѓС‚СЊ Рє С…СЂР°РЅРµРЅРёСЋ Р·Р°РєР°Р·РѕРІ", "РџСѓС‚СЊ");
 
                                     if (Check_Input_ForExit (Str))
                                         continue;
 
-                                    if (Settings.Check_FilePath (Str))
+                                    if (Settings.Check_FilePath (Str)) {
+
                                         Settings.setLabs_Path (Str);
+                                        Settings.SaveSettings (true);
+
+                                    }
 
                                     else
                                         continue;
 
-                            } // изменение пути места хранения заказов
+                            } // РёР·РјРµРЅРµРЅРёРµ РїСѓС‚Рё РјРµСЃС‚Р° С…СЂР°РЅРµРЅРёСЏ Р·Р°РєР°Р·РѕРІ
 
                             else if (ClickCatch ("2", &ButtonNumber)) {
 
-                                Show_TextHeader ("Задайте булевое значение для автоматического запуска меню заказа");
+                                Show_TextHeader ("Р—Р°РґР°Р№С‚Рµ Р±СѓР»РµРІРѕРµ Р·РЅР°С‡РµРЅРёРµ РґР»СЏ Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРѕРіРѕ Р·Р°РїСѓСЃРєР° РјРµРЅСЋ Р·Р°РєР°Р·Р°");
 
                                     if (ChoisenAnswer_SetSettings (&ButtonNumber, Settings.getAutomatic_Order_Start ()) == true) {
 
@@ -208,11 +215,11 @@ const static void Menu_Settings (Class_Settings& Settings, Class_BanLists& Banli
                                     else
                                         continue;
 
-                            } // изменение автоматического запуска меню заказа
+                            } // РёР·РјРµРЅРµРЅРёРµ Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРѕРіРѕ Р·Р°РїСѓСЃРєР° РјРµРЅСЋ Р·Р°РєР°Р·Р°
 
                             else if (ClickCatch ("3", &ButtonNumber)) {
 
-                                Show_TextHeader ("Задайте булевое значение для автоматического закрытия приложения после меню заказа");
+                                Show_TextHeader ("Р—Р°РґР°Р№С‚Рµ Р±СѓР»РµРІРѕРµ Р·РЅР°С‡РµРЅРёРµ РґР»СЏ Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРѕРіРѕ Р·Р°РєСЂС‹С‚РёСЏ РїСЂРёР»РѕР¶РµРЅРёСЏ РїРѕСЃР»Рµ РјРµРЅСЋ Р·Р°РєР°Р·Р°");
 
                                     if (ChoisenAnswer_SetSettings (&ButtonNumber, Settings.getAutomatic_Close_Application ()) == true) {
 
@@ -224,11 +231,11 @@ const static void Menu_Settings (Class_Settings& Settings, Class_BanLists& Banli
                                     else
                                         continue;
 
-                            } // изменение автоматического закрытия приложения после меню заказа
+                            } // РёР·РјРµРЅРµРЅРёРµ Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРѕРіРѕ Р·Р°РєСЂС‹С‚РёСЏ РїСЂРёР»РѕР¶РµРЅРёСЏ РїРѕСЃР»Рµ РјРµРЅСЋ Р·Р°РєР°Р·Р°
 
                             else if (ClickCatch ("4", &ButtonNumber)) {
 
-                                Show_TextHeader ("Задайте булевое значение для автоматического открытия заказа после его создания");
+                                Show_TextHeader ("Р—Р°РґР°Р№С‚Рµ Р±СѓР»РµРІРѕРµ Р·РЅР°С‡РµРЅРёРµ РґР»СЏ Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРѕРіРѕ РѕС‚РєСЂС‹С‚РёСЏ Р·Р°РєР°Р·Р° РїРѕСЃР»Рµ РµРіРѕ СЃРѕР·РґР°РЅРёСЏ");
 
                                     if (ChoisenAnswer_SetSettings (&ButtonNumber, Settings.getAutomatic_Open_Order ()) == true) {
 
@@ -240,11 +247,30 @@ const static void Menu_Settings (Class_Settings& Settings, Class_BanLists& Banli
                                     else
                                         continue;
 
-                            } // включение/отключение автоматического запуска заказа после его создания
+                            } // РІРєР»СЋС‡РµРЅРёРµ/РѕС‚РєР»СЋС‡РµРЅРёРµ Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРѕРіРѕ Р·Р°РїСѓСЃРєР° Р·Р°РєР°Р·Р° РїРѕСЃР»Рµ РµРіРѕ СЃРѕР·РґР°РЅРёСЏ
+
+                            if (ClickCatch ("5", &ButtonNumber)) {
+
+                                const std::string Str = InputAnswer_SetParams ("Р’РІРµРґРёС‚Рµ РЅРѕРІС‹Р№ РїСѓС‚СЊ Рє Р·Р°РїСѓСЃРєСѓ IDE РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ", "РџСѓС‚СЊ");
+
+                                    if (Check_Input_ForExit (Str))
+                                        continue;
+
+                                    if (Settings.Check_ExePath (Str)) {
+
+                                        Settings.setDefault_IDE_Path (Str);
+                                        Settings.SaveSettings (true);
+
+                                    }
+
+                                    else
+                                        continue;
+
+                            } // РёР·РјРµРЅРµРЅРёРµ РїСѓС‚Рё РґР»СЏ Р·Р°РїСѓСЃРєР° IDE РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ
 
                             else if (ClickCatch ("Tab", &ButtonNumber)) {
 
-                                Show_TextHeader ("Вы действительно хотите восстановить параметры формирования заказов по умолчанию?");
+                                Show_TextHeader ("Р’С‹ РґРµР№СЃС‚РІРёС‚РµР»СЊРЅРѕ С…РѕС‚РёС‚Рµ РІРѕСЃСЃС‚Р°РЅРѕРІРёС‚СЊ РїР°СЂР°РјРµС‚СЂС‹ С„РѕСЂРјРёСЂРѕРІР°РЅРёСЏ Р·Р°РєР°Р·РѕРІ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ?");
 
                                     while (true) {
 
@@ -266,39 +292,52 @@ const static void Menu_Settings (Class_Settings& Settings, Class_BanLists& Banli
                                     else if (ClickCatch (&ButtonNumber, "N, Esc"))
                                         continue;
 
-                            } // восстановление по умолчанию настроек формирования заказов
+                            } // РІРѕСЃСЃС‚Р°РЅРѕРІР»РµРЅРёРµ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ РЅР°СЃС‚СЂРѕРµРє С„РѕСЂРјРёСЂРѕРІР°РЅРёСЏ Р·Р°РєР°Р·РѕРІ
 
-                    } // конец жизненного цикла меню настроек модуля формирования заказа
+                    } // РєРѕРЅРµС† Р¶РёР·РЅРµРЅРЅРѕРіРѕ С†РёРєР»Р° РјРµРЅСЋ РЅР°СЃС‚СЂРѕРµРє РјРѕРґСѓР»СЏ С„РѕСЂРјРёСЂРѕРІР°РЅРёСЏ Р·Р°РєР°Р·Р°
 
-                } // раздел настроек модуля формирования заказа
+                } // СЂР°Р·РґРµР» РЅР°СЃС‚СЂРѕРµРє РјРѕРґСѓР»СЏ С„РѕСЂРјРёСЂРѕРІР°РЅРёСЏ Р·Р°РєР°Р·Р°
 
                 else if (ClickCatch ("2", &ButtonNumber)) {
 
                     while (true) {
 
                         Draw_MenuHeader ();
-                        CenterText ("Раздел настроек модуля поиска заказов и клиентов\n\n");
+                        CenterText ("Р Р°Р·РґРµР» РЅР°СЃС‚СЂРѕРµРє РјРѕРґСѓР»СЏ РїРѕРёСЃРєР° Р·Р°РєР°Р·РѕРІ Рё РєР»РёРµРЅС‚РѕРІ\n\n");
 
-                    } // конец жизненного цикла меню настроек модуля поиска заказов
+                            while (true) {
 
-                } // раздела настроек модуля поиска заказов
+                                ButtonNumber = getch ();
+
+                                    if (ClickCatch (&ButtonNumber, "Esc"))
+                                        break;
+
+                            }
+
+                            if (ClickCatch ("Esc", &ButtonNumber))
+                                break;
+
+                    } // РєРѕРЅРµС† Р¶РёР·РЅРµРЅРЅРѕРіРѕ С†РёРєР»Р° РјРµРЅСЋ РЅР°СЃС‚СЂРѕРµРє РјРѕРґСѓР»СЏ РїРѕРёСЃРєР° Р·Р°РєР°Р·РѕРІ
+
+                } // СЂР°Р·РґРµР»Р° РЅР°СЃС‚СЂРѕРµРє РјРѕРґСѓР»СЏ РїРѕРёСЃРєР° Р·Р°РєР°Р·РѕРІ
 
                 else if (ClickCatch ("3", &ButtonNumber)) {
 
                     while (true) {
 
-                        CenterText ("Раздел настроек модуля блокировки клиентов\n\n");
-                        printf ("                                   1. Автоматическое ежемесячное обновление списка бан-листа: ");
+                        Draw_MenuHeader ();
+                        CenterText ("Р Р°Р·РґРµР» РЅР°СЃС‚СЂРѕРµРє РјРѕРґСѓР»СЏ Р±Р»РѕРєРёСЂРѕРІРєРё РєР»РёРµРЅС‚РѕРІ\n\n");
+                        printf ("                                   1. РђРІС‚РѕРјР°С‚РёС‡РµСЃРєРѕРµ РµР¶РµРјРµСЃСЏС‡РЅРѕРµ РѕР±РЅРѕРІР»РµРЅРёРµ СЃРїРёСЃРєР° Р±Р°РЅ-Р»РёСЃС‚Р°: ");
                         Show_Text_Output (Convert_Bool_toString (Settings.getAutomatic_Update_BanList()) + "\n");
 
-                        printf ("                                   2. Изменить адрес бан-листа клиентов: ");
+                        printf ("                                   2. РР·РјРµРЅРёС‚СЊ Р°РґСЂРµСЃ Р±Р°РЅ-Р»РёСЃС‚Р° РєР»РёРµРЅС‚РѕРІ: ");
                         Show_Text_Output (Settings.getUrl_BanList_Clients() + "\n");
 
-                        printf ("                                   3. Изменить адрес бан-листа исполнителей: ");
+                        printf ("                                   3. РР·РјРµРЅРёС‚СЊ Р°РґСЂРµСЃ Р±Р°РЅ-Р»РёСЃС‚Р° РёСЃРїРѕР»РЅРёС‚РµР»РµР№: ");
                         Show_Text_Output (Settings.getUrl_BanList_Workers() + "\n");
 
-                        printf ("                                   4. Обновить список бан-листа");
-                        printf ("\n                                 Tab. Восстановить параметры блокировки клиентов по умолчанию\n");
+                        printf ("                                   4. РћР±РЅРѕРІРёС‚СЊ СЃРїРёСЃРѕРє Р±Р°РЅ-Р»РёСЃС‚Р°");
+                        printf ("\n                                 Tab. Р’РѕСЃСЃС‚Р°РЅРѕРІРёС‚СЊ РїР°СЂР°РјРµС‚СЂС‹ Р±Р»РѕРєРёСЂРѕРІРєРё РєР»РёРµРЅС‚РѕРІ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ\n");
 
                             while (true) {
 
@@ -316,7 +355,7 @@ const static void Menu_Settings (Class_Settings& Settings, Class_BanLists& Banli
 
                             if (ClickCatch ("1", &ButtonNumber)) {
 
-                                Show_TextHeader ("Задайте булевое значение для автоматического обновления списка бан-листа");
+                                Show_TextHeader ("Р—Р°РґР°Р№С‚Рµ Р±СѓР»РµРІРѕРµ Р·РЅР°С‡РµРЅРёРµ РґР»СЏ Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРѕРіРѕ РѕР±РЅРѕРІР»РµРЅРёСЏ СЃРїРёСЃРєР° Р±Р°РЅ-Р»РёСЃС‚Р°");
 
                                     if (ChoisenAnswer_SetSettings (&ButtonNumber, Settings.getAutomatic_Update_BanList ()) == true) {
 
@@ -328,11 +367,11 @@ const static void Menu_Settings (Class_Settings& Settings, Class_BanLists& Banli
                                     else
                                         continue;
 
-                            } // изменение автоматического ежемесячного обновления списка бан-листа
+                            } // РёР·РјРµРЅРµРЅРёРµ Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРѕРіРѕ РµР¶РµРјРµСЃСЏС‡РЅРѕРіРѕ РѕР±РЅРѕРІР»РµРЅРёСЏ СЃРїРёСЃРєР° Р±Р°РЅ-Р»РёСЃС‚Р°
 
                             if (ClickCatch ("2", &ButtonNumber)) {
 
-                                std::string Str = InputAnswer_SetParams ("Введите ссылку на бан-листов клиентов", "Ссылка");
+                                std::string Str = InputAnswer_SetParams ("Р’РІРµРґРёС‚Рµ СЃСЃС‹Р»РєСѓ РЅР° Р±Р°РЅ-Р»РёСЃС‚РѕРІ РєР»РёРµРЅС‚РѕРІ", "РЎСЃС‹Р»РєР°");
 
                                     if (Check_Input_ForExit (Str))
                                         continue;
@@ -344,11 +383,11 @@ const static void Menu_Settings (Class_Settings& Settings, Class_BanLists& Banli
 
                                     }
 
-                            } // изменение веб-адреса бан-листа клиентов
+                            } // РёР·РјРµРЅРµРЅРёРµ РІРµР±-Р°РґСЂРµСЃР° Р±Р°РЅ-Р»РёСЃС‚Р° РєР»РёРµРЅС‚РѕРІ
 
                             if (ClickCatch ("3", &ButtonNumber)) {
 
-                                std::string Str = InputAnswer_SetParams ("Введите ссылку на бан-листов исполнителей", "Ссылка");
+                                std::string Str = InputAnswer_SetParams ("Р’РІРµРґРёС‚Рµ СЃСЃС‹Р»РєСѓ РЅР° Р±Р°РЅ-Р»РёСЃС‚РѕРІ РёСЃРїРѕР»РЅРёС‚РµР»РµР№", "РЎСЃС‹Р»РєР°");
 
                                     if (Check_Input_ForExit (Str))
                                         continue;
@@ -360,11 +399,11 @@ const static void Menu_Settings (Class_Settings& Settings, Class_BanLists& Banli
 
                                     }
 
-                            } // изменение веб-адреса бан-листа исполнителей
+                            } // РёР·РјРµРЅРµРЅРёРµ РІРµР±-Р°РґСЂРµСЃР° Р±Р°РЅ-Р»РёСЃС‚Р° РёСЃРїРѕР»РЅРёС‚РµР»РµР№
 
                             if (ClickCatch ("4", &ButtonNumber)) {
 
-                                Show_TextHeader ("Вы действительно хотите обновить список бан-листов?");
+                                Show_TextHeader ("Р’С‹ РґРµР№СЃС‚РІРёС‚РµР»СЊРЅРѕ С…РѕС‚РёС‚Рµ РѕР±РЅРѕРІРёС‚СЊ СЃРїРёСЃРѕРє Р±Р°РЅ-Р»РёСЃС‚РѕРІ?");
 
                                    // if ((ChoisenAnswer_SetSettings (&ButtonNumber) == true, false) && (ChoisenAnswer_SetParams (&ButtonNumber) == true)) {
 
@@ -376,37 +415,98 @@ const static void Menu_Settings (Class_Settings& Settings, Class_BanLists& Banli
                                     //else
                                         continue;
 
-                            } // обновление списка бан-листа
+                            } // РѕР±РЅРѕРІР»РµРЅРёРµ СЃРїРёСЃРєР° Р±Р°РЅ-Р»РёСЃС‚Р°
 
                             else if (ClickCatch ("Tab", &ButtonNumber)) {
 
                                 Settings.SetDefaultParameters_Banlists ();
                                 Settings.SaveSettings (true);
 
-                            } // восстановление по умолчанию настроек формирования заказов
+                            } // РІРѕСЃСЃС‚Р°РЅРѕРІР»РµРЅРёРµ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ РЅР°СЃС‚СЂРѕРµРє С„РѕСЂРјРёСЂРѕРІР°РЅРёСЏ Р·Р°РєР°Р·РѕРІ
 
-                    } // конец жизненного цикла модуля настроек блокировки клиента
+                    } // РєРѕРЅРµС† Р¶РёР·РЅРµРЅРЅРѕРіРѕ С†РёРєР»Р° РјРѕРґСѓР»СЏ РЅР°СЃС‚СЂРѕРµРє Р±Р»РѕРєРёСЂРѕРІРєРё РєР»РёРµРЅС‚Р°
 
-                 } // раздел настроек модуля блокировки клиентов
+                 } // СЂР°Р·РґРµР» РЅР°СЃС‚СЂРѕРµРє РјРѕРґСѓР»СЏ Р±Р»РѕРєРёСЂРѕРІРєРё РєР»РёРµРЅС‚РѕРІ
 
                  else if (ClickCatch ("4", &ButtonNumber)) {
 
-                    CenterText ("Раздел настроек модуля статистики и данных \n\n");
+                    while (true) {
 
-                    printf ("                                   6. Отображение заработанных средств: ");
-                    Show_Text_Output (Convert_Bool_toString (Settings.getDisplay_Money ()) + "\n");
+                        Draw_MenuHeader ();
+                        CenterText ("Р Р°Р·РґРµР» РЅР°СЃС‚СЂРѕРµРє РјРѕРґСѓР»СЏ СЃС‚Р°С‚РёСЃС‚РёРєРё Рё РґР°РЅРЅС‹С… \n\n");
 
-                } // раздел настроек модуля статистики
+                        printf ("                                   1. РћС‚РѕР±СЂР°Р¶РµРЅРёРµ Р·Р°СЂР°Р±РѕС‚Р°РЅРЅС‹С… СЃСЂРµРґСЃС‚РІ: ");
+                        Show_Text_Output (Convert_Bool_toString (Settings.getDisplay_Money ()) + "\n");
+
+                            while (true) {
+
+                                ButtonNumber = getch ();
+
+                                    if (ClickCatch (&ButtonNumber, "Esc, 1"))
+                                        break;
+
+                            }
+
+                            if (ClickCatch ("Esc", &ButtonNumber))
+                                break;
+
+                        printf ("\n\n\n");
+
+                            if (ClickCatch ("1", &ButtonNumber)) {
+
+                                Show_TextHeader ("Р—Р°РґР°Р№С‚Рµ Р±СѓР»РµРІРѕРµ Р·РЅР°С‡РµРЅРёРµ РґР»СЏ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ Р·Р°СЂР°Р±РѕС‚Р°РЅРЅС‹С… СЃСЂРµРґСЃС‚РІ");
+
+                                    if (ChoisenAnswer_SetSettings (&ButtonNumber, Settings.getDisplay_Money ()) == true) {
+
+                                        Settings.setDisplay_Money (ChoisenAnswer_SetParams (&ButtonNumber));
+                                        Settings.SaveSettings (true);
+
+                                    }
+
+                                    else
+                                        continue;
+
+                            } // РёР·РјРµРЅРµРЅРёРµ РІРєР»/РІС‹РєР» РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ Р·Р°СЂР°Р±РѕС‚Р°РЅРЅС‹С… СЃСЂРµРґСЃС‚РІ
+
+                    }
+
+                } // СЂР°Р·РґРµР» РЅР°СЃС‚СЂРѕРµРє РјРѕРґСѓР»СЏ СЃС‚Р°С‚РёСЃС‚РёРєРё
+
+                else if (ClickCatch ("Tab", &ButtonNumber)) {
+
+                    Show_TextHeader ("Р’С‹ РґРµР№СЃС‚РІРёС‚РµР»СЊРЅРѕ С…РѕС‚РёС‚Рµ РІРѕСЃСЃС‚Р°РЅРѕРІРёС‚СЊ РІСЃРµ РЅР°СЃС‚СЂРѕР№РєРё РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ?");
+
+                        while (true) {
+
+                            ButtonNumber = getch ();
+
+                                if (ClickCatch ("Y", &ButtonNumber) || ClickCatch ("N", &ButtonNumber) || ClickCatch ("Esc", &ButtonNumber))
+                                        break;
+
+                        }
+
+                        if (ClickCatch ("Y", &ButtonNumber)) {
+
+                            Show_Text_Output ("Yes");
+                            Settings.SetDefault_Parameters ();
+                            Settings.SaveSettings (true);
+
+                        }
+
+                        else if (ClickCatch (&ButtonNumber, "N, Esc"))
+                            continue;
+
+                } // РІРѕСЃСЃС‚Р°РЅРѕРІР»РµРЅРёРµ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ РЅР°СЃС‚СЂРѕРµРє С„РѕСЂРјРёСЂРѕРІР°РЅРёСЏ Р·Р°РєР°Р·РѕРІ
         /*
                     else if (ClickCatch ("5", &ButtonNumber)) {
 
 
 
-                    } // включение/отключение ежемесячного обновления списка бан-листа
+                    } // РІРєР»СЋС‡РµРЅРёРµ/РѕС‚РєР»СЋС‡РµРЅРёРµ РµР¶РµРјРµСЃСЏС‡РЅРѕРіРѕ РѕР±РЅРѕРІР»РµРЅРёСЏ СЃРїРёСЃРєР° Р±Р°РЅ-Р»РёСЃС‚Р°
 
                     else if (ClickCatch ("6", &ButtonNumber)) {
 
-                        Show_TextHeader ("Задайте булевое значение для отображения заработанных средств");
+                        Show_TextHeader ("Р—Р°РґР°Р№С‚Рµ Р±СѓР»РµРІРѕРµ Р·РЅР°С‡РµРЅРёРµ РґР»СЏ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ Р·Р°СЂР°Р±РѕС‚Р°РЅРЅС‹С… СЃСЂРµРґСЃС‚РІ");
 
                             if (ChoisenAnswer_SetSettings (&ButtonNumber) == true)
                                 Settings.setDisplay_Money (ChoisenAnswer_SetParams (&ButtonNumber));
@@ -414,29 +514,29 @@ const static void Menu_Settings (Class_Settings& Settings, Class_BanLists& Banli
                             else
                                 continue;
 
-                    } // включение/отключение отображения заработанных средств
+                    } // РІРєР»СЋС‡РµРЅРёРµ/РѕС‚РєР»СЋС‡РµРЅРёРµ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ Р·Р°СЂР°Р±РѕС‚Р°РЅРЅС‹С… СЃСЂРµРґСЃС‚РІ
 
                     else if (ClickCatch ("7", &ButtonNumber)) {
 
 
 
-                    } // изменение ссылки на список бан-листа клиентов
+                    } // РёР·РјРµРЅРµРЅРёРµ СЃСЃС‹Р»РєРё РЅР° СЃРїРёСЃРѕРє Р±Р°РЅ-Р»РёСЃС‚Р° РєР»РёРµРЅС‚РѕРІ
 
                     else if (ClickCatch ("8", &ButtonNumber)) {
 
 
 
-                    } // изменение ссылки на список бан-листа исполнителей
+                    } // РёР·РјРµРЅРµРЅРёРµ СЃСЃС‹Р»РєРё РЅР° СЃРїРёСЃРѕРє Р±Р°РЅ-Р»РёСЃС‚Р° РёСЃРїРѕР»РЅРёС‚РµР»РµР№
 
                     else if (ClickCatch ("9", &ButtonNumber)) {
 
 
 
-                    } // обновить список бан-листа
+                    } // РѕР±РЅРѕРІРёС‚СЊ СЃРїРёСЃРѕРє Р±Р°РЅ-Р»РёСЃС‚Р°
 
                     else if (ClickCatch ("Tab", &ButtonNumber)) {
 
-                        Show_TextHeader ("Вы действительно хотите восстановить все настройки по умолчанию?");
+                        Show_TextHeader ("Р’С‹ РґРµР№СЃС‚РІРёС‚РµР»СЊРЅРѕ С…РѕС‚РёС‚Рµ РІРѕСЃСЃС‚Р°РЅРѕРІРёС‚СЊ РІСЃРµ РЅР°СЃС‚СЂРѕР№РєРё РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ?");
 
                             while (true) {
 
@@ -464,11 +564,11 @@ const static void Menu_Settings (Class_Settings& Settings, Class_BanLists& Banli
                             else if (ClickCatch ("N", &ButtonNumber) || ClickCatch ("Esc", &ButtonNumber))
                                 continue;
 */
-                    } // вернуть настройки по умолчанию
+                    } // РІРµСЂРЅСѓС‚СЊ РЅР°СЃС‚СЂРѕР№РєРё РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ
 
-        //} // конец жизненного цикла меню настроек
+        //} // РєРѕРЅРµС† Р¶РёР·РЅРµРЅРЅРѕРіРѕ С†РёРєР»Р° РјРµРЅСЋ РЅР°СЃС‚СЂРѕРµРє
 
-} // функция настроек приложения
+} // С„СѓРЅРєС†РёСЏ РЅР°СЃС‚СЂРѕРµРє РїСЂРёР»РѕР¶РµРЅРёСЏ
 
 #endif // _Menu_Settings_h_
 

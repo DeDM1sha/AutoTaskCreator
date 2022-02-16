@@ -1,4 +1,4 @@
-// Класс настроек приложения
+// РљР»Р°СЃСЃ РЅР°СЃС‚СЂРѕРµРє РїСЂРёР»РѕР¶РµРЅРёСЏ
 
 #pragma once
 
@@ -14,7 +14,7 @@ class AbstractClass_ConfigEditor {
         const void ConfigFile_Open (const std::string&) const;
         const void ConfigFile_Close (const std::string&) const;
 
-}; // абстрактный класс-родитель для конфигурационных файлов
+}; // Р°Р±СЃС‚СЂР°РєС‚РЅС‹Р№ РєР»Р°СЃСЃ-СЂРѕРґРёС‚РµР»СЊ РґР»СЏ РєРѕРЅС„РёРіСѓСЂР°С†РёРѕРЅРЅС‹С… С„Р°Р№Р»РѕРІ
 
 const void AbstractClass_ConfigEditor::ConfigFile_Open (const std::string& Config_Path) const {
 
@@ -22,7 +22,7 @@ const void AbstractClass_ConfigEditor::ConfigFile_Open (const std::string& Confi
 
     system (attrib.c_str());
 
-} // метод открытия файла конфига
+} // РјРµС‚РѕРґ РѕС‚РєСЂС‹С‚РёСЏ С„Р°Р№Р»Р° РєРѕРЅС„РёРіР°
 
 const void AbstractClass_ConfigEditor::ConfigFile_Close (const std::string& Config_Path) const {
 
@@ -30,79 +30,82 @@ const void AbstractClass_ConfigEditor::ConfigFile_Close (const std::string& Conf
 
     system (attrib.c_str());
 
-} // метод закрытия файла конфига
+} // РјРµС‚РѕРґ Р·Р°РєСЂС‹С‚РёСЏ С„Р°Р№Р»Р° РєРѕРЅС„РёРіР°
 
 class Class_Settings : public AbstractClass_ConfigEditor {
 
     private:
 
-        std::string ProjectBuild_Name_Release; // release билд - использование исходный файловых настроек
-        std::string ProjectBuild_Name_Debug; // debug билд - использование дефолтных дебаг настроек
+        std::string ProjectBuild_Name_Release; // release Р±РёР»Рґ - РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРµ РёСЃС…РѕРґРЅС‹Р№ С„Р°Р№Р»РѕРІС‹С… РЅР°СЃС‚СЂРѕРµРє
+        std::string ProjectBuild_Name_Debug; // debug Р±РёР»Рґ - РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРµ РґРµС„РѕР»С‚РЅС‹С… РґРµР±Р°Рі РЅР°СЃС‚СЂРѕРµРє
 
-        std::string ProjectBuild_Type; // тип сборки проекта (debug / release)
-        std::string ProjectBuild_Version; // версия проекта
+        std::string ProjectBuild_Type; // С‚РёРї СЃР±РѕСЂРєРё РїСЂРѕРµРєС‚Р° (debug / release)
+        std::string ProjectBuild_Version; // РІРµСЂСЃРёСЏ РїСЂРѕРµРєС‚Р°
 
-        std::string ProjectBuild_SavePath_DB_Release; // release путь сохранения заказов - основная папка для release билда
-        std::string ProjectBuild_SavePath_DB_Debug; // debug путь сохранения заказов - отдельная папка для debug билда
+        std::string ProjectBuild_SavePath_DB_Release; // release РїСѓС‚СЊ СЃРѕС…СЂР°РЅРµРЅРёСЏ Р·Р°РєР°Р·РѕРІ - РѕСЃРЅРѕРІРЅР°СЏ РїР°РїРєР° РґР»СЏ release Р±РёР»РґР°
+        std::string ProjectBuild_SavePath_DB_Debug; // debug РїСѓС‚СЊ СЃРѕС…СЂР°РЅРµРЅРёСЏ Р·Р°РєР°Р·РѕРІ - РѕС‚РґРµР»СЊРЅР°СЏ РїР°РїРєР° РґР»СЏ debug Р±РёР»РґР°
 
-        std::string ReleaseExeFile_Path; // путь к хранению release exe приложения
-        std::string DebugExeFile_Path; // путь к локальному хранилищу debug exe приложения
+        std::string ReleaseExeFile_Path; // РїСѓС‚СЊ Рє С…СЂР°РЅРµРЅРёСЋ release exe РїСЂРёР»РѕР¶РµРЅРёСЏ
+        std::string DebugExeFile_Path; // РїСѓС‚СЊ Рє Р»РѕРєР°Р»СЊРЅРѕРјСѓ С…СЂР°РЅРёР»РёС‰Сѓ debug exe РїСЂРёР»РѕР¶РµРЅРёСЏ
 
-        std::string PK_Name; // имя профиля на пк исполнителя
-        std::string Disk_Path; // наименование логического жесткого диска на пк, где хранятся заказы
-        std::string Config_Path; // место хранения файла с настройками
-        std::string Labs_Path; // место сохранения лаб
-        bool Automatic_Order_Start; // автоматический запуск создания заказа
-        bool Automatic_Close_Application; // автоматическое завершение приложения после заполнения заказа
-        bool Automatic_Open_Order; // автоматическое открытие заказа(ов) при создании
-        bool Automatic_Update_BanList; // автоматическое обновление списка бан-листа
-        bool Display_Money; // отображение заработанных средств (true - да / false - нет)
-        std::string Banlist_Path; // путь к хранению бан-листа
-        std::string Url_BanList_Clients; // ссылка на банлист клиентов
-        std::string Url_BanList_Workers; // ссылка на банлист исполнителей
-        std::string LastTime_ProjectBuild_Type_Release; // время последней сборки проекта в режиме [Release]
-        std::string LastTime_ProjectBuild_Type_Debug; // время последней сборки проекта в режиме [Debug]
-        std::string NewTime_ProjectBuild_Type_Release; // время новой сборки проекта в режиме [Release]
-        std::string NewTime_ProjectBuild_Type_Debug; // время новой сборки проекта врежиме [Debug]
+        std::string PK_Name; // РёРјСЏ РїСЂРѕС„РёР»СЏ РЅР° РїРє РёСЃРїРѕР»РЅРёС‚РµР»СЏ
+        std::string Disk_Path; // РЅР°РёРјРµРЅРѕРІР°РЅРёРµ Р»РѕРіРёС‡РµСЃРєРѕРіРѕ Р¶РµСЃС‚РєРѕРіРѕ РґРёСЃРєР° РЅР° РїРє, РіРґРµ С…СЂР°РЅСЏС‚СЃСЏ Р·Р°РєР°Р·С‹
+        std::string Config_Path; // РјРµСЃС‚Рѕ С…СЂР°РЅРµРЅРёСЏ С„Р°Р№Р»Р° СЃ РЅР°СЃС‚СЂРѕР№РєР°РјРё
+        std::string Labs_Path; // РјРµСЃС‚Рѕ СЃРѕС…СЂР°РЅРµРЅРёСЏ Р»Р°Р±
+        bool Automatic_Order_Start; // Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРёР№ Р·Р°РїСѓСЃРє СЃРѕР·РґР°РЅРёСЏ Р·Р°РєР°Р·Р°
+        bool Automatic_Close_Application; // Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРѕРµ Р·Р°РІРµСЂС€РµРЅРёРµ РїСЂРёР»РѕР¶РµРЅРёСЏ РїРѕСЃР»Рµ Р·Р°РїРѕР»РЅРµРЅРёСЏ Р·Р°РєР°Р·Р°
+        bool Automatic_Open_Order; // Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРѕРµ РѕС‚РєСЂС‹С‚РёРµ Р·Р°РєР°Р·Р°(РѕРІ) РїСЂРё СЃРѕР·РґР°РЅРёРё
+        bool Automatic_Update_BanList; // Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРѕРµ РѕР±РЅРѕРІР»РµРЅРёРµ СЃРїРёСЃРєР° Р±Р°РЅ-Р»РёСЃС‚Р°
+        bool Display_Money; // РѕС‚РѕР±СЂР°Р¶РµРЅРёРµ Р·Р°СЂР°Р±РѕС‚Р°РЅРЅС‹С… СЃСЂРµРґСЃС‚РІ (true - РґР° / false - РЅРµС‚)
+        std::string Banlist_Path; // РїСѓС‚СЊ Рє С…СЂР°РЅРµРЅРёСЋ Р±Р°РЅ-Р»РёСЃС‚Р°
+        std::string Url_BanList_Clients; // СЃСЃС‹Р»РєР° РЅР° Р±Р°РЅР»РёСЃС‚ РєР»РёРµРЅС‚РѕРІ
+        std::string Url_BanList_Workers; // СЃСЃС‹Р»РєР° РЅР° Р±Р°РЅР»РёСЃС‚ РёСЃРїРѕР»РЅРёС‚РµР»РµР№
+        std::string Default_IDE_Path; // РїСѓС‚СЊ РґР»СЏ Р·Р°РїСѓСЃРєР° IDE РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ
 
-        std::string LoadTag_Path_to_Labs; // Тэг-считывания пути сохранения заказов
-        std::string LoadTag_Order_Start; // Тэг-считывания автоматического запуска создания заказа
-        std::string LoadTag_Close_Application; // Тэг-считывания автоматического завершения работы приложения
-        std::string LoadTag_Open_Order; // Тэг-считывания автоматического открытия созданного заказа
-        std::string LoadTag_Update_BanList; // Тэг-считывания автоматического обновления бан-листа
-        std::string LoadTag_Display_Money; // Тэг-считывания отображения заработанных средств
-        std::string LoadTag_Url_BanList_Clients; // Тэг-считывания ссылки на бан-лист клиентов
-        std::string LoadTag_Url_BanList_Workers; // Тэг-считывания ссылки на бан-лист исполнителей
-        std::string LoadTag_LastTime_ProjectBuild_Type_Debug; // Тэг-считывания времени последней сборки проекта в режиме [Debug]
-        std::string LoadTag_LastTime_ProjectBuild_Type_Release; // Тэг-ситывания времени последней сборки проекта в режиме [Release]
+        std::string LastTime_ProjectBuild_Type_Release; // РІСЂРµРјСЏ РїРѕСЃР»РµРґРЅРµР№ СЃР±РѕСЂРєРё РїСЂРѕРµРєС‚Р° РІ СЂРµР¶РёРјРµ [Release]
+        std::string LastTime_ProjectBuild_Type_Debug; // РІСЂРµРјСЏ РїРѕСЃР»РµРґРЅРµР№ СЃР±РѕСЂРєРё РїСЂРѕРµРєС‚Р° РІ СЂРµР¶РёРјРµ [Debug]
+        std::string NewTime_ProjectBuild_Type_Release; // РІСЂРµРјСЏ РЅРѕРІРѕР№ СЃР±РѕСЂРєРё РїСЂРѕРµРєС‚Р° РІ СЂРµР¶РёРјРµ [Release]
+        std::string NewTime_ProjectBuild_Type_Debug; // РІСЂРµРјСЏ РЅРѕРІРѕР№ СЃР±РѕСЂРєРё РїСЂРѕРµРєС‚Р° РІСЂРµР¶РёРјРµ [Debug]
 
-        std::string ERROR_Message_ClientExist; // сообщение об ошибки отсуствия введенного клиента в базе
-		std::string ERROR_Message_BuildTimeExist; // сообщение об ошибки отсутствия собранных билдов проекта
+        std::string LoadTag_Path_to_Labs; // РўСЌРі-СЃС‡РёС‚С‹РІР°РЅРёСЏ РїСѓС‚Рё СЃРѕС…СЂР°РЅРµРЅРёСЏ Р·Р°РєР°Р·РѕРІ
+        std::string LoadTag_Path_to_Default_IDE; // РўСЌРі-СЃС‡РёС‚С‹РІР°РЅРёСЏ РїСѓС‚Рё РґР»СЏ Р·Р°РїСѓСЃРєР° IDE РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ
+        std::string LoadTag_Order_Start; // РўСЌРі-СЃС‡РёС‚С‹РІР°РЅРёСЏ Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРѕРіРѕ Р·Р°РїСѓСЃРєР° СЃРѕР·РґР°РЅРёСЏ Р·Р°РєР°Р·Р°
+        std::string LoadTag_Close_Application; // РўСЌРі-СЃС‡РёС‚С‹РІР°РЅРёСЏ Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРѕРіРѕ Р·Р°РІРµСЂС€РµРЅРёСЏ СЂР°Р±РѕС‚С‹ РїСЂРёР»РѕР¶РµРЅРёСЏ
+        std::string LoadTag_Open_Order; // РўСЌРі-СЃС‡РёС‚С‹РІР°РЅРёСЏ Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРѕРіРѕ РѕС‚РєСЂС‹С‚РёСЏ СЃРѕР·РґР°РЅРЅРѕРіРѕ Р·Р°РєР°Р·Р°
+        std::string LoadTag_Update_BanList; // РўСЌРі-СЃС‡РёС‚С‹РІР°РЅРёСЏ Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРѕРіРѕ РѕР±РЅРѕРІР»РµРЅРёСЏ Р±Р°РЅ-Р»РёСЃС‚Р°
+        std::string LoadTag_Display_Money; // РўСЌРі-СЃС‡РёС‚С‹РІР°РЅРёСЏ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ Р·Р°СЂР°Р±РѕС‚Р°РЅРЅС‹С… СЃСЂРµРґСЃС‚РІ
+        std::string LoadTag_Url_BanList_Clients; // РўСЌРі-СЃС‡РёС‚С‹РІР°РЅРёСЏ СЃСЃС‹Р»РєРё РЅР° Р±Р°РЅ-Р»РёСЃС‚ РєР»РёРµРЅС‚РѕРІ
+        std::string LoadTag_Url_BanList_Workers; // РўСЌРі-СЃС‡РёС‚С‹РІР°РЅРёСЏ СЃСЃС‹Р»РєРё РЅР° Р±Р°РЅ-Р»РёСЃС‚ РёСЃРїРѕР»РЅРёС‚РµР»РµР№
+        std::string LoadTag_LastTime_ProjectBuild_Type_Debug; // РўСЌРі-СЃС‡РёС‚С‹РІР°РЅРёСЏ РІСЂРµРјРµРЅРё РїРѕСЃР»РµРґРЅРµР№ СЃР±РѕСЂРєРё РїСЂРѕРµРєС‚Р° РІ СЂРµР¶РёРјРµ [Debug]
+        std::string LoadTag_LastTime_ProjectBuild_Type_Release; // РўСЌРі-СЃРёС‚С‹РІР°РЅРёСЏ РІСЂРµРјРµРЅРё РїРѕСЃР»РµРґРЅРµР№ СЃР±РѕСЂРєРё РїСЂРѕРµРєС‚Р° РІ СЂРµР¶РёРјРµ [Release]
 
-        std::string SaveTag_Field_Technology; // Тэг-сохранения наименования технологии
-	    std::string SaveTag_Field_IDE; // Тэг-сохранения наименования среды разработки
-	    std::string SaveTag_Field_OS; // Тэг-сохранения наименования операционной системы
-	    std::string SaveTag_Field_TypeWork; // Тэг-сохранения наименования типа выполненной работы
-	    std::string SaveTag_Field_OrderCost; // Тэг-сохранения стоимости выполненной работы
-	    std::string SaveTag_Field_Date; // Тэг-схранения даты создания заказа
-	    std::string SaveTag_Field_Keywords; // Тэг-сохранения ключевых слов
+        std::string ERROR_Message_ClientExist; // СЃРѕРѕР±С‰РµРЅРёРµ РѕР± РѕС€РёР±РєРё РѕС‚СЃСѓСЃС‚РІРёСЏ РІРІРµРґРµРЅРЅРѕРіРѕ РєР»РёРµРЅС‚Р° РІ Р±Р°Р·Рµ
+		std::string ERROR_Message_BuildTimeExist; // СЃРѕРѕР±С‰РµРЅРёРµ РѕР± РѕС€РёР±РєРё РѕС‚СЃСѓС‚СЃС‚РІРёСЏ СЃРѕР±СЂР°РЅРЅС‹С… Р±РёР»РґРѕРІ РїСЂРѕРµРєС‚Р°
 
-	    std::string Technology_Name_C; // наименование технологии [Си]
-        std::string Technology_Name_CPlusPlus; // наименование технологии [C++]
-        std::string Technology_Name_Another; // наименование технологии Another
+        std::string SaveTag_Field_Technology; // РўСЌРі-СЃРѕС…СЂР°РЅРµРЅРёСЏ РЅР°РёРјРµРЅРѕРІР°РЅРёСЏ С‚РµС…РЅРѕР»РѕРіРёРё
+	    std::string SaveTag_Field_IDE; // РўСЌРі-СЃРѕС…СЂР°РЅРµРЅРёСЏ РЅР°РёРјРµРЅРѕРІР°РЅРёСЏ СЃСЂРµРґС‹ СЂР°Р·СЂР°Р±РѕС‚РєРё
+	    std::string SaveTag_Field_OS; // РўСЌРі-СЃРѕС…СЂР°РЅРµРЅРёСЏ РЅР°РёРјРµРЅРѕРІР°РЅРёСЏ РѕРїРµСЂР°С†РёРѕРЅРЅРѕР№ СЃРёСЃС‚РµРјС‹
+	    std::string SaveTag_Field_TypeWork; // РўСЌРі-СЃРѕС…СЂР°РЅРµРЅРёСЏ РЅР°РёРјРµРЅРѕРІР°РЅРёСЏ С‚РёРїР° РІС‹РїРѕР»РЅРµРЅРЅРѕР№ СЂР°Р±РѕС‚С‹
+	    std::string SaveTag_Field_OrderCost; // РўСЌРі-СЃРѕС…СЂР°РЅРµРЅРёСЏ СЃС‚РѕРёРјРѕСЃС‚Рё РІС‹РїРѕР»РЅРµРЅРЅРѕР№ СЂР°Р±РѕС‚С‹
+	    std::string SaveTag_Field_Date; // РўСЌРі-СЃС…СЂР°РЅРµРЅРёСЏ РґР°С‚С‹ СЃРѕР·РґР°РЅРёСЏ Р·Р°РєР°Р·Р°
+	    std::string SaveTag_Field_Keywords; // РўСЌРі-СЃРѕС…СЂР°РЅРµРЅРёСЏ РєР»СЋС‡РµРІС‹С… СЃР»РѕРІ
 
-        std::string IDE_Name_VisualStudio; // наименование среды разработки [VisualStudio]
-        std::string IDE_Name_Geany; // наименование среды разработки [Geany]
-        std::string IDE_Name_CodeBlocks; // наименование среды разработки [CodeBlocks]
-        std::string IDE_Name_QtCreator; // наименование среды разработки [QtCreator]
-        std::string IDE_Name_NoneIDE; // наименование среды разработки [NoneIDE]
+	    std::string Technology_Name_C; // РЅР°РёРјРµРЅРѕРІР°РЅРёРµ С‚РµС…РЅРѕР»РѕРіРёРё [РЎРё]
+        std::string Technology_Name_CPlusPlus; // РЅР°РёРјРµРЅРѕРІР°РЅРёРµ С‚РµС…РЅРѕР»РѕРіРёРё [C++]
+        std::string Technology_Name_Another; // РЅР°РёРјРµРЅРѕРІР°РЅРёРµ С‚РµС…РЅРѕР»РѕРіРёРё Another
 
-        std::string OS_Name_Linux; // наименование операционный системы [Linux]
-        std::string OS_Name_Windows; // наименование операционной системы [Windows]
+        std::string IDE_Name_VisualStudio; // РЅР°РёРјРµРЅРѕРІР°РЅРёРµ СЃСЂРµРґС‹ СЂР°Р·СЂР°Р±РѕС‚РєРё [VisualStudio]
+        std::string IDE_Name_Geany; // РЅР°РёРјРµРЅРѕРІР°РЅРёРµ СЃСЂРµРґС‹ СЂР°Р·СЂР°Р±РѕС‚РєРё [Geany]
+        std::string IDE_Name_CodeBlocks; // РЅР°РёРјРµРЅРѕРІР°РЅРёРµ СЃСЂРµРґС‹ СЂР°Р·СЂР°Р±РѕС‚РєРё [CodeBlocks]
+        std::string IDE_Name_QtCreator; // РЅР°РёРјРµРЅРѕРІР°РЅРёРµ СЃСЂРµРґС‹ СЂР°Р·СЂР°Р±РѕС‚РєРё [QtCreator]
+        std::string IDE_Name_NoneIDE; // РЅР°РёРјРµРЅРѕРІР°РЅРёРµ СЃСЂРµРґС‹ СЂР°Р·СЂР°Р±РѕС‚РєРё [NoneIDE]
 
-        std::string TypeWork_Name_LabWork; // наименование типа работы [LabWork]
-        std::string TypeWork_Name_CourseWork; // наименование типа работы [CourseWork]
-        std::string TypeWork_Name_Diploma; // наименование типа работы [Diploma]
+        std::string OS_Name_Linux; // РЅР°РёРјРµРЅРѕРІР°РЅРёРµ РѕРїРµСЂР°С†РёРѕРЅРЅС‹Р№ СЃРёСЃС‚РµРјС‹ [Linux]
+        std::string OS_Name_Windows; // РЅР°РёРјРµРЅРѕРІР°РЅРёРµ РѕРїРµСЂР°С†РёРѕРЅРЅРѕР№ СЃРёСЃС‚РµРјС‹ [Windows]
+
+        std::string TypeWork_Name_LabWork; // РЅР°РёРјРµРЅРѕРІР°РЅРёРµ С‚РёРїР° СЂР°Р±РѕС‚С‹ [LabWork]
+        std::string TypeWork_Name_CourseWork; // РЅР°РёРјРµРЅРѕРІР°РЅРёРµ С‚РёРїР° СЂР°Р±РѕС‚С‹ [CourseWork]
+        std::string TypeWork_Name_Diploma; // РЅР°РёРјРµРЅРѕРІР°РЅРёРµ С‚РёРїР° СЂР°Р±РѕС‚С‹ [Diploma]
 
     public:
 
@@ -119,6 +122,7 @@ class Class_Settings : public AbstractClass_ConfigEditor {
             this->DebugExeFile_Path = "D:\\Projects\\CPlusPlus_Projects\\Automation\\AutoTaskCreator\\bin\\Debug\\AutoTaskCreator.exe";
 
             this->LoadTag_Path_to_Labs = "Path_to_Labs";
+            this->LoadTag_Path_to_Default_IDE = "Path_to_Default_IDE";
             this->LoadTag_Order_Start = "Order_Start";
             this->LoadTag_Close_Application = "Close_Application";
             this->LoadTag_Open_Order = "Open_Order";
@@ -166,6 +170,7 @@ class Class_Settings : public AbstractClass_ConfigEditor {
             this->Display_Money = false;
             this->Url_BanList_Clients = "\0";
             this->Url_BanList_Workers = "\0";
+            this->Default_IDE_Path = "\0";
 
             Load_Parameters ();
 
@@ -196,7 +201,7 @@ class Class_Settings : public AbstractClass_ConfigEditor {
             this->TypeWork_Name_CourseWork = "CourseWork";
             this->TypeWork_Name_Diploma = "Diploma";
 
-            SaveSettings (false); // форсируем сохранение новых дат запуска [Debug] и [Release] билдов
+            SaveSettings (false); // С„РѕСЂСЃРёСЂСѓРµРј СЃРѕС…СЂР°РЅРµРЅРёРµ РЅРѕРІС‹С… РґР°С‚ Р·Р°РїСѓСЃРєР° [Debug] Рё [Release] Р±РёР»РґРѕРІ
 
         }
 
@@ -208,25 +213,25 @@ class Class_Settings : public AbstractClass_ConfigEditor {
 
             return this->ProjectBuild_Type;
 
-        } // геттер для ProjectBuild_Type
+        } // РіРµС‚С‚РµСЂ РґР»СЏ ProjectBuild_Type
 
         const std::string getProjectBuild_Version (void) const {
 
             return this->ProjectBuild_Version;
 
-        } // геттер для ProjectBuild_Version
+        } // РіРµС‚С‚РµСЂ РґР»СЏ ProjectBuild_Version
 
         const std::string getProjectBuild_Name_Release (void) const {
 
             return this->ProjectBuild_Name_Release;
 
-        } // геттер для ProjectBuild_Name_Release
+        } // РіРµС‚С‚РµСЂ РґР»СЏ ProjectBuild_Name_Release
 
         const std::string getProjectBuild_Name_Debug(void) const {
 
             return this->ProjectBuild_Name_Debug;
 
-        } // геттер для ProjectBuild_Name_Debug
+        } // РіРµС‚С‚РµСЂ РґР»СЏ ProjectBuild_Name_Debug
 
     //////////////////////////////////////////////
 
@@ -234,145 +239,157 @@ class Class_Settings : public AbstractClass_ConfigEditor {
 
 			this->PK_Name = Str;
 
-		} // сеттер для PK_Name
+		} // СЃРµС‚С‚РµСЂ РґР»СЏ PK_Name
 
 		const std::string getPK_Name (void) const {
 
 			return this->PK_Name;
 
-		} // геттер для PK_Name
+		} // РіРµС‚С‚РµСЂ РґР»СЏ PK_Name
 
         const void setLabs_Path (const std::string Str) {
 
             this->Labs_Path = Str;
 
-        } // сеттер для Labs_Path
+        } // СЃРµС‚С‚РµСЂ РґР»СЏ Labs_Path
 
         const std::string getLabs_Path (void) const {
 
             return this->Labs_Path;
 
-        } // геттер для Labs_Path
+        } // РіРµС‚С‚РµСЂ РґР»СЏ Labs_Path
 
         const void setConfig_Path (const std::string Str) {
 
             this->Config_Path = Str;
 
-        } // сеттер для Config_Path
+        } // СЃРµС‚С‚РµСЂ РґР»СЏ Config_Path
 
         const std::string getConfig_Path (void) const {
 
             return this->Config_Path;
 
-        } // геттер для Config_Path
+        } // РіРµС‚С‚РµСЂ РґР»СЏ Config_Path
+
+        const void setDefault_IDE_Path (const std::string Str) {
+
+            this->Default_IDE_Path = Str;
+
+        } // СЃРµС‚С‚РµСЂ РґР»СЏ Default_IDE_Path
+
+        const std::string getDefault_IDE_Path (void) const {
+
+            return this->Default_IDE_Path;
+
+        } // РіРµС‚С‚РµСЂ РґР»СЏ Default_IDE_Path
 
         const void setAutomatic_Order_Start (const bool Flag) {
 
             this->Automatic_Order_Start = Flag;
 
-        } // сеттер для Automatic_Order_Start
+        } // СЃРµС‚С‚РµСЂ РґР»СЏ Automatic_Order_Start
 
         const bool getAutomatic_Order_Start (void) const {
 
             return this->Automatic_Order_Start;
 
-        } // геттер для Automatic_Order_Start
+        } // РіРµС‚С‚РµСЂ РґР»СЏ Automatic_Order_Start
 
         const void setAutomatic_Close_Application (const bool Flag) {
 
             this->Automatic_Close_Application = Flag;
 
-        } // сеттер для Automatic_Close_Application
+        } // СЃРµС‚С‚РµСЂ РґР»СЏ Automatic_Close_Application
 
         const bool getAutomatic_Close_Application (void) const {
 
             return this->Automatic_Close_Application;
 
-        } // геттер для Automatic_Close_Applcation
+        } // РіРµС‚С‚РµСЂ РґР»СЏ Automatic_Close_Applcation
 
         const void setAutomatic_Open_Order (const bool Flag) {
 
             this->Automatic_Open_Order = Flag;
 
-        } // сеттер для Automatic_Open_Order
+        } // СЃРµС‚С‚РµСЂ РґР»СЏ Automatic_Open_Order
 
         const bool getAutomatic_Open_Order (void) const {
 
             return this->Automatic_Open_Order;
 
-        } // геттер для Automatic_Open_Order
+        } // РіРµС‚С‚РµСЂ РґР»СЏ Automatic_Open_Order
 
         const void setAutomatic_Update_BanList (const bool Flag) {
 
             this->Automatic_Update_BanList = Flag;
 
-        } // сеттер для Automatic_Update_BanList
+        } // СЃРµС‚С‚РµСЂ РґР»СЏ Automatic_Update_BanList
 
         const bool getAutomatic_Update_BanList (void) const {
 
             return this->Automatic_Update_BanList;
 
-        } // геттер для Automatic_Update_BanList
+        } // РіРµС‚С‚РµСЂ РґР»СЏ Automatic_Update_BanList
 
         const void setDisplay_Money (const bool Flag) {
 
             this->Display_Money = Flag;
 
-        } // сеттер для Display_Money
+        } // СЃРµС‚С‚РµСЂ РґР»СЏ Display_Money
 
         const bool getDisplay_Money (void) const {
 
             return this->Display_Money;
 
-        } // геттер для Display_Money
+        } // РіРµС‚С‚РµСЂ РґР»СЏ Display_Money
 
         const void setUrl_BanList_Clients (const std::string Str) {
 
             this->Url_BanList_Clients = Str;
 
-        } // сеттер для Url_BanList_Clients
+        } // СЃРµС‚С‚РµСЂ РґР»СЏ Url_BanList_Clients
 
         const std::string getUrl_BanList_Clients (void) const {
 
             return this->Url_BanList_Clients;
 
-        } // геттер для Url_BanList_Clients
+        } // РіРµС‚С‚РµСЂ РґР»СЏ Url_BanList_Clients
 
         const void setUrl_BanList_Workers (const std::string Str) {
 
             this->Url_BanList_Workers = Str;
 
-        } // сеттер для Url_BanList_Workers
+        } // СЃРµС‚С‚РµСЂ РґР»СЏ Url_BanList_Workers
 
         const std::string getUrl_BanList_Workers (void) const {
 
             return this->Url_BanList_Workers;
 
-        } // геттер для Url_BanList_Workers
+        } // РіРµС‚С‚РµСЂ РґР»СЏ Url_BanList_Workers
 
         const std::string getLastTime_ProjectBuild_Type_Release (void) const {
 
             return this->LastTime_ProjectBuild_Type_Release;
 
-        } // геттер для LastTime_ProjectBuild_Type_Release
+        } // РіРµС‚С‚РµСЂ РґР»СЏ LastTime_ProjectBuild_Type_Release
 
         const std::string getLastTime_ProjectBuild_Type_Debug (void) const {
 
             return this->LastTime_ProjectBuild_Type_Debug;
 
-        } // геттер для LastTime_ProjectBuild_Type_Debug
+        } // РіРµС‚С‚РµСЂ РґР»СЏ LastTime_ProjectBuild_Type_Debug
 
         const std::string getNewTime_ProjectBuild_Type_Release (void) const {
 
             return this->NewTime_ProjectBuild_Type_Release;
 
-        } // геттер для NewTime_ProjectBuild_Type_Release
+        } // РіРµС‚С‚РµСЂ РґР»СЏ NewTime_ProjectBuild_Type_Release
 
         const std::string getNewTime_ProjectBuild_Type_Debug (void) const {
 
             return this->NewTime_ProjectBuild_Type_Debug;
 
-        } // геттер для NewTime_ProjectBuild_Type_Debug
+        } // РіРµС‚С‚РµСЂ РґР»СЏ NewTime_ProjectBuild_Type_Debug
 
     //////////////////////////////////////////////
 
@@ -380,25 +397,25 @@ class Class_Settings : public AbstractClass_ConfigEditor {
 
             this->Disk_Path = Str;
 
-        } // сеттер для Disk_Path
+        } // СЃРµС‚С‚РµСЂ РґР»СЏ Disk_Path
 
         const std::string getDisk_Path (void) const {
 
             return this->Disk_Path;
 
-        } // геттер для Disk_Path
+        } // РіРµС‚С‚РµСЂ РґР»СЏ Disk_Path
 
         const void setBanlist_Path (const std::string Str) {
 
             this->Banlist_Path = Str;
 
-        } // сеттер для Banlist_Path
+        } // СЃРµС‚С‚РµСЂ РґР»СЏ Banlist_Path
 
         const std::string getBanlist_Path (void) const {
 
             return this->Banlist_Path;
 
-        } // геттер для Banlist_Path
+        } // РіРµС‚С‚РµСЂ РґР»СЏ Banlist_Path
 
     //////////////////////////////////////////////
 
@@ -406,37 +423,37 @@ class Class_Settings : public AbstractClass_ConfigEditor {
 
             return this->SaveTag_Field_Technology;
 
-        } // геттер для SaveTag_Field_Technology
+        } // РіРµС‚С‚РµСЂ РґР»СЏ SaveTag_Field_Technology
 
         const std::string getSaveTag_Field_IDE (void) const {
 
             return this->SaveTag_Field_IDE;
 
-        } // геттер для SaveTag_Field_IDE
+        } // РіРµС‚С‚РµСЂ РґР»СЏ SaveTag_Field_IDE
 
         const std::string getSaveTag_Field_OS (void) const {
 
             return this->SaveTag_Field_OS;
 
-        } // геттер для SaveTag_Field_OS
+        } // РіРµС‚С‚РµСЂ РґР»СЏ SaveTag_Field_OS
 
         const std::string getSaveTag_Field_OrderCost (void) const {
 
             return this->SaveTag_Field_OrderCost;
 
-        } // геттер для SaveTag_Field_OrderCost
+        } // РіРµС‚С‚РµСЂ РґР»СЏ SaveTag_Field_OrderCost
 
         const std::string getSaveTag_Field_Date (void) const {
 
             return this->SaveTag_Field_Date;
 
-        } // геттер для SaveTag_Field_Date
+        } // РіРµС‚С‚РµСЂ РґР»СЏ SaveTag_Field_Date
 
         const std::string getSaveTag_Field_Keywords (void) const {
 
             return this->SaveTag_Field_Keywords;
 
-        } // геттер для SaveTag_Field_Keywords
+        } // РіРµС‚С‚РµСЂ РґР»СЏ SaveTag_Field_Keywords
 
     //////////////////////////////////////////////
 
@@ -444,7 +461,7 @@ class Class_Settings : public AbstractClass_ConfigEditor {
 
             return this->SaveTag_Field_TypeWork;
 
-        } // геттер для SaveTag_Field_TypeWork
+        } // РіРµС‚С‚РµСЂ РґР»СЏ SaveTag_Field_TypeWork
 
     //////////////////////////////////////////////
 
@@ -452,19 +469,19 @@ class Class_Settings : public AbstractClass_ConfigEditor {
 
             return this->Technology_Name_C;
 
-        } // геттер для Technology_Name_C
+        } // РіРµС‚С‚РµСЂ РґР»СЏ Technology_Name_C
 
         const std::string getTechnology_Name_CPlusPlus (void) const {
 
             return this->Technology_Name_CPlusPlus;
 
-        } // геттер для Technology_Name_CPlusPlus
+        } // РіРµС‚С‚РµСЂ РґР»СЏ Technology_Name_CPlusPlus
 
         const std::string getTechnology_Name_Another (void) const {
 
             return this->Technology_Name_Another;
 
-        } // геттер для Technology_Name_Another
+        } // РіРµС‚С‚РµСЂ РґР»СЏ Technology_Name_Another
 
     //////////////////////////////////////////////
 
@@ -472,31 +489,31 @@ class Class_Settings : public AbstractClass_ConfigEditor {
 
             return this->IDE_Name_Geany;
 
-        } // геттер для IDE_Name_Geany
+        } // РіРµС‚С‚РµСЂ РґР»СЏ IDE_Name_Geany
 
         const std::string getIDE_Name_CodeBlocks (void) const {
 
             return this->IDE_Name_CodeBlocks;
 
-        } // геттер для IDE_Name_CodeBlocks
+        } // РіРµС‚С‚РµСЂ РґР»СЏ IDE_Name_CodeBlocks
 
         const std::string getIDE_Name_VisualStudio (void) const {
 
             return this->IDE_Name_VisualStudio;
 
-        } // геттер для IDE_Name_VisualStudio
+        } // РіРµС‚С‚РµСЂ РґР»СЏ IDE_Name_VisualStudio
 
         const std::string getIDE_Name_QtCreator (void) const {
 
             return this->IDE_Name_QtCreator;
 
-        } // геттер для IDE_Name_QtCreator
+        } // РіРµС‚С‚РµСЂ РґР»СЏ IDE_Name_QtCreator
 
         const std::string getIDE_Name_NoneIDE (void) const {
 
             return this->IDE_Name_NoneIDE;
 
-        } // геттер для IDE_Name_NoneIDE
+        } // РіРµС‚С‚РµСЂ РґР»СЏ IDE_Name_NoneIDE
 
     //////////////////////////////////////////////
 
@@ -504,13 +521,13 @@ class Class_Settings : public AbstractClass_ConfigEditor {
 
             return this->OS_Name_Windows;
 
-        } // геттер для OS_Name_Windows
+        } // РіРµС‚С‚РµСЂ РґР»СЏ OS_Name_Windows
 
         const std::string getOS_Name_Linux (void) const {
 
             return this->OS_Name_Linux;
 
-        } // геттер для OS_Name_Linux
+        } // РіРµС‚С‚РµСЂ РґР»СЏ OS_Name_Linux
 
     //////////////////////////////////////////////
 
@@ -518,19 +535,19 @@ class Class_Settings : public AbstractClass_ConfigEditor {
 
             return this->TypeWork_Name_LabWork;
 
-        } // геттер для TypeWork_Name_LabWork
+        } // РіРµС‚С‚РµСЂ РґР»СЏ TypeWork_Name_LabWork
 
          const std::string getTypeWork_Name_CourseWork (void) const {
 
             return this->TypeWork_Name_CourseWork;
 
-        } // геттер для TypeWork_Name_CourseWork
+        } // РіРµС‚С‚РµСЂ РґР»СЏ TypeWork_Name_CourseWork
 
         const std::string getTypeWork_Name_Diploma (void) const {
 
             return this->TypeWork_Name_Diploma;
 
-        } // геттер для TypeWork_Name_Diploma
+        } // РіРµС‚С‚РµСЂ РґР»СЏ TypeWork_Name_Diploma
 
     //////////////////////////////////////////////
 
@@ -538,13 +555,13 @@ class Class_Settings : public AbstractClass_ConfigEditor {
 
             return this->ERROR_Message_ClientExist;
 
-        } // геттер для ERROR_Message_ClientExist
+        } // РіРµС‚С‚РµСЂ РґР»СЏ ERROR_Message_ClientExist
 
         const std::string getERROR_Message_BuildTimeExist (void) const {
 
             return this->ERROR_Message_BuildTimeExist;
 
-        } // геттер для ERROR_Message_BuildTimeExist
+        } // РіРµС‚С‚РµСЂ РґР»СЏ ERROR_Message_BuildTimeExist
 
     //////////////////////////////////////////////
 
@@ -559,8 +576,9 @@ class Class_Settings : public AbstractClass_ConfigEditor {
             this->Automatic_Order_Start = false;
             this->Automatic_Close_Application = false;
             this->Automatic_Open_Order = true;
+            this->Default_IDE_Path = "NoneIDE";
 
-        } // метод установки настроек по умолчанию для модуля формирования заказов
+        } // РјРµС‚РѕРґ СѓСЃС‚Р°РЅРѕРІРєРё РЅР°СЃС‚СЂРѕРµРє РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ РґР»СЏ РјРѕРґСѓР»СЏ С„РѕСЂРјРёСЂРѕРІР°РЅРёСЏ Р·Р°РєР°Р·РѕРІ
 
         const void SetDefaultParameters_Banlists (void) {
 
@@ -568,20 +586,20 @@ class Class_Settings : public AbstractClass_ConfigEditor {
             this->Url_BanList_Clients = "https://vk.com/topic-156779709_36343200";
             this->Url_BanList_Workers = "https://vk.com/topic-156779709_39456558";
 
-        } // метод установки настроек по умолчанию для модуля блокировки клиентов
+        } // РјРµС‚РѕРґ СѓСЃС‚Р°РЅРѕРІРєРё РЅР°СЃС‚СЂРѕРµРє РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ РґР»СЏ РјРѕРґСѓР»СЏ Р±Р»РѕРєРёСЂРѕРІРєРё РєР»РёРµРЅС‚РѕРІ
 
         const void SetDefaultParameters_BuildTypeTime (void) {
 
             this->LastTime_ProjectBuild_Type_Release = CheckBuild_getTime (ReleaseExeFile_Path);
             this->LastTime_ProjectBuild_Type_Debug = CheckBuild_getTime (DebugExeFile_Path);
 
-        } // метод установки настроек по умолчанию для данных по времени последних билдов
+        } // РјРµС‚РѕРґ СѓСЃС‚Р°РЅРѕРІРєРё РЅР°СЃС‚СЂРѕРµРє РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ РґР»СЏ РґР°РЅРЅС‹С… РїРѕ РІСЂРµРјРµРЅРё РїРѕСЃР»РµРґРЅРёС… Р±РёР»РґРѕРІ
 
         const void SetDefaultParameters_Statistics (void) {
 
             this->Display_Money = false;
 
-        } // метод установки настроек по умолчанию для модуля статистики
+        } // РјРµС‚РѕРґ СѓСЃС‚Р°РЅРѕРІРєРё РЅР°СЃС‚СЂРѕРµРє РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ РґР»СЏ РјРѕРґСѓР»СЏ СЃС‚Р°С‚РёСЃС‚РёРєРё
 
          const void SetDefault_Parameters (void) {
 
@@ -590,22 +608,23 @@ class Class_Settings : public AbstractClass_ConfigEditor {
             SetDefaultParameters_BuildTypeTime ();
             SetDefaultParameters_Statistics ();
 
-        } // метод установки настроек по умолчанию
+        } // РјРµС‚РѕРґ СѓСЃС‚Р°РЅРѕРІРєРё РЅР°СЃС‚СЂРѕРµРє РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ
 
         const std::string Load_PK_UserName (void) const;
         const void Check_ConfigFile (bool);
         const void Load_Parameters (void);
         const void SaveSettings (const bool) const;
         const bool Check_FilePath (const std::string&);
+        const bool Check_ExePath (const std::string&);
         const std::string CheckBuild_getTime (const std::string&);
         const std::string SetupBuild_TypeVersion (void);
 
-}; // класс настроек приложения
+}; // РєР»Р°СЃСЃ РЅР°СЃС‚СЂРѕРµРє РїСЂРёР»РѕР¶РµРЅРёСЏ
 
 const std::string Class_Settings::Load_PK_UserName (void) const {
 
     const std::string PathPK_UserName = "C:\\Windows\\Temp\\PK_UserName.txt";
-    std::string Command = "@echo %UserName% > " + PathPK_UserName;
+    const std::string Command = "@echo %UserName% > " + PathPK_UserName;
     std::string PK_User_Name = "\0";
 
     system (Command.c_str());
@@ -624,9 +643,9 @@ const std::string Class_Settings::Load_PK_UserName (void) const {
 
     return PK_User_Name;
 
-} // метод получения названия имени пользователя-пк
+} // РјРµС‚РѕРґ РїРѕР»СѓС‡РµРЅРёСЏ РЅР°Р·РІР°РЅРёСЏ РёРјРµРЅРё РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ-РїРє
 
-const void Class_Settings::Check_ConfigFile (bool ForceRewriteFile) {
+const void Class_Settings::Check_ConfigFile (const bool ForceRewriteFile) {
 
     ConfigFile_Open (this->Config_Path);
 
@@ -647,13 +666,13 @@ const void Class_Settings::Check_ConfigFile (bool ForceRewriteFile) {
 
             Check.close ();
 
-        } // если файла нет, то создаем файл конфига с дефолтными настройками
+        } // РµСЃР»Рё С„Р°Р№Р»Р° РЅРµС‚, С‚Рѕ СЃРѕР·РґР°РµРј С„Р°Р№Р» РєРѕРЅС„РёРіР° СЃ РґРµС„РѕР»С‚РЅС‹РјРё РЅР°СЃС‚СЂРѕР№РєР°РјРё
 
     Read.close ();
 
     ConfigFile_Close (this->Config_Path);
 
-} // метод проверки существования файла с конфигом
+} // РјРµС‚РѕРґ РїСЂРѕРІРµСЂРєРё СЃСѓС‰РµСЃС‚РІРѕРІР°РЅРёСЏ С„Р°Р№Р»Р° СЃ РєРѕРЅС„РёРіРѕРј
 
 const void Class_Settings::Load_Parameters (void) {
 
@@ -661,6 +680,7 @@ const void Class_Settings::Load_Parameters (void) {
 
     std::string Str = "\0";
     bool LabsPath_Founded = false;
+    bool DefaultIDEPath_Founded = false;
     bool OrderStart_Founded = false;
     bool CloseApp_Founded = false;
     bool Open_Order_Founded = false;
@@ -685,6 +705,13 @@ const void Class_Settings::Load_Parameters (void) {
 
                 }
 
+                if (Str == this->LoadTag_Path_to_Default_IDE && DefaultIDEPath_Founded == false) {
+
+                    Read >> Str;
+                    Read >> this->Default_IDE_Path;
+                    DefaultIDEPath_Founded = true;
+
+                }
                 if (Str == this->LoadTag_Order_Start && OrderStart_Founded == false) {
 
                     Read >> Str;
@@ -761,53 +788,60 @@ const void Class_Settings::Load_Parameters (void) {
 
         }
 
-        else
+        else if (ProjectBuild_Type == ProjectBuild_Name_Debug)
             Exception ("File Settings didnt open");
 
     Read.close ();
 
-        if (LabsPath_Founded == false)
-            Exception ("Not found Path_to_Labs in settings file");
+        if (ProjectBuild_Type == ProjectBuild_Name_Debug) {
 
-        if (OrderStart_Founded == false)
-            Exception ("Not found Automatic_Order_Start in settings file");
+            if (LabsPath_Founded == false)
+                Exception ("Not found Path_to_Labs in settings file");
 
-        if (CloseApp_Founded == false)
-            Exception ("Not found Automatic_Close_Application in settings file");
+            if (DefaultIDEPath_Founded == false)
+                Exception ("Not found Default_IDE_Path in settings file");
 
-        if (Open_Order_Founded == false)
-            Exception ("Not found Automatic_Open_Order in settings file");
+            if (OrderStart_Founded == false)
+                Exception ("Not found Automatic_Order_Start in settings file");
 
-        if (UpdateBanList_Founded == false)
-            Exception ("Not found Automatic_Update_BanList in settings file");
+            if (CloseApp_Founded == false)
+                Exception ("Not found Automatic_Close_Application in settings file");
 
-        if (DisplayMoney_Founded == false)
-            Exception ("Not found Display_Money in settings file");
+            if (Open_Order_Founded == false)
+                Exception ("Not found Automatic_Open_Order in settings file");
 
-        if (Url_BanList_Clients_Founded == false)
-            Exception ("Not found Url_BanList_Clients in settings file");
+            if (UpdateBanList_Founded == false)
+                Exception ("Not found Automatic_Update_BanList in settings file");
 
-        if (Url_BanList_Workers_Founded == false)
-            Exception ("Not found Url_BanList_Workers in settings file");
+            if (DisplayMoney_Founded == false)
+                Exception ("Not found Display_Money in settings file");
 
-        if (LastTime_ProjectBuild_Type_Release_Founded == false)
-            Exception ("Not found LastTime_ProjectBuild_Type_Release in settings file");
+            if (Url_BanList_Clients_Founded == false)
+                Exception ("Not found Url_BanList_Clients in settings file");
 
-        if (LastTime_ProjectBuild_Type_Debug_Founded == false)
-            Exception ("Not found LastTime_ProjectBuild_Type_Debug in settings file");
+            if (Url_BanList_Workers_Founded == false)
+                Exception ("Not found Url_BanList_Workers in settings file");
+
+            if (LastTime_ProjectBuild_Type_Release_Founded == false)
+                Exception ("Not found LastTime_ProjectBuild_Type_Release in settings file");
+
+            if (LastTime_ProjectBuild_Type_Debug_Founded == false)
+                Exception ("Not found LastTime_ProjectBuild_Type_Debug in settings file");
+
+        }
 
     ConfigFile_Close (this->Config_Path);
 
-        if (LabsPath_Founded != true || OrderStart_Founded != true || CloseApp_Founded != true ||
-            Open_Order_Founded != true || UpdateBanList_Founded != true || DisplayMoney_Founded != true ||
-            Url_BanList_Clients_Founded != true || Url_BanList_Workers_Founded != true ||
+        if (LabsPath_Founded != true || DefaultIDEPath_Founded != true || OrderStart_Founded != true ||
+            CloseApp_Founded != true || Open_Order_Founded != true || UpdateBanList_Founded != true ||
+            DisplayMoney_Founded != true || Url_BanList_Clients_Founded != true || Url_BanList_Workers_Founded != true ||
             LastTime_ProjectBuild_Type_Release_Founded != true || LastTime_ProjectBuild_Type_Debug_Founded != true) {
 
                 Check_ConfigFile (true);
 
             }
 
-} // метод загрузки параметров приложения
+} // РјРµС‚РѕРґ Р·Р°РіСЂСѓР·РєРё РїР°СЂР°РјРµС‚СЂРѕРІ РїСЂРёР»РѕР¶РµРЅРёСЏ
 
 const void Class_Settings::SaveSettings (const bool UsingDelay) const {
 
@@ -816,6 +850,7 @@ const void Class_Settings::SaveSettings (const bool UsingDelay) const {
     std::ofstream Write (this->Config_Path.c_str ());
 
     Write   << this->LoadTag_Path_to_Labs << " = " << getLabs_Path () << "\n"
+            << this->LoadTag_Path_to_Default_IDE << " = " << getDefault_IDE_Path () << "\n"
             << this->LoadTag_Order_Start << " = " << getAutomatic_Order_Start () << "\n"
             << this->LoadTag_Close_Application << " = " << getAutomatic_Close_Application () << "\n"
             << this->LoadTag_Open_Order << " = " << getAutomatic_Open_Order () << "\n"
@@ -832,7 +867,7 @@ const void Class_Settings::SaveSettings (const bool UsingDelay) const {
 
         if (UsingDelay == true) {
 
-            printf ("\n\n\nСохранение изменений ");
+            printf ("\n\n\nРЎРѕС…СЂР°РЅРµРЅРёРµ РёР·РјРµРЅРµРЅРёР№ ");
 
                 for (unsigned short int i = 0; i < 4; i++) {
 
@@ -843,27 +878,53 @@ const void Class_Settings::SaveSettings (const bool UsingDelay) const {
 
         }
 
-} // метод сохранения настроек
+} // РјРµС‚РѕРґ СЃРѕС…СЂР°РЅРµРЅРёСЏ РЅР°СЃС‚СЂРѕРµРє
 
 const bool Class_Settings::Check_FilePath (const std::string& Path) {
 
-    std::string TestFilePath = Path + "\\ValidTest.txt";
+    const std::string TestFilePath = Path + "\\ValidTest.txt";
+    bool Result = true;
     std::ofstream Write (TestFilePath.c_str ());
 
-        if (!Write.is_open()) {
+        if (!Write.is_open())
+            Result = false;
+
+    Write.close ();
+
+    remove (TestFilePath.c_str ());
+
+        if (Result == false) {
 
             Exception ("New path is invalid, check this folder and repeat");
             return false;
 
         }
 
-    Write.close ();
+    return true;
 
-    remove (TestFilePath.c_str ());
+} // РјРµС‚РѕРґ РїСЂРѕРІРµСЂРєРё РєРѕСЂСЂРµРєС‚РЅРѕСЃС‚Рё РїСѓС‚Рё Рє Р±Р°Р·Рµ Р·Р°РєР°Р·РѕРІ
+
+const bool Class_Settings::Check_ExePath (const std::string& Path) {
+
+    const std::string Command = "IF EXIST " + Path + " (echo GOOD >> log.txt) ELSE (echo BAD >> log.txt)";
+    system (Command.c_str());
+    std::string Result = "BAD";
+
+    std::ifstream Read ("log.txt");
+    Read >> Result;
+    Read.close ();
+    remove ("log.txt");
+
+        if (Result == "BAD") {
+
+            Exception ("New .exe path is invalid, check this full path and repeat");
+            return false;
+
+        }
 
     return true;
 
-} // метод проверки корректности пути к базе заказов
+} // РјРµС‚РѕРґ РїСЂРѕРІРµСЂРєРё РєРѕСЂСЂРµРєС‚РЅРѕСЃС‚Рё Рє Р·Р°РїСѓСЃРєСѓ IDE РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ
 
 const std::string Class_Settings::CheckBuild_getTime (const std::string& ExeFile_Path) {
 
@@ -884,7 +945,7 @@ const std::string Class_Settings::CheckBuild_getTime (const std::string& ExeFile
             FileTimeToSystemTime(&ftWrite, &stUTC);
             SystemTimeToTzSpecificLocalTime(NULL, &stUTC, &stLocal);
 
-        // преобразовать полученное время в строку
+        // РїСЂРµРѕР±СЂР°Р·РѕРІР°С‚СЊ РїРѕР»СѓС‡РµРЅРЅРѕРµ РІСЂРµРјСЏ РІ СЃС‚СЂРѕРєСѓ
 
             sprintf(strDate, "%02hu/%02hu/%02hu|%02hu:%02hu:%02hu",
             stLocal.wDay, stLocal.wMonth, stLocal.wYear,
@@ -900,19 +961,19 @@ const std::string Class_Settings::CheckBuild_getTime (const std::string& ExeFile
 
     return Time;
 
-} // метод считывания времени последнего изменения файла
+} // РјРµС‚РѕРґ СЃС‡РёС‚С‹РІР°РЅРёСЏ РІСЂРµРјРµРЅРё РїРѕСЃР»РµРґРЅРµРіРѕ РёР·РјРµРЅРµРЅРёСЏ С„Р°Р№Р»Р°
 
 class Class_DateTime {
 
     private:
 
-        int Seconds; // кол-во секунд
-        int Minutes; // кол-во минут
-        int Hours; // кол-во часов
+        int Seconds; // РєРѕР»-РІРѕ СЃРµРєСѓРЅРґ
+        int Minutes; // РєРѕР»-РІРѕ РјРёРЅСѓС‚
+        int Hours; // РєРѕР»-РІРѕ С‡Р°СЃРѕРІ
 
-        int Days; // кол-во дней
-        int Months; // кол-во недель
-        int Years; // кол-во лет
+        int Days; // РєРѕР»-РІРѕ РґРЅРµР№
+        int Months; // РєРѕР»-РІРѕ РЅРµРґРµР»СЊ
+        int Years; // РєРѕР»-РІРѕ Р»РµС‚
 
     public:
 
@@ -947,13 +1008,13 @@ class Class_DateTime {
 
             return (Hours*60*60) + Minutes*60 + Seconds;
 
-        } // метод перевода времени в секунды
+        } // РјРµС‚РѕРґ РїРµСЂРµРІРѕРґР° РІСЂРµРјРµРЅРё РІ СЃРµРєСѓРЅРґС‹
 
         const int Converting_Date_toDays (void) const {
 
             return (Years * 10000) + Months * 100 + Days;
 
-        } // метод перевода даты в дни
+        } // РјРµС‚РѕРґ РїРµСЂРµРІРѕРґР° РґР°С‚С‹ РІ РґРЅРё
 
         bool Compare_DateTimes (Class_DateTime& Object) {
 
@@ -973,14 +1034,14 @@ class Class_DateTime {
 
             return true;
 
-        } // метод сравнения даты + время
+        } // РјРµС‚РѕРґ СЃСЂР°РІРЅРµРЅРёСЏ РґР°С‚С‹ + РІСЂРµРјСЏ
 
-}; // класс обработки времени и даты
+}; // РєР»Р°СЃСЃ РѕР±СЂР°Р±РѕС‚РєРё РІСЂРµРјРµРЅРё Рё РґР°С‚С‹
 
 const std::string Class_Settings::SetupBuild_TypeVersion (void){
 
-    this->NewTime_ProjectBuild_Type_Release = CheckBuild_getTime (this->ReleaseExeFile_Path); // в этом свойстве хранится полученное время файла Release exe (преобразованное из char [])
-    this->NewTime_ProjectBuild_Type_Debug = CheckBuild_getTime (this->DebugExeFile_Path); // в этой свойстве хранится полученное время файла Debug exe (преобразованное из char [])
+    this->NewTime_ProjectBuild_Type_Release = CheckBuild_getTime (this->ReleaseExeFile_Path); // РІ СЌС‚РѕРј СЃРІРѕР№СЃС‚РІРµ С…СЂР°РЅРёС‚СЃСЏ РїРѕР»СѓС‡РµРЅРЅРѕРµ РІСЂРµРјСЏ С„Р°Р№Р»Р° Release exe (РїСЂРµРѕР±СЂР°Р·РѕРІР°РЅРЅРѕРµ РёР· char [])
+    this->NewTime_ProjectBuild_Type_Debug = CheckBuild_getTime (this->DebugExeFile_Path); // РІ СЌС‚РѕР№ СЃРІРѕР№СЃС‚РІРµ С…СЂР°РЅРёС‚СЃСЏ РїРѕР»СѓС‡РµРЅРЅРѕРµ РІСЂРµРјСЏ С„Р°Р№Р»Р° Debug exe (РїСЂРµРѕР±СЂР°Р·РѕРІР°РЅРЅРѕРµ РёР· char [])
 
     /*printf("\nNew release: %s", NewTime_ProjectBuild_Type_Release.c_str());
     printf("\nNew debug: %s", NewTime_ProjectBuild_Type_Debug.c_str());
@@ -1006,7 +1067,7 @@ const std::string Class_Settings::SetupBuild_TypeVersion (void){
     this->ProjectBuild_Type = getProjectBuild_Name_Debug ();
     return this->NewTime_ProjectBuild_Type_Debug;
 
-} // метод, задающий тип сборки (билда) программы [Debug] / [Release]
+} // РјРµС‚РѕРґ, Р·Р°РґР°СЋС‰РёР№ С‚РёРї СЃР±РѕСЂРєРё (Р±РёР»РґР°) РїСЂРѕРіСЂР°РјРјС‹ [Debug] / [Release]
 
 #endif // _settings_class_h_
 

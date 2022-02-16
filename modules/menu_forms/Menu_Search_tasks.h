@@ -1,4 +1,4 @@
-// Модуль для поиска заказа. Именно здесь описан весь функционал кнопки "Поиск заказа".
+// РњРѕРґСѓР»СЊ РґР»СЏ РїРѕРёСЃРєР° Р·Р°РєР°Р·Р°. РРјРµРЅРЅРѕ Р·РґРµСЃСЊ РѕРїРёСЃР°РЅ РІРµСЃСЊ С„СѓРЅРєС†РёРѕРЅР°Р» РєРЅРѕРїРєРё "РџРѕРёСЃРє Р·Р°РєР°Р·Р°".
 
 #pragma once
 
@@ -7,18 +7,18 @@
 
 const static void Menu_Search_Tasks (const Class_Settings& Settings) {
 
-    unsigned short int ButtonNumber = 0; // переменная для обработки нажатий в меню
+    unsigned short int ButtonNumber = 0; // РїРµСЂРµРјРµРЅРЅР°СЏ РґР»СЏ РѕР±СЂР°Р±РѕС‚РєРё РЅР°Р¶Р°С‚РёР№ РІ РјРµРЅСЋ
     Class_Search Searching;
 
         while (true) {
 
             cls ();
-            CenterText ("Поиск работ среди имеющихся в базе\n");
+            CenterText ("РџРѕРёСЃРє СЂР°Р±РѕС‚ СЃСЂРµРґРё РёРјРµСЋС‰РёС…СЃСЏ РІ Р±Р°Р·Рµ\n");
             Show_Text_ForExit ();
 
             printf ("\n\n\n");
             printf ("                                             ---------------------------------\n");
-            CenterText ("|   1. Найти клиента по имени   |\n");
+            CenterText ("|   1. РќР°Р№С‚Рё РєР»РёРµРЅС‚Р° РїРѕ РёРјРµРЅРё   |\n");
             printf ("                                             |_______________________________|\n\n\n");
 
                 while (true) {
@@ -35,15 +35,15 @@ const static void Menu_Search_Tasks (const Class_Settings& Settings) {
 
                 else if (ClickCatch ("1", &ButtonNumber)) {
 
-                        CenterText ("Введите имя: ");
-                        std::string ClientName = Show_Text_Input ("Введите имя: ", true);
+                        CenterText ("Р’РІРµРґРёС‚Рµ РёРјСЏ: ");
+                        std::string ClientName = Show_Text_Input ("Р’РІРµРґРёС‚Рµ РёРјСЏ: ", true);
                         Searching.Search_Client(ClientName, Settings);
 
-                } // поиск клиента по имени
+                } // РїРѕРёСЃРє РєР»РёРµРЅС‚Р° РїРѕ РёРјРµРЅРё
 
         }
 
-} // функция поиска заказа / задания / клиента
+} // С„СѓРЅРєС†РёСЏ РїРѕРёСЃРєР° Р·Р°РєР°Р·Р° / Р·Р°РґР°РЅРёСЏ / РєР»РёРµРЅС‚Р°
 
 #endif // _Menu_Search_tasks_h_
 
